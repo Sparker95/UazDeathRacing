@@ -1,0 +1,6 @@
+WeaponSlotComponent {
+ WeaponType MachineGun
+ AttachType InventoryStorageSlot "59A361B803AE409A" {
+ }
+ WeaponTemplate "{6AF5FA1A839A4980}Prefabs/Weapons/MachineGuns/M60/MG_M60_Mounted.et"
+}

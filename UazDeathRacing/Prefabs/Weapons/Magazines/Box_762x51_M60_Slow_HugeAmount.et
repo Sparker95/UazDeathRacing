@@ -1,0 +1,22 @@
+GenericEntity : "{995CF44535296AE3}Prefabs/Weapons/Magazines/Box_762x51_M60_100rnd_Base.et" {
+ ID "0922E741B2667475"
+ components {
+  InventoryItemComponent "{51EED12B803954CC}" {
+   Attributes SCR_ItemAttributeCollection "{51EED12B86960275}" {
+    ItemDisplayName UIInfo "{51FEE38527BFEA5B}" {
+     Description "#AR-Magazine_M60BallTracer_Description"
+    }
+   }
+  }
+  MagazineComponent "{CA6BE4D6B4DAFD69}" {
+   UIInfo MagazineUIInfo "{57126733AA401586}" {
+    m_sAmmoType "#AR-AmmoType_M60_FMJTracer"
+    m_eAmmoTypeFlags 3
+   }
+   MaxAmmo 1000
+   AmmoConfig "{21E9A45D3C80F387}Configs/Weapons/Ammo/Ammo_762x51_Slow.conf"
+   AmmoMapping {
+   }
+  }
+ }
+}

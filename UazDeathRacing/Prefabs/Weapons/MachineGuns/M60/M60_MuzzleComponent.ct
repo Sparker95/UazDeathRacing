@@ -1,0 +1,9 @@
+MuzzleComponent {
+ FireModes {
+  BaseFireMode "{B80A64F4A8EF8333}" {
+   RoundsPerMinute 3000
+  }
+ }
+ DispersionRange 7
+ MagazineTemplate "{B17614CFC892F8C6}Prefabs/Weapons/Magazines/Box_762x51_M60_HugeAmount.et"
+}

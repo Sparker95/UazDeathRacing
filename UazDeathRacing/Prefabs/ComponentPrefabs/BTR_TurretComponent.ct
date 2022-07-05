@@ -1,0 +1,51 @@
+TurretComponent {
+ components {
+  SCR_2DSightsComponent "{59C35548C2A2398C}" {
+   SightsPosition PointInfo "{59C35548C2A23995}" {
+    PivotID "v_gun_01"
+    Offset -0.2 0 0.2
+    Angles 0 0 0
+   }
+   SightsFOVInfo SCR_SightsZoomFOVInfo "{59C35548C2A23993}" {
+    m_fBaseZoom 2.6
+    m_fInterpolationSpeed 25
+   }
+   SightsPointFront PointInfo "{59C35548C2A23991}" {
+    PivotID "v_gun_01"
+    Offset -0.2 0 0.2
+   }
+   SightsPointRear PointInfo "{59C35548C2A2399E}" {
+    PivotID "v_gun_01"
+    Offset -0.2 0 0.1
+   }
+   ADSTime 0
+   m_sLayoutResource "{4CE66FA8219D33D7}UI/layouts/Sights/Optic_Default.layout"
+   m_sReticleTexture "{C6C7ED91CA46D859}UI/Textures/Sights/PP61/PP61-white_UI.edds"
+   m_sReticleGlowTexture "{A69BBC9569E33737}UI/Textures/Sights/PP61/PP61-glow1024_UI.edds"
+   m_bHasIllumination 1
+   m_cReticleTextureIllumination 0.814 0.702 0.213 1
+   m_fMagnification 2.6
+   m_iReticleTextureWidth 550
+   m_fReticleWidthRange 62.832
+   m_fVignetteTextureMultiplier 3.432
+   m_bShouldHideParentObject 0
+   m_bAllowRotation 0
+   m_iHudDeactivationDelay 0
+   m_iAnimationEnterDelay 0
+   m_fAnimationEnter 5
+   m_fVignetteMoveSpeed 2.6
+   m_fReticleRotationScale 1
+   m_fMotionBlurScale 0
+   m_fMoveRotationMax 0.5
+   m_fRecoilScaleMax 1
+  }
+ }
+ SignalsSourceAccess SignalsSourceAccessClass "{59C35548C2A2399D}" {
+  signalsSuffix "Turret"
+ }
+ ProvideAimingType MainTurret
+ LimitsHoriz -180 180
+ LimitsVert -5 30
+ AimingMaxSpeed 1 0.8
+ AimingSpeedControls 0.1 0.1
+}

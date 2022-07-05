@@ -1,0 +1,115 @@
+TurretComponent {
+ components {
+  SightsComponent "{59A361BD22D275DA}" {
+   SightsPosition PointInfo "{59A361BD22D275C3}" {
+    PivotID "w_weapon_holder_01"
+    Offset 0.0034 0.1411 -0.3687
+   }
+   SightsRanges {
+    SightRangeInfo "{59A361BD22D275C4}" {
+     Range 0 300
+     WeaponPosition PointInfo "{59A361BD22D275C7}" {
+      Offset 0 0.00264 0
+      Angles 0.14935 0 0
+     }
+    }
+    SightRangeInfo "{59A361BD22D275C9}" {
+     Range 0 400
+     WeaponPosition PointInfo "{59A361BD22D275C8}" {
+      Offset 0 0.00183 0
+      Angles 0.20842 0 0
+     }
+    }
+    SightRangeInfo "{59A361BD22D275CB}" {
+     Range 0 500
+     WeaponPosition PointInfo "{59A361BD22D275CD}" {
+      Offset 0 0.00085 0
+      Angles 0.27906 0 0
+     }
+    }
+    SightRangeInfo "{59A361BD22D275CC}" {
+     Range 0 600
+     WeaponPosition PointInfo "{59A361BD22D275CF}" {
+      Offset 0 -0.00025 0
+      Angles 0.35882 0 0
+     }
+    }
+    SightRangeInfo "{59A361BD22D275CE}" {
+     Range 0 700
+     WeaponPosition PointInfo "{59A361BD22D27531}" {
+      Offset 0 -0.0015 0
+      Angles 0.44893 0 0
+     }
+    }
+    SightRangeInfo "{59A361BD22D27530}" {
+     Range 0 800
+     WeaponPosition PointInfo "{59A361BD22D27533}" {
+      Offset 0 -0.00294 0
+      Angles 0.55355 0 0
+     }
+    }
+    SightRangeInfo "{59A361BD22D27532}" {
+     Range 0 900
+     WeaponPosition PointInfo "{59A361BD22D27535}" {
+      Offset 0 -0.00458 0
+      Angles 0.67231 0 0
+     }
+    }
+    SightRangeInfo "{59A361BD22D27537}" {
+     Range 0 1000
+     WeaponPosition PointInfo "{59A361BD22D27536}" {
+      Offset 0 -0.00649 0
+      Angles 0.80988 0 0
+     }
+    }
+    SightRangeInfo "{59A361BD22D27539}" {
+     Range 0 1100
+     WeaponPosition PointInfo "{59A361BD22D27538}" {
+      Offset 0 -0.00866 0
+      Angles 0.96753 0 0
+     }
+    }
+   }
+   SightsFOVInfo SCR_FixedFOVInfo "{59A361BD22D2753F}" {
+   }
+   SightsPointFront PointInfo "{59A361BD22D2753E}" {
+    Offset 0.0031 0.1322 0.67092
+   }
+   SightsPointRear PointInfo "{59A361BD22D27521}" {
+    PivotID "w_sight"
+    Offset 0.0007 0.0436 -0.003
+   }
+   ADSTime 0.8
+  }
+ }
+ SignalsSourceAccess SignalsSourceAccessClass "{59A361BD22D27520}" {
+  signalsSuffix "Turret"
+ }
+ ProvideAimingType MainTurret
+ LimitsHoriz -45 45
+ LimitsVert -21 53
+ AimingMaxSpeed 6 6
+ AimingSpeedControls 0.1 0.1
+ CameraAdsAttachment PointInfo "{59A361BD22D27522}" {
+  PivotID "w_weapon_holder_01"
+  Offset 0.0034 0.1411 -0.3687
+ }
+ ikTargets {
+  AnimationIKTargetInfo "{59A361BD22D27525}" {
+   BindingName "LHandIKTarget"
+   PositionInfo PointInfo "{59A361BD22D27524}" {
+    PivotID "w_weapon_holder_01"
+    Offset -0.0842 0.0339 -0.3103
+    Angles 50 -90 0
+   }
+  }
+  AnimationIKTargetInfo "{59A361BD22D27527}" {
+   BindingName "RHandIKTarget"
+   PositionInfo PointInfo "{59A361BD22D253D9}" {
+    PivotID "w_weapon_holder_01"
+    Offset 0.0447 -0.0787 -0.1998
+    Angles -180 90 90
+   }
+  }
+ }
+}

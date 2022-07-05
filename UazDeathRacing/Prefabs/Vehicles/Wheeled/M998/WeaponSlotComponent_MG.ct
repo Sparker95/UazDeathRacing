@@ -1,0 +1,5 @@
+WeaponSlotComponent : "{5DA1E7121057CD6A}WeaponSlotComponent.ct" {
+ AttachType InventoryStorageSlot "59A361B803AE409A" {
+  Offset -1.0575 1.3393 0.3979
+ }
+}

@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{E9BEE081690777B6}Prefabs/Weapons/MachineGuns/M60/M60_MuzzleComponent.ct"
+ Configurations {
+  ComponentTemplateResourceClass PC {
+  }
+  ComponentTemplateResourceClass XBOX_ONE : PC {
+  }
+  ComponentTemplateResourceClass XBOX_SERIES : PC {
+  }
+  ComponentTemplateResourceClass PS4 : PC {
+  }
+  ComponentTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}

@@ -1,0 +1,22 @@
+GenericEntity : "{995CF44535296AE3}Prefabs/Weapons/Magazines/Box_762x51_M60_100rnd_Base.et" {
+ ID "0922E741B2667475"
+ components {
+  InventoryItemComponent "{51EED12B803954CC}" {
+   Attributes SCR_ItemAttributeCollection "{51EED12B86960275}" {
+    ItemDisplayName UIInfo "{51FEE38527BFEA5B}" {
+     Name "#AR-Magazine_M60Tracer_Name"
+     Description "#AR-Magazine_M60Tracer_Description"
+    }
+   }
+  }
+  MagazineComponent "{CA6BE4D6B4DAFD69}" {
+   UIInfo MagazineUIInfo "{57126733AA401586}" {
+    m_sAmmoType "#AR-AmmoType_M60_Tracer"
+    m_eAmmoTypeFlags TRACER
+   }
+   AmmoMapping {
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+   }
+  }
+ }
+}

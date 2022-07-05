@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{B8E58808F421E48D}Prefabs/Weapons/MachineGuns/M60/MuzzleEffect.ct"
+ Configurations {
+  ComponentTemplateResourceClass PC {
+  }
+  ComponentTemplateResourceClass XBOX_ONE : PC {
+  }
+  ComponentTemplateResourceClass XBOX_SERIES : PC {
+  }
+  ComponentTemplateResourceClass PS4 : PC {
+  }
+  ComponentTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}

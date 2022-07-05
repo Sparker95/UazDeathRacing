@@ -1,0 +1,3 @@
+SCR_MuzzleEffectComponent {
+ ParticleEffect "{1991E0492F618D77}Particles/Weapon/Muzzle_M60_flashHider.ptc"
+}

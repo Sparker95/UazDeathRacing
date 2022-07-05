@@ -1,0 +1,16 @@
+Vehicle M998_Armed1 : "{21C45FA677BCDBDA}Prefabs/Vehicles/Wheeled/M998/M998_Armed.et" {
+ components {
+  SCR_VehicleDamageManagerComponent "{141326E9FD94FE40}" {
+   m_fVehicleDestroyDamage 17637.199
+  }
+ }
+ coords 131.44 1.001 129.441
+}
+Vehicle M151A2_M2HB1 : "{F6B23D17D5067C11}Prefabs/Vehicles/Wheeled/M151A2/M151A2_M2HB.et" {
+ components {
+  SCR_VehicleDamageManagerComponent "{141326E9FD94FE40}" {
+   m_fVehicleDestroyDamage 10408.7
+  }
+ }
+ coords 124.403 1.001 121.852
+}

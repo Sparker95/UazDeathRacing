@@ -1,0 +1,39 @@
+GenericEntity : "{6E42C85D9FC0CA5D}Prefabs/Weapons/MachineGuns/M60/MG_M60_base.et" {
+ ID "CFBAA4B725411E45"
+ components {
+  MeshObject "{CFBAA4B701F95D69}" {
+  }
+  WeaponComponent "{CFBAA4B706BA66E8}" {
+   components {
+    MuzzleComponent "{50F64C4591CD7AA6}" {
+     components {
+      SCR_MuzzleEffectComponent "{59C35CEC0F536752}" : "{B8E58808F421E48D}Prefabs/Weapons/MachineGuns/M60/MuzzleEffect.ct" {
+       EffectPosition EntitySlotInfo muzzle {
+        Offset 1.2047 0 0.8644
+       }
+      }
+     }
+     MuzzleEndPositions {
+      PointInfo "{B80A64F4B6CFB9BF}" {
+      }
+      PointInfo "{59C35CED47C725E3}" {
+       Offset 1.2047 0.0538 0.7788
+      }
+     }
+     ProjectileSpawnPositions {
+      PointInfo "{59C35CEC8297E028}" {
+       Offset 1.2047 0.0538 0.1227
+      }
+     }
+     FireModes {
+      BaseFireMode "{B80A64F4A8EF8333}" {
+       RoundsPerMinute 3000
+      }
+     }
+     DispersionRange 5
+     MagazineTemplate "{B17614CFC892F8C6}Prefabs/Weapons/Magazines/Box_762x51_M60_HugeAmount.et"
+    }
+   }
+  }
+ }
+}
