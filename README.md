@@ -1,2 +1,2 @@
 # UAZ Death Racing
-A mod for Arma Reforger
+A fun mod for Arma Reforger
