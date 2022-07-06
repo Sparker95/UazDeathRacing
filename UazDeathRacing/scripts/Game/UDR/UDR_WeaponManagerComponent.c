@@ -11,7 +11,8 @@ class UDR_WeaponManagerComponent : ScriptComponent
 		
 		array<ResourceName> weaponPrefabs = {
 			"{5C3D941FDC76BC95}Prefabs/Weapons/MachineGuns/M60/MG_M60_Mounted_Advanced_Slow.et",
-			"{0746F857CF0EB470}Prefabs/Weapons/MachineGuns/M60/MG_M60_Mounted_Advanced_Fast.et"			
+			//"{0746F857CF0EB470}Prefabs/Weapons/MachineGuns/M60/MG_M60_Mounted_Advanced_Fast.et",
+			"{58ED978DD73772BE}Prefabs/Weapons/Blaster/Blaster.et"
 		};
 		
 		BaseWeaponManagerComponent weaponMgrComp = BaseWeaponManagerComponent.Cast(vehicleEnt.FindComponent(BaseWeaponManagerComponent));

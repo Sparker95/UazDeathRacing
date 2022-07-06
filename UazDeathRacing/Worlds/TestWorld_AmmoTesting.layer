@@ -65,6 +65,9 @@ Projectile : "{8346AC21916651EA}Prefabs/Weapons/Blaster/BlasterProjectile.et" {
  }
  coords 111.586 1.001 155.683
 }
+GenericEntity : "{D2B48DEBEF38D7D7}Prefabs/Weapons/MachineGuns/M249/MG_M249.et" {
+ coords 128.06 1.001 132.705
+}
 GenericEntity : "{D37A54E258B72E0F}Prefabs/Weapons/Blaster/BlasterProjectile_Warhead.et" {
  coords 110.375 1.001 156.673
 }

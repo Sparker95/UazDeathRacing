@@ -5,7 +5,7 @@ SCR_ParticleEmitter {
 Vehicle M998_Armed1 : "{21C45FA677BCDBDA}Prefabs/Vehicles/Wheeled/M998/M998_Armed.et" {
  components {
   SCR_VehicleDamageManagerComponent "{141326E9FD94FE40}" {
-   m_fVehicleDestroyDamage 143.571
+   m_fVehicleDestroyDamage 715
   }
  }
  coords 131.44 1.001 129.441

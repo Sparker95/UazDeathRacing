@@ -826,10 +826,11 @@ Vehicle : "{1F9BB80C3EC3C891}Prefabs/Vehicles/Core/Wheeled_Car_Base.et" {
   WeaponSlotComponent "{59CAEC4825D98251}" {
    WeaponType MachineGun
    AttachType InventoryStorageSlot Point {
-    Offset -0.023 1.7065 0.5979
+    Offset -0.023 1.8562 0.4879
+    Angles 0 0 0
     DeactivatePhysicsOnAtaching 1
    }
-   WeaponTemplate "{D2B48DEBEF38D7D7}Prefabs/Weapons/MachineGuns/M249/MG_M249.et"
+   WeaponTemplate "{58ED978DD73772BE}Prefabs/Weapons/Blaster/Blaster.et"
   }
   ActionsManagerComponent "{C97BE5489221AE18}" {
    ActionContexts {
