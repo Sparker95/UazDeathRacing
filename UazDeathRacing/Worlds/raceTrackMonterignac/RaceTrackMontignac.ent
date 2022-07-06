@@ -10,3 +10,6 @@ Layer race_track_Montignac {
 Layer weapoints_race {
  Index 2
 }
+Layer cars {
+ Index 3
+}
