@@ -1,3 +1,10 @@
+UDR_GameMode UDR_GameMode1 : "{CD9589A17294B557}Prefabs/GameMode/UDR_GameMode.et" {
+ components {
+  SCR_RespawnSystemComponent "{59CCE8840B1B650E}" {
+  }
+ }
+ coords 4859.806 163.033 7345.481
+}
 ScriptedGameTriggerEntity BoostTrigger {
  coords 4865.784 162.877 7354.799
  angleX -1.787
@@ -31,23 +38,6 @@ ScriptedGameTriggerEntity BoostTrigger {
  "        vWheelSimu.EngineSetPeakPowerState(200);"\
  "	"
 }
-Vehicle UAZ1 : "{259EE7B78C51B624}Prefabs/Vehicles/Wheeled/UAZ469/UAZ469.et" {
- components {
-  SCR_VehicleDamageManagerComponent "{141326E9FD94FE40}" {
-   m_fVehicleDestroyDamage 11880.1
-  }
-  VehicleWheeledSimulation "{731B26FCA2F19855}" {
-   Simulation Wheeled "{4D8B26DEA5F25978}" {
-    Engine Engine Engine {
-     MaxPower 200
-     MaxTorque 257
-    }
-   }
-  }
- }
- coords 4856.467 162.574 7362.155
- angleY 92.215
-}
 SCR_SpawnPoint SpawnPointOne : "{5392C4D80E4B18F8}Prefabs/MP/Spawning/SpawnPoint_FFA.et" {
  components {
   SCR_MapDescriptorComponent "{54C659A97C47BDE2}" {
@@ -56,5 +46,6 @@ SCR_SpawnPoint SpawnPointOne : "{5392C4D80E4B18F8}Prefabs/MP/Spawning/SpawnPoint
  }
  coords 4856.238 163.953 7365.392
  angleY 89.136
+ m_fSpawnRadius 10
  m_bShowInDeployMapOnly 1
 }
