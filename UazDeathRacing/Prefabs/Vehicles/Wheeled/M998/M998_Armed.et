@@ -826,7 +826,7 @@ Vehicle : "{1F9BB80C3EC3C891}Prefabs/Vehicles/Core/Wheeled_Car_Base.et" {
   WeaponSlotComponent "{59CAEC4825D98251}" {
    WeaponType MachineGun
    AttachType InventoryStorageSlot Point {
-    Offset -0.023 1.8562 0.4879
+    Offset -0.023 1.329 1.305
     Angles 0 0 0
     DeactivatePhysicsOnAtaching 1
    }

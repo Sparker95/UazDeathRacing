@@ -1,3 +1,11 @@
+Vehicle M998_Armed2 : "{21C45FA677BCDBDA}Prefabs/Vehicles/Wheeled/M998/M998_Armed.et" {
+ components {
+  SCR_VehicleDamageManagerComponent "{141326E9FD94FE40}" {
+   m_fVehicleDestroyDamage 715
+  }
+ }
+ coords 130.606 1.001 104.248
+}
 Projectile : "{32E12D322E107F1C}Prefabs/Weapons/Ammo/Ammo_Rocket_PG7VM.et" {
  coords 110.694 1.001 154.708
 }

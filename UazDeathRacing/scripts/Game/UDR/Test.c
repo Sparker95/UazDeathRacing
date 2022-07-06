@@ -1,3 +1,5 @@
+
+/*
 modded class SCR_CharacterInventoryStorageComponent
 {
 	override int GetTurretWeaponsList(out array<IEntity> turretWeaponsList, BaseCompartmentSlot compartment)
@@ -34,33 +36,6 @@ modded class SCR_CharacterInventoryStorageComponent
 				m_aWeaponQuickSlotsStorage.Insert(m_aQuickSlots[i]);
 			}
 		}
-		
-		/*
-		if (!TurretCompartmentSlot.Cast(compartment) && !m_aWeaponQuickSlotsStorage.IsEmpty())
-		{
-			RemoveItemsFromWeaponQuickSlots();
-			
-			IEntity quickSlotEntity;
-			SCR_InventoryStorageManagerComponent pInventoryManager = SCR_InventoryStorageManagerComponent.Cast(GetOwner().FindComponent( SCR_InventoryStorageManagerComponent));
-			
-			for (int i = 0; i < 4; i++)
-			{
-				quickSlotEntity = m_aWeaponQuickSlotsStorage[i];
-				
-				if (!quickSlotEntity)
-					continue;
-				
-				if (!pInventoryManager.Contains(quickSlotEntity))
-					continue;
-				
-				StoreItemToQuickSlot(quickSlotEntity, i, true);
-			}
-			
-			SCR_WeaponSwitchingBaseUI.RefreshQuickSlots();
-			
-			return;
-		}
-		*/
 
 		array<IEntity> temporaryWeaponsList = {};
 		int result = GetTurretWeaponsList(temporaryWeaponsList, compartment);
@@ -81,6 +56,7 @@ modded class SCR_CharacterInventoryStorageComponent
 		SCR_WeaponSwitchingBaseUI.RefreshQuickSlots();
 	}
 }
+*/
 
 modded class ArmaReforgerScripted
 {
@@ -99,12 +75,13 @@ modded class ArmaReforgerScripted
 		
 		GetInputManager().ActivateContext("TurretContext", 50);
 		
-		GetInputManager().ActivateContext("CarContext", 50);
+		//GetInputManager().ActivateContext("CarContext", 50);
 		
 		UDR_DebugMenu.UpdateMenus();
 	}
 }
 
+/*
 modded class SCR_InventorySlotUI
 {
 	override bool IsCharacterInTurretCompartment(notnull ChimeraCharacter character)
@@ -120,3 +97,4 @@ modded class SCR_InventorySlotUI
 		return true;
 	}
 }
+*/
