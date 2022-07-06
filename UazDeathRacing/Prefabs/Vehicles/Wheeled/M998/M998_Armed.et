@@ -512,6 +512,9 @@ Vehicle : "{1F9BB80C3EC3C891}Prefabs/Vehicles/Core/Wheeled_Car_Base.et" {
   }
   SCR_VehicleDamageManagerComponent "{141326E9FD94FE40}" {
    "Additional hit zones" {
+    SCR_EngineHitZone Engine {
+     MaxHealth 300
+    }
     SCR_FlammableHitZone Hull {
      MaxHealth 500
      DamageReduction 0.5

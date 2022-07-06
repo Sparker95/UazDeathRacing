@@ -1,12 +1,12 @@
-Projectile : "{C0BDA86B5AA5648C}Prefabs/Weapons/Core/Ammo_Rocket_Base.et" {
- ID "DA5C6308000CDEF2"
+Projectile : "{32E12D322E107F1C}Prefabs/Weapons/Ammo/Ammo_Rocket_PG7VM.et" {
+ coords 110.694 1.001 154.708
+}
+Projectile : "{8346AC21916651EA}Prefabs/Weapons/Blaster/BlasterProjectile.et" {
  components {
   CollisionTriggerComponent "{59CCC7AD9FE96432}" {
    PROJECTILE_EFFECTS {
     ExplosionEffect "{59CCC7AD9D6F76EA}" {
-     EffectPrefab "{D37A54E258B72E0F}Prefabs/Weapons/Blaster/BlasterProjectile_Warhead.et"
      ParticleEffect "{F4BA20D2FD407CD0}Prefabs/Weapons/Blaster/BlasterExplosion.ptc"
-     SoundEvent "SOUND_EXPLOSION"
     }
    }
   }
@@ -48,20 +48,7 @@ Projectile : "{C0BDA86B5AA5648C}Prefabs/Weapons/Core/Ammo_Rocket_Base.et" {
    Object "{BB3F99FC7223DDC5}Assets/Weapons/Magazines/RPG7/Rocket_PG7VM.xob"
   }
   MissileMoveComponent "{0EF36690881261EF}" {
-   InitSpeed 120
-   Mass 1.6
-   TimeToLive 5
-   ProjectileEffects {
-    BaseDamageEffect "{56829D01651CE9A7}" {
-    }
-   }
-   ThrustInitTime 0.1
-   ThrustTime 2.1
-   ThrustForce 200
-   ForwardAirFriction 0.1
-   SideAirFriction 0.08
-   AlignTorque 0.04
-   DistanceEnableGravitation 0.4
+   ThrustForce 10
   }
   RigidBody "{59CC9CC7138D73D3}" {
    LayerPreset "Projectile"
@@ -76,6 +63,14 @@ Projectile : "{C0BDA86B5AA5648C}Prefabs/Weapons/Core/Ammo_Rocket_Base.et" {
    }
   }
  }
- ProjectileModel "{591AA00A85929B95}Prefabs/Weapons/Blaster/BlasterProjectile.xob"
- CartridgeModel "{591AA00A85929B95}Prefabs/Weapons/Blaster/BlasterProjectile.xob"
+ coords 111.586 1.001 155.683
+}
+GenericEntity : "{D37A54E258B72E0F}Prefabs/Weapons/Blaster/BlasterProjectile_Warhead.et" {
+ coords 110.375 1.001 156.673
+}
+GenericEntity : "{D649A52C2A1A29FF}Prefabs/Weapons/Warheads/Warhead_HEAT_PG7VM.et" {
+ coords 109.855 1.001 154.575
+}
+Projectile : "{E6EC1F21E22709F0}Prefabs/Weapons/Ammo/Ammo_Rocket_PG7VM_Penetrator.et" {
+ coords 109.158 1.001 155.122
 }

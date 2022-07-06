@@ -1,0 +1,13 @@
+GenericEntity : "{9B5FF7EECAD376FA}Prefabs/Weapons/Warheads/Warhead_Base.et" {
+ ID "9D9BE68EA2672F76"
+ components {
+  SoundComponent "{D092A75ECEFAE456}" {
+   Filenames {
+    "{6FC67D2C9BF229AB}Sounds/Weapons/Ammo/RPG7/Explosion/Ammo_Rocket_RPG7.acp"
+   }
+  }
+  HitEffectComponent "{9D9BE68D6F65A10F}" {
+  }
+ }
+ coords 0 0 0
+}

@@ -1,0 +1,40 @@
+EffectDef {
+ Emitters {
+  EmitterDef Emitter_01 {
+   ShapeSize 1 0 0
+   ConeAngle 360 360 0
+   MaxNum 300
+   BirthRate 800
+   BirthRateRND 0
+   Material "{C2DB77C6BEA354D2}Prefabs/Weapons/Blaster/BlasterTrailMaterial.emat"
+   Prefab "{29FBEC1991810EEF}system/wbdata/ParticleEditor/defaultPrefab.et"
+   SizeMultiplier 0.4
+   SizeRND 0
+   Velocity 32
+   GravityMultiply 0.08
+   Lifetime 0.4
+   Size {
+    0 1 0.732 1 1 0
+   }
+   EmittingTime 0.1
+   Repeat 0
+  }
+  EmitterDef Fire {
+   ShapeType Box
+   ShapeSize 0.3 0.3 0.3
+   ConeAngle 360 360 0
+   MaxNum 5
+   BirthRate 200
+   Material "{D464B3597E196A8C}Particles/_Materials/Fire/Explosion_04.emat"
+   Prefab "{29FBEC1991810EEF}system/wbdata/ParticleEditor/defaultPrefab.et"
+   SizeMultiplier 6
+   Velocity 10
+   Lifetime 0.2
+   Size {
+    0 1 0.45 1 1 0
+   }
+   EmittingTime 0.3
+   Repeat 0
+  }
+ }
+}
