@@ -7,12 +7,37 @@ SCR_BaseGameMode GameMode_Plain1 : "{1B76F75A3175E85C}Prefabs/MP/Modes/Plain/Gam
  "		super.OnPlayerSpawned(playerId, controlledEntity);"\
  "		PrintString(\"overrided Event GameMode PlayerSpawned\");"\
  "		"\
- "		Vehicle veh = Vehicle.Cast(GetGame().GetWorld().FindEntityByName(\"UAZ1\"));"\
+ "		ArmaReforgerScripted game = GetGame();"\
+ "		"\
+ "		vector playerPosition[4];"\
+ "		controlledEntity.GetWorldTransform(playerPosition);"\
+ "		"\
+ "		array<ResourceName> vehiclePrefabs = {"\
+ "			\"{21C45FA677BCDBDA}Prefabs/Vehicles/Wheeled/M998/M998_Armed.et\"	"\
+ "		};"\
+ "		"\
+ "		Resource res = Resource.Load(vehiclePrefabs[0]);"\
+ "		EntitySpawnParams spawnParams = new EntitySpawnParams();"\
+ "		IEntity newVehicleEntity = GetGame().SpawnEntityPrefab(res, params: spawnParams);"\
+ "		newVehicleEntity.SetWorldTransform(playerPosition);"\
+ "		"\
+ "		Vehicle veh = Vehicle.Cast(newVehicleEntity);"\
+ "		"\
  "		SCR_CompartmentAccessComponent compartmentAccessComponent = SCR_CompartmentAccessComponent.Cast(controlledEntity.FindComponent(SCR_CompartmentAccessComponent));"\
  "		compartmentAccessComponent.MoveInVehicle(veh, ECompartmentType.Pilot);"\
  "		"\
  "		CarControllerComponent m_pCarController = CarControllerComponent.Cast(veh.FindComponent(CarControllerComponent));"\
  "		m_pCarController.StartEngine();"\
+ ""\
+ "		"\
+ "		/*"\
+ "		RplComponent newRpl = RplComponent.Cast(newWeaponEnt.FindComponent(RplComponent));"\
+ "		RplId newRplId = newRpl.Id();"\
+ "		RplId newWeaponEntRplId = Replication.FindId(newWeaponEnt);"\
+ "		bool newRplIdValid = newRplId.IsValid();"\
+ "		"\
+ "		Rpc(RPC_BroadcastSetSlotWeapon, newRplId, false);"\
+ "		RPC_BroadcastSetSlotWeapon(newRplId, true);*/"\
  "	"
 }
 SCR_FactionManager FactionManager_FFA1 : "{A1C54BBE72C5C696}Prefabs/MP/Managers/Factions/FactionManager_FFA.et" {
