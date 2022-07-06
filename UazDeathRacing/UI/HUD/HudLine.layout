@@ -1,0 +1,31 @@
+HorizontalLayoutWidgetClass {
+ Name "HudLine"
+ Slot LayoutSlot "{59CCF35D7D973317}" {
+  Padding 0 0 0 4
+ }
+ {
+  SizeLayoutWidgetClass "{59CCF35EA3208881}" {
+   Name "Width"
+   Slot LayoutSlot "{59CCF35EA32088E3}" {
+   }
+   AllowWidthOverride 1
+   WidthOverride 190
+   {
+    TextWidgetClass "{59CCF35E63C2AC08}" : "{24A44C72A21EC570}UI/HUD/HudText.layout" {
+     Name "TextLeft"
+     Slot AlignableSlot "{59CCF35E63C2AC63}" {
+      HorizontalAlign 3
+      VerticalAlign 3
+     }
+     Text "Health:"
+    }
+   }
+  }
+  TextWidgetClass "{59CCF35E66713599}" : "{24A44C72A21EC570}UI/HUD/HudText.layout" {
+   Name "TextRight"
+   Slot LayoutSlot "{59CCF35D4166CA09}" {
+   }
+   Text "100"
+  }
+ }
+}
