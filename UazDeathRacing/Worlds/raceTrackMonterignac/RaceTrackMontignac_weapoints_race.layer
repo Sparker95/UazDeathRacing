@@ -1,3 +1,10 @@
+UDR_GameMode UDR_GameMode1 : "{CD9589A17294B557}Prefabs/GameMode/UDR_GameMode.et" {
+ components {
+  SCR_RespawnSystemComponent "{59CCE8840B1B650E}" {
+  }
+ }
+ coords 4859.806 163.033 7345.481
+}
 ScriptedGameTriggerEntity BoostTrigger {
  coords 4865.784 162.877 7354.799
  angleX -1.787
@@ -39,5 +46,6 @@ SCR_SpawnPoint SpawnPointOne : "{5392C4D80E4B18F8}Prefabs/MP/Spawning/SpawnPoint
  }
  coords 4856.238 163.953 7365.392
  angleY 89.136
+ m_fSpawnRadius 10
  m_bShowInDeployMapOnly 1
 }

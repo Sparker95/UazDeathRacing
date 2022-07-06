@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{DEE5DD6EF1DA580F}Assets/Weapons/Ammo/Tracers/Data/BlasterAmmoMaterial.emat"
+ Name "{DEE5DD6EF1DA580F}Prefabs/Weapons/Blaster/BlasterProjectileMaterial.emat"
  Configurations {
   EMATResourceClass PC {
   }

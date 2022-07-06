@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{C2DB77C6BEA354D2}Particles/_Materials/Fire/Base_Sparks_06___.emat"
+ Name "{C2DB77C6BEA354D2}Prefabs/Weapons/Blaster/BlasterTrailMaterial.emat"
  Configurations {
   EMATResourceClass PC {
   }
