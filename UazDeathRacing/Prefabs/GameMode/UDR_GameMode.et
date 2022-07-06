@@ -1,0 +1,11 @@
+UDR_GameMode {
+ ID "59CCE884E36B7368"
+ components {
+  SCR_AutomaticRespawnHandlerComponent "{59CCE88768068358}" {
+   m_iForcedFaction 1
+  }
+  SCR_RespawnSystemComponent "{59CCE88765B5DF27}" {
+  }
+ }
+ coords 4855.691 163.049 7344.311
+}
