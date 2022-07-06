@@ -5,25 +5,14 @@ SCR_BaseGameMode GameMode_Plain1 : "{1B76F75A3175E85C}Prefabs/MP/Modes/Plain/Gam
  coords 4874.008 163.405 7340.691
  OnPlayerSpawned ""\
  "		super.OnPlayerSpawned(playerId, controlledEntity);"\
- "		PrintString(\"debug\");"\
- "		"\
- "		IEntity uaz = GetGame().GetWorld().FindEntityByName(\"UAZ1\");"\
- "		//MoveInVehicle(\"Jeep\", ECompartmentType.Pilot);"\
+ "		PrintString(\"overrided Event GameMode PlayerSpawned\");"\
  "		"\
  "		Vehicle veh = Vehicle.Cast(GetGame().GetWorld().FindEntityByName(\"UAZ1\"));"\
- "		"\
- "		if (!veh) {"\
- "			return;"\
- "		}"\
- "		"\
  "		SCR_CompartmentAccessComponent compartmentAccessComponent = SCR_CompartmentAccessComponent.Cast(controlledEntity.FindComponent(SCR_CompartmentAccessComponent));"\
- "				"\
- "		if (!compartmentAccessComponent) {"\
- "			return;"\
- "		}"\
+ "		compartmentAccessComponent.MoveInVehicle(veh, ECompartmentType.Pilot);"\
  "		"\
- ""\
- "		compartmentAccessComponent.MoveInVehicle(veh,  ECompartmentType.Pilot);"\
+ "		CarControllerComponent m_pCarController = CarControllerComponent.Cast(veh.FindComponent(CarControllerComponent));"\
+ "		m_pCarController.StartEngine();"\
  "	"
 }
 SCR_FactionManager FactionManager_FFA1 : "{A1C54BBE72C5C696}Prefabs/MP/Managers/Factions/FactionManager_FFA.et" {

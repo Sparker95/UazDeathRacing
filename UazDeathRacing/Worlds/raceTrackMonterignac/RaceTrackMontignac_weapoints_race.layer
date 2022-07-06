@@ -19,7 +19,7 @@ ScriptedGameTriggerEntity BoostTrigger {
  "        vWheelSimu.EngineSetPeakPowerState(500);"\
  "        //sleep(2);"\
  "		"\
- "		GetGame().GetCallqueue().CallLater(RemoveBoost, 5000, false, vWheelSimu);"\
+ "		GetGame().GetCallqueue().CallLater(RemoveBoost, 2000, false, vWheelSimu);"\
  "		//queue.CallLater(vWheelSimu.EngineSetPeakPowerState, 5000, false, vWheelSimu);"\
  "    }"\
  "	"\
