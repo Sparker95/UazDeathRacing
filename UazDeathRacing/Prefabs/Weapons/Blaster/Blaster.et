@@ -1,6 +1,9 @@
 GenericEntity : "{A3E183EB5A2F3A38}Prefabs/Weapons/Rifles/SVD/Rifle_SVD_base.et" {
  ID "525494E72B1E90FD"
  components {
+  MeshObject "{CFBAA4B701F95D69}" {
+   Object "{953BCAB28BF8B818}Assets/Weapons/Launchers/M72/m72_extended.xob"
+  }
   WeaponComponent "{CFBAA4B706BA66E8}" {
    components {
     MuzzleComponent "{CA6BE4D6B867541F}" {
@@ -15,4 +18,5 @@ GenericEntity : "{A3E183EB5A2F3A38}Prefabs/Weapons/Rifles/SVD/Rifle_SVD_base.et"
    }
   }
  }
+ scale 2
 }

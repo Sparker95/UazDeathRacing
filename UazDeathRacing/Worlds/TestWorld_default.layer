@@ -13,6 +13,7 @@ Vehicle M998_Armed1 : "{21C45FA677BCDBDA}Prefabs/Vehicles/Wheeled/M998/M998_Arme
 $grp GenericEntity : "{58ED978DD73772BE}Prefabs/Weapons/Blaster/Blaster.et" {
  {
   coords 129.2 1.001 132.355
+  scale 2
  }
  {
   coords 127.125 1.001 133.019
