@@ -13,7 +13,8 @@ class UDR_GameMode: SCR_BaseGameMode
 		
         // List of UDR custom vehicles
 		array<ResourceName> vehiclePrefabs = {
-			"{21C45FA677BCDBDA}Prefabs/Vehicles/Wheeled/M998/M998_Armed.et"	
+			"{1A20D130A03F9CF1}Prefabs/Vehicles/Wheeled/UAZ469/UAZ469_Armed.et",
+			"{21C45FA677BCDBDA}Prefabs/Vehicles/Wheeled/M998/M998_Armed.et"
 		};
 		
 		Resource res = Resource.Load(vehiclePrefabs[0]);

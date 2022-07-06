@@ -96,7 +96,9 @@ Vehicle : "{1F9BB80C3EC3C891}Prefabs/Vehicles/Core/Wheeled_Car_Base.et" {
    }
   }
   AICarMovementComponent "{BF6BA82CF446553F}" {
-   MaxSteeringChangeS 4
+   MaxVehicleSpeedKmh 130
+   CruiseVehicleSpeedKmh 90
+   MaxSteeringChangeS 8
   }
   AICarSteeringComponent "{50E11CD4A6466E06}" {
   }
@@ -409,8 +411,8 @@ Vehicle : "{1F9BB80C3EC3C891}Prefabs/Vehicles/Core/Wheeled_Car_Base.et" {
   Hierarchy "{F0E2E78C91EF7BEC}" {
   }
   RigidBody "{51DAA09FECF52BBF}" {
-   Mass 1650
-   CenterOfMass 0 0.85 0.15
+   Mass 1500
+   CenterOfMass 0 0.5 0
   }
   SCR_BaseCompartmentManagerComponent "{20FB66C5DCB8DF72}" {
    CompartmentSlots {
@@ -1063,8 +1065,8 @@ Vehicle : "{1F9BB80C3EC3C891}Prefabs/Vehicles/Core/Wheeled_Car_Base.et" {
    Simulation Wheeled "{4D8B26DEA5F25978}" {
     Engine Engine Engine {
      Inertia 0.3
-     MaxPower 53
-     MaxTorque 167
+     MaxPower 80
+     MaxTorque 180
      RpmMaxPower 4000
      RpmMaxTorque 2000
      Steepness 15
@@ -1080,6 +1082,7 @@ Vehicle : "{1F9BB80C3EC3C891}Prefabs/Vehicles/Core/Wheeled_Car_Base.et" {
       4.124 2.641 1.58 1
      }
      Reverse 5.224
+     Efficiency 2
      Output "Diff_C"
     }
     Differentials {
@@ -1149,6 +1152,8 @@ Vehicle : "{1F9BB80C3EC3C891}Prefabs/Vehicles/Core/Wheeled_Car_Base.et" {
     }
     Pacejka Pacejka "{54D53AE3BC404A0C}" : "{FE6D317BB79B59AA}Prefabs/Vehicles/Core/Configs/PacejkaTire_Offroad.conf" {
     }
+    NoiseSteerSensitivity 0.5
+    RoughnessSensitivity 0.5
    }
   }
   CarProcAnimComponent "{A201E6A6F82F2CDA}" {

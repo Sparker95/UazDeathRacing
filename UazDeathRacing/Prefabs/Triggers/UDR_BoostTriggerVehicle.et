@@ -1,0 +1,12 @@
+UDR_BoostVehicleTrigger {
+ ID "59CD64AB00935620"
+ coords 4851.657 162.299 7361.087
+ TriggerShapeType "Oriented Bounding Box"
+ BoxMins 0 0 0
+ BoxMaxs 1 5 20
+ DrawShape 1
+ TriggerActivationType "All changes"
+ PeriodicQueries 1
+ UpdatePeriod 0.1
+ ClassFilter "Vehicle"
+}
