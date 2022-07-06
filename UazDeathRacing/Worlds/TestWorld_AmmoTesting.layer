@@ -45,7 +45,7 @@ $grp Vehicle : "{1A20D130A03F9CF1}Prefabs/Vehicles/Wheeled/UAZ469/UAZ469_Armed.e
     m_fVehicleDestroyDamage 857.143
    }
   }
-  coords 108.172 1.001 143.174
+  coords 108.172 1.001 143.688
  }
  UAZ469_Armed8 {
   components {
