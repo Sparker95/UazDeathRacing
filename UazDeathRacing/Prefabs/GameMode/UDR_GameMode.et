@@ -2,7 +2,7 @@ UDR_GameMode {
  ID "59CCE884E36B7368"
  components {
   SCR_AutomaticRespawnHandlerComponent "{59CCE88768068358}" {
-   m_iForcedFaction 1
+   m_iForcedFaction 0
   }
   SCR_RespawnSystemComponent "{59CCE88765B5DF27}" {
   }
