@@ -1,0 +1,12 @@
+GenericEntity : "{A3E183EB5A2F3A38}Prefabs/Weapons/Rifles/SVD/Rifle_SVD_base.et" {
+ ID "525494E72B1E90FD"
+ components {
+  WeaponComponent "{CFBAA4B706BA66E8}" {
+   components {
+    MuzzleComponent "{CA6BE4D6B867541F}" {
+     MagazineTemplate "{EA28C1F1FBAEE0C8}Prefabs/Weapons/Blaster/BlasterMagazine.et"
+    }
+   }
+  }
+ }
+}

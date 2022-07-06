@@ -1,0 +1,10 @@
+MatCommon {
+ Emissive 1 0.036 0.002 0
+ EmissiveLV 6.452
+ EmissiveAbsoluteLV 0
+ CastShadow 0
+ ReceiveShadow 0
+ NoDecals 1
+ SurfaceProperties "{F0733D364338D7E0}Common/Materials/Game/grass.gamemat"
+ CrossFade 0
+}

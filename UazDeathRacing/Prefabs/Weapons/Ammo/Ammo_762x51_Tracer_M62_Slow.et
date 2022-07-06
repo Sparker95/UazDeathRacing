@@ -5,7 +5,7 @@ TracerProjectile : "{C14C5DE6F97F06F0}Prefabs/Weapons/Ammo/Ammo_762x51_Ball_M80.
    InitSpeed 200
    InitSpeedVariation 40
    ProjectileEffects {
-    BaseDamageEffect "{59CAD515CACC2ED2}" {
+    BaseDamageEffect "{59CB4E9A77A373B2}" {
      DamageType Incendiary
     }
    }

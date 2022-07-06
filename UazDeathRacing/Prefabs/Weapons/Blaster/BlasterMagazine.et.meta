@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{3C91711D612813EA}Prefabs/Weapons/Ammo/Ammo_762x51_Tracer_M62_Slow.et"
+ Name "{EA28C1F1FBAEE0C8}Prefabs/Weapons/Core/BlasterMagazine.et"
  Configurations {
   EntityTemplateResourceClass PC {
   }

@@ -513,8 +513,10 @@ Vehicle : "{1F9BB80C3EC3C891}Prefabs/Vehicles/Core/Wheeled_Car_Base.et" {
   SCR_VehicleDamageManagerComponent "{141326E9FD94FE40}" {
    "Additional hit zones" {
     SCR_FlammableHitZone Hull {
-     MaxHealth 6000
+     MaxHealth 500
      DamageReduction 0.5
+     "Kinetic multiplier" 1
+     "Fragmentation multiplier" 1
      m_pDestructionHandler SCR_DestructionBaseHandler "{5584C42C773FDFBF}" {
       m_sWreckModel "{E30753B331EE0B6B}Assets/Vehicles/Wheeled/M998/M998_Wreck.xob"
      }
@@ -531,46 +533,121 @@ Vehicle : "{1F9BB80C3EC3C891}Prefabs/Vehicles/Core/Wheeled_Car_Base.et" {
      ColliderNames {
       "UCX_FG_engine_01"
      }
+     ParentHZs {
+      ParentHitZone "{5528FE11202D0402}" {
+       DamageMultiplier 0
+       HealingMultiplier 0
+      }
+     }
+     BaseDamageMultiplier 0
+     "Collision multiplier" 0
+     "Melee multiplier" 0
+     "Kinetic multiplier" 0
+     "Fragmentation multiplier" 0
+     "Explosive multiplier" 0
+     "Incendiary multiplier" 0
     }
     ScriptedHitZone Gearbox_01 {
      ColliderNames {
       "UCX_FG_Gearbox" "UCS_FG_Driveshaft_01" "UCS_FG_Driveshaft_02" "UCX_FG_Differential_01" "UCX_FG_Differential_02"
      }
+     ParentHZs {
+      ParentHitZone "{5572D3523B625610}" {
+       DamageMultiplier 0
+       HealingMultiplier 0
+      }
+     }
+     BaseDamageMultiplier 0
+     "Collision multiplier" 0
+     "Melee multiplier" 0
+     "Kinetic multiplier" 0
+     "Fragmentation multiplier" 0
+     "Explosive multiplier" 0
+     "Incendiary multiplier" 0
     }
     SCR_FuelHitZone FuelTank_01 : "{D19325BDFDD31404}Prefabs/Vehicles/Core/Configs/HitZones/FuelTank_Truck.conf" {
      ColliderNames {
       "UBX_FG_Fueltank_01"
      }
+     BaseDamageMultiplier 0
+     "Collision multiplier" 0
+     "Melee multiplier" 0
+     "Kinetic multiplier" 0
+     "Fragmentation multiplier" 0
+     "Explosive multiplier" 0
+     "Incendiary multiplier" 0
     }
     SCR_BatteryHitZone Battery_01 : "{53C3DC00CBDABF76}Prefabs/Vehicles/Core/Configs/HitZones/Battery_Truck.conf" {
      ColliderNames {
       "UBX_FG_Battery_01"
      }
+     BaseDamageMultiplier 0
+     "Collision multiplier" 0
+     "Melee multiplier" 0
+     "Kinetic multiplier" 0
+     "Fragmentation multiplier" 0
+     "Explosive multiplier" 0
+     "Incendiary multiplier" 0
     }
     SCR_BatteryHitZone Battery_02 : "{53C3DC00CBDABF76}Prefabs/Vehicles/Core/Configs/HitZones/Battery_Truck.conf" {
      ColliderNames {
       "UBX_FG_Battery_02"
      }
+     BaseDamageMultiplier 0
+     "Collision multiplier" 0
+     "Melee multiplier" 0
+     "Kinetic multiplier" 0
+     "Fragmentation multiplier" 0
+     "Explosive multiplier" 0
+     "Incendiary multiplier" 0
     }
     SCR_WheelHitZone Wheel_L01 {
      ColliderNames {
       "UTM_FG_wheel_L01"
      }
+     BaseDamageMultiplier 0
+     "Collision multiplier" 0
+     "Melee multiplier" 0
+     "Kinetic multiplier" 0
+     "Fragmentation multiplier" 0
+     "Explosive multiplier" 0
+     "Incendiary multiplier" 0
     }
     SCR_WheelHitZone Wheel_L02 {
      ColliderNames {
       "UTM_FG_wheel_L02"
      }
+     BaseDamageMultiplier 0
+     "Collision multiplier" 0
+     "Melee multiplier" 0
+     "Kinetic multiplier" 0
+     "Fragmentation multiplier" 0
+     "Explosive multiplier" 0
+     "Incendiary multiplier" 0
     }
     SCR_WheelHitZone Wheel_R01 {
      ColliderNames {
       "UTM_FG_wheel_R01"
      }
+     BaseDamageMultiplier 0
+     "Collision multiplier" 0
+     "Melee multiplier" 0
+     "Kinetic multiplier" 0
+     "Fragmentation multiplier" 0
+     "Explosive multiplier" 0
+     "Incendiary multiplier" 0
     }
     SCR_WheelHitZone Wheel_R02 {
      ColliderNames {
       "UTM_FG_wheel_R02"
      }
+     BaseDamageMultiplier 0
+     "Collision multiplier" 0
+     "Melee multiplier" 0
+     "Kinetic multiplier" 0
+     "Fragmentation multiplier" 0
+     "Explosive multiplier" 0
+     "Incendiary multiplier" 0
     }
    }
    m_fVehicleDamageSpeedThreshold 20
@@ -597,7 +674,7 @@ Vehicle : "{1F9BB80C3EC3C891}Prefabs/Vehicles/Core/Wheeled_Car_Base.et" {
     }
    }
   }
-  TurretComponent "{59C35549F1F82278}" : "{00B64054B93111A8}BTR_TurretComponent.ct" {
+  TurretComponent "{59C35549F1F82278}" : "{00B64054B93111A8}Prefabs/ComponentPrefabs/BTR_TurretComponent.ct" {
   }
   UDR_WeaponManagerComponent "{59CAF3120BEC1D11}" {
   }

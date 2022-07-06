@@ -1,24 +1,5 @@
-SCR_ParticleEmitter {
- coords 130.975 1.001 134.059
- m_EffectPath "{6437C32C2FF30F70}Prefabs/Weapons/Blaster/BlasterTrail.ptc"
-}
-Vehicle M998_Armed1 : "{21C45FA677BCDBDA}Prefabs/Vehicles/Wheeled/M998/M998_Armed.et" {
- components {
-  SCR_VehicleDamageManagerComponent "{141326E9FD94FE40}" {
-   m_fVehicleDestroyDamage 143.571
-  }
- }
- coords 131.44 1.001 129.441
-}
-$grp GenericEntity : "{58ED978DD73772BE}Prefabs/Weapons/Blaster/Blaster.et" {
- {
-  coords 129.2 1.001 132.355
- }
- {
-  coords 127.125 1.001 133.019
- }
-}
-Projectile : "{8346AC21916651EA}Prefabs/Weapons/Blaster/BlasterProjectile.et" {
+Projectile : "{C0BDA86B5AA5648C}Prefabs/Weapons/Core/Ammo_Rocket_Base.et" {
+ ID "DA5C6308000CDEF2"
  components {
   CollisionTriggerComponent "{59CC9CC7138D73F8}" {
    PROJECTILE_EFFECTS {
@@ -68,7 +49,19 @@ Projectile : "{8346AC21916651EA}Prefabs/Weapons/Blaster/BlasterProjectile.et" {
    Object "{BB3F99FC7223DDC5}Assets/Weapons/Magazines/RPG7/Rocket_PG7VM.xob"
   }
   MissileMoveComponent "{0EF36690881261EF}" {
+   InitSpeed 70
+   InitSpeedVariation 1
+   Mass 1.6
+   TimeToLive 5
+   ProjectileEffects {
+   }
+   ThrustInitTime 0.001
+   ThrustTime 8
    ThrustForce 10
+   ForwardAirFriction 0.1
+   SideAirFriction 0.08
+   AlignTorque 0.04
+   DistanceEnableGravitation 0.1
   }
   RigidBody "{59CC9CC7138D73D3}" {
    LayerPreset "Projectile"
@@ -83,19 +76,6 @@ Projectile : "{8346AC21916651EA}Prefabs/Weapons/Blaster/BlasterProjectile.et" {
    }
   }
  }
- coords 111.586 1.001 155.683
-}
-SCR_DestructibleBuildingEntity : "{BEF9077AF9F93AE7}Prefabs/Structures/Houses/Village/House_Mountain_E_1I01.et" {
- coords 181.381 0.001 194.345
-}
-GenericEntity : "{EDE6EC8B05227E3E}Prefabs/Systems/Arsenal/ArsenalBoxes/USSR/ArsenalBox_USSR.et" {
- coords 130.29 1.001 136.998
-}
-Vehicle M151A2_M2HB1 : "{F6B23D17D5067C11}Prefabs/Vehicles/Wheeled/M151A2/M151A2_M2HB.et" {
- components {
-  SCR_VehicleDamageManagerComponent "{141326E9FD94FE40}" {
-   m_fVehicleDestroyDamage 10408.7
-  }
- }
- coords 124.403 1.001 121.852
+ ProjectileModel "{591AA00A85929B95}Prefabs/Weapons/Blaster/BlasterProjectile.xob"
+ CartridgeModel "{591AA00A85929B95}Prefabs/Weapons/Blaster/BlasterProjectile.xob"
 }
