@@ -1,0 +1,4 @@
+UDR_BoostVehicleTrigger : "{C3865A319561D60F}Prefabs/Triggers/UDR_BoostTriggerVehicle.et" {
+ coords -287.277 0 -107.922
+ angleY 90
+}

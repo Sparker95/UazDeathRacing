@@ -1,9 +1,6 @@
 PerceptionManager PerceptionManager1 : "{028DAEAD63E056BE}Prefabs/World/Game/PerceptionManager.et" {
  coords 4860.704 163.26 7342.035
 }
-SCR_BaseGameMode GameMode_Plain1 : "{1B76F75A3175E85C}Prefabs/MP/Modes/Plain/GameMode_Plain.et" {
- coords 4829.294 161.064 7386.709
-}
 SCR_FactionManager FactionManager_FFA1 : "{A1C54BBE72C5C696}Prefabs/MP/Managers/Factions/FactionManager_FFA.et" {
  coords 4877.695 163.946 7345.681
 }

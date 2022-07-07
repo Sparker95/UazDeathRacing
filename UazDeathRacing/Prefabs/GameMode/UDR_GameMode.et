@@ -6,6 +6,8 @@ UDR_GameMode {
   }
   SCR_RespawnSystemComponent "{59CCE88765B5DF27}" {
   }
+  RplComponent "{59CE058AE0CFD2D5}" {
+  }
  }
  coords 4855.691 163.049 7344.311
 }
