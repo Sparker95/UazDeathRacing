@@ -15,8 +15,6 @@ AudioClass {
      }
     }
    }
-   volume 5.623
-   volume_dB 15
    outState 7179
    outStatePort 2055
    noInAudible 0

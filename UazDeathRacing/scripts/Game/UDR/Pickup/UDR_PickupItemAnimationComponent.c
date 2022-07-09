@@ -30,8 +30,6 @@ class UDR_PickupItemAnimationComponent : ScriptComponent
 		if ((owner.GetFlags() & EntityFlags.VISIBLE) == 0)
 			return;
 		
-		Print(string.Format("Visible: %1", true));
-		
 		// Rotation animation
 		m_fRorationAnimTime += timeSlice;
 		if (m_fRorationAnimTime > m_fRotationAnimPeriod)
