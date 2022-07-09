@@ -3,7 +3,8 @@ modded enum SCR_DebugMenuID
 	UDR_MENU,
 	//UDR_SELECT_WEAPON_0,
 	//UDR_SELECT_WEAPON_1,
-	UDR_SHOW_VEHICLE_PANEL
+	UDR_SHOW_VEHICLE_PANEL,
+	UDR_SHOW_SOUND_PANEL
 }
 
 class UDR_DebugMenu
@@ -14,14 +15,13 @@ class UDR_DebugMenu
 	{
 		DiagMenu.RegisterMenu(SCR_DebugMenuID.UDR_MENU, DEBUG_MENU_NAME, "");
 		
-		//DiagMenu.RegisterBool(SCR_DebugMenuID.UDR_SELECT_WEAPON_0, "", "Select Weapon 0", DEBUG_MENU_NAME);
-		//DiagMenu.RegisterBool(SCR_DebugMenuID.UDR_SELECT_WEAPON_1, "", "Select Weapon 1", DEBUG_MENU_NAME);
 		DiagMenu.RegisterBool(SCR_DebugMenuID.UDR_SHOW_VEHICLE_PANEL, "", "Show Vehicle Panel", DEBUG_MENU_NAME);
+		DiagMenu.RegisterBool(SCR_DebugMenuID.UDR_SHOW_SOUND_PANEL, "", "Show Sound Panel", DEBUG_MENU_NAME);
 	}
 	
 	static void DrawVehiclePanel()
 	{
-		DbgUI.Begin("Vehicle Panel");
+		DbgUI.Begin("UDR Vehicle Panel");
 		
 		// Find components
 		PlayerController playerController;
@@ -114,14 +114,24 @@ class UDR_DebugMenu
 		DbgUI.End();
 	}
 	
-	//void Update()
-	//{
-	//	
-	//}
+	static void DrawSoundPanel()
+	{
+		DbgUI.Begin("UDR Sound Panel");
+		
+		if (DbgUI.Button("Pickup Item"))
+		{
+			SCR_UISoundEntity.SoundEvent("PICKUP_ITEM");
+		}
+		
+		DbgUI.End();
+	}
 	
 	static void UpdateMenus()
 	{
 		if (DiagMenu.GetBool(SCR_DebugMenuID.UDR_SHOW_VEHICLE_PANEL))
 			DrawVehiclePanel();
+		
+		if (DiagMenu.GetBool(SCR_DebugMenuID.UDR_SHOW_SOUND_PANEL))
+			DrawSoundPanel();
 	}
 }

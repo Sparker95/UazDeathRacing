@@ -8,7 +8,7 @@ GenericEntity : "{F9E1A46E3ABA116F}Prefabs/Weapons/Core/Magazine_Base.et" {
     Name "Blaster Magazine"
     Description "Blaster Magazine"
    }
-   MaxAmmo 400
+   MaxAmmo 10
    AmmoConfig "{D38AA322A96D5199}Prefabs/Weapons/Blaster/BlasterMagazine.conf"
    AmmoMapping {
    }

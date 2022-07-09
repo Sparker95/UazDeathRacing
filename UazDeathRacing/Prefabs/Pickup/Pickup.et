@@ -1,4 +1,4 @@
-GenericEntity {
+UDR_ReloadAmmoTrigger {
  ID "59D2A41745B895CC"
  components {
   MeshObject "{59D2A4164585DC4F}" {
@@ -11,10 +11,15 @@ GenericEntity {
   }
   Hierarchy "{59D2BDA130F446B6}" {
   }
-  UDR_PickupComponent "{59D2BDA0D58E62A2}" {
+  RplComponent "{59D2FBC7BB9AC8BA}" {
   }
  }
  coords 0 0 0
+ TriggerShapeType Sphere
+ SphereRadius 1.7
+ TriggerActivationType "All changes"
+ ClassFilter "Vehicle"
+ m_fRespawnPeriod 13
  {
   GenericEntity {
    ID "59D2A41752346FD0"
@@ -23,12 +28,12 @@ GenericEntity {
     }
     UDR_PickupItemAnimationComponent "{59D2BDA02D5829F0}" {
      m_fRotationAnimPeriod 2
-     m_fOscillationAnimAmplitude 0.15
+     m_fOscillationAnimAmplitude 0.1
     }
    }
    coords 0 0.8 0
    {
-    $grp GenericEntity : "{E0C466F8E7FDD9EF}Prefabs/Pickup/BulletShape.et" {
+    $grp GenericEntity : "{E0C466F8E7FDD9EF}Prefabs/Pickup/PickupBulletShape.et" {
      {
       ID "59D2BDA0055CC1FC"
       angleX 90

@@ -26,6 +26,12 @@ class UDR_PickupItemAnimationComponent : ScriptComponent
 	//------------------------------------------------------------------------------------------------
 	override void EOnFrame(IEntity owner, float timeSlice)
 	{
+		// Ignore if we are not visible
+		if ((owner.GetFlags() & EntityFlags.VISIBLE) == 0)
+			return;
+		
+		Print(string.Format("Visible: %1", true));
+		
 		// Rotation animation
 		m_fRorationAnimTime += timeSlice;
 		if (m_fRorationAnimTime > m_fRotationAnimPeriod)
@@ -63,6 +69,7 @@ class UDR_PickupItemAnimationComponent : ScriptComponent
 		m_vInitialOffset = transform[3];
 	}
 
+	/*
 	//------------------------------------------------------------------------------------------------
 	override void EOnInit(IEntity owner)
 	{
@@ -77,5 +84,6 @@ class UDR_PickupItemAnimationComponent : ScriptComponent
 	void ~UDR_PickupItemAnimationComponent()
 	{
 	}
+	*/
 
 }

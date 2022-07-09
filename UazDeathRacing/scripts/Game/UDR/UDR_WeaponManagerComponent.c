@@ -1,26 +1,30 @@
+enum UDR_Weapons {
+	MACHINEGUN,
+	BLASTER
+}
+
+ref array<ResourceName> UDR_WeaponPrefabs = {
+	"{5C3D941FDC76BC95}Prefabs/Weapons/MachineGuns/M60/MG_M60_Mounted_Advanced_Slow.et",
+	"{58ED978DD73772BE}Prefabs/Weapons/Blaster/Blaster.et"
+};
+
 class UDR_WeaponManagerComponentClass : ScriptComponentClass
 {
 }
 
 class UDR_WeaponManagerComponent : ScriptComponent
-{
+{	
 	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
-	void RPC_ServerAddWeapon(int weaponId)
+	void RpcAsk_AddWeapon(UDR_Weapons weaponId)
 	{
 		IEntity vehicleEnt = GetOwner();
-		
-		array<ResourceName> weaponPrefabs = {
-			"{5C3D941FDC76BC95}Prefabs/Weapons/MachineGuns/M60/MG_M60_Mounted_Advanced_Slow.et",
-			//"{0746F857CF0EB470}Prefabs/Weapons/MachineGuns/M60/MG_M60_Mounted_Advanced_Fast.et",
-			"{58ED978DD73772BE}Prefabs/Weapons/Blaster/Blaster.et"
-		};
 		
 		BaseWeaponManagerComponent weaponMgrComp = BaseWeaponManagerComponent.Cast(vehicleEnt.FindComponent(BaseWeaponManagerComponent));
 		array<WeaponSlotComponent> weaponSlots = {};
 		weaponMgrComp.GetWeaponsSlots(weaponSlots);
 		WeaponSlotComponent slot = weaponSlots[0];
 		
-		Resource res = Resource.Load(weaponPrefabs[weaponId]);
+		Resource res = Resource.Load(UDR_WeaponPrefabs[weaponId]);
 		EntitySpawnParams spawnParams = new EntitySpawnParams();
 		spawnParams.Parent = vehicleEnt;
 		IEntity newWeaponEnt = GetGame().SpawnEntityPrefab(res, params: spawnParams);
@@ -30,12 +34,12 @@ class UDR_WeaponManagerComponent : ScriptComponent
 		RplId newWeaponEntRplId = Replication.FindId(newWeaponEnt);
 		bool newRplIdValid = newRplId.IsValid();
 		
-		Rpc(RPC_BroadcastSetSlotWeapon, newRplId, false);
-		RPC_BroadcastSetSlotWeapon(newRplId, true);
+		Rpc(RpcDo_BroadcastSetSlotWeapon, newRplId, false);
+		RpcDo_BroadcastSetSlotWeapon(newRplId, true);
 	}
 	
 	[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
-	void RPC_BroadcastSetSlotWeapon(RplId newWeaponId, bool deletePrevWeapon)
+	protected void RpcDo_BroadcastSetSlotWeapon(RplId newWeaponId, bool deletePrevWeapon)
 	{
 		IEntity vehicleEnt = GetOwner();
 		
@@ -60,6 +64,24 @@ class UDR_WeaponManagerComponent : ScriptComponent
 	
 	void Owner_RequestAddWeapon(int weaponId)
 	{
-		Rpc(RPC_ServerAddWeapon, weaponId);
+		Rpc(RpcAsk_AddWeapon, weaponId);
+	}
+	
+	
+	
+	
+	//-----------------------------------------------------------------------
+	// Logic for sound playing
+	// Move it elsewhere later
+	
+	[RplRpc(RplChannel.Reliable, RplRcver.Owner)]
+	protected void RpcDo_PlayPickupSound()
+	{
+		SCR_UISoundEntity.SoundEvent(UDR_UISounds.PICKUP_ITEM);
+	}
+	
+	void Authority_SendPlayPickupSound()
+	{
+		Rpc(RpcDo_PlayPickupSound);
 	}
 }
