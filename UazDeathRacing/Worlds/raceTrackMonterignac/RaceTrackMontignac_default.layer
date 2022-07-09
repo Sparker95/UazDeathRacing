@@ -13,6 +13,17 @@ TimeAndWeatherManagerEntity : "{A3BAF78F6F03315B}Prefabs/World/Game/TimeAndWeath
 HitRegistrationManager HitRegManager1 : "{0EDA3D48791120DD}Prefabs/MP/HitRegManager.et" {
  coords 4871.811 163.161 7341.985
 }
+$grp UDR_ReloadAmmoTrigger : "{762143360F3032EB}Prefabs/Pickup/Pickup.et" {
+ {
+  coords 4965.432 155.726 7412.643
+ }
+ {
+  coords 4870.038 161.304 7385.524
+ }
+ {
+  coords 4845.144 164.818 7288.838
+ }
+}
 SCR_LoadoutManager : "{B7E5D7F4864D81C0}Prefabs/MP/Managers/Loadouts/LoadoutManager_FFA.et" {
  coords 4876.164 163.371 7342.343
 }

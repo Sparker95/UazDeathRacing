@@ -46,6 +46,10 @@ class UDR_ReloadAmmoTrigger : ScriptedGameTriggerEntity
 		if (!weaponMgr)
 			return false;
 		
+		// Don't pick it up if the vehicle is full on ammo already
+		if (weaponMgr.IsFullAmmo())
+			return false;
+		
 		weaponMgr.RpcAsk_AddWeapon(UDR_Weapons.BLASTER);
 		weaponMgr.Authority_SendPlayPickupSound();
 		

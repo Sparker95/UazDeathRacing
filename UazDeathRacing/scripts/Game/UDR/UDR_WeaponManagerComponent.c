@@ -67,6 +67,32 @@ class UDR_WeaponManagerComponent : ScriptComponent
 	}
 	
 	
+	// Returns true when this vehicle is full on ammo
+	bool IsFullAmmo()
+	{
+		IEntity vehicleEnt = GetOwner();
+		BaseWeaponManagerComponent weaponMgrComp = BaseWeaponManagerComponent.Cast(vehicleEnt.FindComponent(BaseWeaponManagerComponent));
+		BaseWeaponComponent weaponComp = weaponMgrComp.GetCurrentWeapon();
+		if (weaponComp)
+		{
+			BaseMuzzleComponent muzzleComp = weaponComp.GetCurrentMuzzle();
+			if (muzzleComp)
+			{
+				BaseMagazineComponent magazineComp = muzzleComp.GetMagazine();
+				if (magazineComp)
+				{
+					int ammoCount = magazineComp.GetAmmoCount();
+					if (muzzleComp.IsChamberingPossible() && muzzleComp.IsBarrelChambered(0))
+						ammoCount++;
+					
+					return ammoCount == magazineComp.GetMaxAmmoCount();
+				}
+			}
+		}
+		
+		return false;
+	}
+	
 	
 	
 	//-----------------------------------------------------------------------
