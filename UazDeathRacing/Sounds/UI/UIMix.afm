@@ -1,0 +1,28 @@
+AudioOutputStateResClass {
+ Mixers {
+  OBusClass {
+   id 1031
+   name "Output UI"
+   tl 93.889 -57.778
+   conns {
+    ConnectionsClass connections {
+     id 3
+     links {
+      ConnectionClass connection {
+       id 2055
+       port 65
+      }
+     }
+    }
+   }
+   type Out
+   master UI
+  }
+  OBusClass {
+   id 2055
+   name "Input UI"
+   tl -111.111 -58.333
+   type In
+  }
+ }
+}

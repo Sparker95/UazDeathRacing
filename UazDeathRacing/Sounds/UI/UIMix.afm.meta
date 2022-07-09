@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{7C8E39DAEEA0CE80}Sounds/UI/FinalMix.afm"
+ Configurations {
+  AudioOutputStateResourceClass PC {
+  }
+  AudioOutputStateResourceClass XBOX_ONE : PC {
+  }
+  AudioOutputStateResourceClass XBOX_SERIES : PC {
+  }
+  AudioOutputStateResourceClass PS4 : PC {
+  }
+  AudioOutputStateResourceClass HEADLESS : PC {
+  }
+ }
+}

@@ -75,6 +75,20 @@ Vehicle M998_Armed2 : "{21C45FA677BCDBDA}Prefabs/Vehicles/Wheeled/M998/M998_Arme
 Projectile : "{32E12D322E107F1C}Prefabs/Weapons/Ammo/Ammo_Rocket_PG7VM.et" {
  coords 110.694 1.001 154.708
 }
+$grp UDR_ReloadAmmoTrigger : "{762143360F3032EB}Prefabs/Pickup/Pickup.et" {
+ {
+  coords 119.523 1.001 149.67
+  DrawShape 0
+ }
+ {
+  coords 108.336 1.001 178.802
+  DrawShape 0
+ }
+ {
+  coords 129.277 1.001 155.764
+  DrawShape 0
+ }
+}
 Projectile : "{8346AC21916651EA}Prefabs/Weapons/Blaster/BlasterProjectile.et" {
  components {
   CollisionTriggerComponent "{59CCC7AD9FE96432}" {

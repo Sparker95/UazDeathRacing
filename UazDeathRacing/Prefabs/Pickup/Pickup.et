@@ -1,0 +1,62 @@
+UDR_ReloadAmmoTrigger {
+ ID "59D2A41745B895CC"
+ components {
+  MeshObject "{59D2A4164585DC4F}" {
+   Object "{A3048B22A0B49B2E}Prefabs/Pickup/PickupCylinder.xob"
+   CastShadow 0
+   CastFarShadow 0
+   RainOccluder 0
+   WetnessOccluder 0
+   ReceiveLight 0
+  }
+  Hierarchy "{59D2BDA130F446B6}" {
+  }
+  RplComponent "{59D2FBC7BB9AC8BA}" {
+  }
+ }
+ coords 0 0 0
+ TriggerShapeType Sphere
+ SphereRadius 1.7
+ TriggerActivationType "All changes"
+ ClassFilter "Vehicle"
+ m_fRespawnPeriod 13
+ {
+  GenericEntity {
+   ID "59D2A41752346FD0"
+   components {
+    Hierarchy "{59D2BDA1347E012A}" {
+    }
+    UDR_PickupItemAnimationComponent "{59D2BDA02D5829F0}" {
+     m_fRotationAnimPeriod 2
+     m_fOscillationAnimAmplitude 0.1
+    }
+   }
+   coords 0 0.8 0
+   {
+    $grp GenericEntity : "{E0C466F8E7FDD9EF}Prefabs/Pickup/PickupBulletShape.et" {
+     {
+      ID "59D2BDA0055CC1FC"
+      angleX 90
+      angleY 180
+      angleZ -180
+      scale 7
+     }
+     BulletShape_3 {
+      ID "59D2BDA0606158BF"
+      coords 0.2 0 0
+      angleX 90
+      scale 7
+     }
+     BulletShape_3 {
+      ID "59D2BDA064C33582"
+      coords -0.2 0 0
+      angleX 90
+      angleY -180
+      angleZ 180
+      scale 7
+     }
+    }
+   }
+  }
+ }
+}

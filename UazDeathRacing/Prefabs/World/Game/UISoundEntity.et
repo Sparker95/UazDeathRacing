@@ -1,0 +1,10 @@
+SCR_UISoundEntity {
+ ID "52EAE81F331179B8"
+ components {
+  SoundComponent "{52EAE81FCD04D30C}" {
+   Filenames + {
+    "{CEA788D79A641BC0}Sounds/UI/UI.acp"
+   }
+  }
+ }
+}

@@ -1,0 +1,66 @@
+AudioClass {
+ sounds {
+  SoundClass {
+   id 8201
+   name "PICKUP_ITEM"
+   tl 215 158
+   conns {
+    ConnectionsClass connections {
+     id 0
+     links {
+      ConnectionClass connection {
+       id 9220
+       port 65
+      }
+     }
+    }
+   }
+   volume 5.623
+   volume_dB 15
+   outState 7179
+   outStatePort 2055
+   noInAudible 0
+  }
+ }
+ mixers {
+  MixerClass {
+   id 7179
+   name "OutputState 7"
+   tl 413.833 158.833
+   res "{7C8E39DAEEA0CE80}Sounds/UI/UIMix.afm"
+   iops {
+    IOPConnectionClass iopConnection {
+     port 2055
+     conn {
+      ConnectionsClass connections {
+       id 5
+       links {
+        ConnectionClass connection {
+         id 8201
+         port 65
+        }
+       }
+      }
+     }
+    }
+   }
+   path "{7C8E39DAEEA0CE80}Sounds/UI/UIMix.afm"
+   inputs {
+    "Input UI"
+   }
+  }
+ }
+ banks_local {
+  BankLocalClass {
+   id 9220
+   name "Bank 9"
+   tl 24 159.333
+   Samples {
+    AudioBankSampleClass "Sample(1)" {
+     Filename "{065D53406133D06A}Sounds/UI/PickupItem.wav"
+    }
+   }
+  }
+ }
+ version 1
+}
