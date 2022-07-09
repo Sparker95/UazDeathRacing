@@ -1,0 +1,57 @@
+GenericEntity {
+ ID "59D2A41745B895CC"
+ components {
+  MeshObject "{59D2A4164585DC4F}" {
+   Object "{A3048B22A0B49B2E}Prefabs/Pickup/PickupCylinder.xob"
+   CastShadow 0
+   CastFarShadow 0
+   RainOccluder 0
+   WetnessOccluder 0
+   ReceiveLight 0
+  }
+  Hierarchy "{59D2BDA130F446B6}" {
+  }
+  UDR_PickupComponent "{59D2BDA0D58E62A2}" {
+  }
+ }
+ coords 0 0 0
+ {
+  GenericEntity {
+   ID "59D2A41752346FD0"
+   components {
+    Hierarchy "{59D2BDA1347E012A}" {
+    }
+    UDR_PickupItemAnimationComponent "{59D2BDA02D5829F0}" {
+     m_fRotationAnimPeriod 2
+     m_fOscillationAnimAmplitude 0.15
+    }
+   }
+   coords 0 0.8 0
+   {
+    $grp GenericEntity : "{E0C466F8E7FDD9EF}Prefabs/Pickup/BulletShape.et" {
+     {
+      ID "59D2BDA0055CC1FC"
+      angleX 90
+      angleY 180
+      angleZ -180
+      scale 7
+     }
+     BulletShape_3 {
+      ID "59D2BDA0606158BF"
+      coords 0.2 0 0
+      angleX 90
+      scale 7
+     }
+     BulletShape_3 {
+      ID "59D2BDA064C33582"
+      coords -0.2 0 0
+      angleX 90
+      angleY -180
+      angleZ 180
+      scale 7
+     }
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,19 @@
+GenericEntity {
+ ID "59D2BDA0E365129A"
+ components {
+  MeshObject "{59D2BDA751AE92EC}" {
+   Object "{1DB75A1FD5B12823}Assets/Weapons/Ammo/Bullets/127x99/Cartridge_127x99.xob"
+   Materials {
+    MaterialAssignClass "{59D2CC20ACB86AA9}" {
+     SourceMaterial "12_7x199_M33"
+     AssignedMaterial "{9C497C711107EAB6}Prefabs/Pickup/PickupItemMaterial.emat"
+    }
+   }
+   ReceiveLight 0
+  }
+  Hierarchy "{59D2BDA100E77BB8}" {
+  }
+ }
+ angleX 90
+ scale 7
+}
