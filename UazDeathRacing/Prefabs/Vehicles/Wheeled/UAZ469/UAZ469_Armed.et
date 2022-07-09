@@ -642,6 +642,7 @@ Vehicle : "{1F9BB80C3EC3C891}Prefabs/Vehicles/Core/Wheeled_Car_Base.et" {
     PivotID "v_fx_exhaust"
     Offset 0 0 0
     Angles 0 -19 0
+    InheritParentSkeleton 1
    }
    m_DamagedParticle "{AEA751F0BE7FE821}Particles/Vehicle/Vehicle_smoke_car_exhaust_damage.ptc"
   }
@@ -924,7 +925,7 @@ Vehicle : "{1F9BB80C3EC3C891}Prefabs/Vehicles/Core/Wheeled_Car_Base.et" {
    m_fVehicleDamageSpeedThreshold 20
    m_fVehicleSpeedDestroy 80
    m_vFrontalImpact 0 1.24 2.1
-   m_fVehicleDestroyDamage 11880.1
+   m_fVehicleDestroyDamage 857.143
   }
   SCR_VehicleFactionAffiliationComponent "{5882CBD9AC741CEC}" {
    "faction affiliation" "USSR"
@@ -1206,7 +1207,8 @@ Vehicle : "{1F9BB80C3EC3C891}Prefabs/Vehicles/Core/Wheeled_Car_Base.et" {
   }
   WeaponSlotComponent "{59CD1419F44E9EDF}" {
    AttachType InventoryStorageSlot Slot {
-    Offset 0 1.8531 0.719
+    Offset 0 1.4012 1.3205
+    Angles 0 0 0
    }
    WeaponTemplate "{58ED978DD73772BE}Prefabs/Weapons/Blaster/Blaster.et"
   }
@@ -1556,6 +1558,31 @@ Vehicle : "{1F9BB80C3EC3C891}Prefabs/Vehicles/Core/Wheeled_Car_Base.et" {
    AnimInjection AnimationAttachmentInfo "{50B803EA8AD25BC8}" {
     AnimGraph "{FA439A24DBFB7E5C}Assets/Vehicles/Wheeled/UAZ469/workspaces/UAZ.agr"
     AnimInstance "{33E7ECD51715F4CE}Assets/Vehicles/Wheeled/UAZ469/workspaces/UAZ_player.asi"
+   }
+  }
+ }
+ coords 0 0 0
+ {
+  $grp SCR_ParticleEmitter {
+   {
+    ID "59D0B4CF13A02508"
+    components {
+     Hierarchy "{59D15CB2B89EBF79}" {
+     }
+    }
+    coords 0.485 0.414 -1.882
+    m_EffectPath "{575C2DEE390847F1}boostParticle.ptc"
+    m_PlayOnSpawn 0
+   }
+   {
+    ID "59D15CB230D38497"
+    components {
+     Hierarchy "{59D15CB2B89EBF79}" {
+     }
+    }
+    coords -0.343 0.312 -1.846
+    m_EffectPath "{575C2DEE390847F1}boostParticle.ptc"
+    m_PlayOnSpawn 0
    }
   }
  }

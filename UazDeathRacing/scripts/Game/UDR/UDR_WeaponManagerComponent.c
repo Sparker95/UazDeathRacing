@@ -57,7 +57,6 @@ class UDR_WeaponManagerComponent : ScriptComponent
 			SCR_Global.DeleteEntityAndChildren(prevWeaponEnt);
 	}
 	
-	
 	void Owner_RequestAddWeapon(int weaponId)
 	{
 		Rpc(RPC_ServerAddWeapon, weaponId);
