@@ -1572,6 +1572,7 @@ Vehicle : "{1F9BB80C3EC3C891}Prefabs/Vehicles/Core/Wheeled_Car_Base.et" {
     }
     coords 0.485 0.414 -1.882
     m_EffectPath "{575C2DEE390847F1}boostParticle.ptc"
+    m_PlayOnSpawn 0
    }
    {
     ID "59D15CB230D38497"
@@ -1581,6 +1582,7 @@ Vehicle : "{1F9BB80C3EC3C891}Prefabs/Vehicles/Core/Wheeled_Car_Base.et" {
     }
     coords -0.343 0.312 -1.846
     m_EffectPath "{575C2DEE390847F1}boostParticle.ptc"
+    m_PlayOnSpawn 0
    }
   }
  }
