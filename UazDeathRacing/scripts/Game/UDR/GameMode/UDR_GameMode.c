@@ -30,26 +30,5 @@ class UDR_GameMode: SCR_BaseGameMode
 		
 		CarControllerComponent m_pCarController = CarControllerComponent.Cast(veh.FindComponent(CarControllerComponent));
 		m_pCarController.StartEngine();
-		
-		array<SCR_ParticleEmitter> emittersList = findEmitters(newVehicleEntity);
-		foreach (SCR_ParticleEmitter emitter : emittersList)
-			emitter.Stop();
     }
-	
-	array<SCR_ParticleEmitter> findEmitters(IEntity vehicle) 
-	{
-		array<SCR_ParticleEmitter> emitters = new array<SCR_ParticleEmitter>;
-		IEntity child = vehicle.GetChildren();
-		while (child)
-		{
-			SCR_ParticleEmitter childSlot = SCR_ParticleEmitter.Cast(child);
-			if (childSlot)
-				if (childSlot.GetPathToPTC() == UDR_BoostVehicleTrigger.BOOST_PARTICLE_NAME)
-					emitters.Insert(childSlot);
-			
-			child = child.GetSibling();
-		}
-		
-		return emitters;
-	}
 }
