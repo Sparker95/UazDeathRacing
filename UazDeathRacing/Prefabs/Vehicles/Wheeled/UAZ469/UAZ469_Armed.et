@@ -1208,7 +1208,7 @@ Vehicle : "{1F9BB80C3EC3C891}Prefabs/Vehicles/Core/Wheeled_Car_Base.et" {
   WeaponSlotComponent "{59CD1419F44E9EDF}" {
    AttachType InventoryStorageSlot Slot {
     Offset 0 1.4012 1.3205
-    Angles 2 0 0
+    Angles 0 0 0
    }
    WeaponTemplate "{58ED978DD73772BE}Prefabs/Weapons/Blaster/Blaster.et"
   }
