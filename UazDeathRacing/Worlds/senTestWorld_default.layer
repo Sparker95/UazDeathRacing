@@ -1,6 +1,0 @@
-SCR_SpawnPoint : "{5DDD00A4C0C52421}Prefabs/GameMode/SpawnPoint.et" {
- coords -275.223 0 -133.992
-}
-GenericEntity : "{94F1335400E2A788}Prefabs/GameMode/Systems.et" {
- coords -260.739 0 -110.724
-}

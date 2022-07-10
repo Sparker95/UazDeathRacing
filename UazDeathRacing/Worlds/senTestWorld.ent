@@ -1,9 +1,0 @@
-SubScene {
- Parent "worlds/Editor/PrefabEditing/PrefabEditingTool.ent"
-}
-Layer default {
- Index 0
-}
-Layer tests {
- Index 1
-}
