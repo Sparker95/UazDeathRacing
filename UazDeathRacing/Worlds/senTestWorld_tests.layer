@@ -1,3 +1,11 @@
+$grp UDR_ReloadAmmoTrigger : "{762143360F3032EB}Prefabs/Pickup/Pickup.et" {
+ {
+  coords -249.584 0 -117.934
+ }
+ {
+  coords -241.303 0 -127.097
+ }
+}
 UDR_BoostVehicleTrigger : "{C3865A319561D60F}Prefabs/Triggers/UDR_BoostTriggerVehicle.et" {
  coords -287.277 0 -107.922
  angleY 90

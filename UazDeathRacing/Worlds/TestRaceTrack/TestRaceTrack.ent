@@ -1,0 +1,9 @@
+SubScene {
+ Parent "{DFA66BD7E9527DDD}Worlds/TestWorldBase/TestWorldBase.ent"
+}
+Layer vehicles {
+ Index 0
+}
+Layer systems {
+ Index 1
+}

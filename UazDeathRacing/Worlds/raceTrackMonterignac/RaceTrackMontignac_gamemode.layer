@@ -1,28 +1,2 @@
-PerceptionManager PerceptionManager1 : "{028DAEAD63E056BE}Prefabs/World/Game/PerceptionManager.et" {
- coords 5150.9 163.26 7309.951
-}
-SCR_FactionManager FactionManager1 : "{2642D52D1DDDB797}Prefabs/GameMode/FactionManager.et" {
- coords 5150.256 163.136 7311.763
-}
-TagManager : "{2FA9E172CAB1857A}Prefabs/MP/Managers/TagManager.et" {
- coords 5151.789 163.547 7304.798
-}
-RadioManagerEntity : "{B8E09FAB91C4ECCD}Prefabs/Radio/RadioManager.et" {
- coords 5154.971 163.427 7307.598
-}
-UDR_GameMode UDR_GameMode1 : "{CD9589A17294B557}Prefabs/GameMode/UDR_GameMode.et" {
- components {
-  SCR_AutomaticRespawnHandlerComponent "{59CCE88768068358}" {
-  }
- }
- coords 5148.675 162.937 7314.731
-}
-ScriptedChatEntity : "{F69BC912AC8236F9}Prefabs/MP/ScriptedChatEntity.et" {
- coords 5157.578 163.282 7292.602
-}
-HitRegistrationManager HitRegManager1 : "{0EDA3D48791120DD}Prefabs/MP/HitRegManager.et" {
- coords 5162.007 163.161 7309.901
-}
-SCR_LoadoutManager : "{8139ED5037BF24E7}Prefabs/GameMode/LoadoutManager.et" {
- coords 5080.042 161.973 7427.883
+GenericEntity : "{94F1335400E2A788}Prefabs/GameMode/Systems.et" {
 }

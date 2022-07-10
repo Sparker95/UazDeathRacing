@@ -1,15 +1,6 @@
-SCR_FactionManager FactionManager_FFA1 : "{A1C54BBE72C5C696}Prefabs/MP/Managers/Factions/FactionManager_FFA.et" {
- coords -241.173 0 -105.073
+SCR_SpawnPoint : "{5DDD00A4C0C52421}Prefabs/GameMode/SpawnPoint.et" {
+ coords -275.223 0 -133.992
 }
-UDR_GameMode UDR_GameMode1 : "{CD9589A17294B557}Prefabs/GameMode/UDR_GameMode.et" {
- coords -246.497 0 17.153
-}
-SCR_SpawnPoint : "{5392C4D80E4B18F8}Prefabs/MP/Spawning/SpawnPoint_FFA.et" {
- coords -277.203 2.017 -139.662
-}
-SCR_LoadoutManager : "{B7E5D7F4864D81C0}Prefabs/MP/Managers/Loadouts/LoadoutManager_FFA.et" {
- coords -245.421 0 -175.862
-}
-SCR_PlayerSpawnPoint : "{F6CAD21EDD2D1964}Prefabs/MP/Spawning/PlayerSpawnPoint.et" {
- coords -157.252 0 -173.367
+GenericEntity : "{94F1335400E2A788}Prefabs/GameMode/Systems.et" {
+ coords -260.739 0 -110.724
 }
