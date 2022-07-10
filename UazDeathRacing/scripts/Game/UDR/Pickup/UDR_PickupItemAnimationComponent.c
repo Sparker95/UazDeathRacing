@@ -60,7 +60,6 @@ class UDR_PickupItemAnimationComponent : ScriptComponent
 	{
 		SetEventMask(owner, EntityEvent.INIT | EntityEvent.FRAME);
 		owner.SetFlags(EntityFlags.ACTIVE, true);
-		Print("UDR_PickupItemAnimationComponent OnPostInit", LogLevel.ERROR);
 		
 		vector transform[4];
 		owner.GetLocalTransform(transform);

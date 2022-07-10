@@ -1,3 +1,14 @@
-UDR_ReloadAmmoTrigger : "{762143360F3032EB}Prefabs/Pickup/Pickup.et" {
- coords 4911.963 164.654 7364.543
+$grp UDR_ReloadAmmoTrigger : "{762143360F3032EB}Prefabs/Pickup/Pickup.et" {
+ {
+  coords 4911.963 164.654 7364.543
+ }
+ {
+  coords 4965.432 155.726 7412.643
+ }
+ {
+  coords 4870.038 161.304 7385.524
+ }
+ {
+  coords 4845.144 164.818 7288.838
+ }
 }

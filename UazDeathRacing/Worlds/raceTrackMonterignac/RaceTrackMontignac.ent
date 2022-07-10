@@ -7,9 +7,12 @@ Layer default {
 Layer race_track_Montignac {
  Index 1
 }
-Layer weapoints_race {
+Layer waypoints {
  Index 2
 }
 Layer pickups {
  Index 3
+}
+Layer gamemode {
+ Index 4
 }
