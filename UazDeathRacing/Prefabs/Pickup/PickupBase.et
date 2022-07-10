@@ -1,0 +1,45 @@
+UDR_Pickup {
+ ID "59D2A41745B895CC"
+ components {
+  Hierarchy "{59D2BDA130F446B6}" {
+  }
+  RplComponent "{59D2FBC7BB9AC8BA}" {
+  }
+ }
+ coords 0 0 0
+ TriggerShapeType "Oriented Bounding Box"
+ SphereRadius 0.2
+ BoxMins -0.1 0.8 -0.1
+ BoxMaxs 0.1 1 0.1
+ TriggerActivationType "All changes"
+ ClassFilter "Vehicle"
+ m_fRespawnPeriod 13
+ {
+  $grp GenericEntity {
+   {
+    ID "59D2A41752346FD0"
+    components {
+     Hierarchy "{59D2BDA1347E012A}" {
+     }
+     UDR_PickupItemAnimationComponent "{59D2BDA02D5829F0}" {
+      m_fRotationAnimPeriod 2
+      m_fOscillationAnimAmplitude 0.1
+     }
+    }
+    coords 0 1 0
+   }
+   Sphere {
+    ID "59D560DD353B53C9"
+    components {
+     MeshObject "{59D563C2A20EAF62}" {
+      Object "{A8F4EDFB226F1D3D}Prefabs/Pickup/PickupSphere.xob"
+     }
+     Hierarchy "{59D572D57849ADC5}" {
+     }
+    }
+    coords 0 1 0
+    scale 0.6
+   }
+  }
+ }
+}

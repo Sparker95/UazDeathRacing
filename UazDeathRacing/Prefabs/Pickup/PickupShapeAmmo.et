@@ -1,0 +1,27 @@
+GenericEntity {
+ ID "59D563C3CAB22A70"
+ components {
+  Hierarchy "{59D563C3FE11C322}" {
+  }
+ }
+ coords 0 0 0
+ {
+  $grp GenericEntity : "{E0C466F8E7FDD9EF}Prefabs/Pickup/PickupBullet.et" {
+   {
+    ID "59D563C3CAB1BECF"
+    coords -0.25 -0.4 0
+    angleX 90
+   }
+   {
+    ID "59D563C3CAB22A7E"
+    coords 0 -0.4 0
+    angleX 90
+   }
+   {
+    ID "59D563C3CAB22A7F"
+    coords 0.25 -0.4 0
+    angleX 90
+   }
+  }
+ }
+}

@@ -1,0 +1,19 @@
+UDR_Pickup : "{762143360F3032EB}Prefabs/Pickup/PickupBase.et" {
+ ID "59D2A41745B895CC"
+ m_PickupEffect UDR_PickupEffectHealth "{59D57A960F41D39E}" {
+ }
+ {
+  GenericEntity {
+   ID "59D2A41752346FD0"
+   components {
+    MeshObject "{59D576678D5EB614}" {
+     Object "{E214B6724DA6188A}Prefabs/Pickup/PickupHealth.xob"
+    }
+    UDR_PickupItemAnimationComponent "{59D2BDA02D5829F0}" {
+     m_fOscillationAnimAmplitude 0.05
+    }
+   }
+   scale 0.35
+  }
+ }
+}

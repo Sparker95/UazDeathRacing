@@ -1,0 +1,31 @@
+MetaFileClass {
+ Name "{E214B6724DA6188A}Prefabs/Pickup/PickupHealth.xob"
+ Configurations {
+  FBXResourceClass PC {
+   MaterialAssigns {
+    MaterialAssignClass "{59D5766472416400}" {
+     SourceMaterial "DefaultGeneratedMaterial"
+     AssignedMaterial "{8299F9CA5E70B063}Prefabs/Pickup/PickupHealthMaterial.emat"
+    }
+   }
+   Common TXOCommonClass "{59D55E3BF70DD246}" : "{0877E7C4BB2B2C9A}Configs/System/ResourceTypes/PC/MeshObjectCommon.conf" {
+   }
+  }
+  FBXResourceClass XBOX_ONE : PC {
+   Common TXOCommonClass "{59D55E3BF70DD423}" : "{9D5B6207F7628CE2}Configs/System/ResourceTypes/XBOX_ONE/MeshObjectCommon.conf" {
+   }
+  }
+  FBXResourceClass XBOX_SERIES : PC {
+   Common TXOCommonClass "{59D55E3BF70DD4AD}" : "{DD9F02115C764647}Configs/System/ResourceTypes/XBOX_SERIES/MeshObjectCommon.conf" {
+   }
+  }
+  FBXResourceClass PS4 : PC {
+   Common TXOCommonClass "{59D55E3BF70DD4C2}" : "{53EC476BC921D99A}Configs/System/ResourceTypes/PS4/MeshObjectCommon.conf" {
+   }
+  }
+  FBXResourceClass HEADLESS : PC {
+   Common TXOCommonClass "{59D55E3BF70DD5AA}" : "{3A5B3356978039E8}Configs/System/ResourceTypes/HEADLESS/MeshObjectCommon.conf" {
+   }
+  }
+ }
+}
