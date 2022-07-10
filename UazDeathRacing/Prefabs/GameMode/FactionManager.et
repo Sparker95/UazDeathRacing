@@ -1,0 +1,9 @@
+SCR_FactionManager : "{A242612865F2A48E}Prefabs/MP/Managers/Factions/FactionManager_Base.et" {
+ ID "56B2B4776E6E4499"
+ Factions {
+  UDR_Faction "{59D508A242274802}" {
+   FactionKey "UDR"
+   FactionColor 0.091 1 0 1
+  }
+ }
+}

@@ -1,0 +1,10 @@
+SCR_LoadoutManager {
+ ID "59D521B5234984B2"
+ coords 4859.155 161.856 7371.202
+ m_aPlayerLoadouts {
+  SCR_FactionPlayerLoadout "{59D521B5FCE71850}" {
+   m_sLoadoutResource "{854C04F0EA2129CC}Prefabs/Characters/Factions/INDFOR/FIA/Character_FIA_Unarmed.et"
+   m_sAffiliatedFaction "UDR"
+  }
+ }
+}

@@ -4,6 +4,9 @@ UDR_GameMode {
   SCR_AutomaticRespawnHandlerComponent "{59CCE88768068358}" {
    m_iForcedFaction 0
   }
+  SCR_NametagConfigComponent "{59D508AAA575FE3A}" {
+   m_sConfigPath "{4B227CB2D73A30F1}Configs/NameTagConfig.conf"
+  }
   SCR_RespawnSystemComponent "{59CCE88765B5DF27}" {
   }
   RplComponent "{59CE058AE0CFD2D5}" {
