@@ -23,6 +23,9 @@ GenericEntity {
    components {
     SCR_AutomaticRespawnHandlerComponent "{59CCE88768068358}" {
     }
+    RplComponent "{59CE058AE0CFD2D5}" {
+     "Rpl State Override" Dynamic
+    }
    }
    coords 5148.675 162.937 7314.731
   }

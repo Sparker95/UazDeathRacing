@@ -1,5 +1,12 @@
-SCR_SpawnPoint : "{5DDD00A4C0C52421}Prefabs/GameMode/SpawnPoint.et" {
- coords 30.436 2.001 447.299
+$grp SCR_SpawnPoint : "{5DDD00A4C0C52421}Prefabs/GameMode/SpawnPoint.et" {
+ {
+  coords 36.038 2.001 461.941
+  angleY 90
+ }
+ {
+  coords 12.574 2.001 461.88
+  angleY 90
+ }
 }
 $grp UDR_ReloadAmmoTrigger : "{762143360F3032EB}Prefabs/Pickup/Pickup.et" {
  {
