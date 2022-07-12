@@ -17,9 +17,9 @@ class UDR_WeaponManagerComponent : ScriptComponent
 	// need to clean this, a component only for UDR datas maybe ?
 	protected int serverPlayerID;
 	
-	void SetServerPlayerID(int serverPlayerID)
+	void SetServerPlayerID(int playerID)
 	{
-		this.serverPlayerID = serverPlayerID;
+		this.serverPlayerID = playerID;
 	}
 	
 	int GetServerPlayerID()

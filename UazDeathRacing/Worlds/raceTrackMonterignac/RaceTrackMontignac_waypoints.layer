@@ -4,7 +4,7 @@ SCR_SpawnPoint SpawnPointOne : "{5392C4D80E4B18F8}Prefabs/MP/Spawning/SpawnPoint
    UnitType Infantry
   }
  }
- coords 4856.238 163.953 7365.392
+ coords 4856.903 162.081 7369.227
  angleY 89.136
  m_fSpawnRadius 10
  m_sFaction "UDR"
