@@ -1,11 +1,11 @@
 MetaFileClass {
- Name "{E214B6724DA6188A}Prefabs/Pickup/PickupHealth.xob"
+ Name "{E214B6724DA6188A}Prefabs/Pickups/Assets/PickupHealth.xob"
  Configurations {
   FBXResourceClass PC {
    MaterialAssigns {
     MaterialAssignClass "{59D5766472416400}" {
      SourceMaterial "DefaultGeneratedMaterial"
-     AssignedMaterial "{8299F9CA5E70B063}Prefabs/Pickup/PickupHealthMaterial.emat"
+     AssignedMaterial "{8299F9CA5E70B063}Prefabs/Pickups/Assets/PickupHealthMaterial.emat"
     }
    }
    Common TXOCommonClass "{59D55E3BF70DD246}" : "{0877E7C4BB2B2C9A}Configs/System/ResourceTypes/PC/MeshObjectCommon.conf" {

@@ -1,11 +1,11 @@
 MetaFileClass {
- Name "{A8F4EDFB226F1D3D}Prefabs/Pickup/PickupSphere.xob"
+ Name "{A8F4EDFB226F1D3D}Prefabs/Pickups/Assets/PickupSphere.xob"
  Configurations {
   FBXResourceClass PC {
    MaterialAssigns {
     MaterialAssignClass "{59D55E3B3DB50EAB}" {
      SourceMaterial "DefaultGeneratedMaterial"
-     AssignedMaterial "{E9A02EECF7D59F52}Prefabs/Pickup/PickupCylinderMaterial.emat"
+     AssignedMaterial "{E9A02EECF7D59F52}Prefabs/Pickups/Assets/PickupCylinderMaterial.emat"
     }
    }
    Common TXOCommonClass "{59D55E3BFD82CB08}" : "{0877E7C4BB2B2C9A}Configs/System/ResourceTypes/PC/MeshObjectCommon.conf" {

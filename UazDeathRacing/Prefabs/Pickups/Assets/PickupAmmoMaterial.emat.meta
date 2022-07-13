@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{9C497C711107EAB6}Prefabs/Pickup/PickupItemMaterial.emat"
+ Name "{9C497C711107EAB6}Prefabs/Pickups/Assets/PickupAmmoMaterial.emat"
  Configurations {
   EMATResourceClass PC {
   }
