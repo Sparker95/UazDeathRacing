@@ -6,15 +6,10 @@ protected ref map<int, map<string, RplId>> playersData = new map<int, map<string
 
 class UDR_GameMode: SCR_BaseGameMode
 {
-	//[RplProp()]
-	protected ref map<int, string> playersta = new map<int, string>();
-	
-	//[RplProp()]
-	protected ref map<int, map<string, RplId>> playersData = new map<int, map<string, RplId>>();
-	
     override void OnPlayerSpawned(int playerId, IEntity controlledEntity)
 	{
 		super.OnPlayerSpawned(playerId, controlledEntity);
+		Print("OnPlayerSpawned");
 
 		vector playerPosition[4];
 		controlledEntity.GetWorldTransform(playerPosition);
@@ -25,73 +20,58 @@ class UDR_GameMode: SCR_BaseGameMode
 			"{21C45FA677BCDBDA}Prefabs/Vehicles/Wheeled/M998/M998_Armed.et"
 		};
  
+		// spawn vehicle
 		Resource res = Resource.Load(vehiclePrefabs[0]);
 		IEntity newVehicleEntity = GetGame().SpawnEntityPrefab(res, params: (new EntitySpawnParams));
 		newVehicleEntity.SetWorldTransform(playerPosition);
-
+		
+		// register to destroyed event
 		EventHandlerManagerComponent ev = EventHandlerManagerComponent.Cast(newVehicleEntity.FindComponent(EventHandlerManagerComponent));
         ev.RegisterScriptHandler("OnDestroyed", newVehicleEntity, OnVehicleDestroyed);
-
+		
+		// save some datas in vehicle, move player in pilot and start the car
 		Vehicle veh = Vehicle.Cast(newVehicleEntity);
-		UDR_WeaponManagerComponent wpnComp = UDR_WeaponManagerComponent.Cast(veh.FindComponent(UDR_WeaponManagerComponent));
-		wpnComp.SetServerPlayerID(playerId);
-		
-		// TODO: seems like we must sync playersData variable
-		RplComponent newRpl = RplComponent.Cast(this.FindComponent(RplComponent));
-		if (newRpl.Role() == RplRole.Authority) {
-			Print("OnPlayerSpawned Is On Server");
-		} else {
-			Print("OnPlayerSpawned Is On Client");
-		}
-		//RplId newRplId = newRpl.Id();
-		//RplId newWeaponEntRplId = Replication.FindId(this);
-		//bool newRplIdValid = newRplId.IsValid();
-		
-		//Rpc(updatePlayersData, playerId, Replication.FindId(newVehicleEntity), Replication.FindId(controlledEntity));
-		map<string, RplId> entities = new map<string, RplId>();
-		entities.Set("vehicleEntity", Replication.FindId(newVehicleEntity));
-		entities.Set("playerEntity", Replication.FindId(controlledEntity));
-		playersData.Set(playerId, entities);
-		//Replication.BumpMe();
-		//updatePlayersData(playerId, Replication.FindId(newVehicleEntity), Replication.FindId(controlledEntity));
-		
+		UDR_NetworkComponent vehNetComp = UDR_NetworkComponent.Cast(veh.FindComponent(UDR_NetworkComponent));
+		Managed test = controlledEntity.FindComponent(RplComponent);
+		Print(test);
+		RplComponent playerRplComp = RplComponent.Cast(test);
+		Print(playerRplComp);
+		RplComponent playerNetComp = RplComponent.Cast(controlledEntity.FindComponent(RplComponent));
+		RplId vehRplId = Replication.FindId(vehNetComp);
+		Print(vehRplId);
+		RplId playerRplId = Replication.FindId(playerRplComp);
+		Print(playerRplId);
+		vehNetComp.SetPlayer(playerRplId);
+
 		SCR_CompartmentAccessComponent compartmentAccessComponent = SCR_CompartmentAccessComponent.Cast(controlledEntity.FindComponent(SCR_CompartmentAccessComponent));
 		compartmentAccessComponent.MoveInVehicle(veh, ECompartmentType.Pilot);
 		
 		CarControllerComponent m_pCarController = CarControllerComponent.Cast(veh.FindComponent(CarControllerComponent));
 		m_pCarController.StartEngine();
-		Print(playerId);
-		Print(playersData);
-		Print(playersData.Get(playerId));
     }
 	
-	/*[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
-	void updatePlayersData(int playerId, RplId newVehicleRplID, RplId controlledRplID)
+	void OnVehicleDestroyed(IEntity vecEntity)
 	{
-		map<string,RplId> entities = new map<string, RplId>();
-		entities.Insert("vehicleEntity", IEntity.Cast(Replication.FindItem(newVehicleRplID)));
-		entities.Insert("playerEntity", IEntity.Cast(Replication.FindItem(controlledRplID)));
-		//this.playersData.Set(playerId, entities);
-		//Replication.BumpMe();
-	}*/
-	
-	void OnVehicleDestroyed(IEntity ent)
-	{
-		int serverPlayerID = UDR_WeaponManagerComponent.Cast(ent.FindComponent(UDR_WeaponManagerComponent)).GetServerPlayerID();
+		RplId playerRplID = UDR_NetworkComponent.Cast(vecEntity.FindComponent(UDR_NetworkComponent)).GetPlayer();
+		Print("onDestroyed");
+		Print(playerRplID);
 		
-		RplComponent newRpl = RplComponent.Cast(this.FindComponent(RplComponent));
-		if (newRpl.Role() == RplRole.Authority) {
-			Print("OnVehicleDestroyed Is On Server");
-		} else {
-			Print("OnVehicleDestroyed Is On Client");
-		}
-		Print(serverPlayerID);
-		Print(playersData);
-		Print(playersData.Get(serverPlayerID));
-		//IEntity playerEntity = this.playersData.Get(serverPlayerID)
-		//.Get("playerEntity");
-		//Print(playerEntity);
+		UDR_NetworkComponent playerManaged = UDR_NetworkComponent.Cast(Replication.FindItem(playerRplID));
+		Print(playerManaged);
 		
-		//SCR_DamageManagerComponent.Cast(playerEntity.FindComponent(SCR_DamageManagerComponent)).Kill();
+		if (playerManaged)
+			PrintString("did not find player replication");
+			return;
+		
+		IEntity playerEntity = IEntity.Cast(playerManaged.GetOwner());
+		Print(playerEntity);
+		if (!playerEntity)
+			Print("did not find player entity");
+			return;
+		
+		Print("kill him plz");
+		Print(playerEntity.FindComponent(SCR_DamageManagerComponent));
+		SCR_DamageManagerComponent dmgComp = SCR_DamageManagerComponent.Cast(playerEntity.FindComponent(SCR_DamageManagerComponent));
+		dmgComp.Kill();
 	}
 }
