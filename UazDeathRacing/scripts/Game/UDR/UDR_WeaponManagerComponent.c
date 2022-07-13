@@ -105,21 +105,4 @@ class UDR_WeaponManagerComponent : ScriptComponent
 		
 		return false;
 	}
-	
-	
-	
-	//-----------------------------------------------------------------------
-	// Logic for sound playing
-	// Move it elsewhere later
-	
-	[RplRpc(RplChannel.Reliable, RplRcver.Owner)]
-	protected void RpcDo_PlayPickupSound()
-	{
-		SCR_UISoundEntity.SoundEvent(UDR_UISounds.PICKUP_ITEM);
-	}
-	
-	void Authority_SendPlayPickupSound()
-	{
-		Rpc(RpcDo_PlayPickupSound);
-	}
 }

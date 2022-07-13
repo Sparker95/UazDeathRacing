@@ -13,7 +13,8 @@ class UDR_PickupEffectAmmo : UDR_PickupEffectBase
 			return false;
 		
 		weaponMgr.RpcAsk_AddWeapon(UDR_Weapons.BLASTER);
-		weaponMgr.Authority_SendPlayPickupSound();
+		
+		SendUiEventToVehicle(ent, UDR_UISounds.PICKUP_ITEM);
 		
 		return true;
 	}
@@ -31,8 +32,10 @@ class UDR_PickupEffectHealth : UDR_PickupEffectBase
 		if (health >= 0.99)
 			return false;
 		
-		// Fortunately it doesn't need to be replicated in any way, it's already replicated inside
+		// Fortunately it doesn't need to be replicated in any way, replication is already done for us.
 		damageMgrComp.FullHeal();
+		
+		SendUiEventToVehicle(ent, UDR_UISounds.PICKUP_ITEM);
 		
 		return true;
 	}
