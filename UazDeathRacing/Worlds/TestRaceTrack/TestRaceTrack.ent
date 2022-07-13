@@ -7,3 +7,9 @@ Layer vehicles {
 Layer systems {
  Index 1
 }
+Layer pickups {
+ Index 2
+}
+Layer weapons {
+ Index 3
+}

@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{3672DE2F614310EF}Prefabs/Pickup/PickupCylinderOpacity.edds"
+ Name "{3672DE2F614310EF}Prefabs/Pickups/Assets/PickupCylinderOpacity.edds"
  Configurations {
   PNGResourceClass PC : "{DC555BD399D92412}Configs/System/ResourceTypes/PC/TextureUnspecified.conf" {
   }

@@ -1,0 +1,22 @@
+UDR_Pickup : "{762143360F3032EB}Prefabs/Pickup/PickupBase.et" {
+ ID "59D2A41745B895CC"
+ m_PickupEffect UDR_PickupEffectAmmo "{59D572D468747C46}" {
+ }
+ {
+  GenericEntity {
+   ID "59D2A41752346FD0"
+   coords 0 1 0
+   {
+    GenericEntity : "{9FD1A97047CA1B4D}Prefabs/Pickup/PickupShapeAmmo.et" {
+     ID "59D572D441868320"
+     coords 0 -0.06 0
+    }
+   }
+  }
+  GenericEntity {
+   ID "59D560DD353B53C9"
+   coords 0 1 0
+   scale 0.8
+  }
+ }
+}

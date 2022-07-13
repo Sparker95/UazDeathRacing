@@ -1,0 +1,11 @@
+$grp GenericEntity : "{58ED978DD73772BE}Prefabs/Weapons/Blaster/Blaster.et" {
+ {
+  coords 40.735 2.001 440.387
+ }
+ {
+  coords 42.514 2.012 440.707
+ }
+ {
+  coords 41.811 2.013 440.929
+ }
+}
