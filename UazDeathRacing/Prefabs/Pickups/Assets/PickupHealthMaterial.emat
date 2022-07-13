@@ -1,0 +1,14 @@
+MatPBRBasic {
+ Color 0.043 1 0 1
+ Emissive 0.042 1 0 0
+ EmissiveLV 3.043
+ EmissiveAbsoluteLV 0
+ CastShadow 0
+ OccludeRain 0
+ OccludeWetness 0
+ SpecularMul 0.762
+ RoughnessScale 0.327
+ MetalnessScale 0
+ AOScale 0.012
+ DielectricReflectance 0.02
+}

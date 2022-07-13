@@ -1,0 +1,28 @@
+$grp UDR_Pickup : "{7D5C596D78F729C8}Prefabs/Pickup/PickupAmmo.et" {
+ {
+  coords 50.685 2.023 441.958
+  {
+   GenericEntity {
+    ID "59D560DD353B53C9"
+    coords 0 1 0
+   }
+  }
+ }
+ {
+  coords 65.672 2.001 429.8
+ }
+ {
+  coords 80.002 2.001 445.936
+ }
+}
+$grp UDR_Pickup : "{DF1C96AAD094BA04}Prefabs/Pickup/PickupHealth.et" {
+ {
+  coords 44.032 2.061 443.966
+ }
+ {
+  coords 64.673 2.001 438.859
+ }
+ {
+  coords 60.872 2.001 454.607
+ }
+}
