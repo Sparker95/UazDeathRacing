@@ -1,8 +1,12 @@
 SCR_ChimeraCharacter {
  ID "520EC961A090B1EE"
  components {
+  CharacterWeaponSlotComponent "{520EA1D2F659CFDC}" {
+   WeaponTemplate "{C0F7DD85A86B2900}Prefabs/Weapons/Handguns/PM/Handgun_PM.et"
+  }
   SCR_CharacterDamageManagerComponent "{55872AD7B4E959F2}" {
    EnableDamage 0
   }
  }
+ coords 0 0 0
 }

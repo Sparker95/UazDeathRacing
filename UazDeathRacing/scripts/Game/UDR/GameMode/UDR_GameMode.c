@@ -7,7 +7,7 @@ class UDR_GameMode: SCR_BaseGameMode
     override void OnPlayerSpawned(int playerId, IEntity controlledEntity)
 	{
 		super.OnPlayerSpawned(playerId, controlledEntity);
-		
+
 		vector playerPosition[4];
 		controlledEntity.GetWorldTransform(playerPosition);
 		
@@ -17,18 +17,56 @@ class UDR_GameMode: SCR_BaseGameMode
 			"{21C45FA677BCDBDA}Prefabs/Vehicles/Wheeled/M998/M998_Armed.et"
 		};
 
+		// spawn vehicle
 		Resource res = Resource.Load(vehiclePrefabs[0]);
-		EntitySpawnParams spawnParams = new EntitySpawnParams();
-		IEntity newVehicleEntity = GetGame().SpawnEntityPrefab(res, params: spawnParams);
+		IEntity newVehicleEntity = GetGame().SpawnEntityPrefab(res, params: (new EntitySpawnParams));
 		newVehicleEntity.SetWorldTransform(playerPosition);
-		newVehicleEntity.SetName("Vehicle_"+playerId);
 		
-		Vehicle veh = Vehicle.Cast(newVehicleEntity);
+		// register to destroyed event
+		EventHandlerManagerComponent ev = EventHandlerManagerComponent.Cast(newVehicleEntity.FindComponent(EventHandlerManagerComponent));
+        ev.RegisterScriptHandler("OnDestroyed", newVehicleEntity, OnVehicleDestroyed);
 		
+		// save some datas in vehicleComp
+		Vehicle vehicule = Vehicle.Cast(newVehicleEntity);
+		UDR_VehicleNetworkComponent vehNetComp = UDR_VehicleNetworkComponent.Cast(vehicule.FindComponent(UDR_VehicleNetworkComponent));
+		vehNetComp.SetPlayerControllerID(playerId);
+
+		// move player in pilot and start the car
 		SCR_CompartmentAccessComponent compartmentAccessComponent = SCR_CompartmentAccessComponent.Cast(controlledEntity.FindComponent(SCR_CompartmentAccessComponent));
-		compartmentAccessComponent.MoveInVehicle(veh, ECompartmentType.Pilot);
-		
-		CarControllerComponent m_pCarController = CarControllerComponent.Cast(veh.FindComponent(CarControllerComponent));
+		compartmentAccessComponent.MoveInVehicle(newVehicleEntity, ECompartmentType.Pilot);
+		CarControllerComponent m_pCarController = CarControllerComponent.Cast(vehicule.FindComponent(CarControllerComponent));
 		m_pCarController.StartEngine();
     }
+	
+	void OnVehicleDestroyed(IEntity vecEntity)
+	{
+		int playerID = UDR_VehicleNetworkComponent.Cast(vecEntity.FindComponent(UDR_VehicleNetworkComponent)).GetPlayerControllerID();
+		if (!playerID) {
+			Print("no player found attached to this vehicle");
+			return;
+		}
+		
+		GetGame().GetCallqueue().CallLater(ForceRespawnPlayer, 5000, false, playerID);
+	}
+
+	void ForceRespawnPlayer(int playerID)
+	{
+		PlayerController playerController = GetGame().GetPlayerManager().GetPlayerController(playerID);
+		if (!playerController) {
+			PrintFormat("no PlayerController found for playerID: %1", playerID);
+			return;
+		}
+		
+		IEntity playerEntity = playerController.GetControlledEntity();
+		if (!playerEntity) {
+			PrintFormat("no IEntity found for playerID: %1", playerID);
+			return;
+		}
+		
+		SCR_CharacterControllerComponent characterController = SCR_CharacterControllerComponent.Cast(playerEntity.FindComponent(SCR_CharacterControllerComponent));
+		if (characterController) {
+			characterController.ForceDeath();
+			PrintFormat("ForceDeath playerID: %1", playerID);
+		}
+	}
 }

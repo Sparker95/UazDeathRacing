@@ -1,3 +1,15 @@
 Vehicle UAZ469_Armed1 : "{1A20D130A03F9CF1}Prefabs/Vehicles/Wheeled/UAZ469/UAZ469_Armed.et" {
  coords 4854.58 162.917 7346.841
 }
+SCR_SpawnPoint SpawnPointOne2 : "{5392C4D80E4B18F8}Prefabs/MP/Spawning/SpawnPoint_FFA.et" {
+ components {
+  SCR_MapDescriptorComponent "{54C659A97C47BDE2}" {
+   UnitType Infantry
+  }
+ }
+ coords 4856.793 162.332 7358.644
+ angleY 89.136
+ m_fSpawnRadius 10
+ m_sFaction "UDR"
+ m_bShowInDeployMapOnly 1
+}

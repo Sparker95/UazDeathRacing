@@ -1,0 +1,16 @@
+SCR_PlayerController : "{225E51284CC95CFA}Prefabs/Characters/Core/DefaultPlayerControllerMP.et" {
+ ID "1A9BA6BEFA06E3B1"
+ components {
+  SCR_HUDManagerComponent "{2FDC275D9EBCDB8B}" {
+   InfoDisplays {
+    UDR_HUD "{59DB692A8469287C}" {
+     m_LayoutPath "{B97FA0254C5D6D4D}UI/HUD/HUD.layout"
+     m_eLayer HIGH
+    }
+   }
+  }
+  UDR_PlayerNetworkComponent "{59DB692A9733FFE1}" {
+  }
+ }
+ coords 52.64 1.872 447.469
+}
