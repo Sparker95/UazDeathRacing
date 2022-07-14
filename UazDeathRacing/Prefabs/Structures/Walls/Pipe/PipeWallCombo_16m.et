@@ -1,0 +1,15 @@
+GenericEntity {
+ ID "59DD390692466A15"
+ {
+  $grp GenericEntity : "{AA6FBCA54B8DBBD4}Prefabs/Structures/Walls/Pipe/PipeWallCombo_8m.et" {
+   {
+    ID "59DD52DD22D4D6A0"
+    coords 0 0 0
+   }
+   {
+    ID "59DD52DD3922E8B9"
+    coords 8 0 0
+   }
+  }
+ }
+}

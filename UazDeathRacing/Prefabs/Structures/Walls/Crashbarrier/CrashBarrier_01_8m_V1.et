@@ -1,0 +1,57 @@
+StaticModelEntity : "{974224D8D3A81ABD}Prefabs/Structures/Walls/Crashbarrier/CrashBarrier_01_Base.et" {
+ ID "51E2F0F09703F07B"
+ components {
+  MeshObject "{56DE7C8DCD0F4E0A}" {
+   Object "{8B3DFEEF0815E8F8}Assets/Structures/Walls/Crashbarrier/CrashBarrier_01_8m_V1.xob"
+  }
+  RigidBody "{56DE7C8DDE282E03}" {
+   ResponseIndex "HugeDestructible"
+   ModelGeometry 1
+   Static 1
+  }
+  SCR_DestructionMultiPhaseComponent "{51E2F0F0DB178D38}" {
+   Enabled 0
+   m_DestroySpawnObjects {
+    SCR_DebrisSpawnable "{59DD3902F10A9B7B}" {
+     m_vOffsetPosition 5 0.5 0
+     m_ModelPrefabs {
+      "{D9678156553F87C7}Assets/Props/Debris/Metal/FragmentMetal_dbr_02.xob" "{AE6DE9DEA19D68B7}Assets/Props/Debris/Metal/FragmentMetal_dbr_03.xob" "{AE6DE9DEA19D68B7}Assets/Props/Debris/Metal/FragmentMetal_dbr_03.xob" "{D9678156553F87C7}Assets/Props/Debris/Metal/FragmentMetal_dbr_02.xob" "{AE6DE9DEA19D68B7}Assets/Props/Debris/Metal/FragmentMetal_dbr_03.xob"
+     }
+     m_fMass 5
+     m_fDamageToImpulse 5
+     m_fRandomVelocityLinear 5
+     m_eMaterialSoundType METAL_LIGHT
+     m_fSoundTriggerThreshold 11
+    }
+   }
+   m_aDamagePhases {
+    SCR_DamagePhaseData "{5528B2B320CB4CBF}" {
+     m_PhaseModel "{3A2D09700BB718CC}Assets/Structures/Walls/Crashbarrier/dst/CrashBarrier_01_8m_V1_dst_01.xob"
+     m_PhaseDestroySpawnObjects {
+      SCR_DebrisSpawnable "{59DD3902F10A9B45}" {
+       m_vOffsetPosition 3 0.5 0
+       m_ModelPrefabs {
+        "{D9678156553F87C7}Assets/Props/Debris/Metal/FragmentMetal_dbr_02.xob" "{AE6DE9DEA19D68B7}Assets/Props/Debris/Metal/FragmentMetal_dbr_03.xob" "{D9678156553F87C7}Assets/Props/Debris/Metal/FragmentMetal_dbr_02.xob" "{AE6DE9DEA19D68B7}Assets/Props/Debris/Metal/FragmentMetal_dbr_03.xob"
+       }
+       m_fMass 5
+       m_fDamageToImpulse 5
+       m_fRandomVelocityLinear 5
+       m_eMaterialSoundType METAL_LIGHT
+      }
+      SCR_DebrisSpawnable "{59DD3902F10A9B40}" {
+       m_vOffsetPosition 6 0.5 0
+       m_ModelPrefabs {
+        "{D9678156553F87C7}Assets/Props/Debris/Metal/FragmentMetal_dbr_02.xob" "{AE6DE9DEA19D68B7}Assets/Props/Debris/Metal/FragmentMetal_dbr_03.xob" "{D9678156553F87C7}Assets/Props/Debris/Metal/FragmentMetal_dbr_02.xob" "{AE6DE9DEA19D68B7}Assets/Props/Debris/Metal/FragmentMetal_dbr_03.xob"
+       }
+       m_fMass 5
+       m_fDamageToImpulse 5
+       m_fRandomVelocityLinear 5
+       m_eMaterialSoundType METAL_LIGHT
+      }
+     }
+    }
+   }
+  }
+ }
+ placement slopelandcontact
+}
