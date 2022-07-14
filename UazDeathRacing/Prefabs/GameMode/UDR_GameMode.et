@@ -13,5 +13,5 @@ UDR_GameMode {
   }
  }
  coords 4855.691 163.049 7344.311
- PlayerControllerPrefab "{03FD01C191564264}UDR_DefaultPlayerControllerMP.et"
+ PlayerControllerPrefab "{03FD01C191564264}Prefabs/Characters/Core/UDR_PlayerController.et"
 }

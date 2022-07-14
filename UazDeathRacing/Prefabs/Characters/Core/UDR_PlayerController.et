@@ -9,8 +9,6 @@ SCR_PlayerController : "{225E51284CC95CFA}Prefabs/Characters/Core/DefaultPlayerC
     }
    }
   }
-  UDR_NetworkComponent "{59D95A172115677E}" {
-  }
   UDR_PlayerNetworkComponent "{59DB692A9733FFE1}" {
   }
  }

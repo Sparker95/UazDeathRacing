@@ -1060,7 +1060,7 @@ Vehicle : "{1F9BB80C3EC3C891}Prefabs/Vehicles/Core/Wheeled_Car_Base.et" {
   }
   TurretComponent "{59CD1419E63CB5BE}" {
   }
-  UDR_NetworkComponent "{59D95A14C0B923CF}" {
+  UDR_VehicleNetworkComponent "{59DC00BA59E3A491}" {
   }
   UDR_WeaponManagerComponent "{59CD1419338A6B23}" {
   }
