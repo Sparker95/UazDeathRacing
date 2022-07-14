@@ -14,19 +14,6 @@ class UDR_WeaponManagerComponentClass : ScriptComponentClass
 
 class UDR_WeaponManagerComponent : ScriptComponent
 {
-	// need to clean this, a component only for UDR datas maybe ?
-	protected int serverPlayerID;
-	
-	void SetServerPlayerID(int playerID)
-	{
-		this.serverPlayerID = playerID;
-	}
-	
-	int GetServerPlayerID()
-	{
-		return this.serverPlayerID;
-	}
-
 	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
 	void RpcAsk_AddWeapon(UDR_Weapons weaponId)
 	{
