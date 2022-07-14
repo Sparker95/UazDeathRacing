@@ -11,8 +11,8 @@ FrameWidgetClass {
     OffsetTop 0
     SizeX 300
     OffsetRight -300
-    SizeY 200
-    OffsetBottom -200
+    SizeY 100
+    OffsetBottom -100
     Alignment 1 1
    }
    {
@@ -50,6 +50,7 @@ FrameWidgetClass {
        Name "HudLineBoosters"
        Slot LayoutSlot "{59CCF35D7D973317}" {
        }
+       "Is Visible" 0
        {
         SizeLayoutWidgetClass "{59CCF35EA3208881}" {
          Prefab "{59CCF35EA3208881}"
