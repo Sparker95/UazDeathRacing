@@ -36,6 +36,11 @@ class UDR_GameMode: SCR_BaseGameMode
 		compartmentAccessComponent.MoveInVehicle(newVehicleEntity, ECompartmentType.Pilot);
 		CarControllerComponent m_pCarController = CarControllerComponent.Cast(vehicule.FindComponent(CarControllerComponent));
 		m_pCarController.StartEngine();
+		
+		SCR_DamageManagerComponent damageManager = SCR_DamageManagerComponent.Cast(controlledEntity.FindComponent(SCR_DamageManagerComponent));
+		if (damageManager) {
+			damageManager.EnableDamageHandling(false);
+		}
     }
 	
 	void OnVehicleDestroyed(IEntity vecEntity)
@@ -46,6 +51,7 @@ class UDR_GameMode: SCR_BaseGameMode
 			return;
 		}
 		
+		// TODO: handle the case of being run by which will auto respawn and then die again with this
 		GetGame().GetCallqueue().CallLater(ForceRespawnPlayer, 5000, false, playerID);
 	}
 

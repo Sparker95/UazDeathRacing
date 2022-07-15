@@ -29,3 +29,7 @@ $grp Vehicle : "{21C45FA677BCDBDA}Prefabs/Vehicles/Wheeled/M998/M998_Armed.et" {
   coords 50.339 2.001 432.019
  }
 }
+SCR_SpawnPoint : "{5DDD00A4C0C52421}Prefabs/GameMode/SpawnPoint.et" {
+ coords 23.565 2.001 473.671
+ angleY 118.22
+}
