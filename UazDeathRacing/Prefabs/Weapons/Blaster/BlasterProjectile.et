@@ -53,6 +53,7 @@ Projectile : "{C0BDA86B5AA5648C}Prefabs/Weapons/Core/Ammo_Rocket_Base.et" {
    TimeToLive 5
    ProjectileEffects {
     BaseDamageEffect "{56829D01651CE9A7}" {
+     DamageValue 0
     }
    }
    ThrustInitTime 0.1

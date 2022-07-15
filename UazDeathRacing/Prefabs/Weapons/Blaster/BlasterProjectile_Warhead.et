@@ -6,6 +6,13 @@ GenericEntity : "{9B5FF7EECAD376FA}Prefabs/Weapons/Warheads/Warhead_Base.et" {
     "{6FC67D2C9BF229AB}Sounds/Weapons/Ammo/RPG7/Explosion/Ammo_Rocket_RPG7.acp"
    }
   }
+  BaseTriggerComponent "{55129E81CBAA1390}" {
+   PROJECTILE_EFFECTS {
+    BaseDamageEffect "{59DF70038D5B073E}" {
+     DamageValue 150
+    }
+   }
+  }
   HitEffectComponent "{9D9BE68D6F65A10F}" {
   }
  }

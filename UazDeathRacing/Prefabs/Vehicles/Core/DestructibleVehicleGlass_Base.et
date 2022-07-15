@@ -1,0 +1,12 @@
+GenericEntity {
+ ID "54ACA4E7EDB33945"
+ components {
+  SCR_HitZoneContainerComponent "{54ACA4E7F4367947}" {
+   "Additional hit zones" {
+    SCR_DestructibleHitzone Window {
+     m_fPassDamageToOwnerParent 1
+    }
+   }
+  }
+ }
+}
