@@ -51,7 +51,8 @@ class UDR_GameMode: SCR_BaseGameMode
 			return;
 		}
 		
-		GetGame().GetCallqueue().CallLater(ForceRespawnPlayer, 25000, false, playerID);
+		// TODO: handle the case of being run by which will auto respawn and then die again with this
+		GetGame().GetCallqueue().CallLater(ForceRespawnPlayer, 5000, false, playerID);
 	}
 
 	void ForceRespawnPlayer(int playerID)
