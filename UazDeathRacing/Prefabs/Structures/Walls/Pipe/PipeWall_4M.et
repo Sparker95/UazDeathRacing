@@ -1,0 +1,20 @@
+StaticModelEntity : "{64DF068062375FA9}Prefabs/Structures/Walls/Pipe/PipeWall_01_base.et" {
+ ID "51E2F0F09703F07B"
+ components {
+  MeshObject "{56DE7C8DCD0F4E0A}" {
+   Object "{C38805F2B83B8F25}Assets/Structures/Walls/Pipe/PipeWall_01_4M_V1.xob"
+  }
+  NavmeshCustomLinkComponent "{5088C72B466E73FA}" {
+   Enabled 1
+  }
+  RigidBody "{56DE7C8DDE282E03}" {
+   ResponseIndex "HugeDestructible"
+   ModelGeometry 1
+   Static 1
+  }
+  SCR_DestructionMultiPhaseComponent "{51E2F0F0DB178D38}" {
+   Enabled 0
+  }
+ }
+ placement slopelandcontact
+}

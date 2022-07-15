@@ -1,0 +1,19 @@
+StaticModelEntity : "{974224D8D3A81ABD}Prefabs/Structures/Walls/Crashbarrier/CrashBarrier_01_Base.et" {
+ ID "51E2F0F09703F07B"
+ components {
+  MeshObject "{56DE7C8DCD0F4E0A}" {
+   Object "{B344EFCFFFC9D790}Assets/Structures/Walls/Crashbarrier/CrashBarrier_01_4m_V1.xob"
+  }
+  RigidBody "{56DE7C8DDE282E03}" {
+   ResponseIndex "HugeDestructible"
+   ModelGeometry 1
+   Static 1
+  }
+  SCR_DestructionMultiPhaseComponent "{51E2F0F0DB178D38}" {
+   Enabled 0
+   m_aDamagePhases {
+   }
+  }
+ }
+ placement slopelandcontact
+}

@@ -1,0 +1,16 @@
+GenericEntity {
+ ID "59DD52DDCBBCAE85"
+ {
+  $grp StaticModelEntity : "{9ED02B6FED143A5A}Prefabs/Structures/Walls/Pipe/PipeWall_8M.et" {
+   {
+    ID "59DD52DDCBBCAE98"
+    coords 0 0 0.2
+   }
+   {
+    ID "59DD52DDCBBCAE99"
+    coords 8 0 -0.2
+    angleY 180
+   }
+  }
+ }
+}
