@@ -8,6 +8,13 @@ class UDR_PlayerNetworkComponent : ScriptComponent
 	//-----------------------------------------------------------------------
 	// Logic for sound playing
 	
+	[RplProp()]
+	protected int lapsCompleted;
+	[RplProp()]
+	protected int lastCheckpointID;
+	[RplProp()]
+	protected int spawnPointID;
+
 	[RplRpc(RplChannel.Reliable, RplRcver.Owner)]
 	protected void RpcDo_UiSoundEvent(string soundName)
 	{
