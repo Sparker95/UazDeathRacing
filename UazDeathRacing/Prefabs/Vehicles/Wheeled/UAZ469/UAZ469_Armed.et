@@ -422,11 +422,6 @@ Vehicle : "{1F9BB80C3EC3C891}Prefabs/Vehicles/Core/Wheeled_Car_Base.et" {
        "door_l01"
       }
      }
-     GetOutAction SCR_GetOutAction "{509D56667AFC4BD5}" {
-      ParentContextList {
-       "door_l01_int"
-      }
-     }
      SwitchSeatAction SCR_SwitchSeatAction "{509D56667885A8DC}" {
       ParentContextList {
        "driver"
@@ -454,11 +449,6 @@ Vehicle : "{1F9BB80C3EC3C891}Prefabs/Vehicles/Core/Wheeled_Car_Base.et" {
      CompartmentAction SCR_GetInUserAction "{5086CC2FCCAA457D}" {
       ParentContextList {
        "door_r01"
-      }
-     }
-     GetOutAction SCR_GetOutAction "{509D56665A8C6923}" {
-      ParentContextList {
-       "door_r01_int"
       }
      }
      SwitchSeatAction SCR_SwitchSeatAction "{509D56665850650D}" {
@@ -492,11 +482,6 @@ Vehicle : "{1F9BB80C3EC3C891}Prefabs/Vehicles/Core/Wheeled_Car_Base.et" {
      CompartmentAction SCR_GetInUserAction "{5086CC2FCCAA457D}" {
       ParentContextList {
        "door_l02"
-      }
-     }
-     GetOutAction SCR_GetOutAction "{509D56665A8C6923}" {
-      ParentContextList {
-       "door_l02_int"
       }
      }
      SwitchSeatAction SCR_SwitchSeatAction "{509D56665850650D}" {
@@ -533,11 +518,6 @@ Vehicle : "{1F9BB80C3EC3C891}Prefabs/Vehicles/Core/Wheeled_Car_Base.et" {
        "door_r02"
       }
      }
-     GetOutAction SCR_GetOutAction "{509D56665A8C6923}" {
-      ParentContextList {
-       "door_r02_int"
-      }
-     }
      SwitchSeatAction SCR_SwitchSeatAction "{509D56665850650D}" {
       ParentContextList {
        "passenger_r02"
@@ -569,11 +549,6 @@ Vehicle : "{1F9BB80C3EC3C891}Prefabs/Vehicles/Core/Wheeled_Car_Base.et" {
      CompartmentAction SCR_GetInUserAction "{5086CC2FCCAA457D}" {
       ParentContextList {
        "door_l02" "door_r02"
-      }
-     }
-     GetOutAction SCR_GetOutAction "{509D56665A8C6923}" {
-      ParentContextList {
-       "door_l02_int" "door_r02_int"
       }
      }
      SwitchSeatAction SCR_SwitchSeatAction "{509D56665850650D}" {
