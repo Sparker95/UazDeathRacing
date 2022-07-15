@@ -1,0 +1,17 @@
+StaticModelEntity : "{2817095F9D664A11}Prefabs/Structures/Infrastructure/Pavements/AsphaltPavement_01/AsphaltPavement_Decal_base.et" {
+ coords 55.303 2.1 456.927
+ placement slopelandcontact
+}
+StaticModelEntity : "{73B7748FA21EDC24}Prefabs/Decals/Core/DecalModel_base.et" {
+ coords 51.177 1.91 452.314
+}
+GenericEntity : "{87D337D54A418CFF}Prefabs/Structures/Infrastructure/Roads/Runway/RunwayDecal_Base.et" {
+ coords 52.253 2.024 456.801
+}
+DecalEntity : "{A2027BF514046A99}Prefabs/Decals/Markings/Runway/Decal_Runway_Num_7.et" {
+ coords 53.952 -0.001 454.507
+ angleX -90
+}
+GenericEntity : "{B1E8ADDDA7D1EFF8}Prefabs/Compositions/Misc/CustomEntities/CompositionDecals/BaseCompositionDecal.et" {
+ coords 56.013 1.974 453.742
+}

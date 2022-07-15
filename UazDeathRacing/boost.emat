@@ -1,0 +1,6 @@
+MatPBRBasic {
+ SpecularIBL 0.456 0.456 0.456 1
+ RoughnessScale 0.942
+ MetalnessScale 1.1
+ BCRMap "{2C6939FE7FAAE017}boost_texture.edds"
+}
