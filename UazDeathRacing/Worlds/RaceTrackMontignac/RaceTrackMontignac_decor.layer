@@ -18,7 +18,7 @@ $grp Tree : "{04592C849978A51C}Prefabs/Vegetation/Tree/t_sorbus_aucuparia_2f.et"
   coords 4846.567 0 7314.536
  }
  {
-  coords 4889.012 -0 7341.901
+  coords 4889.012 0 7341.901
  }
  {
   coords 4883.098 0 7274.084
@@ -27,10 +27,10 @@ $grp Tree : "{04592C849978A51C}Prefabs/Vegetation/Tree/t_sorbus_aucuparia_2f.et"
   coords 4888.144 0 7401.339
  }
  {
-  coords 4900.465 -0 7402.816
+  coords 4900.465 0 7402.816
  }
  {
-  coords 4948.498 -0 7396.581
+  coords 4948.498 0 7396.581
  }
 }
 Vehicle UAZ469_Armed1 : "{1A20D130A03F9CF1}Prefabs/Vehicles/Wheeled/UAZ469/UAZ469_Armed.et" {
@@ -93,13 +93,13 @@ $grp Tree : "{63DC62906A5917F3}Prefabs/Vegetation/Tree/t_populus_nigra_3s.et" {
   coords 4956.823 0 7328.973
  }
  {
-  coords 5012.335 -0 7381.218
+  coords 5012.335 0 7381.218
  }
  {
   coords 4819.318 0 7328.814
  }
  {
-  coords 4818.509 -0 7340.976
+  coords 4818.509 0 7340.976
  }
  {
   coords 4825.444 0.001 7382.729
@@ -108,10 +108,10 @@ $grp Tree : "{63DC62906A5917F3}Prefabs/Vegetation/Tree/t_populus_nigra_3s.et" {
   coords 4837.563 -0.001 7414.737
  }
  {
-  coords 4880.669 -0 7446.284
+  coords 4880.669 0 7446.284
  }
  {
-  coords 4924.036 -0 7441.303
+  coords 4924.036 0 7441.303
  }
  {
   coords 4988.97 0.001 7422.99
@@ -146,7 +146,7 @@ GenericEntity : "{67B5336A6D63CCA4}Prefabs/Props/Construction/PlankPile/PlankPil
  coords 4888.803 162.628 7350.947
 }
 StaticModelEntity : "{711BCB922B8CED6F}Prefabs/Structures/Cultural/Statues/Statue_base.et" {
- coords 4861.365 -0 7326.561
+ coords 4861.365 0 7326.561
  scale 7.6
 }
 Tree : "{74BEBD22201B37DA}Prefabs/Vegetation/Tree/t_pinus_sylvestris_2s.et" {
@@ -175,10 +175,10 @@ GenericEntity : "{B8185BFEEFD58533}Prefabs/Props/Infrastructure/ConeTraffic/Cone
 }
 $grp Tree : "{C46F2709EDF643D4}Prefabs/Vegetation/Tree/t_tilia_cordata_3s.et" {
  {
-  coords 4861.424 -0 7441.828
+  coords 4861.424 0 7441.828
  }
  {
-  coords 4904.747 -0 7450.41
+  coords 4904.747 0 7450.41
  }
  {
   coords 5028.008 0 7397.059
@@ -205,16 +205,16 @@ $grp Tree : "{C46F2709EDF643D4}Prefabs/Vegetation/Tree/t_tilia_cordata_3s.et" {
   coords 5008.247 -0.001 7436.704
  }
  {
-  coords 4820.763 -0 7308.167
+  coords 4820.763 0 7308.167
  }
  {
   coords 4815.787 -1.21 7400.353
  }
  {
-  coords 4861.424 -0 7441.828
+  coords 4861.424 0 7441.828
  }
  {
-  coords 4904.747 -0 7450.41
+  coords 4904.747 0 7450.41
  }
  {
   coords 5008.187 0 7344.202
@@ -238,7 +238,7 @@ $grp Tree : "{C46F2709EDF643D4}Prefabs/Vegetation/Tree/t_tilia_cordata_3s.et" {
   coords 5008.247 -0.001 7436.704
  }
  {
-  coords 4820.763 -0 7308.167
+  coords 4820.763 0 7308.167
  }
 }
 $grp GenericEntity : "{CB033C658E372CED}Prefabs/Props/Construction/PlankPile/PlankPile_01_Large.et" {
@@ -253,6 +253,51 @@ $grp GenericEntity : "{CB033C658E372CED}Prefabs/Props/Construction/PlankPile/Pla
 }
 Tree : "{CEFEBF266E7040A9}Prefabs/Vegetation/Tree/t_prunus_domestica_2s.et" {
  coords 4860.869 0.001 7301.156
+}
+GameEntity : "{D4BC1F7EC5C290A3}Prefabs/Characters/HeadGear/Hat_Boonie_US_01/Hat_Boonie_US_01_base.et" {
+ components {
+  InventoryItemComponent "{5244E4431E28A759}" {
+   Enabled 0
+  }
+  ParametricMaterialInstanceComponent "{5854DCD8F168E46E}" {
+  }
+  RigidBody "{5112706CD4157AE6}" {
+   Enabled 0
+  }
+  SimpleSoundComponent "{567C833AB81F2FD7}" {
+   Enabled 0
+  }
+  BaseLoadoutClothComponent "{5112706CD4157AF8}" {
+   Enabled 0
+  }
+  ActionsManagerComponent "{5112706CD4157AC9}" {
+   Enabled 0
+  }
+ }
+ coords 4864.118 164.119 7328.219
+ scale 81.3
+}
+GenericEntity : "{DAAFD15478BDE1C3}Prefabs/Characters/Footwear/CombatBoots_US_01.et" {
+ components {
+  InventoryItemComponent "{5244C46AD695742D}" {
+   Enabled 0
+  }
+  RigidBody "{5244C34DEE7DBFB9}" {
+   Enabled 0
+  }
+  SimpleSoundComponent "{567C833A895826E3}" {
+   Enabled 0
+  }
+  BaseLoadoutClothComponent "{5244C34DEE7DBFB2}" {
+   Enabled 0
+  }
+  ActionsManagerComponent "{5244C34DEE7DBF9F}" {
+   Enabled 0
+  }
+ }
+ coords 4935.012 158.138 7394.845
+ angleY 104.024
+ scale 55.6
 }
 GenericEntity : "{EDEF11FBC42A08F4}Prefabs/Props/Naval/FishingBuoy_01.et" {
  coords 4931.647 163.364 7326.04
