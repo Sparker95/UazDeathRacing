@@ -13,3 +13,6 @@ Layer pickups {
 Layer weapons {
  Index 3
 }
+Layer tests {
+ Index 4
+}
