@@ -1,42 +1,45 @@
 UDR_BoostVehicleTrigger {
  ID "59CD64AB00935620"
- components {
-  DeferredDecalObject "{59DEE6B8A5204496}" {
-   LODFactors {
-   }
-   PixelSizeScale 6.187
-   Type WetnessAdd
-   Material "{A23B3982F12D5BE9}Assets/Structures/Infrastructure/Roads/Data/Bridge_Asphalt_01.emat"
-  }
-  SCR_EditableDecalComponent "{59DEE6B8CA766E9B}" {
-  }
- }
- coords 48.143 1.971 451.299
- angleY 62.01
+ coords 52.015 2.001 470.025
  TriggerShapeType "Oriented Bounding Box"
  BoxMins 0 0 0
  BoxMaxs 1 5 20
  DrawShape 1
- ShapeColor 1 0 0 0.122
+ ShapeColor 1 0 0 0.196
  TriggerActivationType "All changes"
  PeriodicQueries 1
  UpdatePeriod 0.1
  ClassFilter "Vehicle"
  {
-  DecalEntity {
-   ID "59DEE6A9DB96F7D5"
-   coords 0.5 0 0.5
-   angleX -90
-   angleY 90
-   Mat "{FA057F4E1A537B9E}boost.emat"
-  }
-  DeferredDecalEntity {
-   ID "59DEE6A90C1904DD"
-   coords -64.38 -0.066 6.632
-   angleX -89.96
-   angleY -62.01
-   Flags 4719683
-   Material "{FA057F4E1A537B9E}boost.emat"
+  $grp DecalEntity {
+   {
+    ID "59E0215C5D9C88B3"
+    coords 1.462 -0.152 9.024
+    angleX 90
+    angleY -90
+    scale 3
+    Flags 524291
+    Stretch 2
+    Mat "{FA057F4E1A537B9E}Prefabs/Triggers/boost.emat"
+   }
+   {
+    ID "59E0215C7ECAF601"
+    coords 1.569 116.944 10.746
+    angleX 1.751
+    Flags 524291
+    Stretch 2
+    Mat "{FA057F4E1A537B9E}Prefabs/Triggers/boost.emat"
+   }
+   {
+    ID "59E0215D53E650BC"
+    coords 1.443 0 2.979
+    angleX 90
+    angleY -90
+    scale 3
+    Flags 524291
+    Stretch 2
+    Mat "{FA057F4E1A537B9E}Prefabs/Triggers/boost.emat"
+   }
   }
  }
 }

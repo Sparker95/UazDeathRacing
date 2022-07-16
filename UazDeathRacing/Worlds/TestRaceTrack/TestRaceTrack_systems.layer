@@ -4,30 +4,10 @@ $grp SCR_SpawnPoint : "{5DDD00A4C0C52421}Prefabs/GameMode/SpawnPoint.et" {
   angleY 118.22
  }
  {
-  coords 32.013 2.001 457.596
+  coords 43.796 2.001 485.514
   angleY 118.22
  }
 }
 GenericEntity : "{94F1335400E2A788}Prefabs/GameMode/Systems.et" {
  coords 45.265 2.001 420.322
-}
-$grp UDR_BoostVehicleTrigger : "{C3865A319561D60F}Prefabs/Triggers/UDR_BoostTriggerVehicle.et" {
- {
-  coords 48.143 1.971 451.299
-  {
-   DecalEntity {
-    ID "59DEE6A9DB96F7D5"
-    coords 0.5 0 1
-    Stretch 2
-   }
-   DeferredDecalEntity {
-    ID "59DEE6A90C1904DD"
-    coords -64.38 0 6.632
-   }
-  }
- }
- {
-  coords 74.411 2.001 391.602
-  angleY 62.01
- }
 }

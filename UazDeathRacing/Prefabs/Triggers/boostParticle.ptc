@@ -1,9 +1,20 @@
 EffectDef {
  Emitters {
+  EmitterDef Emitter_01 {
+   ConeAngle 200 360 5
+   MaxNum 100
+   BirthRate 3
+   Offset 0 0.3 0
+   Angles 90 0 0
+   Material "{17C4D872CCB15FDE}Particles/_Materials/Gas/Dirt_Wheel_Cloud_N_02.emat"
+   Prefab "{29FBEC1991810EEF}system/wbdata/ParticleEditor/defaultPrefab.et"
+   SizeMultiplier 1
+   Velocity 1
+  }
   EmitterDef Emitter_02 {
    ConeAngle 20 0 10
-   MaxNum 200
-   BirthRate 10
+   MaxNum 400
+   BirthRate 15
    Angles 90 0 0
    Material "{2C4428050F9D50FB}Particles/_Materials/Fire/Fire_Clusters.emat"
    Prefab "{29FBEC1991810EEF}system/wbdata/ParticleEditor/defaultPrefab.et"

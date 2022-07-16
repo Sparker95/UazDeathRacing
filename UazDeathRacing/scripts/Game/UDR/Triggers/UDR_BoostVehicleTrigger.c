@@ -4,7 +4,7 @@ class UDR_BoostVehicleTriggerClass: ScriptedGameTriggerEntityClass
 
 class UDR_BoostVehicleTrigger: ScriptedGameTriggerEntity
 {
-	static const string BOOST_PARTICLE_NAME = "{575C2DEE390847F1}boostParticle.ptc";
+	static const string BOOST_PARTICLE_NAME = "{575C2DEE390847F1}Prefabs/Triggers/boostParticle.ptc";
 
 	override void OnActivate(IEntity ent)
 	{
