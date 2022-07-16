@@ -9,3 +9,17 @@ $grp GenericEntity : "{58ED978DD73772BE}Prefabs/Weapons/Blaster/Blaster.et" {
   coords 41.811 2.013 440.929
  }
 }
+Projectile : "{8346AC21916651EA}Prefabs/Weapons/Blaster/BlasterProjectile.et" {
+ components {
+  MissileMoveComponent "{0EF36690881261EF}" {
+   ProjectileEffects {
+    BaseDamageEffect "{56829D01651CE9A7}" {
+    }
+   }
+  }
+ }
+ coords 29.196 2.001 435.871
+}
+GenericEntity : "{D37A54E258B72E0F}Prefabs/Weapons/Blaster/BlasterProjectile_Warhead.et" {
+ coords 30.668 2.001 438.7
+}
