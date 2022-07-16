@@ -1,0 +1,82 @@
+$grp UDR_BoostVehicleTrigger : "{C3865A319561D60F}Prefabs/Triggers/UDR_BoostTriggerVehicle.et" {
+ {
+  coords 4864.4 162.524 7355.179
+  angleX -1.751
+  BoxMaxs 3 5 15
+  ShapeColor 1 0 0 0.275
+  {
+   DecalEntity {
+    ID "59E0215D53E650BC"
+    coords 1.452 0 2.972
+    angleX 90
+    angleY -90
+    scale 3
+   }
+   DecalEntity {
+    ID "59E0215C7ECAF601"
+    coords 1.451 0 12.85
+    angleX 90
+    angleY -90
+    scale 3
+   }
+  }
+ }
+ {
+  coords 4947.304 157.426 7407.735
+  angleX -1.691
+  angleY 15.007
+  angleZ -0.453
+  scale 1.3
+  BoxMaxs 3 5 15
+  ShapeColor 1 0 0 0.275
+  {
+   DecalEntity {
+    ID "59E0215D53E650BC"
+    coords 1.45 -0.314 2.981
+    angleX 89.972
+    angleY 91.58
+    angleZ 178.398
+    scale 3
+   }
+   DecalEntity {
+    ID "59E0215C7ECAF601"
+    coords 1.441 -1.211 12.886
+    angleX 89.972
+    angleY 91.58
+    angleZ 178.398
+    scale 3
+   }
+   DecalEntity {
+    ID "59E0215C5D9C88B3"
+    coords 1.168 -0.92 7.229
+    angleX 89.972
+    angleY 91.58
+    angleZ 178.398
+   }
+  }
+ }
+ {
+  coords 4901.536 162.845 7348.891
+  angleX 0.453
+  angleY 104.993
+  angleZ -1.691
+  BoxMaxs 3 5 15
+  ShapeColor 1 0 0 0.275
+  {
+   DecalEntity {
+    ID "59E0215D53E650BC"
+    coords 1.452 0 2.972
+    angleX 90
+    angleY -90
+    scale 3
+   }
+   DecalEntity {
+    ID "59E0215C7ECAF601"
+    coords 1.451 0 12.85
+    angleX 90
+    angleY -90
+    scale 3
+   }
+  }
+ }
+}

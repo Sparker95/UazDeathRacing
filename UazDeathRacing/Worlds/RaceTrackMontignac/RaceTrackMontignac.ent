@@ -16,3 +16,12 @@ Layer pickups {
 Layer gamemode {
  Index 4
 }
+Layer decor {
+ Index 5
+}
+Layer Spawns {
+ Index 6
+}
+Layer triggers {
+ Index 7
+}

@@ -1,0 +1,260 @@
+StaticModelEntity : "{00BB072FED5A1EAF}Prefabs/Structures/Walls/Pipe/PipeRailing_01_D.et" {
+ coords 4857.424 4.163 7330.137
+}
+$grp Tree : "{04592C849978A51C}Prefabs/Vegetation/Tree/t_sorbus_aucuparia_2f.et" {
+ {
+  coords 4918.983 0.001 7396.509
+ }
+ {
+  coords 4934.082 0 7396.297
+ }
+ {
+  coords 4844.248 0 7334.289
+ }
+ {
+  coords 4877.5 0 7317.033
+ }
+ {
+  coords 4846.567 0 7314.536
+ }
+ {
+  coords 4889.012 -0 7341.901
+ }
+ {
+  coords 4883.098 0 7274.084
+ }
+ {
+  coords 4888.144 0 7401.339
+ }
+ {
+  coords 4900.465 -0 7402.816
+ }
+ {
+  coords 4948.498 -0 7396.581
+ }
+}
+Vehicle UAZ469_Armed1 : "{1A20D130A03F9CF1}Prefabs/Vehicles/Wheeled/UAZ469/UAZ469_Armed.et" {
+ components {
+  SCR_VehicleDamageManagerComponent "{141326E9FD94FE40}" {
+   m_fVehicleDestroyDamage 857.143
+  }
+ }
+ coords 4860.46 168.093 7325.901
+}
+$grp GenericEntity : "{22E2462FA3AE0849}Prefabs/Props/Construction/ConcretePipe/ConcretePipe_01_Long_Pile.et" {
+ {
+  coords 4860.461 165.045 7294.585
+ }
+ {
+  coords 4854.761 164.874 7296.827
+ }
+ {
+  coords 4865.891 165.186 7296.414
+ }
+}
+SCR_DestructibleBuildingEntity : "{22E7F9CBA061B6FE}PrefabLibrary/Structures/Cultural/StatueSoldier_01.et" {
+ coords 4955.335 0.001 7393.267
+ scale 3
+}
+GenericEntity : "{25C8B889A777399D}Prefabs/Props/Infrastructure/ConeTraffic/ConeTraffic_01_red.et" {
+ coords 4844.792 162.938 7348.292
+ scale 5
+}
+GenericEntity : "{388B774519BD6294}Prefabs/Props/Wrecks/T62_wreck.et" {
+ coords 4841.586 161.462 7380.424
+ angleY -165
+ scale 2
+}
+StaticModelEntity : "{3E76CAB74D4C2F0C}Prefabs/Structures/Walls/Pipe/PipeRailing_01_3m.et" {
+ coords 4861.56 0.001 7332.538
+ angleY 90
+}
+StaticModelEntity : "{52ADECE22F634F08}Prefabs/Structures/Cultural/Statues/StatueAnchor_01.et" {
+ coords 4881.994 -0.268 7401.195
+ scale 4.8
+}
+StaticModelEntity : "{559D2FB1A54441E7}Prefabs/Structures/Walls/Pipe/PipeRailing_02_base.et" {
+ coords 4856.229 0.31 7322.844
+}
+$grp Tree : "{63DC62906A5917F3}Prefabs/Vegetation/Tree/t_populus_nigra_3s.et" {
+ {
+  coords 4845.899 0 7266.058
+ }
+ {
+  coords 4872.118 0.001 7270.128
+ }
+ {
+  coords 4892.361 0 7283.322
+ }
+ {
+  coords 4869.679 0 7308.237
+ }
+ {
+  coords 4956.823 0 7328.973
+ }
+ {
+  coords 5012.335 -0 7381.218
+ }
+ {
+  coords 4819.318 0 7328.814
+ }
+ {
+  coords 4818.509 -0 7340.976
+ }
+ {
+  coords 4825.444 0.001 7382.729
+ }
+ {
+  coords 4837.563 -0.001 7414.737
+ }
+ {
+  coords 4880.669 -0 7446.284
+ }
+ {
+  coords 4924.036 -0 7441.303
+ }
+ {
+  coords 4988.97 0.001 7422.99
+ }
+ {
+  coords 4998.063 0.001 7413.909
+ }
+ {
+  coords 5008.248 0.001 7397.867
+ }
+ {
+  coords 4999.694 0.001 7357.662
+ }
+ {
+  coords 4976.842 0.001 7335.828
+ }
+ {
+  coords 4909.309 0.001 7302.106
+ }
+ {
+  coords 4909.309 0.001 7302.106
+ }
+ {
+  coords 4861.647 0.001 7343.637
+ }
+}
+GenericEntity : "{6720CD0D5B7B7768}Prefabs/Props/Construction/ConcretePipe/ConcretePipe_01_Long.et" {
+ coords 4861.585 169.722 7329.175
+ angleZ -90
+}
+GenericEntity : "{67B5336A6D63CCA4}Prefabs/Props/Construction/PlankPile/PlankPile_01_Medium.et" {
+ coords 4888.803 162.628 7350.947
+}
+StaticModelEntity : "{711BCB922B8CED6F}Prefabs/Structures/Cultural/Statues/Statue_base.et" {
+ coords 4861.365 -0 7326.561
+ scale 7.6
+}
+Tree : "{74BEBD22201B37DA}Prefabs/Vegetation/Tree/t_pinus_sylvestris_2s.et" {
+ coords 4862.767 0 7261.5
+}
+GenericEntity : "{89534EF0A1EEE176}Prefabs/Props/Naval/LifeBuoy_01.et" {
+ coords 4879.401 171.555 7335.312
+ angleZ -90
+ scale 25
+}
+GenericEntity : "{9CED2481A6A5986B}Prefabs/Structures/BuildingParts/Industrial/ConcretePlant_E_01_Pipe.et" {
+ coords 4864.579 167.764 7323
+}
+GenericEntity : "{AEF9A26C2F0334B3}Prefabs/Props/Infrastructure/ConeTraffic/ConeTraffic_01_base.et" {
+ coords 4849.325 162.772 7350.988
+ scale 5
+}
+StaticModelEntity : "{B2E5E8E5398D6574}Prefabs/Structures/Cultural/Statues/StatueFIA_01_big.et" {
+ coords 4911.156 0.001 7398.873
+ angleY 180
+ scale 3
+}
+GenericEntity : "{B8185BFEEFD58533}Prefabs/Props/Infrastructure/ConeTraffic/ConeTraffic_01_stack.et" {
+ coords 4841.36 163.158 7344.791
+ scale 5
+}
+$grp Tree : "{C46F2709EDF643D4}Prefabs/Vegetation/Tree/t_tilia_cordata_3s.et" {
+ {
+  coords 4861.424 -0 7441.828
+ }
+ {
+  coords 4904.747 -0 7450.41
+ }
+ {
+  coords 5028.008 0 7397.059
+ }
+ {
+  coords 5008.187 0 7344.202
+ }
+ {
+  coords 4817.583 0 7360.982
+ }
+ {
+  coords 4978.398 0 7439.967
+ }
+ {
+  coords 4945.48 0 7447.722
+ }
+ {
+  coords 4819.776 -0.61 7425.65
+ }
+ {
+  coords 5028.549 0.001 7409.557
+ }
+ {
+  coords 5008.247 -0.001 7436.704
+ }
+ {
+  coords 4820.763 -0 7308.167
+ }
+ {
+  coords 4815.787 -1.21 7400.353
+ }
+ {
+  coords 4861.424 -0 7441.828
+ }
+ {
+  coords 4904.747 -0 7450.41
+ }
+ {
+  coords 5008.187 0 7344.202
+ }
+ {
+  coords 4817.583 0 7360.982
+ }
+ {
+  coords 4978.398 0 7439.967
+ }
+ {
+  coords 4945.48 0 7447.722
+ }
+ {
+  coords 4838.354 -0.013 7436.798
+ }
+ {
+  coords 5028.549 0.001 7409.557
+ }
+ {
+  coords 5008.247 -0.001 7436.704
+ }
+ {
+  coords 4820.763 -0 7308.167
+ }
+}
+$grp GenericEntity : "{CB033C658E372CED}Prefabs/Props/Construction/PlankPile/PlankPile_01_Large.et" {
+ {
+  coords 4897.373 162.949 7348.864
+  angleY -90
+ }
+ {
+  coords 4897.373 162.949 7348.864
+  angleY -90
+ }
+}
+Tree : "{CEFEBF266E7040A9}Prefabs/Vegetation/Tree/t_prunus_domestica_2s.et" {
+ coords 4860.869 0.001 7301.156
+}
+GenericEntity : "{EDEF11FBC42A08F4}Prefabs/Props/Naval/FishingBuoy_01.et" {
+ coords 4931.647 163.364 7326.04
+ scale 50
+}

@@ -1,0 +1,98 @@
+$grp SCR_SpawnPoint : "{5392C4D80E4B18F8}Prefabs/MP/Spawning/SpawnPoint_FFA.et" {
+ SpawnPointOne {
+  components {
+   SCR_MapDescriptorComponent "{54C659A97C47BDE2}" {
+    UnitType Infantry
+   }
+  }
+  coords 4944.22 159.954 7377.094
+  angleY 90
+  m_fSpawnRadius 10
+  m_sFaction "UDR"
+  m_bShowInDeployMapOnly 1
+ }
+ SpawnPointOne2 {
+  components {
+   SCR_MapDescriptorComponent "{54C659A97C47BDE2}" {
+    UnitType Infantry
+   }
+  }
+  coords 4944.043 159.693 7372.277
+  angleY 90
+  m_fSpawnRadius 10
+  m_sFaction "UDR"
+  m_bShowInDeployMapOnly 1
+ }
+ SpawnPointOne3 {
+  components {
+   SCR_MapDescriptorComponent "{54C659A97C47BDE2}" {
+    UnitType Infantry
+   }
+  }
+  coords 4944.266 159.853 7366.462
+  angleY 90
+  m_fSpawnRadius 10
+  m_sFaction "UDR"
+  m_bShowInDeployMapOnly 1
+ }
+ SpawnPointOne4 {
+  components {
+   SCR_MapDescriptorComponent "{54C659A97C47BDE2}" {
+    UnitType Infantry
+   }
+  }
+  coords 4944.246 160.107 7362.615
+  angleY 90
+  m_fSpawnRadius 10
+  m_sFaction "UDR"
+  m_bShowInDeployMapOnly 1
+ }
+ SpawnPointOne5 {
+  components {
+   SCR_MapDescriptorComponent "{54C659A97C47BDE2}" {
+    UnitType Infantry
+   }
+  }
+  coords 4944.255 160.331 7358.585
+  angleY 90
+  m_fSpawnRadius 10
+  m_sFaction "UDR"
+  m_bShowInDeployMapOnly 1
+ }
+ SpawnPointOne6 {
+  components {
+   SCR_MapDescriptorComponent "{54C659A97C47BDE2}" {
+    UnitType Infantry
+   }
+  }
+  coords 4944.461 160.563 7354.221
+  angleY 90
+  m_fSpawnRadius 10
+  m_sFaction "UDR"
+  m_bShowInDeployMapOnly 1
+ }
+ SpawnPointOne7 {
+  components {
+   SCR_MapDescriptorComponent "{54C659A97C47BDE2}" {
+    UnitType Infantry
+   }
+  }
+  coords 4944.323 160.775 7350.365
+  angleY 90
+  m_fSpawnRadius 10
+  m_sFaction "UDR"
+  m_bShowInDeployMapOnly 1
+ }
+ SpawnPointOne8 {
+  components {
+   SCR_MapDescriptorComponent "{54C659A97C47BDE2}" {
+    UnitType Infantry
+   }
+  }
+  coords 4944.411 161.032 7346.479
+  angleY 90
+  m_fSpawnRadius 10
+  m_sFaction "UDR"
+  m_bShowInDeployMapOnly 1
+ }
+}
