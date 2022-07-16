@@ -30,6 +30,13 @@ GenericEntity {
    ID "59D5289C95BB4129"
    coords 5157.578 163.282 7292.602
   }
+  GarbageManager {
+   ID "59E0B34D04802990"
+   CollectorInterval 1
+   CharacterLifetime 6
+   VehicleLifetime 6
+   ItemLifetime 10
+  }
   HitRegistrationManager HitRegManager1 : "{0EDA3D48791120DD}Prefabs/MP/HitRegManager.et" {
    ID "59D5289C95B8402E"
    coords 5162.007 163.161 7309.901
