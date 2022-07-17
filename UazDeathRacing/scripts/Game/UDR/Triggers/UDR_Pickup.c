@@ -19,7 +19,7 @@ class UDR_Pickup : ScriptedGameTriggerEntity
 	
 	protected float m_fRespawnTimer;
 	
-	bool m_bAuthority;
+	protected bool m_bAuthority;
 	
 	//-------------------------------------------------------------------------------------------
 	override void OnInit(IEntity owner)
@@ -30,7 +30,7 @@ class UDR_Pickup : ScriptedGameTriggerEntity
 		if (m_bAuthority)
 		{
 			SetFlags(EntityFlags.ACTIVE, true);
-			SetEventMask(EntityEvent.FRAME);
+			SetEventMask(EntityEvent.POSTFRAME);
 		}
 	}
 	
@@ -49,7 +49,7 @@ class UDR_Pickup : ScriptedGameTriggerEntity
 	}
 	
 	// This is a small trigger, we msut query it every frame in order not to miss entities
-	override void OnFrame(IEntity owner, float timeSlice)
+	override void EOnPostFrame(IEntity owner, float timeSlice)
 	{
 		if (m_bWaitingRespawn)
 		{

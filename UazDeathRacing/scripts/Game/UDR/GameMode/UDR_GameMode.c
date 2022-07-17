@@ -4,6 +4,27 @@ class UDR_GameModeClass: SCR_BaseGameModeClass
 
 class UDR_GameMode: SCR_BaseGameMode
 {
+	[Attribute("", UIWidgets.EditBox)]
+	protected string m_sRaceTrackLogicEntity;
+	
+	protected UDR_RaceTrackLogicComponent m_RaceTrackLogic;
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	override void EOnInit(IEntity owner)
+	{
+		super.EOnInit(owner);
+			
+		IEntity raceTrackLogicEnt = GetGame().FindEntity(m_sRaceTrackLogicEntity);
+		if (raceTrackLogicEnt)
+			m_RaceTrackLogic = UDR_RaceTrackLogicComponent.Cast(raceTrackLogicEnt.FindComponent(UDR_RaceTrackLogicComponent));
+		
+		if (!m_RaceTrackLogic)
+		{
+			Print("Could not find UDR_RaceTrackLogicComponent!");
+		}
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
     override void OnPlayerSpawned(int playerId, IEntity controlledEntity)
 	{
 		super.OnPlayerSpawned(playerId, controlledEntity);
@@ -21,6 +42,9 @@ class UDR_GameMode: SCR_BaseGameMode
 		Resource res = Resource.Load(vehiclePrefabs[0]);
 		IEntity newVehicleEntity = GetGame().SpawnEntityPrefab(res, params: (new EntitySpawnParams));
 		newVehicleEntity.SetWorldTransform(playerPosition);
+		
+		// Register the vehicle to race track logic
+		m_RaceTrackLogic.RegisterRacer(newVehicleEntity, 1);
 		
 		// register to destroyed event
 		EventHandlerManagerComponent ev = EventHandlerManagerComponent.Cast(newVehicleEntity.FindComponent(EventHandlerManagerComponent));
@@ -43,9 +67,13 @@ class UDR_GameMode: SCR_BaseGameMode
 		}
     }
 	
-	void OnVehicleDestroyed(IEntity vecEntity)
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	void OnVehicleDestroyed(IEntity vehEntity)
 	{
-		int playerID = UDR_VehicleNetworkComponent.Cast(vecEntity.FindComponent(UDR_VehicleNetworkComponent)).GetPlayerControllerID();
+		m_RaceTrackLogic.UnregisterRacer(vehEntity);
+		
+		int playerID = UDR_VehicleNetworkComponent.Cast(vehEntity.FindComponent(UDR_VehicleNetworkComponent)).GetPlayerControllerID();
 		if (!playerID) {
 			Print("no player found attached to this vehicle");
 			return;
@@ -54,7 +82,9 @@ class UDR_GameMode: SCR_BaseGameMode
 		// TODO: handle the case of being run by which will auto respawn and then die again with this
 		GetGame().GetCallqueue().CallLater(ForceRespawnPlayer, 5000, false, playerID);
 	}
-
+	
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
 	void ForceRespawnPlayer(int playerID)
 	{
 		PlayerController playerController = GetGame().GetPlayerManager().GetPlayerController(playerID);
@@ -74,5 +104,17 @@ class UDR_GameMode: SCR_BaseGameMode
 			characterController.ForceDeath();
 			PrintFormat("ForceDeath playerID: %1", playerID);
 		}
+	}
+	
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	// Returns Player ID of player assigned to this vehicle
+	int GetVehiclePlayerId(Vehicle veh)
+	{
+		UDR_VehicleNetworkComponent vehNetworkComp = UDR_VehicleNetworkComponent.Cast(veh.FindComponent(UDR_VehicleNetworkComponent));
+		if (!vehNetworkComp)
+			return -1;
+		
+		return vehNetworkComp.GetPlayerControllerID();
 	}
 }

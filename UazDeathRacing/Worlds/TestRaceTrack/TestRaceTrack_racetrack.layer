@@ -1,0 +1,49 @@
+GenericEntity RaceTrackLogic {
+ components {
+  UDR_RaceTrackLogicComponent "{59E2C13FD14D1E05}" {
+   m_aWaypointNames {
+    "RaceTrack_FinishLine" "Waypoint1" "Waypoint2" "Waypoint3"
+   }
+  }
+ }
+ coords 30.365 2.001 476.066
+}
+$grp UDR_Waypoint {
+ RaceTrack_FinishLine {
+  coords 35.072 2.001 478.913
+  TriggerShapeType "Oriented Bounding Box"
+  BoxMins -0.5 0 -10
+  BoxMaxs 0.5 5 10
+  DrawShape 1
+  ShapeColor 1 0 0 0.196
+  TriggerActivationType "All changes"
+  ClassFilter "Vehicle"
+ }
+ Waypoint1 {
+  coords 107.263 2.001 464.246
+  TriggerShapeType Sphere
+  SphereRadius 5
+  DrawShape 1
+  ShapeColor 1 0 0 0.196
+  TriggerActivationType "All changes"
+  ClassFilter "Vehicle"
+ }
+ Waypoint2 {
+  coords 55.546 2.001 440.336
+  TriggerShapeType Sphere
+  SphereRadius 5
+  DrawShape 1
+  ShapeColor 1 0 0 0.196
+  TriggerActivationType "All changes"
+  ClassFilter "Vehicle"
+ }
+ Waypoint3 {
+  coords 10.908 2.001 460.427
+  TriggerShapeType Sphere
+  SphereRadius 5
+  DrawShape 1
+  ShapeColor 1 0 0 0.196
+  TriggerActivationType "All changes"
+  ClassFilter "Vehicle"
+ }
+}
