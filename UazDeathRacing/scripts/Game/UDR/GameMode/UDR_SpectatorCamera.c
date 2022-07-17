@@ -109,6 +109,7 @@ class UDR_SpectatorCamera : CameraBase
 		
 		SetTransform(transform);
 		
+		/*
 		#ifdef WORKBENCH
 		if (DiagMenu.GetBool(SCR_DebugMenuID.UDR_SHOW_SPECTATOR_PANEL))
 		{
@@ -121,5 +122,6 @@ class UDR_SpectatorCamera : CameraBase
 			DbgUI.End();
 		}
 		#endif
+		*/
 	}
 }

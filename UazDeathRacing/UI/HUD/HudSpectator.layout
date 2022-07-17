@@ -1,0 +1,89 @@
+FrameWidgetClass {
+ Name "rootFrame"
+ components {
+  SCR_WidgetExportRuleRoot "{59E157B6AB0E8872}" {
+   DestinationPath "{0650B47502DFD6F4}scripts/Game/UDR/UI/HUD"
+   ScriptAddon "$UazDeathRacing:"
+   ScriptClassNamePrefix "UDR_"
+  }
+ }
+ {
+  FrameWidgetClass "{59E139C96E20171E}" : "{017A451CAE8F9992}UI/Prefabs/RaceProgressPanel.layout" {
+   Name "RaceProgressPanel"
+   Slot FrameWidgetSlot "{59E139C96E20176F}" {
+    Anchor 0 0 1 1
+    PositionX 0
+    OffsetLeft 0
+    PositionY 0
+    OffsetTop 0
+    SizeX -1620
+    OffsetRight 0
+    SizeY -980
+    OffsetBottom 0
+   }
+   {
+   }
+  }
+  VerticalLayoutWidgetClass "{59E139C821FCD97F}" {
+   Name "VerticalLayout0"
+   Slot FrameWidgetSlot "{59E139C821FCD94B}" {
+    Anchor 0.5 0.95 0.5 0.95
+    PositionX 0
+    OffsetLeft 0
+    OffsetTop 0
+    SizeX 100
+    OffsetRight -100
+    SizeY 30
+    OffsetBottom -30
+    Alignment 0.5 1
+    SizeToContent 1
+   }
+   {
+    TextWidgetClass "{59E139C81ABF50C3}" : "{995D2B8E2BD6A0C5}UI/Prefabs/HudTextBig.layout" {
+     Name "Spectating"
+     Slot LayoutSlot "{59E139C81ABF50D7}" {
+      HorizontalAlign 1
+      Padding 0 0 0 10
+     }
+     Clipping False
+     Text "Spectating player:"
+    }
+    HorizontalLayoutWidgetClass "{59E139CFF1E1AE5D}" {
+     Name "HorizontalLayout0"
+     Slot LayoutSlot "{59E139CFF1E1AEB8}" {
+      HorizontalAlign 1
+      VerticalAlign 3
+      Padding 0 0 0 0
+     }
+     {
+      ImageWidgetClass "{59E139CF423CBAC3}" : "{B71C58FE7526EFA3}UI/Prefabs/ArrowRight.layout" {
+       Name "ArrowLeft"
+       Slot LayoutSlot "{59E139CFC0B71D2A}" {
+       }
+       "Flip Horizontally" 1
+      }
+      TextWidgetClass "{59E139C8189DD408}" : "{24A44C72A21EC570}UI/Prefabs/HudTextMedium.layout" {
+       Name "PlayerName"
+       Slot LayoutSlot "{59E139C8189DD460}" {
+        HorizontalAlign 3
+        VerticalAlign 3
+       }
+       Clipping False
+       components {
+        SCR_WidgetExportRule "{59E139CDFA8BD81C}" {
+         WidgetVariableName "m_PlayerNameText"
+        }
+       }
+       Text "Player Name"
+      }
+      ImageWidgetClass "{59E139CF7D6850A6}" : "{B71C58FE7526EFA3}UI/Prefabs/ArrowRight.layout" {
+       Name "ArrowRight0"
+       Slot LayoutSlot "{59E139CFC0B71D2A}" {
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

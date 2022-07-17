@@ -1,10 +1,10 @@
 FrameWidgetClass {
- Name "rootFrame"
+ Name "RaceProgressPanel"
  {
-  OverlayWidgetClass "{59CCF35D14125D7F}" {
+  OverlayWidgetClass "{59E139C533E53700}" {
    Name "Panel"
    Slot FrameWidgetSlot "{59CCF35D14125D57}" {
-    Anchor 0.95 0.95 0.95 0.95
+    Anchor 0.95 0.05 0.95 0.05
     PositionX 0
     OffsetLeft 0
     PositionY 0
@@ -13,25 +13,18 @@ FrameWidgetClass {
     OffsetRight -300
     SizeY 100
     OffsetBottom -100
-    Alignment 1 1
+    Alignment 1 0
    }
    {
-    VerticalLayoutWidgetClass "{59CCF35D76EAB4EF}" {
+    VerticalLayoutWidgetClass "{59E139C533E53701}" {
      Name "VerticalLayout0"
      Slot OverlayWidgetSlot "{59CCF35D76EAB4C0}" {
       HorizontalAlign 3
       VerticalAlign 3
      }
      {
-      HorizontalLayoutWidgetClass "{59CCF35E5F73C01C}" : "{73693F4D3D37CE31}UI/HUD/HudLine.layout" {
-       Name "HudLineHealth"
-       Slot LayoutSlot "{59CCF35D7D973317}" {
-       }
-       {
-       }
-      }
-      HorizontalLayoutWidgetClass "{59CCF35FA3475641}" : "{73693F4D3D37CE31}UI/HUD/HudLine.layout" {
-       Name "HudLineAmmo"
+      HorizontalLayoutWidgetClass "{59E139C533E5370E}" : "{73693F4D3D37CE31}UI/HUD/HudLine.layout" {
+       Name "HudLineLap"
        Slot LayoutSlot "{59CCF35D7D973317}" {
        }
        {
@@ -40,30 +33,43 @@ FrameWidgetClass {
          {
           TextWidgetClass "{59CCF35E63C2AC08}" {
            Prefab "{59CCF35E63C2AC08}"
-           Text "Ammo:"
-          }
-         }
-        }
-       }
-      }
-      HorizontalLayoutWidgetClass "{59CCF35F9BF50430}" : "{73693F4D3D37CE31}UI/HUD/HudLine.layout" {
-       Name "HudLineBoosters"
-       Slot LayoutSlot "{59CCF35D7D973317}" {
-       }
-       "Is Visible" 0
-       {
-        SizeLayoutWidgetClass "{59CCF35EA3208881}" {
-         Prefab "{59CCF35EA3208881}"
-         {
-          TextWidgetClass "{59CCF35E63C2AC08}" {
-           Prefab "{59CCF35E63C2AC08}"
-           Text "Boosters:"
+           Text "Lap:"
           }
          }
         }
         TextWidgetClass "{59CCF35E66713599}" {
          Prefab "{59CCF35E66713599}"
-         Text "NYI"
+         components {
+          SCR_WidgetExportRule "{59E139CA70481136}" {
+           WidgetVariableName "m_LapCountText"
+          }
+         }
+         Text "4/20"
+        }
+       }
+      }
+      HorizontalLayoutWidgetClass "{59E139C533E5370C}" : "{73693F4D3D37CE31}UI/HUD/HudLine.layout" {
+       Name "HudLinePos"
+       Slot LayoutSlot "{59CCF35D7D973317}" {
+       }
+       {
+        SizeLayoutWidgetClass "{59CCF35EA3208881}" {
+         Prefab "{59CCF35EA3208881}"
+         {
+          TextWidgetClass "{59CCF35E63C2AC08}" {
+           Prefab "{59CCF35E63C2AC08}"
+           Text "Position:"
+          }
+         }
+        }
+        TextWidgetClass "{59CCF35E66713599}" {
+         Prefab "{59CCF35E66713599}"
+         components {
+          SCR_WidgetExportRule "{59E139CA43CD1A39}" {
+           WidgetVariableName "m_PositionText"
+          }
+         }
+         Text "6/9"
         }
        }
       }

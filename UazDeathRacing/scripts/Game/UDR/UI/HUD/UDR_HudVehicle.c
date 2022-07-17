@@ -1,6 +1,6 @@
-class UDR_HUD : SCR_InfoDisplay
+class UDR_HudVehicle : SCR_InfoDisplay
 {
-	protected ref UDR_HUDWidgets widgets = new UDR_HUDWidgets();
+	protected ref UDR_HudVehicleWidgets widgets = new UDR_HudVehicleWidgets();
 	
 	
 	override event void OnStartDraw(IEntity owner)
