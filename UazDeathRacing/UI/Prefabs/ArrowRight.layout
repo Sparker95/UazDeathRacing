@@ -1,0 +1,13 @@
+ImageWidgetClass {
+ Name "ArrowRight"
+ Slot LayoutSlot "{59E139CFC0B71D2A}" {
+  HorizontalAlign 1
+  VerticalAlign 1
+  Padding 10 0 10 0
+ }
+ Texture "{45AAA018767160BD}UI/Textures/WidgetLibrary/PagingArrow.edds"
+ Image ""
+ Size 30 30
+ "Shadow Offset" 2 2
+ "Shadow Color" 0 0 0 0.635
+}

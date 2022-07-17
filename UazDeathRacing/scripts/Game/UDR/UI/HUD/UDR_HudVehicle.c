@@ -1,6 +1,6 @@
-class UDR_HUD : SCR_InfoDisplay
+class UDR_HudVehicle : SCR_InfoDisplay
 {
-	protected ref UDR_HUDWidgets widgets = new UDR_HUDWidgets();
+	protected ref UDR_HudVehicleWidgets widgets = new UDR_HudVehicleWidgets();
 	
 	
 	override event void OnStartDraw(IEntity owner)
@@ -97,6 +97,17 @@ class UDR_HUD : SCR_InfoDisplay
 		float health = damageMgrComp.GetHealth() / damageMgrComp.GetMaxHealth();
 		float healthPercent = Math.Floor(health * 100.0);
 		widgets.m_HealthText.SetText(healthPercent.ToString());
+		
+		// Race track 
+		PlayerController pc = GetGame().GetPlayerController();
+		UDR_PlayerNetworkComponent playerNetworkComp = UDR_PlayerNetworkComponent.Cast(pc.FindComponent(UDR_PlayerNetworkComponent));
+		if (playerNetworkComp)
+		{
+			int playerCount = GetGame().GetPlayerManager().GetPlayerCount();
+			widgets.m_PositionText.SetText(string.Format("%1 / %2", playerNetworkComp.m_iPositionInRace+1, playerCount));
+			
+			widgets.m_LapCountText.SetText(playerNetworkComp.m_iLapCount.ToString());
+		}
 		
 		Show(true);
 	}

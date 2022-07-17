@@ -1,13 +1,13 @@
-$grp SCR_SpawnPoint : "{5DDD00A4C0C52421}Prefabs/GameMode/SpawnPoint.et" {
- {
-  coords 23.565 2.001 473.671
-  angleY 118.22
- }
- {
-  coords 43.796 2.001 485.514
-  angleY 118.22
- }
+SCR_SpawnPoint : "{5DDD00A4C0C52421}Prefabs/GameMode/SpawnPoint.et" {
+ coords 43.778 2.001 478.45
+ angleY 85.379
 }
 GenericEntity : "{94F1335400E2A788}Prefabs/GameMode/Systems.et" {
  coords 45.265 2.001 420.322
+ {
+  UDR_GameMode {
+   ID "59D5289C95B8DF5E"
+   m_sRaceTrackLogicEntity "RaceTrackLogic"
+  }
+ }
 }

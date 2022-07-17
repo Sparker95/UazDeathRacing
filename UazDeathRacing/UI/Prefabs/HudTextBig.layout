@@ -1,0 +1,15 @@
+TextWidgetClass {
+ Name "Text0"
+ Slot AlignableSlot "{59CCF35E707AC597}" {
+  HorizontalAlign 3
+  VerticalAlign 3
+ }
+ Text "Health"
+ "Font Size" 50
+ "Min Font Size" 50
+ FontProperties FontProperties "{59CCF35ED2CA4385}" {
+  Font "{CD2634D279AB011A}UI/Fonts/Roboto/Roboto_Bold.fnt"
+  OutlineSize 2
+  OutlineColor 0 0 0 0.424
+ }
+}

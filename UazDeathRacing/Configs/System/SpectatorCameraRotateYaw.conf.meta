@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{0126D0E0FE3C98F0}Configs/System/SpectatorCameraRotateYaw.conf"
+ Configurations {
+  CONFResourceClass PC {
+  }
+  CONFResourceClass XBOX_ONE : PC {
+  }
+  CONFResourceClass XBOX_SERIES : PC {
+  }
+  CONFResourceClass PS4 : PC {
+  }
+  CONFResourceClass HEADLESS : PC {
+  }
+ }
+}

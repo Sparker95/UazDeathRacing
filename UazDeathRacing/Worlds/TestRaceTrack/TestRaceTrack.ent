@@ -16,3 +16,6 @@ Layer weapons {
 Layer tests {
  Index 4
 }
+Layer racetrack {
+ Index 5
+}

@@ -77,7 +77,9 @@ modded class ArmaReforgerScripted
 		
 		//GetInputManager().ActivateContext("CarContext", 50);
 		
+		#ifdef WORKBENCH
 		UDR_DebugMenu.UpdateMenus();
+		#endif
 	}
 }
 
