@@ -5,7 +5,21 @@ class UDR_PlayerNetworkComponentClass : ScriptComponentClass
 
 class UDR_PlayerNetworkComponent : ScriptComponent
 {
-	IEntity m_AssignedVehicle;
+	//-----------------------------------------------------------------------
+	// Vehicle assignment
+	
+	protected IEntity m_AssignedVehicle;
+	
+	void SetAssignedVehicle(IEntity veh)
+	{
+		m_AssignedVehicle = veh;
+	}
+	
+	IEntity GetAssignedVehicle()
+	{
+		return m_AssignedVehicle;
+	}
+	
 	
 	//-----------------------------------------------------------------------
 	// Properties synchronized from race track logic

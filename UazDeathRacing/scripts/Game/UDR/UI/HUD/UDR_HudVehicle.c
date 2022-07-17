@@ -98,6 +98,17 @@ class UDR_HudVehicle : SCR_InfoDisplay
 		float healthPercent = Math.Floor(health * 100.0);
 		widgets.m_HealthText.SetText(healthPercent.ToString());
 		
+		// Race track 
+		PlayerController pc = GetGame().GetPlayerController();
+		UDR_PlayerNetworkComponent playerNetworkComp = UDR_PlayerNetworkComponent.Cast(pc.FindComponent(UDR_PlayerNetworkComponent));
+		if (playerNetworkComp)
+		{
+			int playerCount = GetGame().GetPlayerManager().GetPlayerCount();
+			widgets.m_PositionText.SetText(string.Format("%1 / %2", playerNetworkComp.m_iPositionInRace+1, playerCount));
+			
+			widgets.m_LapCountText.SetText(playerNetworkComp.m_iLapCount.ToString());
+		}
+		
 		Show(true);
 	}
 }

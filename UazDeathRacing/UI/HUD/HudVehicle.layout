@@ -1,5 +1,12 @@
 FrameWidgetClass {
  Name "rootFrame"
+ components {
+  SCR_WidgetExportRuleRoot "{59E36C0CC1CAC20F}" {
+   DestinationPath "{0650B47502DFD6F4}scripts/Game/UDR/UI/HUD"
+   ScriptAddon "$UazDeathRacing:"
+   ScriptClassNamePrefix "UDR_"
+  }
+ }
  {
   OverlayWidgetClass "{59CCF35D14125D7F}" {
    Name "Panel"
@@ -23,14 +30,22 @@ FrameWidgetClass {
       VerticalAlign 3
      }
      {
-      HorizontalLayoutWidgetClass "{59CCF35E5F73C01C}" : "{73693F4D3D37CE31}UI/HUD/HudLine.layout" {
+      HorizontalLayoutWidgetClass "{59CCF35E5F73C01C}" : "{73693F4D3D37CE31}UI/Prefabs/HudLine.layout" {
        Name "HudLineHealth"
        Slot LayoutSlot "{59CCF35D7D973317}" {
        }
        {
+        TextWidgetClass "{59CCF35E66713599}" {
+         Prefab "{59CCF35E66713599}"
+         components {
+          SCR_WidgetExportRule "{59E36C0C9D8CFD53}" {
+           WidgetVariableName "m_HealthText"
+          }
+         }
+        }
        }
       }
-      HorizontalLayoutWidgetClass "{59CCF35FA3475641}" : "{73693F4D3D37CE31}UI/HUD/HudLine.layout" {
+      HorizontalLayoutWidgetClass "{59CCF35FA3475641}" : "{73693F4D3D37CE31}UI/Prefabs/HudLine.layout" {
        Name "HudLineAmmo"
        Slot LayoutSlot "{59CCF35D7D973317}" {
        }
@@ -44,9 +59,17 @@ FrameWidgetClass {
           }
          }
         }
+        TextWidgetClass "{59CCF35E66713599}" {
+         Prefab "{59CCF35E66713599}"
+         components {
+          SCR_WidgetExportRule "{59E36C0CE7505AC0}" {
+           WidgetVariableName "m_AmmoText"
+          }
+         }
+        }
        }
       }
-      HorizontalLayoutWidgetClass "{59CCF35F9BF50430}" : "{73693F4D3D37CE31}UI/HUD/HudLine.layout" {
+      HorizontalLayoutWidgetClass "{59CCF35F9BF50430}" : "{73693F4D3D37CE31}UI/Prefabs/HudLine.layout" {
        Name "HudLineBoosters"
        Slot LayoutSlot "{59CCF35D7D973317}" {
        }
@@ -71,7 +94,7 @@ FrameWidgetClass {
     }
    }
   }
-  FrameWidgetClass "{59E139C9AF401050}" : "{017A451CAE8F9992}UI/HUD/RaceProgressPanel.layout" {
+  FrameWidgetClass "{59E139C9AF401050}" : "{017A451CAE8F9992}UI/Prefabs/RaceProgressPanel.layout" {
    Name "RaceProgressPanel"
    Slot FrameWidgetSlot "{59E139C9AF4010A5}" {
     Anchor 0 0 1 1
@@ -84,7 +107,6 @@ FrameWidgetClass {
     SizeY -980
     OffsetBottom 0
    }
-   "Is Visible" 0
    {
    }
   }

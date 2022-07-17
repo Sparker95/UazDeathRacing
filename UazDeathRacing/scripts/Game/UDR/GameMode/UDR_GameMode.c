@@ -35,6 +35,9 @@ class UDR_GameMode: SCR_BaseGameMode
 		vector playerPosition[4];
 		controlledEntity.GetWorldTransform(playerPosition);
 		
+		PlayerController pc = GetGame().GetPlayerManager().GetPlayerController(playerId);
+		UDR_PlayerNetworkComponent playerNetworkComp = UDR_PlayerNetworkComponent.Cast(pc.FindComponent(UDR_PlayerNetworkComponent));
+		
         // List of UDR custom vehicles
 		array<ResourceName> vehiclePrefabs = {
 			"{1A20D130A03F9CF1}Prefabs/Vehicles/Wheeled/UAZ469/UAZ469_Armed.et",
@@ -45,6 +48,9 @@ class UDR_GameMode: SCR_BaseGameMode
 		Resource res = Resource.Load(vehiclePrefabs[0]);
 		IEntity newVehicleEntity = GetGame().SpawnEntityPrefab(res, params: (new EntitySpawnParams));
 		newVehicleEntity.SetWorldTransform(playerPosition);
+		
+		// Assign vehicle to player
+		playerNetworkComp.SetAssignedVehicle(newVehicleEntity);
 		
 		// Register the vehicle to race track logic
 		m_RaceTrackLogic.RegisterRacer(newVehicleEntity);
@@ -149,7 +155,7 @@ class UDR_GameMode: SCR_BaseGameMode
 				if (!playerComp)
 					continue;
 				
-				IEntity assignedVehicle = playerComp.m_AssignedVehicle;
+				IEntity assignedVehicle = playerComp.GetAssignedVehicle();
 				if (!assignedVehicle)
 					continue;
 				
