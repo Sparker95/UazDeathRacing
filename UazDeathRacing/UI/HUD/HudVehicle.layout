@@ -1,0 +1,92 @@
+FrameWidgetClass {
+ Name "rootFrame"
+ {
+  OverlayWidgetClass "{59CCF35D14125D7F}" {
+   Name "Panel"
+   Slot FrameWidgetSlot "{59CCF35D14125D57}" {
+    Anchor 0.95 0.95 0.95 0.95
+    PositionX 0
+    OffsetLeft 0
+    PositionY 0
+    OffsetTop 0
+    SizeX 300
+    OffsetRight -300
+    SizeY 100
+    OffsetBottom -100
+    Alignment 1 1
+   }
+   {
+    VerticalLayoutWidgetClass "{59CCF35D76EAB4EF}" {
+     Name "VerticalLayout0"
+     Slot OverlayWidgetSlot "{59CCF35D76EAB4C0}" {
+      HorizontalAlign 3
+      VerticalAlign 3
+     }
+     {
+      HorizontalLayoutWidgetClass "{59CCF35E5F73C01C}" : "{73693F4D3D37CE31}UI/HUD/HudLine.layout" {
+       Name "HudLineHealth"
+       Slot LayoutSlot "{59CCF35D7D973317}" {
+       }
+       {
+       }
+      }
+      HorizontalLayoutWidgetClass "{59CCF35FA3475641}" : "{73693F4D3D37CE31}UI/HUD/HudLine.layout" {
+       Name "HudLineAmmo"
+       Slot LayoutSlot "{59CCF35D7D973317}" {
+       }
+       {
+        SizeLayoutWidgetClass "{59CCF35EA3208881}" {
+         Prefab "{59CCF35EA3208881}"
+         {
+          TextWidgetClass "{59CCF35E63C2AC08}" {
+           Prefab "{59CCF35E63C2AC08}"
+           Text "Ammo:"
+          }
+         }
+        }
+       }
+      }
+      HorizontalLayoutWidgetClass "{59CCF35F9BF50430}" : "{73693F4D3D37CE31}UI/HUD/HudLine.layout" {
+       Name "HudLineBoosters"
+       Slot LayoutSlot "{59CCF35D7D973317}" {
+       }
+       "Is Visible" 0
+       {
+        SizeLayoutWidgetClass "{59CCF35EA3208881}" {
+         Prefab "{59CCF35EA3208881}"
+         {
+          TextWidgetClass "{59CCF35E63C2AC08}" {
+           Prefab "{59CCF35E63C2AC08}"
+           Text "Boosters:"
+          }
+         }
+        }
+        TextWidgetClass "{59CCF35E66713599}" {
+         Prefab "{59CCF35E66713599}"
+         Text "NYI"
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+  FrameWidgetClass "{59E139C9AF401050}" : "{017A451CAE8F9992}UI/HUD/RaceProgressPanel.layout" {
+   Name "RaceProgressPanel"
+   Slot FrameWidgetSlot "{59E139C9AF4010A5}" {
+    Anchor 0 0 1 1
+    PositionX 0
+    OffsetLeft 0
+    PositionY 0
+    OffsetTop 0
+    SizeX -1620
+    OffsetRight 0
+    SizeY -980
+    OffsetBottom 0
+   }
+   "Is Visible" 0
+   {
+   }
+  }
+ }
+}

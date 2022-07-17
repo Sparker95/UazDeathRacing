@@ -3,8 +3,12 @@ SCR_PlayerController : "{225E51284CC95CFA}Prefabs/Characters/Core/DefaultPlayerC
  components {
   SCR_HUDManagerComponent "{2FDC275D9EBCDB8B}" {
    InfoDisplays {
-    UDR_HUD "{59DB692A8469287C}" {
-     m_LayoutPath "{B97FA0254C5D6D4D}UI/HUD/HUD.layout"
+    UDR_HudVehicle "{59DB692A8469287C}" {
+     m_LayoutPath "{B97FA0254C5D6D4D}UI/HUD/HudVehicle.layout"
+     m_eLayer HIGH
+    }
+    UDR_HudSpectator "{59E157B5C134F1D7}" {
+     m_LayoutPath "{ECE19D6F64222867}UI/HUD/HudSpectator.layout"
      m_eLayer HIGH
     }
    }
