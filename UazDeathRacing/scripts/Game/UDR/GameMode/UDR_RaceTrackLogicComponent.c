@@ -2,6 +2,7 @@
 This component implements race track logic:
 - Reacting to events when a car activates a waypoint
 - Tracking progress of cars: lap count, selection next waypoint
+It must be attached to some entity in the world (not to car, not to player, not to player controller).
 */
 
 class UDR_RaceTrackLogicRacerData : Managed
@@ -39,29 +40,40 @@ class UDR_RaceTrackLogicComponent : ScriptComponent
 	//----------------------------------------------------------------------------------------------
 	// Registers a racer
 	// racerEnt - entity which will be activating triggers (the vehicle entity)
-	void RegisterRacer(IEntity racerEnt, int firstWaypointId)
+	// racerData - the data object of this racer, can be passed in case of switching of vehicles, when the new vehicle inherits progress of the old one.
+	void RegisterRacer(notnull IEntity racerEnt, UDR_RaceTrackLogicRacerData racerData = null)
 	{
 		_print(string.Format("RegisterRacer: %1", racerEnt));
 		
-		UDR_RaceTrackLogicRacerData racerData = m_RacerData.Get(racerEnt);
+		UDR_RaceTrackLogicRacerData oldRacerData = m_RacerData.Get(racerEnt);
 		
-		if (racerData)
+		if (oldRacerData)
 		{
 			_print(string.Format("Racer is already registered: %1", racerEnt), LogLevel.ERROR);
 			return;
 		}
 		
-		racerData = new UDR_RaceTrackLogicRacerData();
-		racerData.m_iNextWaypoint = firstWaypointId;
-		int prevWpId = firstWaypointId - 1;
-		if (prevWpId < 0)
-			prevWpId = m_aWaypoints.Count() - 1;
-		racerData.m_iPrevWaypoint = prevWpId;
-		m_RacerData.Insert(racerEnt, racerData);
+		if (racerData != null)
+		{
+			m_RacerData.Insert(racerEnt, racerData);
+		}
+		else
+		{
+			int firstWaypointId = 1;
+			
+			UDR_RaceTrackLogicRacerData newRacerData = new UDR_RaceTrackLogicRacerData();
+			newRacerData.m_iNextWaypoint = firstWaypointId;
+			int prevWpId = firstWaypointId - 1;
+			if (prevWpId < 0)
+				prevWpId = m_aWaypoints.Count() - 1;
+			newRacerData.m_iPrevWaypoint = prevWpId;
+			m_RacerData.Insert(racerEnt, newRacerData);
+		}
+		
 	}
 	
 	//----------------------------------------------------------------------------------------------
-	void UnregisterRacer(IEntity racerEnt)
+	void UnregisterRacer(notnull IEntity racerEnt)
 	{
 		_print(string.Format("UnregisterRacer: %1", racerEnt));
 		
@@ -77,11 +89,41 @@ class UDR_RaceTrackLogicComponent : ScriptComponent
 	}
 	
 	//----------------------------------------------------------------------------------------------
+	// Combines both register and unregister: unregisters old racer, registers new racer,
+	// And makes the new racer inherit Racer Data of the old one.
+	void SwitchRacer(IEntity oldRacerEnt, IEntity newRacerEnt)
+	{
+		UDR_RaceTrackLogicRacerData oldRacerData = m_RacerData.Get(oldRacerEnt);
+		
+		if (!oldRacerData)
+		{
+			_print("SwitchRacer: could not find the old racer entity!");
+			return;
+		}
+		
+		UnregisterRacer(oldRacerEnt);
+		RegisterRacer(newRacerEnt, oldRacerData);
+	}
+	
+	//----------------------------------------------------------------------------------------------
+	bool GetRacerData(IEntity racerEnt, out float outTotalProgress, out int outLapCount, out int outNextWaypoint)
+	{
+		UDR_RaceTrackLogicRacerData racerData = m_RacerData.Get(racerEnt);
+		
+		if (!racerData)
+			return false;
+		
+		outTotalProgress = racerData.m_fTotalProgress;
+		outLapCount = racerData.m_iLapCount;
+		outNextWaypoint = racerData.m_iNextWaypoint;
+		return true;
+	}
+	
+	//----------------------------------------------------------------------------------------------
 	override void OnPostInit(IEntity owner)
 	{
 		owner.SetFlags(EntityFlags.ACTIVE, true);
-		SetEventMask(owner, EntityEvent.FRAME | EntityEvent.INIT | EntityEvent.DIAG);
-		Print("UDR_RaceTrackLogicComponent OnPostInit");
+		SetEventMask(owner, EntityEvent.FIXEDFRAME | EntityEvent.INIT | EntityEvent.DIAG);
 	}
 	
 	//----------------------------------------------------------------------------------------------
@@ -171,7 +213,13 @@ class UDR_RaceTrackLogicComponent : ScriptComponent
 	}
 	
 	//----------------------------------------------------------------------------------------------
-	override void EOnFrame(IEntity owner, float timeSlice)
+	//override void EOnFixedFrame(IEntity owner, float timeSlice)
+	//{
+	//	
+	//}
+	
+	//----------------------------------------------------------------------------------------------
+	void UpdateAllRacers()
 	{
 		foreach (IEntity racerEnt, UDR_RaceTrackLogicRacerData racerData : m_RacerData)
 		{
@@ -199,7 +247,7 @@ class UDR_RaceTrackLogicComponent : ScriptComponent
 				DbgUI.Text(string.Format("%1 Lap Count:      %2", i, racerData.m_iLapCount));
 				DbgUI.Text(string.Format("%1 Lap Progress:   %2", i, racerData.m_fLapProgress));
 				DbgUI.Text(string.Format("%1 Total Progress: %2", i, racerData.m_fTotalProgress));
-				DbgUI.PlotLive(string.Format("%1 Total Progress", i), i, 400, 200, racerData.m_fTotalProgress, 100); 
+				DbgUI.PlotLive(string.Format("%1 Total Progress", i), 400, 200, racerData.m_fTotalProgress, 100); 
 				
 				i++;
 			}
