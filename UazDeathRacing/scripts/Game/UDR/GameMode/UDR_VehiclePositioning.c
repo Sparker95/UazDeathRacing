@@ -9,7 +9,7 @@ class UDR_VehiclePositioningClass : GenericEntityClass
 class UDR_VehiclePositioning : GenericEntity
 {
 	[Attribute("{1DEFD52732318765}Prefabs/VehiclePositioning/VehiclePreview.et", UIWidgets.ResourceNamePicker)]
-	protected ResourceName m_sVehiclePrefab;
+	protected ResourceName m_sVehiclePreviewPrefab;
 	
 	[Attribute("2", UIWidgets.EditBox)]
 	protected int m_iNumRows;
@@ -52,7 +52,7 @@ class UDR_VehiclePositioning : GenericEntity
 	{
 		if (!GetGame().InPlayMode())
 		{
-			Resource res = Resource.Load(m_sVehiclePrefab);
+			Resource res = Resource.Load(m_sVehiclePreviewPrefab);
 			for (int iRow = 0; iRow < m_iNumRows; iRow++)
 			{
 				for (int iCol = 0; iCol < m_iNumColumns; iCol++)
