@@ -7,7 +7,12 @@ class UDR_GameMode: SCR_BaseGameMode
 	[Attribute("", UIWidgets.EditBox)]
 	protected string m_sRaceTrackLogicEntity;
 	
+	[Attribute("", UIWidgets.EditBox)]
+	protected string m_sVehiclePositioningEntity;
+	
 	protected UDR_RaceTrackLogicComponent m_RaceTrackLogic;
+	
+	protected UDR_VehiclePositioning m_VehiclePositioning;
 	
 	protected const float RACE_TRACK_LOGIC_UPDATE_INTERVAL = 0.25;
 	
@@ -20,11 +25,14 @@ class UDR_GameMode: SCR_BaseGameMode
 		IEntity raceTrackLogicEnt = GetGame().FindEntity(m_sRaceTrackLogicEntity);
 		if (raceTrackLogicEnt)
 			m_RaceTrackLogic = UDR_RaceTrackLogicComponent.Cast(raceTrackLogicEnt.FindComponent(UDR_RaceTrackLogicComponent));
-		
 		if (!m_RaceTrackLogic)
-		{
-			Print("Could not find UDR_RaceTrackLogicComponent!");
-		}
+			Print("Could not find UDR_RaceTrackLogicComponent!", LogLevel.ERROR);
+		
+		IEntity vehiclePosEnt = GetGame().FindEntity(m_sVehiclePositioningEntity);
+		if (vehiclePosEnt)
+			m_VehiclePositioning = UDR_VehiclePositioning.Cast(vehiclePosEnt);
+		if (!m_VehiclePositioning)
+			Print("Could not find UDR_VehiclePositioning entity!", LogLevel.ERROR);
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------

@@ -1,0 +1,10 @@
+UDR_VehiclePositioning {
+ ID "59E92B6C5A603FC8"
+ components {
+  Hierarchy "{59E92B60952EF5E3}" {
+  }
+ }
+ m_iNumRows 4
+ m_fStepRows 6.8
+ m_fStepColumns 5.2
+}

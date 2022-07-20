@@ -1,0 +1,43 @@
+GenericEntity {
+ ID "59E92B6537C623D5"
+ components {
+  MeshObject "{59E92B67303F1311}" {
+   Object "{B80903BACFCDCCB6}Assets/Vehicles/Wheeled/UAZ469/UAZ469_base.xob"
+   Materials {
+    MaterialAssignClass "{59E92B64FD9913FC}" {
+     SourceMaterial "Common/Materials/Mirror_generic"
+     AssignedMaterial "{14A9DCEA57D1C381}Assets/Conflict/CannotBuild.emat"
+    }
+    MaterialAssignClass "{59E92B64FD9913D6}" {
+     SourceMaterial "UAZ469_Body"
+     AssignedMaterial "{14A9DCEA57D1C381}Assets/Conflict/CannotBuild.emat"
+    }
+    MaterialAssignClass "{59E92B64FD9913D3}" {
+     SourceMaterial "UAZ469_Dashboard"
+     AssignedMaterial "{14A9DCEA57D1C381}Assets/Conflict/CannotBuild.emat"
+    }
+    MaterialAssignClass "{59E92B64FD9913DC}" {
+     SourceMaterial "UAZ469_Details"
+     AssignedMaterial "{14A9DCEA57D1C381}Assets/Conflict/CannotBuild.emat"
+    }
+    MaterialAssignClass "{59E92B64FD9913DB}" {
+     SourceMaterial "UAZ469_Glass"
+     AssignedMaterial "{14A9DCEA57D1C381}Assets/Conflict/CannotBuild.emat"
+    }
+    MaterialAssignClass "{59E92B64FD991427}" {
+     SourceMaterial "UAZ469_Lights"
+     AssignedMaterial "{14A9DCEA57D1C381}Assets/Conflict/CannotBuild.emat"
+    }
+    MaterialAssignClass "{59E92B64FD991425}" {
+     SourceMaterial "UAZ469_SpareWheel"
+     AssignedMaterial "{14A9DCEA57D1C381}Assets/Conflict/CannotBuild.emat"
+    }
+    MaterialAssignClass "{59E92B64FD991420}" {
+     SourceMaterial "UAZ469_Wheel"
+     AssignedMaterial "{14A9DCEA57D1C381}Assets/Conflict/CannotBuild.emat"
+    }
+   }
+   ReceiveLight 0
+  }
+ }
+}
