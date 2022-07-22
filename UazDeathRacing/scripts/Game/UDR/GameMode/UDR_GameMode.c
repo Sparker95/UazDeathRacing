@@ -178,6 +178,10 @@ class UDR_GameMode: SCR_BaseGameMode
 		UDR_VehicleNetworkComponent vehNetComp = UDR_VehicleNetworkComponent.Cast(vehicle.FindComponent(UDR_VehicleNetworkComponent));
 		vehNetComp.Init(playerComp.GetPlayerId());
 
+		// Start engine
+		CarControllerComponent carController = CarControllerComponent.Cast(vehicle.FindComponent(CarControllerComponent));
+		carController.StartEngine();
+		
 		// Move player in pilot and start the car
 		playerComp.MoveInVehicle(vehicle);
 		

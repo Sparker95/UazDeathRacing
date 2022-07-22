@@ -106,8 +106,6 @@ class UDR_PlayerNetworkComponent : ScriptComponent
 		
 		SCR_CompartmentAccessComponent compartmentAccessComponent = SCR_CompartmentAccessComponent.Cast(controlledEntity.FindComponent(SCR_CompartmentAccessComponent));
 		compartmentAccessComponent.MoveInVehicle(vehicle, ECompartmentType.Pilot);
-		CarControllerComponent carController = CarControllerComponent.Cast(vehicle.FindComponent(CarControllerComponent));
-		carController.StartEngine();
 		
 		m_bMoveInVehicleRequest = false;
 	}
