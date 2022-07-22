@@ -30,13 +30,19 @@ class UDR_GameMode: SCR_BaseGameMode
 	protected ERaceState m_RaceState = ERaceState.WAITING_PLAYERS;
 
 	// IDs of players which are assigned to the race
-	protected ref array<UDR_PlayerNetworkComponent> m_aRacers = {};
-		
+	protected ref array<UDR_PlayerNetworkComponent> m_aCurrentRacers = {};	// Players who are currently racing
+	protected ref array<UDR_PlayerNetworkComponent> m_aNextRacers = {};	// Players who will also be racing at the next race
+	
+	protected int m_iNextFreeSpawnPointId = 0;
+	
 	//-------------------------------------------------------------------------------------------------------------------------------
 	override void EOnInit(IEntity owner)
 	{
 		super.EOnInit(owner);
-			
+		
+		if (!GetGame().InPlayMode())
+			return;
+		
 		IEntity raceTrackLogicEnt = GetGame().FindEntity(m_sRaceTrackLogicEntity);
 		if (raceTrackLogicEnt)
 			m_RaceTrackLogic = UDR_RaceTrackLogicComponent.Cast(raceTrackLogicEnt.FindComponent(UDR_RaceTrackLogicComponent));
@@ -61,51 +67,141 @@ class UDR_GameMode: SCR_BaseGameMode
 		PlayerController pc = GetGame().GetPlayerManager().GetPlayerController(playerId);
 		UDR_PlayerNetworkComponent playerNetworkComp = UDR_PlayerNetworkComponent.Cast(pc.FindComponent(UDR_PlayerNetworkComponent));
 		
-        // List of UDR custom vehicles
+        
+    }
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	void RegisterForNextRace(notnull UDR_PlayerNetworkComponent playerComp)
+	{
+		m_aNextRacers.RemoveItem(playerComp);
+		m_aNextRacers.Insert(playerComp);
+		
+		playerComp.m_bAssignedForRace = true;
+		playerComp.BumpReplication();
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	void UnregisterFromNextRace(notnull UDR_PlayerNetworkComponent playerComp)
+	{
+		m_aNextRacers.RemoveItem(playerComp);
+		
+		playerComp.m_bAssignedForRace = false;
+		playerComp.BumpReplication();
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	override void OnPlayerRegistered(int playerId)
+	{
+		super.OnPlayerRegistered(playerId);
+		
+		if (!m_RplComponent.IsMaster())
+			return;
+		
+		UDR_PlayerNetworkComponent playerComp = UDR_PlayerNetworkComponent.GetForPlayerId(playerId);
+		playerComp.Init(playerId);
+		
+		GetGame().GetCallqueue().CallLater(OnAfterPlayerRegistered, 0, false, playerId); // No idea why but spawning doesn't work instantly, must be called later
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	void OnAfterPlayerRegistered(int playerId)
+	{
+		UDR_PlayerNetworkComponent playerComp = UDR_PlayerNetworkComponent.GetForPlayerId(playerId);
+		
+		// The function is called delayed, player might have disconnected, better check that!
+		if (!playerComp)
+			return;
+		
+		switch (m_RaceState)
+		{
+			// Currently waiting for players, register and spawn instantly
+			case ERaceState.WAITING_PLAYERS:
+			{
+				RegisterForNextRace(playerComp);
+				int spawnPointId = FindNextFreeSpawnPoint();
+				SpawnVehicleAndPlayer(playerComp, spawnPointId);
+				break;
+			}
+			
+			// Race is already in progress, register this player for next race
+			case ERaceState.FINISH_SCREEN:
+			case ERaceState.COUNTDOWN:
+			case ERaceState.RACING:
+			{
+				RegisterForNextRace(playerComp);
+				break;
+			}
+		}
+		
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	void SpawnVehicleAndPlayer(notnull UDR_PlayerNetworkComponent playerComp, int spawnPointId)
+	{
+		SCR_PlayerController pc = SCR_PlayerController.Cast(GetGame().GetPlayerManager().GetPlayerController(playerComp.GetPlayerId()));
+		
+		// Spawn driver character
+		EntitySpawnParams p = new EntitySpawnParams();
+		p.Transform[3] = m_VehiclePositioning.GetOrigin();
+		Resource playerRes = Resource.Load("{A8BE87DC32CFF3C5}Prefabs/Characters/DriverCharacter.et");
+		IEntity controlledEntity = GetGame().SpawnEntityPrefab(playerRes, params: p);
+		
+		pc.SetPossessedEntity(controlledEntity);
+		
+		// Spawn vehicle
+		// List of UDR custom vehicles
 		array<ResourceName> vehiclePrefabs = {
 			"{1A20D130A03F9CF1}Prefabs/Vehicles/Wheeled/UAZ469/UAZ469_Armed.et",
 			"{21C45FA677BCDBDA}Prefabs/Vehicles/Wheeled/M998/M998_Armed.et"
 		};
 
-		// spawn vehicle
-		Resource res = Resource.Load(vehiclePrefabs[0]);
-		IEntity newVehicleEntity = GetGame().SpawnEntityPrefab(res, params: (new EntitySpawnParams));
-		newVehicleEntity.SetWorldTransform(playerPosition);
+		
+		// Resolve spawn position
+		EntitySpawnParams spawnParams = new EntitySpawnParams();
+		m_VehiclePositioning.GetPosition(spawnPointId, spawnParams.Transform);
+		
+		Resource vehicleRes = Resource.Load(vehiclePrefabs[0]);
+		IEntity newVehicleEntity = GetGame().SpawnEntityPrefab(vehicleRes, params: spawnParams);
 		
 		// Assign vehicle to player
-		playerNetworkComp.m_AssignedVehicle = newVehicleEntity;
+		playerComp.m_AssignedVehicle = newVehicleEntity;
 		
 		// Register the vehicle to race track logic
 		m_RaceTrackLogic.RegisterRacer(newVehicleEntity);
 		
-		// register to destroyed event
+		// Register to destroyed event
 		EventHandlerManagerComponent ev = EventHandlerManagerComponent.Cast(newVehicleEntity.FindComponent(EventHandlerManagerComponent));
         ev.RegisterScriptHandler("OnDestroyed", newVehicleEntity, OnVehicleDestroyed);
 		
-		// save some datas in vehicleComp
-		Vehicle vehicule = Vehicle.Cast(newVehicleEntity);
-		UDR_VehicleNetworkComponent vehNetComp = UDR_VehicleNetworkComponent.Cast(vehicule.FindComponent(UDR_VehicleNetworkComponent));
-		vehNetComp.SetPlayerControllerID(playerId);
+		// Initialize vehicleComp
+		Vehicle vehicle = Vehicle.Cast(newVehicleEntity);
+		UDR_VehicleNetworkComponent vehNetComp = UDR_VehicleNetworkComponent.Cast(vehicle.FindComponent(UDR_VehicleNetworkComponent));
+		vehNetComp.Init(playerComp.GetPlayerId());
 
-		// move player in pilot and start the car
-		SCR_CompartmentAccessComponent compartmentAccessComponent = SCR_CompartmentAccessComponent.Cast(controlledEntity.FindComponent(SCR_CompartmentAccessComponent));
-		compartmentAccessComponent.MoveInVehicle(newVehicleEntity, ECompartmentType.Pilot);
-		CarControllerComponent m_pCarController = CarControllerComponent.Cast(vehicule.FindComponent(CarControllerComponent));
-		m_pCarController.StartEngine();
+		// Move player in pilot and start the car
+		playerComp.MoveInVehicle(vehicle);
 		
 		SCR_DamageManagerComponent damageManager = SCR_DamageManagerComponent.Cast(controlledEntity.FindComponent(SCR_DamageManagerComponent));
 		if (damageManager) {
 			damageManager.EnableDamageHandling(false);
 		}
-    }
+		
+	}
 	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	int FindNextFreeSpawnPoint()
+	{
+		int id = m_iNextFreeSpawnPointId;
+		m_iNextFreeSpawnPointId++;
+		return id;
+	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
 	void OnVehicleDestroyed(IEntity vehEntity)
 	{
 		m_RaceTrackLogic.UnregisterRacer(vehEntity);
 		
-		int playerID = UDR_VehicleNetworkComponent.Cast(vehEntity.FindComponent(UDR_VehicleNetworkComponent)).GetPlayerControllerID();
+		int playerID = UDR_VehicleNetworkComponent.Cast(vehEntity.FindComponent(UDR_VehicleNetworkComponent)).GetPlayerId();
 		if (!playerID) {
 			Print("no player found attached to this vehicle");
 			return;
@@ -147,7 +243,7 @@ class UDR_GameMode: SCR_BaseGameMode
 		if (!vehNetworkComp)
 			return -1;
 		
-		return vehNetworkComp.GetPlayerControllerID();
+		return vehNetworkComp.GetPlayerId();
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
@@ -159,13 +255,7 @@ class UDR_GameMode: SCR_BaseGameMode
 		
 		foreach (int id : playerIds)
 		{
-			PlayerController pc = pm.GetPlayerController(id);
-			if (!pc)
-				continue;
-			UDR_PlayerNetworkComponent playerComp = UDR_PlayerNetworkComponent.Cast(pc.FindComponent(UDR_PlayerNetworkComponent));
-			if (!playerComp)
-				continue;
-			
+			auto playerComp = UDR_PlayerNetworkComponent.GetForPlayerId(id);			
 			outComponents.Insert(playerComp);
 		}
 	}
@@ -181,56 +271,60 @@ class UDR_GameMode: SCR_BaseGameMode
 		m_fUpdateRaceTrackLogicTimer += timeSlice;
 		if (m_fUpdateRaceTrackLogicTimer >= RACE_TRACK_LOGIC_UPDATE_INTERVAL)
 		{
-			m_RaceTrackLogic.UpdateAllRacers();
-			
-			// Update player component of each player
-			PlayerManager playerMgr = GetGame().GetPlayerManager();
-			array<int> players = {};
-			playerMgr.GetPlayers(players);
-			
-			array<UDR_PlayerNetworkComponent> playerComponents = {};
-			foreach (int playerId : players)
-			{
-				PlayerController playerController = playerMgr.GetPlayerController(playerId);
-				if (!playerController)
-					continue;
-				UDR_PlayerNetworkComponent playerComp = UDR_PlayerNetworkComponent.Cast(playerController.FindComponent(UDR_PlayerNetworkComponent));
-				if (!playerComp)
-					continue;
-				
-				IEntity assignedVehicle = playerComp.m_AssignedVehicle;
-				if (!assignedVehicle)
-					continue;
-				
-				// Get race track data of the player
-				float totalProgress;
-				int lapCount;
-				int nextWaypoint;
-				if (!m_RaceTrackLogic.GetRacerData(assignedVehicle, totalProgress, lapCount, nextWaypoint))
-					continue;
-				
-				playerComp.m_iLapCount = lapCount;
-				playerComp.m_iNextWaypoint = nextWaypoint;
-				playerComp.m_fTotalProgress = totalProgress;
-				
-				playerComponents.Insert(playerComp);
-			}
-			
-			// Sort player components by total track progress, to find who is first, second, etc
-			SCR_Sorting<UDR_PlayerNetworkComponent, UDR_PlayerNetworkComponent_CompareTotalProgress>.HeapSort(playerComponents, true);
-			
-			foreach (int i, UDR_PlayerNetworkComponent playerComp : playerComponents)
-			{
-				playerComp.m_iPositionInRace = i;
-				playerComp.BumpReplication(); // Finally, replicate this
-			}
-			
+			UpdateRaceTrackLogic(timeSlice);			
 			m_fUpdateRaceTrackLogicTimer -= RACE_TRACK_LOGIC_UPDATE_INTERVAL;
 		}
 		
-		UpdateRaceState();
+		UpdateRaceState(timeSlice);
 	}
 	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	void UpdateRaceTrackLogic(float timeSlice)
+	{
+		m_RaceTrackLogic.UpdateAllRacers();
+			
+		// Update player component of each player
+		PlayerManager playerMgr = GetGame().GetPlayerManager();
+		array<int> players = {};
+		playerMgr.GetPlayers(players);
+		
+		array<UDR_PlayerNetworkComponent> playerComponents = {};
+		foreach (int playerId : players)
+		{
+			PlayerController playerController = playerMgr.GetPlayerController(playerId);
+			if (!playerController)
+				continue;
+			UDR_PlayerNetworkComponent playerComp = UDR_PlayerNetworkComponent.Cast(playerController.FindComponent(UDR_PlayerNetworkComponent));
+			if (!playerComp)
+				continue;
+			
+			IEntity assignedVehicle = playerComp.m_AssignedVehicle;
+			if (!assignedVehicle)
+				continue;
+			
+			// Get race track data of the player
+			float totalProgress;
+			int lapCount;
+			int nextWaypoint;
+			if (!m_RaceTrackLogic.GetRacerData(assignedVehicle, totalProgress, lapCount, nextWaypoint))
+				continue;
+			
+			playerComp.m_iLapCount = lapCount;
+			playerComp.m_iNextWaypoint = nextWaypoint;
+			playerComp.m_fTotalProgress = totalProgress;
+			
+			playerComponents.Insert(playerComp);
+		}
+		
+		// Sort player components by total track progress, to find who is first, second, etc
+		SCR_Sorting<UDR_PlayerNetworkComponent, UDR_PlayerNetworkComponent_CompareTotalProgress>.HeapSort(playerComponents, true);
+		
+		foreach (int i, UDR_PlayerNetworkComponent playerComp : playerComponents)
+		{
+			playerComp.m_iPositionInRace = i;
+			playerComp.BumpReplication(); // Finally, replicate this
+		}
+	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
 	void UpdateRaceState(float timeSlice)

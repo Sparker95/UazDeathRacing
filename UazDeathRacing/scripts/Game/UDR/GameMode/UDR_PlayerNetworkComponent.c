@@ -5,27 +5,21 @@ class UDR_PlayerNetworkComponentClass : ScriptComponentClass
 
 class UDR_PlayerNetworkComponent : ScriptComponent
 {
-	void BumpReplication()
-	{
-		Replication.BumpMe();
-	}
-	
-	//-----------------------------------------------------------------------
 	// Game mode logic
 	
 	IEntity m_AssignedVehicle;
+	protected int m_iPlayerId; // Only valid for server!
 	
 	[RplProp()]
-	bool m_bSpectator;		// Spectating
+	bool m_bSpectating;			// Spectating
 	
 	[RplProp()]
-	bool m_bAssignedForRace;	// Will race in the next race
+	bool m_bAssignedForRace;	// Will participate in the next race
 	
 	[RplProp()]
 	bool m_bRacingNow;			// Participating in the race now
 	
-	//-----------------------------------------------------------------------
-	// Properties synchronized from race track logic
+	// Data synchronized from race track logic
 	// They are maintained by game mode
 	
 	[RplProp()]
@@ -34,13 +28,39 @@ class UDR_PlayerNetworkComponent : ScriptComponent
 	[RplProp()]
 	int m_iPositionInRace;	// Our position among other racers
 	
-	//[RplProp()]
 	float m_fTotalProgress;	// Our total distance travelled, including previous laps
 	
 	int m_iNextWaypoint;
 	
+	// For moving into vehicle
+	protected bool m_bMoveInVehicleRequest = false;
+	protected RplId m_MoveInVehicleRplId;
+	
+	
+	void BumpReplication()
+	{
+		Replication.BumpMe();
+	}
+	
+	override void OnPostInit(IEntity owner)
+	{
+		//owner.SetFlags(EntityFlags.ACTIVE, true);
+		SetEventMask(owner, EntityEvent.FRAME);
+	}
+	
 	//-----------------------------------------------------------------------
-	// Logic for sound playing
+	void Init(int playerId)
+	{
+		m_iPlayerId = playerId;
+	}
+	
+	int GetPlayerId()
+	{
+		return m_iPlayerId;
+	}
+	
+	//-----------------------------------------------------------------------
+	// Playing sounds
 	
 	[RplRpc(RplChannel.Reliable, RplRcver.Owner)]
 	protected void RpcDo_UiSoundEvent(string soundName)
@@ -51,6 +71,65 @@ class UDR_PlayerNetworkComponent : ScriptComponent
 	void Authority_SendUiSoundEvent(string soundName)
 	{
 		Rpc(RpcDo_UiSoundEvent, soundName);
+	}
+	
+	//-----------------------------------------------------------------------
+	// Moving in vehicle... is a whole serious process
+	
+	// Must be ccalled by server
+	void MoveInVehicle(Vehicle vehicle)
+	{
+		RplComponent rpl = RplComponent.Cast(vehicle.FindComponent(RplComponent));
+		Rpc(RpcDo_MoveInVehicle, rpl.Id());
+	}
+	
+	[RplRpc(RplChannel.Reliable, RplRcver.Owner)]
+	void RpcDo_MoveInVehicle(RplId vehId)
+	{
+		m_bMoveInVehicleRequest = true;
+		m_MoveInVehicleRplId = vehId;
+	}
+	
+	void TryMoveInVehicle()
+	{
+		// We must wait until the vehicle entity is streamed to us, then move into it
+		RplComponent rpl = RplComponent.Cast(Replication.FindItem(m_MoveInVehicleRplId));
+		if (!rpl)
+			return;
+		
+		Vehicle vehicle = Vehicle.Cast(rpl.GetEntity());
+		if (!vehicle)
+			return;
+		
+		PlayerController pc = PlayerController.Cast(GetOwner());
+		IEntity controlledEntity = pc.GetControlledEntity();
+		
+		SCR_CompartmentAccessComponent compartmentAccessComponent = SCR_CompartmentAccessComponent.Cast(controlledEntity.FindComponent(SCR_CompartmentAccessComponent));
+		compartmentAccessComponent.MoveInVehicle(vehicle, ECompartmentType.Pilot);
+		CarControllerComponent carController = CarControllerComponent.Cast(vehicle.FindComponent(CarControllerComponent));
+		carController.StartEngine();
+		
+		m_bMoveInVehicleRequest = false;
+	}
+	
+	//-----------------------------------------------------------------------
+	// Misc functions
+	
+	static UDR_PlayerNetworkComponent GetForPlayerId(int playerId)
+	{
+		PlayerController pc = GetGame().GetPlayerManager().GetPlayerController(playerId);
+		if (!pc)
+			return null;
+		UDR_PlayerNetworkComponent playerComp = UDR_PlayerNetworkComponent.Cast(pc.FindComponent(UDR_PlayerNetworkComponent));
+		return playerComp;
+	}
+	
+	override void EOnFrame(IEntity owner, float timeSlice)
+	{
+		if (m_bMoveInVehicleRequest)
+		{
+			TryMoveInVehicle();
+		}
 	}
 }
 

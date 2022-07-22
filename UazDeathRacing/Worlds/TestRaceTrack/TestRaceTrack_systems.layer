@@ -1,7 +1,3 @@
-SCR_SpawnPoint : "{5DDD00A4C0C52421}Prefabs/GameMode/SpawnPoint.et" {
- coords 43.778 2.001 478.45
- angleY 85.379
-}
 GenericEntity : "{94F1335400E2A788}Prefabs/GameMode/Systems.et" {
  coords 45.265 2.001 420.322
  {
@@ -16,6 +12,7 @@ UDR_VehiclePositioning VehiclePositioning : "{F33FD9275A6393DB}Prefabs/VehiclePo
  coords 47.109 2.001 479.192
  angleY 90.12
  m_iNumRows 2
+ m_iNumColumns 4
  m_fStepRows 6.9
- m_fStepColumns 7.2
+ m_fStepColumns 3.7
 }

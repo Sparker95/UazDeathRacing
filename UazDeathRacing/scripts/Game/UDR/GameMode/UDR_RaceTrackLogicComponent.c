@@ -141,8 +141,11 @@ class UDR_RaceTrackLogicComponent : ScriptComponent
 		//-----------------------------------------------
 		// If we are in editor, just check if all waypoint names are correct and return
 		#ifdef WORKBENCH
+		
 		if (!GetGame().InPlayMode())
 		{
+			/*
+			// Disabled this shit because it looks like it can't find entities when reloading a world and thus spams this sometimes
 			WorldEditor worldEditor = Workbench.GetModule(WorldEditor); // Watch out, WorldEditor class doesn't exist not in Workbench
 			WorldEditorAPI api = worldEditor.GetApi();
 			
@@ -152,7 +155,7 @@ class UDR_RaceTrackLogicComponent : ScriptComponent
 				if (!wpEntSrc)
 					_print(string.Format("Could not find waypoint: %1", wpName), LogLevel.ERROR);
 			}
-			
+			*/
 			return;
 		}
 		#endif
