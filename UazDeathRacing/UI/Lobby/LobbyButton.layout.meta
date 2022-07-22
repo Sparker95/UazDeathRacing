@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{08F03482FD71F8BA}UI/layouts/Menus/ContentBrowser/Buttons/LobbyButton.layout"
+ Configurations {
+  LayoutResourceClass PC {
+  }
+  LayoutResourceClass XBOX_ONE : PC {
+  }
+  LayoutResourceClass XBOX_SERIES : PC {
+  }
+  LayoutResourceClass PS4 : PC {
+  }
+  LayoutResourceClass HEADLESS : PC {
+  }
+ }
+}

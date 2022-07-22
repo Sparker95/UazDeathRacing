@@ -5,21 +5,24 @@ class UDR_PlayerNetworkComponentClass : ScriptComponentClass
 
 class UDR_PlayerNetworkComponent : ScriptComponent
 {
+	void BumpReplication()
+	{
+		Replication.BumpMe();
+	}
+	
 	//-----------------------------------------------------------------------
-	// Vehicle assignment
+	// Game mode logic
 	
-	protected IEntity m_AssignedVehicle;
+	IEntity m_AssignedVehicle;
 	
-	void SetAssignedVehicle(IEntity veh)
-	{
-		m_AssignedVehicle = veh;
-	}
+	[RplProp()]
+	bool m_bSpectator;		// Spectating
 	
-	IEntity GetAssignedVehicle()
-	{
-		return m_AssignedVehicle;
-	}
+	[RplProp()]
+	bool m_bAssignedForRace;	// Will race in the next race
 	
+	[RplProp()]
+	bool m_bRacingNow;			// Participating in the race now
 	
 	//-----------------------------------------------------------------------
 	// Properties synchronized from race track logic
@@ -35,12 +38,6 @@ class UDR_PlayerNetworkComponent : ScriptComponent
 	float m_fTotalProgress;	// Our total distance travelled, including previous laps
 	
 	int m_iNextWaypoint;
-	
-	void BumpReplication()
-	{
-		Replication.BumpMe();
-	}
-	
 	
 	//-----------------------------------------------------------------------
 	// Logic for sound playing

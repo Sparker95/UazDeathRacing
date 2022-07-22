@@ -2,21 +2,36 @@ class UDR_GameModeClass: SCR_BaseGameModeClass
 {
 };
 
+enum ERaceState
+{
+	WAITING_PLAYERS,
+	COUNTDOWN,
+	RACING,
+	FINISH_SCREEN
+}
+
 class UDR_GameMode: SCR_BaseGameMode
 {
+	// Constants
+	protected const float RACE_TRACK_LOGIC_UPDATE_INTERVAL = 0.25;
+	
+	
+	// Other entities for the game mode
 	[Attribute("", UIWidgets.EditBox)]
 	protected string m_sRaceTrackLogicEntity;
-	
 	[Attribute("", UIWidgets.EditBox)]
 	protected string m_sVehiclePositioningEntity;
 	
 	protected UDR_RaceTrackLogicComponent m_RaceTrackLogic;
-	
 	protected UDR_VehiclePositioning m_VehiclePositioning;
 	
-	protected const float RACE_TRACK_LOGIC_UPDATE_INTERVAL = 0.25;
-	
-	
+	// State of the race
+	[RplProp()]
+	protected ERaceState m_RaceState = ERaceState.WAITING_PLAYERS;
+
+	// IDs of players which are assigned to the race
+	protected ref array<UDR_PlayerNetworkComponent> m_aRacers = {};
+		
 	//-------------------------------------------------------------------------------------------------------------------------------
 	override void EOnInit(IEntity owner)
 	{
@@ -58,7 +73,7 @@ class UDR_GameMode: SCR_BaseGameMode
 		newVehicleEntity.SetWorldTransform(playerPosition);
 		
 		// Assign vehicle to player
-		playerNetworkComp.SetAssignedVehicle(newVehicleEntity);
+		playerNetworkComp.m_AssignedVehicle = newVehicleEntity;
 		
 		// Register the vehicle to race track logic
 		m_RaceTrackLogic.RegisterRacer(newVehicleEntity);
@@ -136,6 +151,26 @@ class UDR_GameMode: SCR_BaseGameMode
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
+	void GetPlayerNetworkComponents(notnull array<UDR_PlayerNetworkComponent> outComponents)
+	{
+		PlayerManager pm = GetGame().GetPlayerManager();
+		array<int> playerIds = {};
+		pm.GetPlayers(playerIds);
+		
+		foreach (int id : playerIds)
+		{
+			PlayerController pc = pm.GetPlayerController(id);
+			if (!pc)
+				continue;
+			UDR_PlayerNetworkComponent playerComp = UDR_PlayerNetworkComponent.Cast(pc.FindComponent(UDR_PlayerNetworkComponent));
+			if (!playerComp)
+				continue;
+			
+			outComponents.Insert(playerComp);
+		}
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
 	float m_fUpdateRaceTrackLogicTimer = RACE_TRACK_LOGIC_UPDATE_INTERVAL;
 	override void EOnFrame(IEntity owner, float timeSlice)
 	{
@@ -163,7 +198,7 @@ class UDR_GameMode: SCR_BaseGameMode
 				if (!playerComp)
 					continue;
 				
-				IEntity assignedVehicle = playerComp.GetAssignedVehicle();
+				IEntity assignedVehicle = playerComp.m_AssignedVehicle;
 				if (!assignedVehicle)
 					continue;
 				
@@ -191,6 +226,32 @@ class UDR_GameMode: SCR_BaseGameMode
 			}
 			
 			m_fUpdateRaceTrackLogicTimer -= RACE_TRACK_LOGIC_UPDATE_INTERVAL;
+		}
+		
+		UpdateRaceState();
+	}
+	
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	void UpdateRaceState(float timeSlice)
+	{
+		switch (m_RaceState)
+		{
+			case ERaceState.WAITING_PLAYERS:
+			{
+			}
+			
+			case ERaceState.COUNTDOWN:
+			{
+			}
+			
+			case ERaceState.RACING:
+			{
+			}
+			
+			case ERaceState.FINISH_SCREEN:
+			{
+			}
 		}
 	}
 }

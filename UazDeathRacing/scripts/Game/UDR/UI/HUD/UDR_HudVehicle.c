@@ -106,7 +106,7 @@ class UDR_HudVehicle : SCR_InfoDisplay
 			int playerCount = GetGame().GetPlayerManager().GetPlayerCount();
 			widgets.m_PositionText.SetText(string.Format("%1 / %2", playerNetworkComp.m_iPositionInRace+1, playerCount));
 			
-			widgets.m_LapCountText.SetText(playerNetworkComp.m_iLapCount.ToString());
+			widgets.m_LapCountText.SetText((playerNetworkComp.m_iLapCount+1).ToString());
 		}
 		
 		Show(true);
