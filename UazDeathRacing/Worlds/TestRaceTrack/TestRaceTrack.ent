@@ -19,3 +19,6 @@ Layer tests {
 Layer racetrack {
  Index 5
 }
+Layer other {
+ Index 6
+}

@@ -1,0 +1,8 @@
+UDR_PlayerNetworkEntity {
+ ID "59ED60CFA8E004ED"
+ components {
+  RplComponent "{59ED60CCCCA77F7C}" {
+   Streamable Disabled
+  }
+ }
+}

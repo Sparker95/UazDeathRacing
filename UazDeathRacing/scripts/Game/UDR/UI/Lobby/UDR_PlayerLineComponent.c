@@ -38,7 +38,19 @@ class UDR_PlayerLineComponent : ScriptedWidgetComponent
 			return;
 		
 		PlayerManager pm = GetGame().GetPlayerManager();
+
+		// Player name
+		string playerName = pm.GetPlayerName(m_iPlayerId);
+		widgets.m_PlayerNameText.SetText(playerName);
 		
+		UDR_GameMode gm = UDR_GameMode.Cast(GetGame().GetGameMode());
+		
+		UDR_PlayerNetworkEntity networkSync = gm.GetPlayerNetworkSyncEntity(m_iPlayerId);
+		
+		if (!networkSync)
+			return;
+		
+		/*
 		PlayerController pc = pm.GetPlayerController(m_iPlayerId);
 		if (!pc)
 			return;
@@ -46,16 +58,13 @@ class UDR_PlayerLineComponent : ScriptedWidgetComponent
 		UDR_PlayerNetworkComponent playerComp = UDR_PlayerNetworkComponent.Cast(pc.FindComponent(UDR_PlayerNetworkComponent));
 		if (!playerComp)
 			return;
-		
-		// Player name
-		string playerName = pm.GetPlayerName(m_iPlayerId);
-		widgets.m_PlayerNameText.SetText(playerName);
+		*/
 		
 		// Position
-		widgets.m_PositionText.SetText((playerComp.m_iPositionInRace + 1).ToString());
+		widgets.m_PositionText.SetText((networkSync.m_iPositionInRace + 1).ToString());
 		
 		// Lap
-		widgets.m_CurrentLapText.SetText((playerComp.m_iLapCount + 1).ToString());
+		widgets.m_CurrentLapText.SetText((networkSync.m_iLapCount + 1).ToString());
 		
 		// Best lap time
 		widgets.m_BestLapText.SetText("");
