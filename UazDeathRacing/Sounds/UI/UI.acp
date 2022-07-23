@@ -19,12 +19,50 @@ AudioClass {
    outStatePort 2055
    noInAudible 0
   }
+  SoundClass {
+   id 11273
+   name "RACE_COUNTDOWN"
+   tl 215.5 375.583
+   conns {
+    ConnectionsClass connections {
+     id 0
+     links {
+      ConnectionClass connection {
+       id 10244
+       port 65
+      }
+     }
+    }
+   }
+   outState 7179
+   outStatePort 2055
+   noInAudible 0
+  }
+  SoundClass {
+   id 13321
+   name "RACE_START"
+   tl 216.214 587.905
+   conns {
+    ConnectionsClass connections {
+     id 0
+     links {
+      ConnectionClass connection {
+       id 12292
+       port 65
+      }
+     }
+    }
+   }
+   outState 7179
+   outStatePort 2055
+   noInAudible 0
+  }
  }
  mixers {
   MixerClass {
    id 7179
    name "OutputState 7"
-   tl 413.833 158.833
+   tl 600.976 158.833
    res "{7C8E39DAEEA0CE80}Sounds/UI/UIMix.afm"
    iops {
     IOPConnectionClass iopConnection {
@@ -35,6 +73,14 @@ AudioClass {
        links {
         ConnectionClass connection {
          id 8201
+         port 65
+        }
+        ConnectionClass connection {
+         id 11273
+         port 65
+        }
+        ConnectionClass connection {
+         id 13321
          port 65
         }
        }
@@ -56,6 +102,26 @@ AudioClass {
    Samples {
     AudioBankSampleClass "Sample(1)" {
      Filename "{065D53406133D06A}Sounds/UI/PickupItem.wav"
+    }
+   }
+  }
+  BankLocalClass {
+   id 10244
+   name "Bank 9"
+   tl 24.5 376.917
+   Samples {
+    AudioBankSampleClass "Sample(1)" {
+     Filename "{001BD370EE1E0474}Sounds/UI/RaceCountdown.wav"
+    }
+   }
+  }
+  BankLocalClass {
+   id 12292
+   name "Bank 9"
+   tl 25.214 589.238
+   Samples {
+    AudioBankSampleClass "Sample(1)" {
+     Filename "{F156BAD9FCC77A7E}Sounds/UI/RaceStart.wav"
     }
    }
   }

@@ -61,7 +61,8 @@ class UDR_RaceStateOnePlayer : UDR_RaceStateBase
 		
 		foreach (UDR_PlayerNetworkComponent player : players)
 		{
-			m_GameMode.SpawnVehicleAtSpawnPoint(player); // Go on, have fun..
+			if (player.m_AssignedVehicle == null)
+				m_GameMode.SpawnVehicleAtSpawnPoint(player); // Go on, have fun..
 		}
 	}
 	
@@ -106,7 +107,7 @@ class UDR_RaceStateOnePlayer : UDR_RaceStateBase
 
 class UDR_RaceStatePreparing : UDR_RaceStateBase
 {	
-	protected const float TIMER_THRESHOLD = 8.0;
+	protected const float TIMER_THRESHOLD = 3.0;
 	protected float m_fTimer;
 	
 	//-----------------------------------------------------------------------------
@@ -156,12 +157,14 @@ class UDR_RaceStatePreparing : UDR_RaceStateBase
 
 class UDR_RaceStateCountdown : UDR_RaceStateBase
 {
-	protected float m_fTimer;
+	protected float m_fTimerSeconds;	// This timer measures seconds
+	protected int m_iCountdown;			// Countdown
 	
 	//-----------------------------------------------------------------------------
 	override void OnStateEnter()
 	{
-		m_fTimer = 3.0;
+		m_fTimerSeconds = 1.0;
+		m_iCountdown = 5;
 	}
 	
 	
@@ -173,15 +176,39 @@ class UDR_RaceStateCountdown : UDR_RaceStateBase
 	//-----------------------------------------------------------------------------
 	override bool OnUpdate(float timeSlice, out ERaceState outNewState)
 	{
-		m_fTimer -= timeSlice;
+		m_fTimerSeconds -= timeSlice;
 		
-		if (m_fTimer <= 0)
+		bool switchState = false;
+		
+		if (m_fTimerSeconds <= 0)
 		{
-			outNewState = ERaceState.RACING;
-			return true;
+			m_GameMode._print(string.Format("Countdown: %1", m_iCountdown));
+			
+			string soundEventName;
+			string countdownText;
+			if (m_iCountdown == 0)
+			{
+				countdownText = "GO!";
+				soundEventName = UDR_UISounds.RACE_START;
+				
+				// Switch to next state
+				outNewState = ERaceState.RACING;
+				switchState = true;
+			}
+			else
+			{
+				countdownText = m_iCountdown.ToString();
+				soundEventName = UDR_UISounds.RACE_COUNTDOWN;
+			}
+			
+			m_GameMode.BroadcastUiSoundEvent(soundEventName);
+			m_GameMode.BroadcastNotification(countdownText, 900.0);
+		
+			m_iCountdown--;	
+			m_fTimerSeconds = 1.0;
 		}
 		
-		return false;
+		return switchState;
 	}
 }
 

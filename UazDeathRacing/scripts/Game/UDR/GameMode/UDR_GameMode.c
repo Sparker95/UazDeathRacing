@@ -57,32 +57,32 @@ class UDR_GameMode: SCR_BaseGameMode
 		if (!GetGame().InPlayMode())
 			return;
 		
-		if (!m_RplComponent.IsMaster())
-			return;
-		
-		//--------------------------------------------------------
-		// Everything below is only for server
-		
-		IEntity raceTrackLogicEnt = GetGame().FindEntity(m_sRaceTrackLogicEntity);
-		if (raceTrackLogicEnt)
-			m_RaceTrackLogic = UDR_RaceTrackLogicComponent.Cast(raceTrackLogicEnt.FindComponent(UDR_RaceTrackLogicComponent));
-		if (!m_RaceTrackLogic)
-			Print("Could not find UDR_RaceTrackLogicComponent!", LogLevel.ERROR);
-		
-		IEntity vehiclePosEnt = GetGame().FindEntity(m_sVehiclePositioningEntity);
-		if (vehiclePosEnt)
-			m_VehiclePositioning = UDR_VehiclePositioning.Cast(vehiclePosEnt);
-		if (!m_VehiclePositioning)
-			Print("Could not find UDR_VehiclePositioning entity!", LogLevel.ERROR);
-		
-		// Initialize the race states
-		m_StateNoPlayers 		= new UDR_RaceStateNoPlayers(this);
-		m_StateOnePlayer		= new UDR_RaceStateOnePlayer(this);
-		m_StatePreparing		= new UDR_RaceStatePreparing(this);
-		m_StateCountdown		= new UDR_RaceStateCountdown(this);
-		m_StateRacing			= new UDR_RaceStateRacing(this);
-		m_StateFinishScreen		= new UDR_RaceStateFinishScreen(this);
-		SwitchToRaceState(ERaceState.NO_PLAYERS);
+		if (m_RplComponent.IsMaster())
+		{
+			//--------------------------------------------------------
+			// Everything below is only for server
+			
+			IEntity raceTrackLogicEnt = GetGame().FindEntity(m_sRaceTrackLogicEntity);
+			if (raceTrackLogicEnt)
+				m_RaceTrackLogic = UDR_RaceTrackLogicComponent.Cast(raceTrackLogicEnt.FindComponent(UDR_RaceTrackLogicComponent));
+			if (!m_RaceTrackLogic)
+				Print("Could not find UDR_RaceTrackLogicComponent!", LogLevel.ERROR);
+			
+			IEntity vehiclePosEnt = GetGame().FindEntity(m_sVehiclePositioningEntity);
+			if (vehiclePosEnt)
+				m_VehiclePositioning = UDR_VehiclePositioning.Cast(vehiclePosEnt);
+			if (!m_VehiclePositioning)
+				Print("Could not find UDR_VehiclePositioning entity!", LogLevel.ERROR);
+			
+			// Initialize the race states
+			m_StateNoPlayers 		= new UDR_RaceStateNoPlayers(this);
+			m_StateOnePlayer		= new UDR_RaceStateOnePlayer(this);
+			m_StatePreparing		= new UDR_RaceStatePreparing(this);
+			m_StateCountdown		= new UDR_RaceStateCountdown(this);
+			m_StateRacing			= new UDR_RaceStateRacing(this);
+			m_StateFinishScreen		= new UDR_RaceStateFinishScreen(this);
+			SwitchToRaceState(ERaceState.NO_PLAYERS);
+		}
 	}
 		
 	//-------------------------------------------------------------------------------------------------------------------------------
@@ -344,21 +344,39 @@ class UDR_GameMode: SCR_BaseGameMode
 	{
 		super.EOnFrame(owner, timeSlice);
 		
-		if (!m_RplComponent.IsMaster())
-			return;
 		
-		//--------------------------------------------------------
-		// Everything below is only for server
-		
-		// Update the race track logic based on timer (no need to update too often)
-		m_fUpdateRaceTrackLogicTimer += timeSlice;
-		if (m_fUpdateRaceTrackLogicTimer >= RACE_TRACK_LOGIC_UPDATE_INTERVAL)
+		// Disable car inputs during countdown
+		if (m_eRaceState == ERaceState.COUNTDOWN || m_eRaceState == ERaceState.PREPARING)
 		{
-			UpdateRaceTrackLogic(timeSlice);			
-			m_fUpdateRaceTrackLogicTimer -= RACE_TRACK_LOGIC_UPDATE_INTERVAL;
+			auto im = GetGame().GetInputManager();
+			im.ActivateContext("UDR_CountdownContext", 50);
+			
+			/*
+			// Doesn't work when run on client unfortunately
+			im.SetActionValue("CarThrust", 0);
+			im.SetActionValue("CarBrake", 0);
+			im.SetActionValue("CarHandBrake", 1.0);
+			im.SetActionValue("VehicleFire", 0);
+			*/
 		}
 		
-		UpdateRaceState(timeSlice);
+		
+		
+		if (m_RplComponent.IsMaster())
+		{
+			//--------------------------------------------------------
+			// Everything below is only for server
+			
+			// Update the race track logic based on timer (no need to update too often)
+			m_fUpdateRaceTrackLogicTimer += timeSlice;
+			if (m_fUpdateRaceTrackLogicTimer >= RACE_TRACK_LOGIC_UPDATE_INTERVAL)
+			{
+				UpdateRaceTrackLogic(timeSlice);			
+				m_fUpdateRaceTrackLogicTimer -= RACE_TRACK_LOGIC_UPDATE_INTERVAL;
+			}
+			
+			UpdateRaceState(timeSlice);
+		}
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
@@ -529,29 +547,21 @@ class UDR_GameMode: SCR_BaseGameMode
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
 	string GetNotificationText()
-	{
+	{	
 		switch (m_eRaceState)
 		{
 			case ERaceState.ONE_PLAYER:
 			{
-				return "You are the only player. Drive around until more players join.";
+				return "You are the only player. Drive around until more players join...";
 			}
 			
 			case ERaceState.PREPARING:
 			{
-				return "Prepare for race! Wait for a few seconds.";
-			}
-			
-			case ERaceState.COUNTDOWN:
-			{
-				return "3... 2... 1..";
+				return "Prepare for race! Wait for a few seconds...";
 			}
 			
 			case ERaceState.RACING:
-			{
-				return string.Empty;
-			}
-			
+			case ERaceState.COUNTDOWN:
 			case ERaceState.FINISH_SCREEN:
 			{
 				return string.Empty;
@@ -593,5 +603,25 @@ class UDR_GameMode: SCR_BaseGameMode
 	void _print(string str, LogLevel logLevel = LogLevel.NORMAL)
 	{
 		Print(string.Format("UDR_GameMode: %1", str));
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	// Sends a UI sound event to all users
+	void BroadcastUiSoundEvent(string eventName)
+	{
+		foreach (UDR_PlayerNetworkComponent playerComp : GetAllPlayers())
+		{
+			playerComp.Authority_SendUiSoundEvent(eventName);
+		}
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	// Sends a UI sound event to all users
+	void BroadcastNotification(string text, float lifeTime_ms)
+	{
+		foreach (UDR_PlayerNetworkComponent playerComp : GetAllPlayers())
+		{
+			playerComp.Authority_SendNotification(text, lifeTime_ms);
+		}
 	}
 }

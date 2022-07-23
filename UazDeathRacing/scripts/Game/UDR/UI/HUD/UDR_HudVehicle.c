@@ -105,6 +105,7 @@ class UDR_HudVehicle : SCR_InfoDisplay
 		UDR_PlayerNetworkComponent playerNetworkComp = UDR_PlayerNetworkComponent.Cast(pc.FindComponent(UDR_PlayerNetworkComponent));
 		if (!playerNetworkComp)
 			return;
+		
 		UDR_PlayerNetworkEntity networkEntity = playerNetworkComp.m_NetworkEntity;
 		if (networkEntity)
 		{
@@ -114,9 +115,22 @@ class UDR_HudVehicle : SCR_InfoDisplay
 			widgets.m_LapCountText.SetText((networkEntity.m_iLapCount+1).ToString());
 		}
 		
-		// Notifications from game mode
-		string notificationText = gm.GetNotificationText();
-		widgets.m_NotificationText.SetText(notificationText);
+		// Show notifications
+		string notificationsText;
+		
+		// There can be a fixed notification from game mode
+		string staticNotification = gm.GetNotificationText();
+		if (!staticNotification.IsEmpty())
+		{
+			notificationsText = notificationsText + "\n" + staticNotification;
+		}
+		
+		// Sum notifications from player component, line after line
+		foreach (UDR_Notification notification : playerNetworkComp.GetNotifications())
+		{
+			notificationsText = notificationsText + "\n" + notification.m_sText;
+		}
+		widgets.m_NotificationText.SetText(notificationsText);
 		
 		Show(true);
 	}

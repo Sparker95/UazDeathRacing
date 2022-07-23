@@ -19,6 +19,8 @@ class UDR_PlayerNetworkComponent : ScriptComponent
 	protected bool m_bMoveInVehicleRequest = false;
 	protected RplId m_MoveInVehicleRplId;
 	
+	protected ref array<ref UDR_Notification> m_aNotifications = {};
+	
 	
 	//-----------------------------------------------------------------------
 	void BumpReplication()
@@ -65,7 +67,28 @@ class UDR_PlayerNetworkComponent : ScriptComponent
 		Rpc(RpcDo_UiSoundEvent, soundName);
 	}
 	
+	//-----------------------------------------------------------------------
+	// Sending notifications
 	
+	//-----------------------------------------------------------------------
+	[RplRpc(RplChannel.Reliable, RplRcver.Owner)]
+	protected void RpcDo_AddNotification(string text, float lifeTime_ms)
+	{
+		float worldTime = GetGame().GetWorld().GetWorldTime();
+		m_aNotifications.Insert(new UDR_Notification(text, lifeTime_ms));
+	}
+	
+	//-----------------------------------------------------------------------
+	void Authority_SendNotification(string text, float lifeTime_ms)
+	{
+		Rpc(RpcDo_AddNotification, text, lifeTime_ms);
+	}
+	
+	//-----------------------------------------------------------------------
+	array<ref UDR_Notification> GetNotifications()
+	{
+		return m_aNotifications;
+	}
 	
 	//-----------------------------------------------------------------------
 	// Moving in vehicle... is a whole serious process
@@ -126,6 +149,15 @@ class UDR_PlayerNetworkComponent : ScriptComponent
 		if (m_bMoveInVehicleRequest)
 		{
 			TryMoveInVehicle();
+		}
+		
+		// Delete old notifications
+		float worldTime = GetGame().GetWorld().GetWorldTime();
+		for (int i = m_aNotifications.Count() - 1; i >= 0; i--)
+		{
+			UDR_Notification n = m_aNotifications[i];
+			if (worldTime > n.m_fTimeEnd)
+				m_aNotifications.Remove(i);
 		}
 	}
 }
