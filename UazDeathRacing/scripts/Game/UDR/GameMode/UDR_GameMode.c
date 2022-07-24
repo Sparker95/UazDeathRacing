@@ -44,8 +44,6 @@ class UDR_GameMode: SCR_BaseGameMode
 	protected ref array<UDR_PlayerNetworkComponent> m_aNextRacers = {};		// Players who want to race at the next race
 	protected ref array<UDR_PlayerNetworkComponent> m_aSpectators = {};		// Players currently spectating
 	
-	protected int m_iNextFreeSpawnPointId = 0;
-	
 	// Map which maintains UDR_PlayerNetworkEntity per each player
 	protected ref map<int, UDR_PlayerNetworkEntity> m_mPlayerNetworkSyncEntities = new map<int, UDR_PlayerNetworkEntity>();
 	
@@ -134,6 +132,10 @@ class UDR_GameMode: SCR_BaseGameMode
 		//--------------------------------------------------------
 		// Everything below is only for server
 		
+		// Unassign spawn position
+		m_VehiclePositioning.UnassignPlayer(playerId);
+		
+		// Notify the race state
 		UDR_PlayerNetworkComponent playerComp = UDR_PlayerNetworkComponent.GetForPlayerId(playerId);
 		if (playerComp)
 			m_RaceState.OnPlayerDisconnected(playerComp);
@@ -178,7 +180,7 @@ class UDR_GameMode: SCR_BaseGameMode
 	void SpawnVehicleAtSpawnPoint(notnull UDR_PlayerNetworkComponent playerComp)
 	{
 		vector transform[4];
-		int spawnPointId = FindNextFreeSpawnPoint();
+		int spawnPointId = FindAndAssignSpawnPosition(playerComp);
 		m_VehiclePositioning.GetPosition(spawnPointId, transform); // Get position from vehicle positioning entity
 		SpawnVehicle(playerComp, transform);
 	}
@@ -250,11 +252,29 @@ class UDR_GameMode: SCR_BaseGameMode
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
-	int FindNextFreeSpawnPoint()
+	int FindAndAssignSpawnPosition(notnull UDR_PlayerNetworkComponent playerComp)
 	{
-		int id = m_iNextFreeSpawnPointId;
-		m_iNextFreeSpawnPointId++;
-		return id;
+		int playerId = playerComp.GetPlayerId();
+		
+		// Check if a position has been assigned to this player already
+		int previousAssignedPosition = m_VehiclePositioning.FindAssignedPosition(playerId);
+		
+		if (previousAssignedPosition != -1)
+			return previousAssignedPosition;
+		
+		// If not, find a next free position
+		int nextFreePosition = m_VehiclePositioning.FindNextFreePosition();
+		
+		if (nextFreePosition != -1)
+		{
+			m_VehiclePositioning.AssignPosition(nextFreePosition, playerId);
+			return nextFreePosition;
+		}
+		else
+		{
+			// No more positions :( just select a random one, but don't assign it
+			return m_VehiclePositioning.GetRandomPositionId();
+		}
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
@@ -349,15 +369,9 @@ class UDR_GameMode: SCR_BaseGameMode
 		if (m_eRaceState == ERaceState.COUNTDOWN || m_eRaceState == ERaceState.PREPARING)
 		{
 			auto im = GetGame().GetInputManager();
-			im.ActivateContext("UDR_CountdownContext", 50);
 			
-			/*
-			// Doesn't work when run on client unfortunately
-			im.SetActionValue("CarThrust", 0);
-			im.SetActionValue("CarBrake", 0);
-			im.SetActionValue("CarHandBrake", 1.0);
-			im.SetActionValue("VehicleFire", 0);
-			*/
+			// This context has special priority value, to be higher than car controls, so car controls are blocked
+			im.ActivateContext("UDR_CountdownContext", 50);
 		}
 		
 		
@@ -457,6 +471,29 @@ class UDR_GameMode: SCR_BaseGameMode
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
+	void AssignToCurrentRace(notnull UDR_PlayerNetworkComponent playerComp)
+	{
+		_print(string.Format("AssignToCurrentRace: %1", playerComp.GetPlayerName()));
+		
+		if (!m_aCurrentRacers.Contains(playerComp))
+			m_aCurrentRacers.Insert(playerComp);
+		
+		playerComp.m_NetworkEntity.m_bRacingNow = true;
+		playerComp.m_NetworkEntity.BumpReplication();
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	void UnassignFromCurrentRace(notnull UDR_PlayerNetworkComponent playerComp)
+	{
+		_print(string.Format("UnassignFromCurrentRace: %1", playerComp.GetPlayerName()));
+		
+		m_aCurrentRacers.RemoveItem(playerComp);
+		
+		playerComp.m_NetworkEntity.m_bRacingNow = false;
+		playerComp.m_NetworkEntity.BumpReplication();
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
 	void AssignToNextRace(notnull UDR_PlayerNetworkComponent playerComp)
 	{
 		_print(string.Format("AssignToNextRace: %1", playerComp.GetPlayerName()));
@@ -499,6 +536,24 @@ class UDR_GameMode: SCR_BaseGameMode
 		m_aSpectators.RemoveItem(playerComp);
 		playerComp.m_NetworkEntity.m_bSpectating = false;
 		playerComp.m_NetworkEntity.BumpReplication();
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	void UnassignAllFromCurrentRace()
+	{
+		_print("UnassignAllFromCurrentRace");
+		
+		foreach (UDR_PlayerNetworkComponent playerComp : GetAllPlayers())
+			UnassugnFromCurrentRace(playerComp);
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	void UnassignAllFromNextRace()
+	{
+		_print("UnassignAllFromNextRace");
+		
+		foreach (UDR_PlayerNetworkComponent playerComp : GetAllPlayers())
+			UnassugnFromNextRace(playerComp);
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
