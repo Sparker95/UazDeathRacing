@@ -108,7 +108,7 @@ class UDR_DebugMenu
 			PlayerController playerController = GetGame().GetPlayerController();
 			IEntity controlledEnt = playerController.GetControlledEntity();
 			
-			UDR_SpectatorCamera camera = UDR_SpectatorCamera.Create();
+			UDR_SpectatorCamera camera = UDR_SpectatorCamera.GetInstance();
 			camera.SwitchToThisCamera();
 			camera.FollowEntity(controlledEnt);
 		}

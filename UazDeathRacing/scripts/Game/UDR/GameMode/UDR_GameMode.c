@@ -61,22 +61,22 @@ class UDR_GameMode: SCR_BaseGameMode
 		if (!GetGame().InPlayMode())
 			return;
 		
+		IEntity raceTrackLogicEnt = GetGame().FindEntity(m_sRaceTrackLogicEntity);
+		if (raceTrackLogicEnt)
+			m_RaceTrackLogic = UDR_RaceTrackLogicComponent.Cast(raceTrackLogicEnt.FindComponent(UDR_RaceTrackLogicComponent));
+		if (!m_RaceTrackLogic)
+			Print("Could not find UDR_RaceTrackLogicComponent!", LogLevel.ERROR);
+		
+		IEntity vehiclePosEnt = GetGame().FindEntity(m_sVehiclePositioningEntity);
+		if (vehiclePosEnt)
+			m_VehiclePositioning = UDR_VehiclePositioning.Cast(vehiclePosEnt);
+		if (!m_VehiclePositioning)
+			Print("Could not find UDR_VehiclePositioning entity!", LogLevel.ERROR);
+		
 		if (m_RplComponent.IsMaster())
 		{
 			//--------------------------------------------------------
 			// Everything below is only for server
-			
-			IEntity raceTrackLogicEnt = GetGame().FindEntity(m_sRaceTrackLogicEntity);
-			if (raceTrackLogicEnt)
-				m_RaceTrackLogic = UDR_RaceTrackLogicComponent.Cast(raceTrackLogicEnt.FindComponent(UDR_RaceTrackLogicComponent));
-			if (!m_RaceTrackLogic)
-				Print("Could not find UDR_RaceTrackLogicComponent!", LogLevel.ERROR);
-			
-			IEntity vehiclePosEnt = GetGame().FindEntity(m_sVehiclePositioningEntity);
-			if (vehiclePosEnt)
-				m_VehiclePositioning = UDR_VehiclePositioning.Cast(vehiclePosEnt);
-			if (!m_VehiclePositioning)
-				Print("Could not find UDR_VehiclePositioning entity!", LogLevel.ERROR);
 			
 			// Initialize the race states
 			m_StateNoPlayers 		= new UDR_RaceStateNoPlayers(this);
@@ -255,6 +255,9 @@ class UDR_GameMode: SCR_BaseGameMode
 		
 		// Assign vehicle to player
 		playerComp.m_AssignedVehicle = newVehicleEntity;
+		RplComponent rpl = RplComponent.Cast(newVehicleEntity.FindComponent(RplComponent));
+		playerComp.m_NetworkEntity.m_AssigedVehicleId = rpl.Id();
+		playerComp.m_NetworkEntity.BumpReplication();
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
@@ -408,6 +411,8 @@ class UDR_GameMode: SCR_BaseGameMode
 		{
 			DbgUI.Begin("Game Mode");
 			
+			DbgUI.Text(string.Format("Race State: %1 %2", typename.EnumToString(ERaceState, m_eRaceState), m_RaceState.Type()));
+			
 			DbgUI.Text("Spectators:");
 			foreach (UDR_PlayerNetworkComponent player : GetSpectators())
 				DbgUI.Text(string.Format(" [S] %1", player.GetPlayerName()));
@@ -509,6 +514,13 @@ class UDR_GameMode: SCR_BaseGameMode
 				a.Remove(i);
 		}
 	}
+	
+	
+	
+	
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	// Assignment to player groups
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
 	void AssignToCurrentRace(notnull UDR_PlayerNetworkComponent playerComp)
@@ -640,6 +652,21 @@ class UDR_GameMode: SCR_BaseGameMode
 		return a;
 	}
 	
+	// Returns all player nerwork entities
+	array<UDR_PlayerNetworkEntity> GetAllPlayerNetworkEntities()
+	{		
+		array<UDR_PlayerNetworkEntity> a = {};
+		
+		foreach (int id, UDR_PlayerNetworkEntity ent : m_mPlayerNetworkSyncEntities)
+		{		
+			a.Insert(ent);
+		}
+		
+		return a;
+	}
+	
+	
+	
 	//-------------------------------------------------------------------------------------------------------------------------------
 	string GetNotificationText()
 	{	
@@ -701,6 +728,13 @@ class UDR_GameMode: SCR_BaseGameMode
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
+	// Fallback position for the camera when there is nothing to spectate
+	IEntity GetFallbackSpectatorTarget()
+	{
+		return m_VehiclePositioning;
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
 	// Sends a UI sound event to all users
 	void BroadcastUiSoundEvent(string eventName)
 	{
@@ -718,5 +752,40 @@ class UDR_GameMode: SCR_BaseGameMode
 		{
 			playerComp.Authority_SendNotification(text, lifeTime_ms);
 		}
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	// Triggered by "Join Spectators" button
+	void AskJoinSpectators(int playerId)
+	{
+		UDR_PlayerNetworkComponent playerComp = UDR_PlayerNetworkComponent.GetForPlayerId(playerId);
+		
+		if (!playerComp)
+			return;
+		
+		// Player is spectator already
+		if (m_aSpectators.Contains(playerComp))
+			return;
+		
+		AssignToSpectators(playerComp);
+		DespawnVehicle(playerComp);
+		
+		UnassignFromNextRace(playerComp);
+		UnassignFromCurrentRace(playerComp);
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	// Triggered by "Join Race" button
+	void AskJoinRace(int playerId)
+	{
+		UDR_PlayerNetworkComponent playerComp = UDR_PlayerNetworkComponent.GetForPlayerId(playerId);
+		
+		if (!playerComp)
+			return;
+		
+		if (m_aCurrentRacers.Contains(playerComp) || m_aNextRacers.Contains(playerComp))
+			return;
+
+		m_RaceState.OnPlayerRequestJoinRace(playerComp);
 	}
 }

@@ -14,7 +14,8 @@ class UDR_SpectatorCamera : CameraBase
 	protected IEntity m_Target;
 	protected vector m_vLastTargetPos;
 	
-	static UDR_SpectatorCamera Create()
+	// Returns existing instance or creates a new one
+	static UDR_SpectatorCamera GetInstance()
 	{
 		if (s_Instance)
 			return s_Instance;

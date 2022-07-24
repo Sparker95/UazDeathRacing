@@ -131,6 +131,37 @@ class UDR_PlayerNetworkComponent : ScriptComponent
 	}
 	
 	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
+	void RpcAsk_JoinSpectators()
+	{
+		UDR_GameMode gm = GetGame().GetUdrGameMode();
+		gm.AskJoinSpectators(m_iPlayerId);
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	// Called from client's UI when he wants to join spectators
+	void Client_RequestJoinSpectators()
+	{
+		Rpc(RpcAsk_JoinSpectators);
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
+	void RpcAsk_JoinRace()
+	{
+		UDR_GameMode gm = GetGame().GetUdrGameMode();
+		gm.AskJoinRace(m_iPlayerId);
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	// Called from client's UI when he wants to join race
+	void Client_RequestJoinRace()
+	{
+		Rpc(RpcAsk_JoinRace);
+	}
+	
+	
 	
 	//-----------------------------------------------------------------------
 	// Misc functions
@@ -142,6 +173,13 @@ class UDR_PlayerNetworkComponent : ScriptComponent
 			return null;
 		UDR_PlayerNetworkComponent playerComp = UDR_PlayerNetworkComponent.Cast(pc.FindComponent(UDR_PlayerNetworkComponent));
 		return playerComp;
+	}
+	
+	// Returns the local player network component
+	static UDR_PlayerNetworkComponent GetLocal()
+	{
+		PlayerController pc = GetGame().GetPlayerController();
+		return UDR_PlayerNetworkComponent.Cast(pc.FindComponent(UDR_PlayerNetworkComponent));
 	}
 	
 	override void EOnFrame(IEntity owner, float timeSlice)

@@ -26,6 +26,9 @@ class UDR_PlayerNetworkEntity : GenericEntity
 	[RplProp()]
 	bool m_bRacingNow;			// Participating in the race now
 	
+	[RplProp()]
+	RplId m_AssigedVehicleId;	// Rpl ID of the assigned vehicle
+	
 	//------------------------------------------------------------------------------------------------
 	void BumpReplication()
 	{
@@ -67,6 +70,8 @@ class UDR_PlayerNetworkEntity : GenericEntity
 		reader.ReadBool(m_bAssignedForRace);
 		reader.ReadBool(m_bRacingNow);
 		
+		reader.ReadRplId(m_AssigedVehicleId);
+		
 		UDR_GameMode gm = UDR_GameMode.Cast(GetGame().GetGameMode());
 		gm.RegisterPlayerNetrowkSyncEntity(this); // This will register itself on client
 		
@@ -87,6 +92,8 @@ class UDR_PlayerNetworkEntity : GenericEntity
 		writer.WriteBool(m_bSpectating);
 		writer.WriteBool(m_bAssignedForRace);
 		writer.WriteBool(m_bRacingNow);
+		
+		writer.WriteRplId(m_AssigedVehicleId);
 		
 		return true;
 	}

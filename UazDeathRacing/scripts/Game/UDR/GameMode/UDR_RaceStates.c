@@ -10,12 +10,17 @@ sealed class UDR_RaceStateNoPlayers : UDR_RaceStateBase
 		m_GameMode.AssignToNextRace(playerComp);
 	}
 	
-	
 	//-----------------------------------------------------------------------------
 	override void OnPlayerDisconnected(UDR_PlayerNetworkComponent playerComp)
 	{
 	}
 	
+	//-----------------------------------------------------------------------------
+	override void OnPlayerRequestJoinRace(UDR_PlayerNetworkComponent playerComp)
+	{
+		m_GameMode.AssignToNextRace(playerComp);
+		m_GameMode.UnassignFromSpectators(playerComp);
+	}
 	
 	//-----------------------------------------------------------------------------
 	override void OnStateEnter()
@@ -52,7 +57,6 @@ sealed class UDR_RaceStateNoPlayers : UDR_RaceStateBase
 
 sealed class UDR_RaceStateOnePlayer : UDR_RaceStateBase
 {	
-	
 	//-----------------------------------------------------------------------------
 	override void OnStateEnter()
 	{
@@ -66,7 +70,6 @@ sealed class UDR_RaceStateOnePlayer : UDR_RaceStateBase
 		}
 	}
 	
-	
 	//-----------------------------------------------------------------------------
 	override void OnStateLeave()
 	{
@@ -78,6 +81,13 @@ sealed class UDR_RaceStateOnePlayer : UDR_RaceStateBase
 	{
 		// Assign the player to next race
 		m_GameMode.AssignToNextRace(playerComp);
+	}
+	
+	//-----------------------------------------------------------------------------
+	override void OnPlayerRequestJoinRace(UDR_PlayerNetworkComponent playerComp)
+	{
+		m_GameMode.AssignToNextRace(playerComp);
+		m_GameMode.UnassignFromSpectators(playerComp);
 	}
 	
 	//-----------------------------------------------------------------------------
@@ -128,6 +138,14 @@ sealed class UDR_RaceStatePreparing : UDR_RaceStateBase
 		// Assign the player to next race and spawn his vehicle
 		m_GameMode.AssignToNextRace(playerComp);
 		m_GameMode.SpawnVehicleAtSpawnPoint(playerComp);
+	}
+	
+	//-----------------------------------------------------------------------------
+	override void OnPlayerRequestJoinRace(UDR_PlayerNetworkComponent playerComp)
+	{
+		m_GameMode.AssignToNextRace(playerComp);
+		m_GameMode.UnassignFromSpectators(playerComp);
+		m_GameMode.SpawnVehicleAtSpawnPoint(playerComp);	// During this stage we can spawn in vehicles for new players
 	}
 	
 	//-----------------------------------------------------------------------------
@@ -187,6 +205,12 @@ sealed class UDR_RaceStateCountdown : UDR_RaceStateBase
 		// Assign the player to next race and enable spectator mode
 		m_GameMode.AssignToSpectators(playerComp);
 		m_GameMode.AssignToNextRace(playerComp);
+	}
+	
+	//-----------------------------------------------------------------------------
+	override void OnPlayerRequestJoinRace(UDR_PlayerNetworkComponent playerComp)
+	{
+		OnPlayerConnected(playerComp); // Same logic as when player connects
 	}
 	
 	//-----------------------------------------------------------------------------
@@ -259,6 +283,12 @@ sealed class UDR_RaceStateRacing : UDR_RaceStateBase
 		// Assign the player to next race and enable spectator mode
 		m_GameMode.AssignToSpectators(playerComp);
 		m_GameMode.AssignToNextRace(playerComp);
+	}
+	
+	//-----------------------------------------------------------------------------
+	override void OnPlayerRequestJoinRace(UDR_PlayerNetworkComponent playerComp)
+	{
+		OnPlayerConnected(playerComp); // Same logic as when player connects
 	}
 	
 	//-----------------------------------------------------------------------------

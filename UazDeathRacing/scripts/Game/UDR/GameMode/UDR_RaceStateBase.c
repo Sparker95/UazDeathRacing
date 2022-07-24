@@ -11,6 +11,8 @@ class UDR_RaceStateBase : Managed
 	
 	void OnPlayerDisconnected(UDR_PlayerNetworkComponent playerComp);
 	
+	void OnPlayerRequestJoinRace(UDR_PlayerNetworkComponent playerComp);
+	
 	void OnStateEnter();
 	
 	void OnStateLeave();

@@ -16,6 +16,9 @@ class UDR_LobbyUi : ScriptedWidgetComponent
 			m_GameMode.GetOnPlayerDisconnected().Insert(OnPlayerDisconnected);
 		}
 		
+		widgets.m_JoinRaceButtonComponent.m_OnClicked.Insert(OnJoinRaceButton);
+		widgets.m_SpectateButtonComponent.m_OnClicked.Insert(OnSpectateButton);
+		
 		CreatePlayerList();
 		GetGame().GetCallqueue().CallLater(Update, 0, true);
 	}
@@ -82,4 +85,15 @@ class UDR_LobbyUi : ScriptedWidgetComponent
 		DeletePlayerLine(playerId);
 	}
 	
+	protected void OnJoinRaceButton()
+	{
+		UDR_PlayerNetworkComponent comp = UDR_PlayerNetworkComponent.GetLocal();
+		comp.Client_RequestJoinRace();
+	}
+	
+	protected void OnSpectateButton()
+	{
+		UDR_PlayerNetworkComponent comp = UDR_PlayerNetworkComponent.GetLocal();
+		comp.Client_RequestJoinSpectators();
+	}
 }
