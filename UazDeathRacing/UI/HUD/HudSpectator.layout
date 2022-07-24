@@ -1,12 +1,5 @@
 FrameWidgetClass {
  Name "rootFrame"
- components {
-  SCR_WidgetExportRuleRoot "{59E157B6AB0E8872}" {
-   DestinationPath "{0650B47502DFD6F4}scripts/Game/UDR/UI/HUD"
-   ScriptAddon "$UazDeathRacing:"
-   ScriptClassNamePrefix "UDR_"
-  }
- }
  {
   FrameWidgetClass "{59E139C96E20171E}" : "{017A451CAE8F9992}UI/Prefabs/RaceProgressPanel.layout" {
    Name "RaceProgressPanel"
@@ -69,11 +62,6 @@ FrameWidgetClass {
         VerticalAlign 3
        }
        Clipping False
-       components {
-        SCR_WidgetExportRule "{59E139CDFA8BD81C}" {
-         WidgetVariableName "m_PlayerNameText"
-        }
-       }
        Text "Player Name"
       }
       ImageWidgetClass "{59E139CF7D6850A6}" : "{B71C58FE7526EFA3}UI/Prefabs/ArrowRight.layout" {
@@ -114,6 +102,7 @@ FrameWidgetClass {
     Alignment 0 0.5
     SizeToContent 1
    }
+   "Is Visible" 0
    Clipping Ancestor
    Text "Notification Text"\
    "Notification Text"
