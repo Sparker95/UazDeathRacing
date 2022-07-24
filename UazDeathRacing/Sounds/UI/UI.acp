@@ -57,6 +57,27 @@ AudioClass {
    outStatePort 2055
    noInAudible 0
   }
+  SoundClass {
+   id 14345
+   name "RACE_FINISH_LINE"
+   tl 220.955 770.243
+   conns {
+    ConnectionsClass connections {
+     id 0
+     links {
+      ConnectionClass connection {
+       id 15364
+       port 65
+      }
+     }
+    }
+   }
+   volume 3.981
+   volume_dB 12
+   outState 7179
+   outStatePort 2055
+   noInAudible 0
+  }
  }
  mixers {
   MixerClass {
@@ -81,6 +102,10 @@ AudioClass {
         }
         ConnectionClass connection {
          id 13321
+         port 65
+        }
+        ConnectionClass connection {
+         id 14345
          port 65
         }
        }
@@ -122,6 +147,16 @@ AudioClass {
    Samples {
     AudioBankSampleClass "Sample(1)" {
      Filename "{F156BAD9FCC77A7E}Sounds/UI/RaceStart.wav"
+    }
+   }
+  }
+  BankLocalClass {
+   id 15364
+   name "Bank 9"
+   tl 29.955 771.576
+   Samples {
+    AudioBankSampleClass "Sample(1)" {
+     Filename "{6341321A3599CE49}Sounds/UI/RaceFinishLine.wav"
     }
    }
   }
