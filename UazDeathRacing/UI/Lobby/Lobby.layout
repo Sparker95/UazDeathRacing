@@ -101,6 +101,15 @@ FrameWidgetClass {
                  }
                  Text "Pos"
                 }
+                TextWidgetClass "{59ECC4D474ECE1B1}" : "{6FD63D0CFCF2F4DF}UI/layouts/WidgetLibrary/TextWidgets/Text_Heading5.layout" {
+                 Name "TextCurrentLap"
+                 Slot LayoutSlot "{59ECC4D4732697CA}" {
+                  Padding 10 0 0 0
+                  SizeMode Fill
+                  FillWeight 1
+                 }
+                 Text "Lap"
+                }
                 TextWidgetClass "{59ECC4D47497A5AF}" : "{6FD63D0CFCF2F4DF}UI/layouts/WidgetLibrary/TextWidgets/Text_Heading5.layout" {
                  Name "TextName"
                  Slot LayoutSlot "{59ECC4D4732697CA}" {
@@ -117,16 +126,8 @@ FrameWidgetClass {
                   SizeMode Fill
                   FillWeight 3
                  }
+                 "Is Visible" 0
                  Text "Best Lap"
-                }
-                TextWidgetClass "{59ECC4D474ECE1B1}" : "{6FD63D0CFCF2F4DF}UI/layouts/WidgetLibrary/TextWidgets/Text_Heading5.layout" {
-                 Name "TextCurrentLap"
-                 Slot LayoutSlot "{59ECC4D4732697CA}" {
-                  Padding 10 0 0 0
-                  SizeMode Fill
-                  FillWeight 3
-                 }
-                 Text "Current Lap"
                 }
                }
               }

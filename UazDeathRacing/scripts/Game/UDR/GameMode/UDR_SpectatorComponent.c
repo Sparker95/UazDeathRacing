@@ -135,7 +135,11 @@ class UDR_SpectatorComponent : ScriptComponent
 	void SpectatePlayer(notnull UDR_PlayerNetworkEntity target, int targetId)
 	{
 		RplComponent targetVehicleRpl = RplComponent.Cast(Replication.FindItem(target.m_AssigedVehicleId));
+		if (!targetVehicleRpl)
+			return;
 		IEntity targetVehicle = targetVehicleRpl.GetEntity();
+		if (!targetVehicle)
+			return;
 		
 		UDR_SpectatorCamera camera = UDR_SpectatorCamera.GetInstance();
 		camera.SwitchToThisCamera();

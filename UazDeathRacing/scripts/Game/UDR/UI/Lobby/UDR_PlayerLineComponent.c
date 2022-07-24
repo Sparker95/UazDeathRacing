@@ -45,28 +45,25 @@ class UDR_PlayerLineComponent : ScriptedWidgetComponent
 		
 		UDR_GameMode gm = UDR_GameMode.Cast(GetGame().GetGameMode());
 		
-		UDR_PlayerNetworkEntity networkSync = gm.GetPlayerNetworkSyncEntity(m_iPlayerId);
+		UDR_PlayerNetworkEntity networkEntity = gm.GetPlayerNetworkSyncEntity(m_iPlayerId);
 		
-		if (!networkSync)
+		if (!networkEntity)
 			return;
 		
-		/*
-		PlayerController pc = pm.GetPlayerController(m_iPlayerId);
-		if (!pc)
-			return;
-		
-		UDR_PlayerNetworkComponent playerComp = UDR_PlayerNetworkComponent.Cast(pc.FindComponent(UDR_PlayerNetworkComponent));
-		if (!playerComp)
-			return;
-		*/
-		
-		// Position
-		widgets.m_PositionText.SetText((networkSync.m_iPositionInRace + 1).ToString());
-		
-		// Lap
-		widgets.m_CurrentLapText.SetText((networkSync.m_iLapCount + 1).ToString());
-		
+		// Lap and position
+		if (networkEntity.m_bSpectating)
+		{
+			widgets.m_PositionText.SetText("Spectator");
+			widgets.m_CurrentLapText.SetText(string.Empty);
+			
+		}
+		else
+		{
+			widgets.m_PositionText.SetText((networkEntity.m_iPositionInRace + 1).ToString());
+			widgets.m_CurrentLapText.SetText((networkEntity.m_iLapCount + 1).ToString());
+		}
+			
 		// Best lap time
-		widgets.m_BestLapText.SetText("");
+		//widgets.m_BestLapText.SetText("");
 	}
 }

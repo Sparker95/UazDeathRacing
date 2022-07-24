@@ -30,6 +30,17 @@ OverlayWidgetClass {
      "Horizontal Alignment" Center
      "Vertical Alignment" Center
     }
+    TextWidgetClass "{59ECC4D091145EA1}" : "{3132F64DB8B4CB44}UI/layouts/WidgetLibrary/TextWidgets/Text_Body.layout" {
+     Name "m_CurrentLapText"
+     Slot LayoutSlot "{59ECC4D08B3C8E29}" {
+      Padding 10 0 0 0
+      SizeMode Fill
+      FillWeight 1
+     }
+     Text "9"
+     "Horizontal Alignment" Center
+     "Vertical Alignment" Center
+    }
     TextWidgetClass "{59ECC4D09184F1C1}" : "{3132F64DB8B4CB44}UI/layouts/WidgetLibrary/TextWidgets/Text_Body.layout" {
      Name "m_PlayerNameText"
      Slot LayoutSlot "{59ECC4D08B3C8E29}" {
@@ -47,18 +58,8 @@ OverlayWidgetClass {
       SizeMode Fill
       FillWeight 3
      }
+     "Is Visible" 0
      Text "4m 20s"
-     "Vertical Alignment" Center
-    }
-    TextWidgetClass "{59ECC4D091145EA1}" : "{3132F64DB8B4CB44}UI/layouts/WidgetLibrary/TextWidgets/Text_Body.layout" {
-     Name "m_CurrentLapText"
-     Slot LayoutSlot "{59ECC4D08B3C8E29}" {
-      Padding 10 0 0 0
-      SizeMode Fill
-      FillWeight 3
-     }
-     Text "9"
-     "Horizontal Alignment" Center
      "Vertical Alignment" Center
     }
    }
