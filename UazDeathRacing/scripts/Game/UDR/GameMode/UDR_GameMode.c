@@ -48,6 +48,12 @@ class UDR_GameMode: SCR_BaseGameMode
 	protected ref map<int, UDR_PlayerNetworkEntity> m_mPlayerNetworkSyncEntities = new map<int, UDR_PlayerNetworkEntity>();
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
+	void UDR_GameMode(IEntitySource src, IEntity parent)
+	{
+		SetEventMask(EntityEvent.INIT | EntityEvent.FRAME | EntityEvent.DIAG);
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
 	override void EOnInit(IEntity owner)
 	{
 		super.EOnInit(owner);
@@ -181,7 +187,7 @@ class UDR_GameMode: SCR_BaseGameMode
 	{
 		vector transform[4];
 		int spawnPointId = FindAndAssignSpawnPosition(playerComp);
-		m_VehiclePositioning.GetPosition(spawnPointId, transform); // Get position from vehicle positioning entity
+		m_VehiclePositioning.GetPositionTransform(spawnPointId, transform); // Get position from vehicle positioning entity
 		SpawnVehicle(playerComp, transform);
 	}
 	
@@ -273,7 +279,7 @@ class UDR_GameMode: SCR_BaseGameMode
 		else
 		{
 			// No more positions :( just select a random one, but don't assign it
-			return m_VehiclePositioning.GetRandomPositionId();
+			return m_VehiclePositioning.GetRandomPosition();
 		}
 	}
 	
@@ -390,6 +396,40 @@ class UDR_GameMode: SCR_BaseGameMode
 			}
 			
 			UpdateRaceState(timeSlice);
+			
+			
+		}
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	override void EOnDiag(IEntity owner, float timeSlice)
+	{
+		if (DiagMenu.GetBool(SCR_DebugMenuID.UDR_SHOW_GAME_MODE_PANEL))
+		{
+			DbgUI.Begin("Game Mode");
+			
+			DbgUI.Text("Spectators:");
+			foreach (UDR_PlayerNetworkComponent player : GetSpectators())
+				DbgUI.Text(string.Format(" [S] %1", player.GetPlayerName()));
+			
+			DbgUI.Text("Current Race:");
+			foreach (UDR_PlayerNetworkComponent player : GetCurrentRacers())
+				DbgUI.Text(string.Format(" [R] %1", player.GetPlayerName()));
+			
+			DbgUI.Text("Next Race:");
+			foreach (UDR_PlayerNetworkComponent player : GetNextRacers())
+				DbgUI.Text(string.Format(" [N] %1", player.GetPlayerName()));
+			
+			DbgUI.Text("Spawn Position assignments:");
+			int spawnPosCount = m_VehiclePositioning.GetPositionCount();
+			string spawnPosStr;
+			for (int i = 0; i < spawnPosCount; i++)
+			{
+				spawnPosStr = spawnPosStr + string.Format("%1 ", m_VehiclePositioning.GetPlayerAssignedToPosition(i));
+			}
+			DbgUI.Text(spawnPosStr);
+			
+			DbgUI.End();
 		}
 	}
 	
@@ -544,7 +584,7 @@ class UDR_GameMode: SCR_BaseGameMode
 		_print("UnassignAllFromCurrentRace");
 		
 		foreach (UDR_PlayerNetworkComponent playerComp : GetAllPlayers())
-			UnassugnFromCurrentRace(playerComp);
+			UnassignFromCurrentRace(playerComp);
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
@@ -553,7 +593,7 @@ class UDR_GameMode: SCR_BaseGameMode
 		_print("UnassignAllFromNextRace");
 		
 		foreach (UDR_PlayerNetworkComponent playerComp : GetAllPlayers())
-			UnassugnFromNextRace(playerComp);
+			UnassignFromCurrentRace(playerComp);
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------

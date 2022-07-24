@@ -30,7 +30,7 @@ class UDR_VehiclePositioning : GenericEntity
 
 	//------------------------------------------------------------------------------------------------
 	// Returs position at given ID in world coordinates
-	void GetPosition(int id, out vector outTransform[])
+	void GetPositionTransform(int id, out vector outTransform[])
 	{
 		if (id >= m_iNumColumns*m_iNumRows)
 			Print(string.Format("UDR_VehiclePositioning: GetPosition: id %1 is more than predefined size", id), LogLevel.ERROR);
@@ -50,11 +50,6 @@ class UDR_VehiclePositioning : GenericEntity
 		outTransform[3] = worldPos;
 	}
 	
-	//------------------------------------------------------------------------------------------------
-	int GetRandomPositionId()
-	{
-		return Math.RandomInt(0, m_iNumRows*m_iNumColumns);
-	}
 	
 	//------------------------------------------------------------------------------------------------
 	// Assignment of vehicle positions
@@ -83,6 +78,27 @@ class UDR_VehiclePositioning : GenericEntity
 		}
 		
 		return -1;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	int GetRandomPosition()
+	{
+		return Math.RandomInt(0, m_iNumRows*m_iNumColumns);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	int GetPlayerAssignedToPosition(int positionId)
+	{
+		if (positionId < 0 || positionId >= m_aAssignedPlayers.Count())
+			return -1;
+		
+		return m_aAssignedPlayers[positionId];
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	int GetPositionCount()
+	{
+		return m_iNumRows * m_iNumColumns;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -117,6 +133,8 @@ class UDR_VehiclePositioning : GenericEntity
 			}
 		}
 	}
+	
+	
 	
 	//------------------------------------------------------------------------------------------------
 	void ClearAssignments()
