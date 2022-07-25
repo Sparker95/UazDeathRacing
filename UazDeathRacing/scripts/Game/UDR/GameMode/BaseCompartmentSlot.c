@@ -14,8 +14,6 @@ modded class BaseCompartmentSlot : ExtBaseCompartmentSlot
 		CharacterControllerComponent controller = character.GetCharacterController();
 		if (!controller)
 			return;
-
-		Print("KillOccupant but no !");
 		
 		CompartmentAccessComponent access = character.GetCompartmentAccessComponent();
 		access.EjectOutOfVehicle();

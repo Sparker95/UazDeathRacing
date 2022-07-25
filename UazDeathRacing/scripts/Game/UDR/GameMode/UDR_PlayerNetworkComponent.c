@@ -35,6 +35,8 @@ class UDR_PlayerNetworkComponent : ScriptComponent
 	float m_fTotalProgress;	// Our total distance travelled, including previous laps
 	
 	int m_iNextWaypoint;
+
+	bool hasAlreadyDied = false; // Used to avoid double death when runned over after vehicle was destroyed
 	
 	void BumpReplication()
 	{
