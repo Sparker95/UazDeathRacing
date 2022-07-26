@@ -5,14 +5,14 @@ class UDR_VehicleNetworkComponentClass : ScriptComponentClass
 
 class UDR_VehicleNetworkComponent : ScriptComponent
 {
-	private int playerControllerID;
+	protected int playerControllerID;
 	
-	void SetPlayerControllerID(int playerInt)
+	void Init(int playerId)
 	{
-		playerControllerID = playerInt;
-		Replication.BumpMe();
+		playerControllerID = playerId;
 	}
-	int GetPlayerControllerID()
+	
+	int GetPlayerId()
 	{
 		return playerControllerID;
 	}

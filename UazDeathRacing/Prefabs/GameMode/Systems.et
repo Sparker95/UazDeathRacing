@@ -21,8 +21,6 @@ GenericEntity {
   UDR_GameMode UDR_GameMode1 : "{CD9589A17294B557}Prefabs/GameMode/UDR_GameMode.et" {
    ID "59D5289C95B8DF5E"
    components {
-    SCR_AutomaticRespawnHandlerComponent "{59CCE88768068358}" {
-    }
    }
    coords 5148.675 162.937 7314.731
   }

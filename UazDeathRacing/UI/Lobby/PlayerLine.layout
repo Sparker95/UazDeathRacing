@@ -1,0 +1,68 @@
+OverlayWidgetClass {
+ Name "PlayerLine"
+ Slot LayoutSlot "{59ECC4D0B8729F42}" {
+ }
+ components {
+  SCR_WidgetExportRuleRoot "{59ECF9576BB1D09E}" {
+   DestinationPath "{9ECC1D79FAA15EB9}scripts/Game/UDR/UI/Lobby"
+   ScriptAddon "$UazDeathRacing:"
+   ScriptClassNamePrefix "UDR_"
+  }
+  UDR_PlayerLineComponent "{59ECF95023C4E83E}" {
+  }
+ }
+ {
+  HorizontalLayoutWidgetClass "{59ECC4D0BC7A896D}" {
+   Name "HorizontalLayout0"
+   Slot OverlayWidgetSlot "{59ECC4D0BC7A8977}" {
+    HorizontalAlign 3
+    VerticalAlign 3
+   }
+   {
+    TextWidgetClass "{59ECC4D08B3C8E05}" : "{3132F64DB8B4CB44}UI/layouts/WidgetLibrary/TextWidgets/Text_Body.layout" {
+     Name "m_PositionText"
+     Slot LayoutSlot "{59ECC4D08B3C8E29}" {
+      Padding 10 0 0 0
+      SizeMode Fill
+      FillWeight 1
+     }
+     Text "4"
+     "Horizontal Alignment" Center
+     "Vertical Alignment" Center
+    }
+    TextWidgetClass "{59ECC4D091145EA1}" : "{3132F64DB8B4CB44}UI/layouts/WidgetLibrary/TextWidgets/Text_Body.layout" {
+     Name "m_CurrentLapText"
+     Slot LayoutSlot "{59ECC4D08B3C8E29}" {
+      Padding 10 0 0 0
+      SizeMode Fill
+      FillWeight 1
+     }
+     Text "9"
+     "Horizontal Alignment" Center
+     "Vertical Alignment" Center
+    }
+    TextWidgetClass "{59ECC4D09184F1C1}" : "{3132F64DB8B4CB44}UI/layouts/WidgetLibrary/TextWidgets/Text_Body.layout" {
+     Name "m_PlayerNameText"
+     Slot LayoutSlot "{59ECC4D08B3C8E29}" {
+      Padding 10 0 0 0
+      SizeMode Fill
+      FillWeight 10
+     }
+     Text "Player One"
+     "Vertical Alignment" Center
+    }
+    TextWidgetClass "{59ECC4D091BA0D1A}" : "{3132F64DB8B4CB44}UI/layouts/WidgetLibrary/TextWidgets/Text_Body.layout" {
+     Name "m_BestLapText"
+     Slot LayoutSlot "{59ECC4D08B3C8E29}" {
+      Padding 10 0 0 0
+      SizeMode Fill
+      FillWeight 3
+     }
+     "Is Visible" 0
+     Text "4m 20s"
+     "Vertical Alignment" Center
+    }
+   }
+  }
+ }
+}

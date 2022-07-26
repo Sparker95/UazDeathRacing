@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{A8BE87DC32CFF3C5}Prefabs/Characters/Factions/INDFOR/FIA/DriverCharacter.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}

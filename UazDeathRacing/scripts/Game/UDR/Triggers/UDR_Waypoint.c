@@ -11,6 +11,9 @@ class UDR_Waypoint : ScriptedGameTriggerEntity
 	// Public event	
 	ref ScriptInvoker m_OnActivated = new ScriptInvoker(); // (UDR_Waypoint wp, Vehicle veh) - the vehicle entity which triggered the event
 	
+	[Attribute()]
+	ref UDR_EntityLinkWaypoint m_Next;
+	
 	//-------------------------------------------------------------------------------------------
 	override void OnInit(IEntity owner)
 	{
@@ -19,6 +22,11 @@ class UDR_Waypoint : ScriptedGameTriggerEntity
 		{
 			SetFlags(EntityFlags.ACTIVE, true);
 			SetEventMask(EntityEvent.FRAME);
+			
+			if (GetGame().InPlayMode())
+			{
+				m_Next.Init();
+			}
 		}
 	}
 	
@@ -36,9 +44,16 @@ class UDR_Waypoint : ScriptedGameTriggerEntity
 		m_OnActivated.Invoke(this, veh);
 	}
 	
-	// This is a small trigger, we msut query it every frame in order not to miss entities
+	// This is a small trigger, we must query it every frame in order not to miss entities
 	override void EOnFrame(IEntity owner, float timeSlice)
 	{
 		QueryEntitiesInside();
+	}
+	
+	
+	override void _WB_AfterWorldUpdate(float timeSlice)
+	{
+		if (m_Next)
+			m_Next.Draw(this);
 	}
 }

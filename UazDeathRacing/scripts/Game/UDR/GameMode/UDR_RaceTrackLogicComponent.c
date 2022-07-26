@@ -30,6 +30,9 @@ class UDR_RaceTrackLogicComponent : ScriptComponent
 	protected ref array<float> m_aWaypointDistances = {};	// Distance from that WP to next WP
 	protected float m_fLapLength;
 	
+	[Attribute()]
+	protected ref UDR_EntityLinkWaypoint m_FinishLineWaypoint;
+	
 	protected ref map<IEntity, ref UDR_RaceTrackLogicRacerData> m_RacerData = new map<IEntity, ref UDR_RaceTrackLogicRacerData>;
 	
 	protected bool m_bInitSuccess = false;
@@ -141,8 +144,11 @@ class UDR_RaceTrackLogicComponent : ScriptComponent
 		//-----------------------------------------------
 		// If we are in editor, just check if all waypoint names are correct and return
 		#ifdef WORKBENCH
+		
 		if (!GetGame().InPlayMode())
 		{
+			/*
+			// Disabled this shit because it looks like it can't find entities when reloading a world and thus spams this sometimes
 			WorldEditor worldEditor = Workbench.GetModule(WorldEditor); // Watch out, WorldEditor class doesn't exist not in Workbench
 			WorldEditorAPI api = worldEditor.GetApi();
 			
@@ -152,7 +158,7 @@ class UDR_RaceTrackLogicComponent : ScriptComponent
 				if (!wpEntSrc)
 					_print(string.Format("Could not find waypoint: %1", wpName), LogLevel.ERROR);
 			}
-			
+			*/
 			return;
 		}
 		#endif
@@ -312,5 +318,11 @@ class UDR_RaceTrackLogicComponent : ScriptComponent
 	void _print(string str, LogLevel logLevel = LogLevel.NORMAL)
 	{
 		Print(string.Format("UDR_RaceTrackLogicComponent %1: %2", GetOwner().GetName(), str), logLevel);
+	}
+	
+	override void _WB_AfterWorldUpdate(IEntity owner, float timeSlice)
+	{
+		if (m_FinishLineWaypoint)
+			m_FinishLineWaypoint.Draw(GetOwner());
 	}
 }

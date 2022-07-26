@@ -71,6 +71,8 @@ class UDR_HudVehicle : SCR_InfoDisplay
 		//-------------------------------------------------------------------------
 		// Update values...
 		
+		UDR_GameMode gm = UDR_GameMode.Cast(GetGame().GetGameMode());
+		
 		// Ammo count
 		BaseWeaponComponent weaponComp = weaponMgrComp.GetCurrentWeapon();
 		int ammoCount = -1;
@@ -101,13 +103,34 @@ class UDR_HudVehicle : SCR_InfoDisplay
 		// Race track 
 		PlayerController pc = GetGame().GetPlayerController();
 		UDR_PlayerNetworkComponent playerNetworkComp = UDR_PlayerNetworkComponent.Cast(pc.FindComponent(UDR_PlayerNetworkComponent));
-		if (playerNetworkComp)
+		if (!playerNetworkComp)
+			return;
+		
+		UDR_PlayerNetworkEntity networkEntity = playerNetworkComp.m_NetworkEntity;
+		if (networkEntity)
 		{
 			int playerCount = GetGame().GetPlayerManager().GetPlayerCount();
-			widgets.m_PositionText.SetText(string.Format("%1 / %2", playerNetworkComp.m_iPositionInRace+1, playerCount));
+			widgets.m_PositionText.SetText(string.Format("%1 / %2", networkEntity.m_iPositionInRace+1, playerCount));
 			
-			widgets.m_LapCountText.SetText(playerNetworkComp.m_iLapCount.ToString());
+			widgets.m_LapCountText.SetText((networkEntity.m_iLapCount+1).ToString());
 		}
+		
+		// Show notifications
+		string notificationsText;
+		
+		// There can be a fixed notification from game mode
+		string staticNotification = gm.GetNotificationText();
+		if (!staticNotification.IsEmpty())
+		{
+			notificationsText = notificationsText + "\n" + staticNotification;
+		}
+		
+		// Sum notifications from player component, line after line
+		foreach (UDR_Notification notification : playerNetworkComp.GetNotifications())
+		{
+			notificationsText = notificationsText + "\n" + notification.m_sText;
+		}
+		widgets.m_NotificationText.SetText(notificationsText);
 		
 		Show(true);
 	}

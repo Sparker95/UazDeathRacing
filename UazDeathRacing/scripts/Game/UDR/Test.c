@@ -81,6 +81,11 @@ modded class ArmaReforgerScripted
 		UDR_DebugMenu.UpdateMenus();
 		#endif
 	}
+	
+	UDR_GameMode GetUdrGameMode()
+	{
+		return UDR_GameMode.Cast(GetGameMode());
+	}
 }
 
 /*

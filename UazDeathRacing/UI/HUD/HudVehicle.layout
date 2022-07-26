@@ -110,5 +110,10 @@ FrameWidgetClass {
    {
    }
   }
+  TextWidgetClass "{59EEAA90E1AB7A0F}" : "{D5AAA17F0B7E0559}UI/Prefabs/NotificationText.layout" {
+   Name "m_NotificationText"
+   Slot FrameWidgetSlot "{59EEAA91041B7852}" {
+   }
+  }
  }
 }

@@ -1,0 +1,297 @@
+FrameWidgetClass {
+ Name "rootFrame"
+ components {
+  SCR_WidgetExportRuleRoot "{59ECF9541838A378}" {
+   DestinationPath "{9ECC1D79FAA15EB9}scripts/Game/UDR/UI/Lobby"
+   ScriptAddon "$UazDeathRacing:"
+   ScriptClassNamePrefix "UDR_"
+  }
+  UDR_LobbyUi "{59ECF9567D8A027B}" {
+  }
+ }
+ {
+  OverlayWidgetClass "{59ECF7262E7BF284}" {
+   Name "Overlay0"
+   Slot FrameWidgetSlot "{59ECF7262E7BF291}" {
+    Anchor 0.5 0.5 0.5 0.5
+    PositionX 0
+    OffsetLeft 0
+    PositionY 0
+    OffsetTop 0
+    SizeX 900
+    OffsetRight -900
+    SizeY 650
+    OffsetBottom -650
+    Alignment 0.5 0.5
+   }
+   {
+    ImageWidgetClass "{59ECF7260E14019D}" : "{997E262EDAF1549F}UI/layouts/Menus/Dialogs/DialogBackground.layout" {
+     Name "Background"
+     Slot OverlayWidgetSlot "{59ECF7260E1401F5}" {
+      HorizontalAlign 3
+      VerticalAlign 3
+     }
+    }
+    OverlayWidgetClass "{59ECF7261A53DAFE}" {
+     Name "Content"
+     Slot OverlayWidgetSlot "{59ECF7261A53DAD6}" {
+      HorizontalAlign 3
+      VerticalAlign 3
+      Padding 20 20 20 0
+     }
+     {
+      VerticalLayoutWidgetClass "{59ECF726656D7C68}" {
+       Name "VerticalLayout0"
+       Slot OverlayWidgetSlot "{59ECF726656D7C45}" {
+        HorizontalAlign 3
+        VerticalAlign 3
+       }
+       {
+        VerticalLayoutWidgetClass "{59ECC4D87BE41DA6}" {
+         Name "SectionPlayerList"
+         Slot LayoutSlot "{59ECC4D87BE41DB2}" {
+         }
+         {
+          TextWidgetClass "{59ECC4DAA61B57ED}" : "{B3656334DE3D701F}UI/layouts/WidgetLibrary/TextWidgets/Text_Heading3.layout" {
+           Name "Text2"
+           Slot LayoutSlot "{59ECC4DAA61B57C5}" {
+            Padding 0 0 0 10
+           }
+           Text "Players"
+          }
+          ImageWidgetClass "{59ECC4D4351879F1}" : "{199E5807E8619522}UI/layouts/WidgetLibrary/WLib_Separator.layout" {
+           Name "Separator0"
+           Slot LayoutSlot "{59ECC4D435187982}" {
+            Padding 4 8 4 8
+           }
+           "Is Visible" 0
+          }
+          OverlayWidgetClass "{59ECC4CCD8B47489}" {
+           Name "Overlay0"
+           Slot LayoutSlot "{59ECC4CCD8B47496}" {
+           }
+           {
+            ImageWidgetClass "{59ECC4CC0D814387}" {
+             Name "ScrollBacgkround"
+             Slot OverlayWidgetSlot "{59ECC4CC0D8143AF}" {
+              HorizontalAlign 3
+              VerticalAlign 3
+             }
+             Color 0 0 0 0.196
+            }
+            VerticalLayoutWidgetClass "{59ECC4CCDDA74F3D}" {
+             Name "VerticalLayout0"
+             Slot OverlayWidgetSlot "{59ECC4CCDDA74CC1}" {
+              HorizontalAlign 3
+              VerticalAlign 3
+             }
+             {
+              HorizontalLayoutWidgetClass "{59ECC4D4626143A4}" {
+               Name "Header"
+               Slot LayoutSlot "{59ECC4D46261434F}" {
+                Padding 0 10 20 5
+               }
+               {
+                TextWidgetClass "{59ECC4D473269620}" : "{6FD63D0CFCF2F4DF}UI/layouts/WidgetLibrary/TextWidgets/Text_Heading5.layout" {
+                 Name "TextPos"
+                 Slot LayoutSlot "{59ECC4D4732697CA}" {
+                  Padding 10 0 0 0
+                  SizeMode Fill
+                  FillWeight 1
+                 }
+                 Text "Pos"
+                }
+                TextWidgetClass "{59ECC4D474ECE1B1}" : "{6FD63D0CFCF2F4DF}UI/layouts/WidgetLibrary/TextWidgets/Text_Heading5.layout" {
+                 Name "TextCurrentLap"
+                 Slot LayoutSlot "{59ECC4D4732697CA}" {
+                  Padding 10 0 0 0
+                  SizeMode Fill
+                  FillWeight 1
+                 }
+                 Text "Lap"
+                }
+                TextWidgetClass "{59ECC4D47497A5AF}" : "{6FD63D0CFCF2F4DF}UI/layouts/WidgetLibrary/TextWidgets/Text_Heading5.layout" {
+                 Name "TextName"
+                 Slot LayoutSlot "{59ECC4D4732697CA}" {
+                  Padding 10 0 0 0
+                  SizeMode Fill
+                  FillWeight 10
+                 }
+                 Text "Name"
+                }
+                TextWidgetClass "{59ECC4D474D0B377}" : "{6FD63D0CFCF2F4DF}UI/layouts/WidgetLibrary/TextWidgets/Text_Heading5.layout" {
+                 Name "TextBestLap"
+                 Slot LayoutSlot "{59ECC4D4732697CA}" {
+                  Padding 10 0 0 0
+                  SizeMode Fill
+                  FillWeight 3
+                 }
+                 "Is Visible" 0
+                 Text "Best Lap"
+                }
+               }
+              }
+              ImageWidgetClass "{59ECC4CC64D0A54E}" {
+               Name "Separator"
+               Slot LayoutSlot "{59ECC4CC64D0A553}" {
+               }
+               Color 0.012 0.012 0.012 1
+               Size 32 2
+              }
+              SizeLayoutWidgetClass "{59ECC4D552B85CAC}" {
+               Name "ScrollSize"
+               Slot LayoutSlot "{59ECC4D552B85C4A}" {
+                Padding 0 5 0 0
+               }
+               AllowHeightOverride 1
+               HeightOverride 300
+               {
+                ScrollLayoutWidgetClass "{59ECC4D5676E4A14}" {
+                 Name "Scroll"
+                 Slot LayoutSlot "{59ECC4D5676E4A3F}" {
+                 }
+                 Color 0.761 0.386 0.078 1
+                 {
+                  VerticalLayoutWidgetClass "{59ECC4D57EE21E39}" {
+                   Name "m_PlayerList"
+                   Slot AlignableSlot "{59ECC4D57EE21FCD}" {
+                    HorizontalAlign 3
+                    VerticalAlign 3
+                    Padding 0 0 10 0
+                   }
+                  }
+                 }
+                }
+               }
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+        VerticalLayoutWidgetClass "{59ECC4DB8D4C60EA}" {
+         Name "SectionRace"
+         Slot LayoutSlot "{59ECF72675BB9CD6}" {
+          Padding 0 20 0 0
+         }
+         {
+          TextWidgetClass "{59ECC4DAB6A308B1}" : "{B3656334DE3D701F}UI/layouts/WidgetLibrary/TextWidgets/Text_Heading3.layout" {
+           Name "Text0"
+           Slot LayoutSlot "{59ECC4DAB6A3088C}" {
+           }
+           Text "Current Race"
+          }
+          ImageWidgetClass "{59ECC4D2E8D84FD4}" : "{199E5807E8619522}UI/layouts/WidgetLibrary/WLib_Separator.layout" {
+           Name "Separator0"
+           Slot LayoutSlot "{59ECC4D2E8D84F8B}" {
+            Padding 4 8 4 8
+           }
+           "Is Visible" 0
+          }
+          TextWidgetClass "{59ECC4CFEEBE3FAD}" : "{3132F64DB8B4CB44}UI/layouts/WidgetLibrary/TextWidgets/Text_Body.layout" {
+           Name "m_RaceTrackNameText"
+           Slot LayoutSlot "{59ECC4CFE68452C5}" {
+           }
+           Text "Race Track: XXX"
+          }
+          TextWidgetClass "{59ECC4CFE6845D33}" : "{3132F64DB8B4CB44}UI/layouts/WidgetLibrary/TextWidgets/Text_Body.layout" {
+           Name "m_RaceTrackPropertiesText"
+           Slot LayoutSlot "{59ECC4CFE68452C5}" {
+           }
+           Text "Laps: XX    Max Players: XX"
+          }
+         }
+        }
+        VerticalLayoutWidgetClass "{59ECC4DBD04E6870}" {
+         Name "SectionButtons"
+         Slot LayoutSlot "{59ECC4DBD04E684B}" {
+          Padding 0 20 0 0
+         }
+         {
+          HorizontalLayoutWidgetClass "{59ECC4DB2CE64A09}" {
+           Name "HorizontalLayout0"
+           Slot LayoutSlot "{59ECC4DB2CE64A6C}" {
+           }
+           {
+            OverlayWidgetClass "{59ECC4D5D0B80B6C}" {
+             Name "spacer1"
+             Slot LayoutSlot "{59ECC4D5CE88F20B}" {
+              SizeMode Fill
+             }
+             "Is Visible" 0
+            }
+            ButtonWidgetClass "{59ECC4D5BD439823}" : "{08F03482FD71F8BA}UI/Lobby/LobbyButton.layout" {
+             Name "m_JoinRaceButton"
+             Slot LayoutSlot "{56C91A138E401233}" {
+             }
+             components {
+              SCR_ModularButtonComponent "{56C91A11F1ECB4CD}" {
+               m_aEffects {
+                SCR_ButtonEffectText "{56C91A11E8FE1C7D}" {
+                 m_sDefault "Join Race"
+                }
+               }
+              }
+             }
+             {
+             }
+            }
+            OverlayWidgetClass "{59ECC4D5CE88F266}" {
+             Name "spacer"
+             Slot LayoutSlot "{59ECC4D5CE88F20B}" {
+              SizeMode Fill
+             }
+             "Is Visible" 0
+            }
+            ButtonWidgetClass "{59ECC4D58241ABD0}" : "{08F03482FD71F8BA}UI/Lobby/LobbyButton.layout" {
+             Name "m_SpectateButton"
+             Slot LayoutSlot "{56C91A138E401233}" {
+             }
+             components {
+              SCR_ModularButtonComponent "{56C91A11F1ECB4CD}" {
+               m_aEffects {
+                SCR_ButtonEffectText "{56C91A11E8FE1C7D}" {
+                 m_sDefault "Spectate"
+                }
+               }
+              }
+             }
+             {
+             }
+            }
+            OverlayWidgetClass "{59ECC4D5D1CA8DBD}" {
+             Name "spacer0"
+             Slot LayoutSlot "{59ECC4D5CE88F20B}" {
+              SizeMode Fill
+             }
+            }
+           }
+          }
+         }
+        }
+        VerticalLayoutWidgetClass "{59ECC4C9FF8F0E4C}" {
+         Name "SectionOther"
+         Slot LayoutSlot "{59ECC4C9FF8F0E66}" {
+          Padding 0 20 0 0
+          SizeMode Fill
+         }
+         {
+          TextWidgetClass "{59ECC4C9D23BE77C}" : "{3132F64DB8B4CB44}UI/layouts/WidgetLibrary/TextWidgets/Text_Body.layout" {
+           Name "m_WarningText"
+           Slot LayoutSlot "{59ECC4C9D23BE703}" {
+            SizeMode Fill
+           }
+           Color 1 0.027 0.027 1
+           Text "Warning Text"
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

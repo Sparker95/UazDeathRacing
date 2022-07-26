@@ -4,7 +4,8 @@ modded enum SCR_DebugMenuID
 	UDR_SHOW_VEHICLE_PANEL,
 	UDR_SHOW_SOUND_PANEL,
 	UDR_SHOW_SPECTATOR_PANEL,
-	UDR_SHOW_RACE_TRACK_LOGIC_PANEL
+	UDR_SHOW_RACE_TRACK_LOGIC_PANEL,
+	UDR_SHOW_GAME_MODE_PANEL
 }
 
 class UDR_DebugMenu
@@ -15,10 +16,11 @@ class UDR_DebugMenu
 	{
 		DiagMenu.RegisterMenu(SCR_DebugMenuID.UDR_MENU, DEBUG_MENU_NAME, "");
 		
-		DiagMenu.RegisterBool(SCR_DebugMenuID.UDR_SHOW_VEHICLE_PANEL, "", "Show Vehicle Panel", DEBUG_MENU_NAME);
-		DiagMenu.RegisterBool(SCR_DebugMenuID.UDR_SHOW_SOUND_PANEL, "", "Show Sound Panel", DEBUG_MENU_NAME);
-		DiagMenu.RegisterBool(SCR_DebugMenuID.UDR_SHOW_RACE_TRACK_LOGIC_PANEL, "", "Show Race Track Logic Panel", DEBUG_MENU_NAME);
-		DiagMenu.RegisterBool(SCR_DebugMenuID.UDR_SHOW_SPECTATOR_PANEL, "", "Show Spectator Panel", DEBUG_MENU_NAME);
+		DiagMenu.RegisterBool(SCR_DebugMenuID.UDR_SHOW_VEHICLE_PANEL, "", "Vehicle Panel", DEBUG_MENU_NAME);
+		DiagMenu.RegisterBool(SCR_DebugMenuID.UDR_SHOW_SOUND_PANEL, "", "Sound Panel", DEBUG_MENU_NAME);
+		DiagMenu.RegisterBool(SCR_DebugMenuID.UDR_SHOW_RACE_TRACK_LOGIC_PANEL, "", "Race Track Logic Panel", DEBUG_MENU_NAME);
+		DiagMenu.RegisterBool(SCR_DebugMenuID.UDR_SHOW_SPECTATOR_PANEL, "", "Spectator Panel", DEBUG_MENU_NAME);
+		DiagMenu.RegisterBool(SCR_DebugMenuID.UDR_SHOW_GAME_MODE_PANEL, "", "Game Mode Panel", DEBUG_MENU_NAME);
 	}
 	
 	static void DrawVehiclePanel()
@@ -106,7 +108,7 @@ class UDR_DebugMenu
 			PlayerController playerController = GetGame().GetPlayerController();
 			IEntity controlledEnt = playerController.GetControlledEntity();
 			
-			UDR_SpectatorCamera camera = UDR_SpectatorCamera.Create();
+			UDR_SpectatorCamera camera = UDR_SpectatorCamera.GetInstance();
 			camera.SwitchToThisCamera();
 			camera.FollowEntity(controlledEnt);
 		}

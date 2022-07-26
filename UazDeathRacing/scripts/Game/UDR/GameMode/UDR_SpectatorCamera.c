@@ -14,7 +14,8 @@ class UDR_SpectatorCamera : CameraBase
 	protected IEntity m_Target;
 	protected vector m_vLastTargetPos;
 	
-	static UDR_SpectatorCamera Create()
+	// Returns existing instance or creates a new one
+	static UDR_SpectatorCamera GetInstance()
 	{
 		if (s_Instance)
 			return s_Instance;
@@ -50,11 +51,11 @@ class UDR_SpectatorCamera : CameraBase
 	void UDR_SpectatorCamera(IEntitySource src, IEntity parent)
 	{
 		SetFlags(EntityFlags.ACTIVE, false);
-		SetEventMask(EntityEvent.INIT | EntityEvent.POSTFRAME);
+		SetEventMask(EntityEvent.INIT | EntityEvent.FRAME);
 		SetName("UDR_SpectatorCamera"); // Must keep this name, otherwise if it's not named, camera manager will reject this camera
 	}
 	
-	override void EOnPostFrame(IEntity owner, float timeSlice)
+	override void EOnFrame(IEntity owner, float timeSlice)
 	{
 		vector targetPos = m_vLastTargetPos;
 		if (m_Target)

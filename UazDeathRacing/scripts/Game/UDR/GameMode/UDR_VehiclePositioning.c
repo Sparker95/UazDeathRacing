@@ -24,16 +24,19 @@ class UDR_VehiclePositioning : GenericEntity
 	protected float m_fStepColumns;
 	
 	protected ref array<IEntity> m_aPreviews = {};
+	
+	// Assignment of players to spawn positions
+	protected ref array<int> m_aAssignedPlayers = {};
 
 	//------------------------------------------------------------------------------------------------
 	// Returs position at given ID in world coordinates
-	void GetPosition(int id, out vector outTransform[])
+	void GetPositionTransform(int id, out vector outTransform[])
 	{
 		if (id >= m_iNumColumns*m_iNumRows)
 			Print(string.Format("UDR_VehiclePositioning: GetPosition: id %1 is more than predefined size", id), LogLevel.ERROR);
 		
 		int col = id % m_iNumColumns;
-		int row = id / m_iNumRows;
+		int row = id / m_iNumColumns;
 		
 		vector localPos = GetPositionOffset(row, col);
 		vector worldPos = CoordToParent(localPos);
@@ -46,6 +49,102 @@ class UDR_VehiclePositioning : GenericEntity
 		outTransform[2] = myTransform[2]; // Dir
 		outTransform[3] = worldPos;
 	}
+	
+	
+	//------------------------------------------------------------------------------------------------
+	// Assignment of vehicle positions
+	
+	//------------------------------------------------------------------------------------------------
+	int FindNextFreePosition()
+	{
+		int count = m_aAssignedPlayers.Count();
+		for (int i = 0; i < count; i++)
+		{
+			if (m_aAssignedPlayers[i] == -1)
+				return i;
+		}
+		
+		return -1;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	int FindAssignedPosition(int playerId)
+	{
+		int count = m_aAssignedPlayers.Count();
+		for (int i = 0; i < count; i++)
+		{
+			if (m_aAssignedPlayers[i] == playerId)
+				return i;
+		}
+		
+		return -1;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	int GetRandomPosition()
+	{
+		return Math.RandomInt(0, m_iNumRows*m_iNumColumns);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	int GetPlayerAssignedToPosition(int positionId)
+	{
+		if (positionId < 0 || positionId >= m_aAssignedPlayers.Count())
+			return -1;
+		
+		return m_aAssignedPlayers[positionId];
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	int GetPositionCount()
+	{
+		return m_iNumRows * m_iNumColumns;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	// Assigns position to player
+	void AssignPosition(int positionId, int playerId)
+	{
+		if (positionId < 0 || positionId >= m_aAssignedPlayers.Count())
+			return;
+		
+		m_aAssignedPlayers[positionId] = playerId; // Assigned to this player
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void UnassignPosition(int positionId)
+	{
+		if (positionId < 0 || positionId >= m_aAssignedPlayers.Count())
+			return;
+		
+		m_aAssignedPlayers[positionId] = -1; // Not assigned to anyone
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void UnassignPlayer(int playerId)
+	{
+		int count = m_aAssignedPlayers.Count();
+		for (int i = 0; i < count; i++)
+		{
+			if (m_aAssignedPlayers[i] == playerId)
+			{
+				m_aAssignedPlayers[i] = -1;
+				return;
+			}
+		}
+	}
+	
+	
+	
+	//------------------------------------------------------------------------------------------------
+	void ClearAssignments()
+	{
+		for (int i = 0; i < m_aAssignedPlayers.Count(); i++)
+			m_aAssignedPlayers[i] = -1;
+	}
+	
+	
+	
 	
 	//------------------------------------------------------------------------------------------------
 	override void EOnInit(IEntity owner)
@@ -87,6 +186,10 @@ class UDR_VehiclePositioning : GenericEntity
 	{
 		SetEventMask(EntityEvent.INIT);
 		SetFlags(EntityFlags.ACTIVE, true);
+		
+		int nPositionsMax = m_iNumRows * m_iNumColumns;
+		m_aAssignedPlayers.Resize(nPositionsMax);
+		ClearAssignments();
 	}
 
 	//------------------------------------------------------------------------------------------------

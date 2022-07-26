@@ -1,12 +1,5 @@
 FrameWidgetClass {
  Name "rootFrame"
- components {
-  SCR_WidgetExportRuleRoot "{59E157B6AB0E8872}" {
-   DestinationPath "{0650B47502DFD6F4}scripts/Game/UDR/UI/HUD"
-   ScriptAddon "$UazDeathRacing:"
-   ScriptClassNamePrefix "UDR_"
-  }
- }
  {
   FrameWidgetClass "{59E139C96E20171E}" : "{017A451CAE8F9992}UI/Prefabs/RaceProgressPanel.layout" {
    Name "RaceProgressPanel"
@@ -69,11 +62,6 @@ FrameWidgetClass {
         VerticalAlign 3
        }
        Clipping False
-       components {
-        SCR_WidgetExportRule "{59E139CDFA8BD81C}" {
-         WidgetVariableName "m_PlayerNameText"
-        }
-       }
        Text "Player Name"
       }
       ImageWidgetClass "{59E139CF7D6850A6}" : "{B71C58FE7526EFA3}UI/Prefabs/ArrowRight.layout" {
@@ -84,6 +72,42 @@ FrameWidgetClass {
      }
     }
    }
+  }
+  FrameWidgetClass "{59EEAA9122450515}" {
+   Name "Frame0"
+   Slot FrameWidgetSlot "{59EEAA9122450571}" {
+    Anchor 0 0 1 1
+    PositionX 0
+    OffsetLeft 0
+    PositionY 0
+    OffsetTop 0
+    SizeX -1820
+    OffsetRight 0
+    SizeY -1050
+    OffsetBottom 0
+   }
+  }
+  TextWidgetClass "{59EEAA91041B7879}" : "{995D2B8E2BD6A0C5}UI/Prefabs/HudTextBig.layout" {
+   Name "m_NotificationText"
+   Slot FrameWidgetSlot "{59EEAA91041B7852}" {
+    Anchor 0 0.3 1 0.3
+    PositionX 0
+    OffsetLeft 0
+    PositionY 0
+    OffsetTop 0
+    SizeX 0
+    OffsetRight 0
+    SizeY 100
+    OffsetBottom -100
+    Alignment 0 0.5
+    SizeToContent 1
+   }
+   "Is Visible" 0
+   Clipping Ancestor
+   Text "Notification Text"\
+   "Notification Text"
+   "Horizontal Alignment" Center
+   "Vertical Alignment" Center
   }
  }
 }
