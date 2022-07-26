@@ -333,7 +333,7 @@ class UDR_GameMode: SCR_BaseGameMode
 		PlayerController playerController = GetGame().GetPlayerManager().GetPlayerController(playerID);
 		UDR_PlayerNetworkComponent playerNetworkComp = UDR_PlayerNetworkComponent.Cast(playerController.FindComponent(UDR_PlayerNetworkComponent));
 		if (playerNetworkComp) {
-			playerNetworkComp.hasAlreadyDied = true;
+			playerNetworkComp.m_bHasDied = true;
 		}
 	}
 	
@@ -354,8 +354,8 @@ class UDR_GameMode: SCR_BaseGameMode
 		}
 		
 		UDR_PlayerNetworkComponent playerNetworkComp = UDR_PlayerNetworkComponent.Cast(playerController.FindComponent(UDR_PlayerNetworkComponent));
-		if (playerNetworkComp.hasAlreadyDied) {
-			playerNetworkComp.hasAlreadyDied = false;
+		if (playerNetworkComp.m_bHasDied) {
+			playerNetworkComp.m_bHasDied = false;
 			return;
 		}
 
