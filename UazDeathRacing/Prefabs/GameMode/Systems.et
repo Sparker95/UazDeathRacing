@@ -14,6 +14,10 @@ GenericEntity {
    ID "59D5289C95B8DF5F"
    coords 5151.789 163.547 7304.798
   }
+  SCR_CameraManager SCR_CameraManager1 : "{33F9FD881E3700CC}Prefabs/World/Game/SCR_CameraManager.et" {
+   ID "59F5490E2FC9091E"
+   coords 0 0 0
+  }
   RadioManagerEntity : "{B8E09FAB91C4ECCD}Prefabs/Radio/RadioManager.et" {
    ID "59D5289C95B8DF40"
    coords 5154.971 163.427 7307.598
