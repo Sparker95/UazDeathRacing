@@ -3,6 +3,9 @@ UDR_RaceTrackLogic RaceTrackLogic {
  m_FinishLineWaypoint UDR_EntityLinkWaypoint "{59F55BCB1745E5F7}" {
   m_sEntityName "RaceTrack_FinishLine"
  }
+ m_VehiclePositioning UDR_EntityLinkVehiclePositioning "{59F56997989401A6}" {
+  m_sEntityName "VehiclePositioning"
+ }
 }
 $grp UDR_Waypoint {
  RaceTrack_FinishLine {

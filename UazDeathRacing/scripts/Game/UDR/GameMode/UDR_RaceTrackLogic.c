@@ -30,6 +30,9 @@ class UDR_RaceTrackLogic : GenericEntity
 	[Attribute("", UIWidgets.Auto, "Finish line waypoint which must be circularly linked with the rest of waypoints.")]
 	protected ref UDR_EntityLinkWaypoint m_FinishLineWaypoint;
 	
+	[Attribute()]
+	protected ref UDR_EntityLinkVehiclePositioning m_VehiclePositioning;
+	
 	protected ref map<IEntity, ref UDR_RaceTrackLogicRacerData> m_RacerData = new map<IEntity, ref UDR_RaceTrackLogicRacerData>;
 	
 	protected bool m_bInitSuccess = false;
@@ -120,6 +123,12 @@ class UDR_RaceTrackLogic : GenericEntity
 	}
 	
 	//----------------------------------------------------------------------------------------------
+	UDR_VehiclePositioning GetVehiclePositioning()
+	{
+		return m_VehiclePositioning.value;
+	}
+	
+	//----------------------------------------------------------------------------------------------
 	override void EOnInit(IEntity owner)
 	{		
 		//-----------------------------------------------
@@ -147,6 +156,7 @@ class UDR_RaceTrackLogic : GenericEntity
 		//-----------------------------------------------
 		// Not in editor, but in actual game
 		m_FinishLineWaypoint.Init();
+		m_VehiclePositioning.Init();
 		m_aWaypoints = {};
 		m_aWaypointPositions = {};
 		m_aWaypointDistances = {};
@@ -322,5 +332,7 @@ class UDR_RaceTrackLogic : GenericEntity
 	{
 		if (m_FinishLineWaypoint)
 			m_FinishLineWaypoint.Draw(this);
+		if (m_VehiclePositioning)
+			m_VehiclePositioning.Draw(this);
 	}
 }
