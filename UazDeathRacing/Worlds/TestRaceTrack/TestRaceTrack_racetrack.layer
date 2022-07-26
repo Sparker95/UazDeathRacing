@@ -1,9 +1,6 @@
 GenericEntity RaceTrackLogic {
  components {
   UDR_RaceTrackLogicComponent "{59E2C13FD14D1E05}" {
-   m_aWaypointNames {
-    "RaceTrack_FinishLine" "Waypoint1" "Waypoint2" "Waypoint3"
-   }
    m_FinishLineWaypoint UDR_EntityLinkWaypoint "{59F34701446DB3C2}" {
     m_sEntityName "RaceTrack_FinishLine"
    }
@@ -61,4 +58,12 @@ $grp UDR_Waypoint {
    m_sEntityName "RaceTrack_FinishLine"
   }
  }
+}
+UDR_VehiclePositioning VehiclePositioning : "{F33FD9275A6393DB}Prefabs/VehiclePositioning/VehiclePositioning.et" {
+ coords 47.109 2.001 479.192
+ angleY 90.12
+ m_iNumRows 2
+ m_iNumColumns 4
+ m_fStepRows 6.9
+ m_fStepColumns 3.7
 }

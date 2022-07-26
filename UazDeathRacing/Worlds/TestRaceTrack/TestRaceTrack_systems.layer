@@ -1,18 +1,19 @@
 GenericEntity : "{94F1335400E2A788}Prefabs/GameMode/Systems.et" {
- coords 45.265 2.001 420.322
+ coords 78.173 25.119 421.226
  {
+  SCR_FactionManager "59F55BCC81C29090" {
+   ID "59D5289C95B8402D"
+   coords 0 0 0
+  }
   UDR_GameMode "59E92B6DB3A1F725" {
    ID "59D5289C95B8DF5E"
-   m_sRaceTrackLogicEntity "RaceTrackLogic"
-   m_sVehiclePositioningEntity "VehiclePositioning"
+   coords 34.103 0 -16.671
+   m_RaceTrackLogicEntity UDR_EntityLink "{59F55BCFDA750A97}" {
+    m_sEntityName "RaceTrackLogic"
+   }
+   m_VehiclePositioning UDR_EntityLinkVehiclePositioning "{59F55BCFDCE36D36}" {
+    m_sEntityName "VehiclePositioning"
+   }
   }
  }
-}
-UDR_VehiclePositioning VehiclePositioning : "{F33FD9275A6393DB}Prefabs/VehiclePositioning/VehiclePositioning.et" {
- coords 47.109 2.001 479.192
- angleY 90.12
- m_iNumRows 2
- m_iNumColumns 4
- m_fStepRows 6.9
- m_fStepColumns 3.7
 }

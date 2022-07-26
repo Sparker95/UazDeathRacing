@@ -26,7 +26,6 @@ GenericEntity {
    ID "59D5289C95B8DF5E"
    components {
    }
-   coords 5148.675 162.937 7314.731
   }
   ScriptedChatEntity : "{F69BC912AC8236F9}Prefabs/MP/ScriptedChatEntity.et" {
    ID "59D5289C95BB4129"

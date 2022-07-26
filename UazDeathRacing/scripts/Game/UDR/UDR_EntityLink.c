@@ -3,22 +3,26 @@ class UDR_EntityLinkTemplated<Class T> : Managed
 	[Attribute("", UIWidgets.EditBox)]
 	protected string m_sEntityName;
 	
-	protected T m_Target;
+	T m_Value;
 	
 	protected static const int COLOR_ERROR = 0xffff0000;
 	protected static const int COLOR_GOOD = 0xff00ff80;
 	protected static const int COLOR_BACKGROUND = 0x50001005;
 		
-	void Init()
+	T Init()
 	{
-		m_Target = T.Cast(GetGame().GetWorld().FindEntityByName(m_sEntityName));
-		if (!m_Target)
+		m_Value = T.Cast(GetGame().GetWorld().FindEntityByName(m_sEntityName));
+		if (!m_Value)
+		{
 			Print(string.Format("%1: Entity '%2' was not found!", ClassName(), m_sEntityName), LogLevel.ERROR);
+			return null;
+		}
+		return m_Value;
 	}
 	
 	T Get()
 	{
-		return m_Target;
+		return m_Value;
 	}
 	
 	// Call from _WB_AfterWorldUpdate
@@ -78,3 +82,6 @@ class UDR_EntityLinkCharacter : UDR_EntityLinkTemplated<ChimeraCharacter> {}
 
 [BaseContainerProps()]
 class UDR_EntityLinkWaypoint : UDR_EntityLinkTemplated<UDR_Waypoint> {}
+
+[BaseContainerProps()]
+class UDR_EntityLinkVehiclePositioning : UDR_EntityLinkTemplated<UDR_VehiclePositioning> {}

@@ -19,13 +19,12 @@ class UDR_GameMode: SCR_BaseGameMode
 	
 	
 	// Other entities for the game mode
-	[Attribute("", UIWidgets.EditBox)]
-	protected string m_sRaceTrackLogicEntity;
-	[Attribute("", UIWidgets.EditBox)]
-	protected string m_sVehiclePositioningEntity;
+	[Attribute()]
+	protected ref UDR_EntityLink m_RaceTrackLogicEntity;
+	[Attribute()]
+	protected ref UDR_EntityLinkVehiclePositioning m_VehiclePositioning;
 	
 	protected UDR_RaceTrackLogicComponent m_RaceTrackLogic;
-	protected UDR_VehiclePositioning m_VehiclePositioning;
 	
 	// States of the race
 	[RplProp()]
@@ -61,16 +60,15 @@ class UDR_GameMode: SCR_BaseGameMode
 		if (!GetGame().InPlayMode())
 			return;
 		
-		IEntity raceTrackLogicEnt = GetGame().FindEntity(m_sRaceTrackLogicEntity);
-		if (raceTrackLogicEnt)
-			m_RaceTrackLogic = UDR_RaceTrackLogicComponent.Cast(raceTrackLogicEnt.FindComponent(UDR_RaceTrackLogicComponent));
+		m_VehiclePositioning.Init();
+		m_RaceTrackLogicEntity.Init();
+		
+		if (m_RaceTrackLogicEntity.Get())
+			m_RaceTrackLogic = UDR_RaceTrackLogicComponent.Cast(m_RaceTrackLogicEntity.Get().FindComponent(UDR_RaceTrackLogicComponent));
 		if (!m_RaceTrackLogic)
 			Print("Could not find UDR_RaceTrackLogicComponent!", LogLevel.ERROR);
 		
-		IEntity vehiclePosEnt = GetGame().FindEntity(m_sVehiclePositioningEntity);
-		if (vehiclePosEnt)
-			m_VehiclePositioning = UDR_VehiclePositioning.Cast(vehiclePosEnt);
-		if (!m_VehiclePositioning)
+		if (!m_VehiclePositioning.Get())
 			Print("Could not find UDR_VehiclePositioning entity!", LogLevel.ERROR);
 		
 		if (m_RplComponent.IsMaster())
@@ -139,7 +137,7 @@ class UDR_GameMode: SCR_BaseGameMode
 		// Everything below is only for server
 		
 		// Unassign spawn position
-		m_VehiclePositioning.UnassignPlayer(playerId);
+		m_VehiclePositioning.Get().UnassignPlayer(playerId);
 		
 		// Notify the race state
 		UDR_PlayerNetworkComponent playerComp = UDR_PlayerNetworkComponent.GetForPlayerId(playerId);
@@ -187,7 +185,7 @@ class UDR_GameMode: SCR_BaseGameMode
 	{
 		vector transform[4];
 		int spawnPointId = FindAndAssignSpawnPosition(playerComp);
-		m_VehiclePositioning.GetPositionTransform(spawnPointId, transform); // Get position from vehicle positioning entity
+		m_VehiclePositioning.m_Value.GetPositionTransform(spawnPointId, transform); // Get position from vehicle positioning entity
 		SpawnVehicle(playerComp, transform);
 	}
 	
@@ -207,7 +205,7 @@ class UDR_GameMode: SCR_BaseGameMode
 			
 		// Spawn driver character
 		EntitySpawnParams p = new EntitySpawnParams();
-		p.Transform[3] = m_VehiclePositioning.GetOrigin();
+		p.Transform[3] = m_VehiclePositioning.m_Value.GetOrigin();
 		Resource playerRes = Resource.Load("{A8BE87DC32CFF3C5}Prefabs/Characters/DriverCharacter.et");
 		IEntity controlledEntity = GetGame().SpawnEntityPrefab(playerRes, params: p);
 		
@@ -269,23 +267,23 @@ class UDR_GameMode: SCR_BaseGameMode
 		int playerId = playerComp.GetPlayerId();
 		
 		// Check if a position has been assigned to this player already
-		int previousAssignedPosition = m_VehiclePositioning.FindAssignedPosition(playerId);
+		int previousAssignedPosition = m_VehiclePositioning.m_Value.FindAssignedPosition(playerId);
 		
 		if (previousAssignedPosition != -1)
 			return previousAssignedPosition;
 		
 		// If not, find a next free position
-		int nextFreePosition = m_VehiclePositioning.FindNextFreePosition();
+		int nextFreePosition = m_VehiclePositioning.m_Value.FindNextFreePosition();
 		
 		if (nextFreePosition != -1)
 		{
-			m_VehiclePositioning.AssignPosition(nextFreePosition, playerId);
+			m_VehiclePositioning.m_Value.AssignPosition(nextFreePosition, playerId);
 			return nextFreePosition;
 		}
 		else
 		{
 			// No more positions :( just select a random one, but don't assign it
-			return m_VehiclePositioning.GetRandomPosition();
+			return m_VehiclePositioning.m_Value.GetRandomPosition();
 		}
 	}
 	
@@ -443,16 +441,25 @@ class UDR_GameMode: SCR_BaseGameMode
 				DbgUI.Text(string.Format(" [N] %1", player.GetPlayerName()));
 			
 			DbgUI.Text("Spawn Position assignments:");
-			int spawnPosCount = m_VehiclePositioning.GetPositionCount();
+			int spawnPosCount = m_VehiclePositioning.m_Value.GetPositionCount();
 			string spawnPosStr;
 			for (int i = 0; i < spawnPosCount; i++)
 			{
-				spawnPosStr = spawnPosStr + string.Format("%1 ", m_VehiclePositioning.GetPlayerAssignedToPosition(i));
+				spawnPosStr = spawnPosStr + string.Format("%1 ", m_VehiclePositioning.m_Value.GetPlayerAssignedToPosition(i));
 			}
 			DbgUI.Text(spawnPosStr);
 			
 			DbgUI.End();
 		}
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	override void _WB_AfterWorldUpdate(float timeSlice)
+	{
+		if (m_VehiclePositioning)
+			m_VehiclePositioning.Draw(this);
+		if (m_RaceTrackLogicEntity)
+			m_RaceTrackLogicEntity.Draw(this);
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
@@ -748,7 +755,7 @@ class UDR_GameMode: SCR_BaseGameMode
 	// Fallback position for the camera when there is nothing to spectate
 	IEntity GetFallbackSpectatorTarget()
 	{
-		return m_VehiclePositioning;
+		return m_VehiclePositioning.m_Value;
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------

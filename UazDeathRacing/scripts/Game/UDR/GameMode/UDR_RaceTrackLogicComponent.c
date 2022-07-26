@@ -20,17 +20,14 @@ class UDR_RaceTrackLogicComponentClass : ScriptComponentClass
 }
 
 class UDR_RaceTrackLogicComponent : ScriptComponent
-{
-	[Attribute("", UIWidgets.Auto, desc: "Names of UDR_Waypoint entities. There must be at least two of waypoints.")]
-	protected ref array<string> m_aWaypointNames;
-	
+{	
 	// Waypoints
 	protected ref array<UDR_Waypoint> m_aWaypoints = {};	// Entities
 	protected ref array<vector> m_aWaypointPositions = {};	// Positiuon
 	protected ref array<float> m_aWaypointDistances = {};	// Distance from that WP to next WP
 	protected float m_fLapLength;
 	
-	[Attribute()]
+	[Attribute("", UIWidgets.Auto, "Finish line waypoint which must be circularly linked with the rest of waypoints.")]
 	protected ref UDR_EntityLinkWaypoint m_FinishLineWaypoint;
 	
 	protected ref map<IEntity, ref UDR_RaceTrackLogicRacerData> m_RacerData = new map<IEntity, ref UDR_RaceTrackLogicRacerData>;
@@ -131,16 +128,7 @@ class UDR_RaceTrackLogicComponent : ScriptComponent
 	
 	//----------------------------------------------------------------------------------------------
 	override void EOnInit(IEntity owner)
-	{
-		int wpCount = m_aWaypointNames.Count();
-		
-		// Bail if there are not enough waypoints
-		if (wpCount < 2)
-		{
-			_print("There must be at least 2 waypoints!", LogLevel.ERROR);
-			return;
-		}
-		
+	{		
 		//-----------------------------------------------
 		// If we are in editor, just check if all waypoint names are correct and return
 		#ifdef WORKBENCH
@@ -165,39 +153,50 @@ class UDR_RaceTrackLogicComponent : ScriptComponent
 		
 		//-----------------------------------------------
 		// Not in editor, but in actual game
-		m_aWaypoints.Resize(wpCount);
-		m_aWaypointPositions.Resize(wpCount);
-		m_aWaypointDistances.Resize(wpCount);
-		int nWaypointsNotFound = 0;
-		foreach (int i, string wpName : m_aWaypointNames)
+		m_FinishLineWaypoint.Init();
+		m_aWaypoints = {};
+		m_aWaypointPositions = {};
+		m_aWaypointDistances = {};
+		
+		UDR_Waypoint wpFinish = m_FinishLineWaypoint.Get();
+		
+		
+		bool wpInitSuccess = false;
+
+		if (!wpFinish)
 		{
-			IEntity wpEnt = GetGame().FindEntity(wpName);
-			if (!wpEnt)
+			_print("Could not find finish line waypoint!", LogLevel.ERROR);
+		}
+		else
+		{
+			UDR_Waypoint wp = wpFinish;
+			while (wp)
 			{
-				nWaypointsNotFound++;
-				_print(string.Format("Could not find waypoint: %1", wpName), LogLevel.ERROR);
-				continue;
+				_print(string.Format("Added waypoint: %1", wp.GetName()));
+				m_aWaypoints.Insert(wp);
+				m_aWaypointPositions.Insert(wp.GetOrigin());
+				wp.m_OnActivated.Insert(Callback_OnWaypointActivated);
+				
+				wp = wp.m_Next.Init(); // Get next waypoint
+				
+				if (!wp)
+				{
+					_print("Could reach the finish line while traversing waypoints! The waypoints must be linked in a loop!", LogLevel.ERROR);
+					break;
+				}
+				if (wp == wpFinish)
+				{
+					wpInitSuccess = true; // Reached finish line
+					break;
+				}
 			}
-			
-			UDR_Waypoint wp = UDR_Waypoint.Cast(wpEnt);
-			
-			if (!wp)
-			{
-				nWaypointsNotFound++;
-				_print(string.Format("Waypoint must be of UDR_Waypoint class: %1, %2", wpEnt, wpEnt.GetName()), LogLevel.ERROR);
-				continue;
-			}
-			
-			m_aWaypoints[i] = wp;
-			m_aWaypointPositions[i] = wp.GetOrigin();
-			
-			wp.m_OnActivated.Insert(Callback_OnWaypointActivated);
-			
 		}
 		
-		if (nWaypointsNotFound == 0)
+		if (wpInitSuccess)
 		{
 			float trackLength = 0;
+			int wpCount = m_aWaypoints.Count();
+			m_aWaypointDistances.Resize(wpCount);
 			for (int i = 0; i < wpCount; i++)
 			{
 				int nextWpId = (i + 1) % wpCount;
