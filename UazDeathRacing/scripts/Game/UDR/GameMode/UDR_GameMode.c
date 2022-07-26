@@ -20,11 +20,9 @@ class UDR_GameMode: SCR_BaseGameMode
 	
 	// Other entities for the game mode
 	[Attribute()]
-	protected ref UDR_EntityLink m_RaceTrackLogicEntity;
+	protected ref UDR_EntityLinkRaceTrackLogic m_RaceTrackLogic;
 	[Attribute()]
 	protected ref UDR_EntityLinkVehiclePositioning m_VehiclePositioning;
-	
-	protected UDR_RaceTrackLogicComponent m_RaceTrackLogic;
 	
 	// States of the race
 	[RplProp()]
@@ -60,16 +58,11 @@ class UDR_GameMode: SCR_BaseGameMode
 		if (!GetGame().InPlayMode())
 			return;
 		
-		m_VehiclePositioning.Init();
-		m_RaceTrackLogicEntity.Init();
+		if (!m_RaceTrackLogic.Init())
+			Print("Could not find UDR_RaceTrackLogic!", LogLevel.ERROR);
 		
-		if (m_RaceTrackLogicEntity.Get())
-			m_RaceTrackLogic = UDR_RaceTrackLogicComponent.Cast(m_RaceTrackLogicEntity.Get().FindComponent(UDR_RaceTrackLogicComponent));
-		if (!m_RaceTrackLogic)
-			Print("Could not find UDR_RaceTrackLogicComponent!", LogLevel.ERROR);
-		
-		if (!m_VehiclePositioning.Get())
-			Print("Could not find UDR_VehiclePositioning entity!", LogLevel.ERROR);
+		if (!m_VehiclePositioning.Init())
+			Print("Could not find UDR_VehiclePositioning!", LogLevel.ERROR);
 		
 		if (m_RplComponent.IsMaster())
 		{
@@ -185,7 +178,7 @@ class UDR_GameMode: SCR_BaseGameMode
 	{
 		vector transform[4];
 		int spawnPointId = FindAndAssignSpawnPosition(playerComp);
-		m_VehiclePositioning.m_Value.GetPositionTransform(spawnPointId, transform); // Get position from vehicle positioning entity
+		m_VehiclePositioning.value.GetPositionTransform(spawnPointId, transform); // Get position from vehicle positioning entity
 		SpawnVehicle(playerComp, transform);
 	}
 	
@@ -205,7 +198,7 @@ class UDR_GameMode: SCR_BaseGameMode
 			
 		// Spawn driver character
 		EntitySpawnParams p = new EntitySpawnParams();
-		p.Transform[3] = m_VehiclePositioning.m_Value.GetOrigin();
+		p.Transform[3] = m_VehiclePositioning.value.GetOrigin();
 		Resource playerRes = Resource.Load("{A8BE87DC32CFF3C5}Prefabs/Characters/DriverCharacter.et");
 		IEntity controlledEntity = GetGame().SpawnEntityPrefab(playerRes, params: p);
 		
@@ -228,7 +221,7 @@ class UDR_GameMode: SCR_BaseGameMode
 		IEntity newVehicleEntity = GetGame().SpawnEntityPrefab(vehicleRes, params: spawnParams);
 		
 		// Register the vehicle to race track logic
-		m_RaceTrackLogic.RegisterRacer(newVehicleEntity);
+		m_RaceTrackLogic.value.RegisterRacer(newVehicleEntity);
 		
 		// Register to destroyed event
 		EventHandlerManagerComponent ev = EventHandlerManagerComponent.Cast(newVehicleEntity.FindComponent(EventHandlerManagerComponent));
@@ -267,23 +260,23 @@ class UDR_GameMode: SCR_BaseGameMode
 		int playerId = playerComp.GetPlayerId();
 		
 		// Check if a position has been assigned to this player already
-		int previousAssignedPosition = m_VehiclePositioning.m_Value.FindAssignedPosition(playerId);
+		int previousAssignedPosition = m_VehiclePositioning.value.FindAssignedPosition(playerId);
 		
 		if (previousAssignedPosition != -1)
 			return previousAssignedPosition;
 		
 		// If not, find a next free position
-		int nextFreePosition = m_VehiclePositioning.m_Value.FindNextFreePosition();
+		int nextFreePosition = m_VehiclePositioning.value.FindNextFreePosition();
 		
 		if (nextFreePosition != -1)
 		{
-			m_VehiclePositioning.m_Value.AssignPosition(nextFreePosition, playerId);
+			m_VehiclePositioning.value.AssignPosition(nextFreePosition, playerId);
 			return nextFreePosition;
 		}
 		else
 		{
 			// No more positions :( just select a random one, but don't assign it
-			return m_VehiclePositioning.m_Value.GetRandomPosition();
+			return m_VehiclePositioning.value.GetRandomPosition();
 		}
 	}
 	
@@ -315,7 +308,7 @@ class UDR_GameMode: SCR_BaseGameMode
 	//-------------------------------------------------------------------------------------------------------------------------------
 	void OnVehicleDestroyed(IEntity vehEntity)
 	{
-		m_RaceTrackLogic.UnregisterRacer(vehEntity);
+		m_RaceTrackLogic.value.UnregisterRacer(vehEntity);
 		
 		int playerID = UDR_VehicleNetworkComponent.Cast(vehEntity.FindComponent(UDR_VehicleNetworkComponent)).GetPlayerId();
 		if (!playerID) {
@@ -441,11 +434,11 @@ class UDR_GameMode: SCR_BaseGameMode
 				DbgUI.Text(string.Format(" [N] %1", player.GetPlayerName()));
 			
 			DbgUI.Text("Spawn Position assignments:");
-			int spawnPosCount = m_VehiclePositioning.m_Value.GetPositionCount();
+			int spawnPosCount = m_VehiclePositioning.value.GetPositionCount();
 			string spawnPosStr;
 			for (int i = 0; i < spawnPosCount; i++)
 			{
-				spawnPosStr = spawnPosStr + string.Format("%1 ", m_VehiclePositioning.m_Value.GetPlayerAssignedToPosition(i));
+				spawnPosStr = spawnPosStr + string.Format("%1 ", m_VehiclePositioning.value.GetPlayerAssignedToPosition(i));
 			}
 			DbgUI.Text(spawnPosStr);
 			
@@ -458,14 +451,14 @@ class UDR_GameMode: SCR_BaseGameMode
 	{
 		if (m_VehiclePositioning)
 			m_VehiclePositioning.Draw(this);
-		if (m_RaceTrackLogicEntity)
-			m_RaceTrackLogicEntity.Draw(this);
+		if (m_RaceTrackLogic)
+			m_RaceTrackLogic.Draw(this);
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
 	void UpdateRaceTrackLogic(float timeSlice)
 	{
-		m_RaceTrackLogic.UpdateAllRacers();
+		m_RaceTrackLogic.value.UpdateAllRacers();
 			
 		// Update player component of each player
 		PlayerManager playerMgr = GetGame().GetPlayerManager();
@@ -492,7 +485,7 @@ class UDR_GameMode: SCR_BaseGameMode
 			float totalProgress;
 			int lapCount;
 			int nextWaypoint;
-			if (!m_RaceTrackLogic.GetRacerData(assignedVehicle, totalProgress, lapCount, nextWaypoint))
+			if (!m_RaceTrackLogic.value.GetRacerData(assignedVehicle, totalProgress, lapCount, nextWaypoint))
 				continue;
 			
 			networkEnt.m_iLapCount = lapCount;
@@ -755,7 +748,7 @@ class UDR_GameMode: SCR_BaseGameMode
 	// Fallback position for the camera when there is nothing to spectate
 	IEntity GetFallbackSpectatorTarget()
 	{
-		return m_VehiclePositioning.m_Value;
+		return m_VehiclePositioning.value;
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------

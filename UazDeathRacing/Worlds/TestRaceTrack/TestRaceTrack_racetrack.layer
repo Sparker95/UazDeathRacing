@@ -1,12 +1,8 @@
-GenericEntity RaceTrackLogic {
- components {
-  UDR_RaceTrackLogicComponent "{59E2C13FD14D1E05}" {
-   m_FinishLineWaypoint UDR_EntityLinkWaypoint "{59F34701446DB3C2}" {
-    m_sEntityName "RaceTrack_FinishLine"
-   }
-  }
+UDR_RaceTrackLogic RaceTrackLogic {
+ coords 41.823 13.087 460.796
+ m_FinishLineWaypoint UDR_EntityLinkWaypoint "{59F55BCB1745E5F7}" {
+  m_sEntityName "RaceTrack_FinishLine"
  }
- coords 39.836 11.723 462.341
 }
 $grp UDR_Waypoint {
  RaceTrack_FinishLine {

@@ -3,26 +3,27 @@ class UDR_EntityLinkTemplated<Class T> : Managed
 	[Attribute("", UIWidgets.EditBox)]
 	protected string m_sEntityName;
 	
-	T m_Value;
+	T value;
 	
 	protected static const int COLOR_ERROR = 0xffff0000;
 	protected static const int COLOR_GOOD = 0xff00ff80;
-	protected static const int COLOR_BACKGROUND = 0x50001005;
+	protected static const int COLOR_BACKGROUND = 0x70001005;
+	protected static const float TEXT_SIZE = 13.0;
 		
 	T Init()
 	{
-		m_Value = T.Cast(GetGame().GetWorld().FindEntityByName(m_sEntityName));
-		if (!m_Value)
+		value = T.Cast(GetGame().GetWorld().FindEntityByName(m_sEntityName));
+		if (!value)
 		{
 			Print(string.Format("%1: Entity '%2' was not found!", ClassName(), m_sEntityName), LogLevel.ERROR);
 			return null;
 		}
-		return m_Value;
+		return value;
 	}
 	
 	T Get()
 	{
-		return m_Value;
+		return value;
 	}
 	
 	// Call from _WB_AfterWorldUpdate
@@ -58,7 +59,7 @@ class UDR_EntityLinkTemplated<Class T> : Managed
 			}
 				
 			vector textPos = 0.25 * owner.GetOrigin() + 0.75 * targetEnt.GetOrigin();
-			DebugTextWorldSpace.Create(GetGame().GetWorld(), textStr, DebugTextFlags.ONCE, textPos[0], textPos[1], textPos[2], size: 20.0, color: textColor, bgColor: COLOR_BACKGROUND);
+			DebugTextWorldSpace.Create(GetGame().GetWorld(), textStr, DebugTextFlags.ONCE, textPos[0], textPos[1], textPos[2], size: TEXT_SIZE, color: textColor, bgColor: COLOR_BACKGROUND);
 		}
 		else if (!targetEnt && !m_sEntityName.IsEmpty())
 		{
@@ -66,7 +67,7 @@ class UDR_EntityLinkTemplated<Class T> : Managed
 			
 			string errorText = string.Format("'%1' not found", m_sEntityName);
 			vector pos = owner.GetOrigin();
-			DebugTextWorldSpace.Create(GetGame().GetWorld(), errorText, DebugTextFlags.ONCE, pos[0], pos[1], pos[2], size: 20.0, color: COLOR_ERROR, bgColor: COLOR_BACKGROUND);
+			DebugTextWorldSpace.Create(GetGame().GetWorld(), errorText, DebugTextFlags.ONCE, pos[0], pos[1], pos[2], size: TEXT_SIZE, color: COLOR_ERROR, bgColor: COLOR_BACKGROUND);
 		}
 	}
 }
@@ -85,3 +86,6 @@ class UDR_EntityLinkWaypoint : UDR_EntityLinkTemplated<UDR_Waypoint> {}
 
 [BaseContainerProps()]
 class UDR_EntityLinkVehiclePositioning : UDR_EntityLinkTemplated<UDR_VehiclePositioning> {}
+
+[BaseContainerProps()]
+class UDR_EntityLinkRaceTrackLogic : UDR_EntityLinkTemplated<UDR_RaceTrackLogic> {}

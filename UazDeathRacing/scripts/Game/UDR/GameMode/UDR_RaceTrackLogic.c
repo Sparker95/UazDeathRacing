@@ -15,11 +15,11 @@ class UDR_RaceTrackLogicRacerData : Managed
 }
 
 
-class UDR_RaceTrackLogicComponentClass : ScriptComponentClass
+class UDR_RaceTrackLogicClass : GenericEntityClass
 {
 }
 
-class UDR_RaceTrackLogicComponent : ScriptComponent
+class UDR_RaceTrackLogic : GenericEntity
 {	
 	// Waypoints
 	protected ref array<UDR_Waypoint> m_aWaypoints = {};	// Entities
@@ -117,13 +117,6 @@ class UDR_RaceTrackLogicComponent : ScriptComponent
 		outLapCount = racerData.m_iLapCount;
 		outNextWaypoint = racerData.m_iNextWaypoint;
 		return true;
-	}
-	
-	//----------------------------------------------------------------------------------------------
-	override void OnPostInit(IEntity owner)
-	{
-		owner.SetFlags(EntityFlags.ACTIVE, true);
-		SetEventMask(owner, EntityEvent.FIXEDFRAME | EntityEvent.INIT | EntityEvent.DIAG);
 	}
 	
 	//----------------------------------------------------------------------------------------------
@@ -316,12 +309,18 @@ class UDR_RaceTrackLogicComponent : ScriptComponent
 	//----------------------------------------------------------------------------------------------
 	void _print(string str, LogLevel logLevel = LogLevel.NORMAL)
 	{
-		Print(string.Format("UDR_RaceTrackLogicComponent %1: %2", GetOwner().GetName(), str), logLevel);
+		Print(string.Format("UDR_RaceTrackLogicComponent %1: %2", GetName(), str), logLevel);
 	}
 	
-	override void _WB_AfterWorldUpdate(IEntity owner, float timeSlice)
+	void UDR_RaceTrackLogic(IEntitySource src, IEntity parent)
+	{
+		SetEventMask(EntityEvent.INIT);
+		SetFlags(EntityFlags.ACTIVE, true);
+	}
+	
+	override void _WB_AfterWorldUpdate(float timeSlice)
 	{
 		if (m_FinishLineWaypoint)
-			m_FinishLineWaypoint.Draw(GetOwner());
+			m_FinishLineWaypoint.Draw(this);
 	}
 }

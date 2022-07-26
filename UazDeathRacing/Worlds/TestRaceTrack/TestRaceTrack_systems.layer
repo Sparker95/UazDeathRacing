@@ -8,7 +8,7 @@ GenericEntity : "{94F1335400E2A788}Prefabs/GameMode/Systems.et" {
   UDR_GameMode "59E92B6DB3A1F725" {
    ID "59D5289C95B8DF5E"
    coords 34.103 0 -16.671
-   m_RaceTrackLogicEntity UDR_EntityLink "{59F55BCFDA750A97}" {
+   m_RaceTrackLogic UDR_EntityLinkRaceTrackLogic "{59F55BCB0FF5138E}" {
     m_sEntityName "RaceTrackLogic"
    }
    m_VehiclePositioning UDR_EntityLinkVehiclePositioning "{59F55BCFDCE36D36}" {
