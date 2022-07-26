@@ -235,6 +235,9 @@ class UDR_GameMode: SCR_BaseGameMode
 		// Register to destroyed event
 		EventHandlerManagerComponent ev = EventHandlerManagerComponent.Cast(newVehicleEntity.FindComponent(EventHandlerManagerComponent));
         ev.RegisterScriptHandler("OnDestroyed", newVehicleEntity, OnVehicleDestroyed);
+
+		// register to server death event
+		this.GetOnPlayerKilled().Insert(OnPlayerDeath);
 		
 		// Initialize vehicleComp
 		Vehicle vehicle = Vehicle.Cast(newVehicleEntity);
@@ -321,9 +324,17 @@ class UDR_GameMode: SCR_BaseGameMode
 			Print("no player found attached to this vehicle");
 			return;
 		}
-		
-		// TODO: handle the case of being run by which will auto respawn and then die again with this
+
 		GetGame().GetCallqueue().CallLater(ForceRespawnPlayer, 5000, false, playerID);
+	}
+	
+	void OnPlayerDeath(int playerID, IEntity controlledEntity)
+	{
+		PlayerController playerController = GetGame().GetPlayerManager().GetPlayerController(playerID);
+		UDR_PlayerNetworkComponent playerNetworkComp = UDR_PlayerNetworkComponent.Cast(playerController.FindComponent(UDR_PlayerNetworkComponent));
+		if (playerNetworkComp) {
+			playerNetworkComp.hasAlreadyDied = true;
+		}
 	}
 	
 	
@@ -342,6 +353,12 @@ class UDR_GameMode: SCR_BaseGameMode
 			return;
 		}
 		
+		UDR_PlayerNetworkComponent playerNetworkComp = UDR_PlayerNetworkComponent.Cast(playerController.FindComponent(UDR_PlayerNetworkComponent));
+		if (playerNetworkComp.hasAlreadyDied) {
+			playerNetworkComp.hasAlreadyDied = false;
+			return;
+		}
+
 		SCR_CharacterControllerComponent characterController = SCR_CharacterControllerComponent.Cast(playerEntity.FindComponent(SCR_CharacterControllerComponent));
 		if (characterController) {
 			characterController.ForceDeath();

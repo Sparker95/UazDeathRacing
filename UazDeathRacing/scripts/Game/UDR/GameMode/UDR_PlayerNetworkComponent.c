@@ -14,7 +14,12 @@ class UDR_PlayerNetworkComponent : ScriptComponent
 	IEntity m_AssignedVehicle;
 	float m_fTotalProgress;	// Our total distance travelled, including previous laps
 	int m_iNextWaypoint;
-	
+  
+	int m_iNextWaypoint;
+
+  // Used to avoid double death when runned over after vehicle was destroyed
+	bool hasAlreadyDied = false;
+  
 	// For moving into vehicle
 	protected bool m_bMoveInVehicleRequest = false;
 	protected RplId m_MoveInVehicleRplId;
@@ -48,9 +53,7 @@ class UDR_PlayerNetworkComponent : ScriptComponent
 	
 	//-----------------------------------------------------------------------
 	string GetPlayerName() { return m_sPlayerName; }
-	
-	
-	
+  
 	//-----------------------------------------------------------------------
 	// Playing sounds
 	
