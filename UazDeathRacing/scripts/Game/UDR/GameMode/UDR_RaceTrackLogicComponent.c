@@ -30,6 +30,9 @@ class UDR_RaceTrackLogicComponent : ScriptComponent
 	protected ref array<float> m_aWaypointDistances = {};	// Distance from that WP to next WP
 	protected float m_fLapLength;
 	
+	[Attribute()]
+	protected ref UDR_EntityLinkWaypoint m_FinishLineWaypoint;
+	
 	protected ref map<IEntity, ref UDR_RaceTrackLogicRacerData> m_RacerData = new map<IEntity, ref UDR_RaceTrackLogicRacerData>;
 	
 	protected bool m_bInitSuccess = false;
@@ -315,5 +318,11 @@ class UDR_RaceTrackLogicComponent : ScriptComponent
 	void _print(string str, LogLevel logLevel = LogLevel.NORMAL)
 	{
 		Print(string.Format("UDR_RaceTrackLogicComponent %1: %2", GetOwner().GetName(), str), logLevel);
+	}
+	
+	override void _WB_AfterWorldUpdate(IEntity owner, float timeSlice)
+	{
+		if (m_FinishLineWaypoint)
+			m_FinishLineWaypoint.Draw(GetOwner());
 	}
 }

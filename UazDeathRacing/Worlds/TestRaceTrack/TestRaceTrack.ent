@@ -22,3 +22,6 @@ Layer racetrack {
 Layer other {
  Index 6
 }
+Layer TestLink {
+ Index 7
+}

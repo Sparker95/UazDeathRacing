@@ -4,9 +4,12 @@ GenericEntity RaceTrackLogic {
    m_aWaypointNames {
     "RaceTrack_FinishLine" "Waypoint1" "Waypoint2" "Waypoint3"
    }
+   m_FinishLineWaypoint UDR_EntityLinkWaypoint "{59F34701446DB3C2}" {
+    m_sEntityName "RaceTrack_FinishLine"
+   }
   }
  }
- coords 30.365 2.001 476.066
+ coords 39.836 11.723 462.341
 }
 $grp UDR_Waypoint {
  RaceTrack_FinishLine {
@@ -18,32 +21,44 @@ $grp UDR_Waypoint {
   ShapeColor 1 0 0 0.196
   TriggerActivationType "All changes"
   ClassFilter "Vehicle"
+  m_Next UDR_EntityLinkWaypoint "{59F347004DEC0021}" {
+   m_sEntityName "Waypoint1"
+  }
  }
  Waypoint1 {
-  coords 107.263 2.001 464.246
+  coords 73.182 2.001 464.053
   TriggerShapeType Sphere
   SphereRadius 5
   DrawShape 1
   ShapeColor 1 0 0 0.196
   TriggerActivationType "All changes"
   ClassFilter "Vehicle"
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "Waypoint2"
+  }
  }
  Waypoint2 {
-  coords 55.546 2.001 440.336
+  coords 47.526 2.001 445.488
   TriggerShapeType Sphere
   SphereRadius 5
   DrawShape 1
   ShapeColor 1 0 0 0.196
   TriggerActivationType "All changes"
   ClassFilter "Vehicle"
+  m_Next UDR_EntityLinkWaypoint "{59F347007E0749C5}" {
+   m_sEntityName "Waypoint3"
+  }
  }
  Waypoint3 {
-  coords 10.908 2.001 460.427
+  coords 16.905 2.001 462.137
   TriggerShapeType Sphere
   SphereRadius 5
   DrawShape 1
   ShapeColor 1 0 0 0.196
   TriggerActivationType "All changes"
   ClassFilter "Vehicle"
+  m_Next UDR_EntityLinkWaypoint "{59F3470048E188DD}" {
+   m_sEntityName "RaceTrack_FinishLine"
+  }
  }
 }

@@ -1,14 +1,14 @@
 $grp GenericEntity : "{25C8B889A777399D}Prefabs/Props/Infrastructure/ConeTraffic/ConeTraffic_01_red.et" {
  {
-  coords 107.281 2.001 463.708
+  coords 73.2 2.001 463.515
   scale 2
  }
  {
-  coords 55.3 2.001 440.102
+  coords 47.28 2.001 445.254
   scale 2
  }
  {
-  coords 10.847 2.001 460.51
+  coords 16.844 2.001 462.22
   scale 2
  }
 }

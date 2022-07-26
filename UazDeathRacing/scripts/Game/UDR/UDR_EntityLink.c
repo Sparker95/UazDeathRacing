@@ -21,7 +21,8 @@ class UDR_EntityLinkTemplated<Class T> : Managed
 		return m_Target;
 	}
 	
-	void OnEditorUpdate(IEntity owner)
+	// Call from _WB_AfterWorldUpdate
+	void Draw(IEntity owner)
 	{		
 		WorldEditor worldEditor = Workbench.GetModule(WorldEditor);
 		if (!worldEditor)
@@ -74,3 +75,6 @@ class UDR_EntityLinkVehicle : UDR_EntityLinkTemplated<Vehicle> {}
 
 [BaseContainerProps()]
 class UDR_EntityLinkCharacter : UDR_EntityLinkTemplated<ChimeraCharacter> {}
+
+[BaseContainerProps()]
+class UDR_EntityLinkWaypoint : UDR_EntityLinkTemplated<UDR_Waypoint> {}
