@@ -199,6 +199,24 @@ class UDR_PlayerNetworkComponent : ScriptComponent
 				m_aNotifications.Remove(i);
 		}
 	}
+	
+	override void EOnPostFrame(IEntity owner, float timeSlice)
+	{
+		super.EOnPostFrame(owner, timeSlice);
+
+		ArmaReforgerScripted game = GetGame();
+		InputManager inputMgr = game.GetInputManager();
+		bool isPressing = inputMgr.GetActionValue("UDR_Respawn");		
+		
+		if (isPressing) {
+			IEntity character = game.GetPlayerController().GetControlledEntity();
+			int playerId = game.GetPlayerManager().GetPlayerIdFromControlledEntity(character);
+			UDR_GameMode gameMode = UDR_GameMode.Cast(game.GetGameMode());
+
+			PrintFormat("player %1 request respawn", playerId);
+			gameMode.ForceRespawnPlayer(playerId);
+		}
+	}
 }
 
 // Used for sorting
