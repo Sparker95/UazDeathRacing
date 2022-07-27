@@ -36,6 +36,15 @@ class UDR_PlayerNetworkComponent : ScriptComponent
 	{
 		//owner.SetFlags(EntityFlags.ACTIVE, true);
 		SetEventMask(owner, EntityEvent.FRAME);
+		GetGame().GetInputManager().AddActionListener("UDR_Respawn", EActionTrigger.UP, playerRespawnListener);
+	}
+	
+	void playerRespawnListener()
+	{
+		PrintFormat("player %1 request respawn", GetPlayerId());
+		GetGame().GetUdrGameMode().ForceRespawnPlayer(GetPlayerId());
+		Client_RequestJoinSpectators();
+		GetGame().GetCallqueue().CallLater(Client_RequestJoinRace, 2000, false);
 	}
 	
 	//-----------------------------------------------------------------------
