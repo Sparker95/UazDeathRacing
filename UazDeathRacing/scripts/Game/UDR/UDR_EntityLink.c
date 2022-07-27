@@ -28,7 +28,8 @@ class UDR_EntityLinkTemplated<Class T> : Managed
 	
 	// Call from _WB_AfterWorldUpdate
 	void Draw(IEntity owner)
-	{		
+	{
+		#ifdef WORKBENCH
 		WorldEditor worldEditor = Workbench.GetModule(WorldEditor);
 		if (!worldEditor)
 			return;
@@ -69,6 +70,7 @@ class UDR_EntityLinkTemplated<Class T> : Managed
 			vector pos = owner.GetOrigin();
 			DebugTextWorldSpace.Create(GetGame().GetWorld(), errorText, DebugTextFlags.ONCE, pos[0], pos[1], pos[2], size: TEXT_SIZE, color: COLOR_ERROR, bgColor: COLOR_BACKGROUND);
 		}
+		#endif
 	}
 }
 
