@@ -1,0 +1,128 @@
+UDR_RaceTrackLogic Track1 {
+ coords 4909.877 181.196 7365.972
+ m_FinishLineWaypoint UDR_EntityLinkWaypoint "{59FD238CEBB95157}" {
+  m_sEntityName "t1_Finish"
+ }
+ m_VehiclePositioning UDR_EntityLinkVehiclePositioning "{59FD238C048973D7}" {
+  m_sEntityName "t1_Positions"
+ }
+ m_iLapCount 3
+}
+UDR_VehiclePositioning t1_Positions {
+ coords 4934.501 160.407 7365.989
+ angleX -3.681
+ angleY 87.691
+ angleZ -2.532
+ m_iNumColumns 4
+ m_fStepRows 6
+ m_fStepColumns 5
+}
+$grp UDR_Waypoint : "{92A0F1C3F4161A7D}Prefabs/Triggers/WaypointInvisible.et" {
+ t1_Wp1 {
+  coords 4967.986 156.099 7407.464
+  angleY -71.056
+  SphereRadius 11.1
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "t1_Wp2"
+  }
+ }
+ t1_Wp2 {
+  coords 4923.735 157.091 7421.079
+  angleY -84.57
+  SphereRadius 11
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "t1_Wp3"
+  }
+ }
+ t1_Wp3 {
+  coords 4870.231 158.407 7420.391
+  angleY -120.892
+  SphereRadius 8.9
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "t1_Wp4"
+  }
+ }
+ t1_Wp4 {
+  coords 4859.572 160.211 7398.499
+  angleY 155.337
+  SphereRadius 9.2
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "t1_Wp5"
+  }
+ }
+ t1_Wp5 {
+  coords 4891.603 161.3 7381.865
+  angleY 92.183
+  SphereRadius 9.8
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "t1_Wp6"
+  }
+ }
+ t1_Wp6 {
+  coords 4912.069 161.487 7363.435
+  angleY -171.897
+  SphereRadius 7.2
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "t1_Wp7"
+  }
+ }
+ t1_Wp7 {
+  coords 4898.928 164.28 7326.667
+  angleY -146.888
+  SphereRadius 7.9
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "t1_Wp8"
+  }
+ }
+ t1_Wp8 {
+  coords 4875.744 165.355 7292.036
+  angleY -133.693
+  SphereRadius 7.5
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "t1_Wp9"
+  }
+ }
+ t1_Wp9 {
+  coords 4849.932 164.889 7287.153
+  angleY -44.447
+  SphereRadius 7.7
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "t1_Wp10"
+  }
+ }
+ t1_Wp10 {
+  coords 4835.696 164.355 7306.982
+  angleY -22.961
+  SphereRadius 8.2
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "t1_Wp11"
+  }
+ }
+ t1_Wp11 {
+  coords 4829.83 162.977 7343.901
+  angleY 15.092
+  SphereRadius 9.5
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "t1_Wp12"
+  }
+ }
+ t1_Wp12 {
+  coords 4857.168 162.205 7362.786
+  angleY 90.691
+  SphereRadius 8.9
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "t1_Finish"
+  }
+ }
+}
+UDR_Waypoint t1_Finish : "{9DB4B14E0E7FB10B}Prefabs/Triggers/WaypointFinishLine.et" {
+ coords 4943.979 159.958 7366.263
+ angleX -2.584
+ angleY 92.102
+ angleZ -2.777
+ BoxMins -15 0 -0.5
+ BoxMaxs 15 10 0.5
+ m_Next UDR_EntityLinkWaypoint "{59F347004DEC0021}" {
+  m_sEntityName "t1_Wp1"
+ }
+}

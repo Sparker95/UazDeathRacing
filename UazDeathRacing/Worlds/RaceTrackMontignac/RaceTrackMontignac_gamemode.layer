@@ -1,2 +1,11 @@
 GenericEntity : "{94F1335400E2A788}Prefabs/GameMode/Systems.et" {
+ coords 4631.048 360.649 6493.925
+ {
+  UDR_GameMode {
+   ID "59D5289C95B8DF5E"
+   m_RaceTrackLogic UDR_EntityLinkRaceTrackLogic "{59FD238C507DEA14}" {
+    m_sEntityName "Track1"
+   }
+  }
+ }
 }
