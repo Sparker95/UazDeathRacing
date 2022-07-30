@@ -14,6 +14,8 @@ class UDR_PlayerNetworkComponent : ScriptComponent
 	IEntity m_AssignedVehicle;
 	float m_fTotalProgress;	// Our total distance travelled, including previous laps
 	int m_iNextWaypoint;
+	int m_iPrevWaypoint;
+	int m_iLapCount;
 
   	// Used to avoid double death when runned over after vehicle was destroyed
 	bool m_bHasDied = false;

@@ -51,6 +51,7 @@ class UDR_HudRaceResults : UDR_HudBase
 				int hours, minutes, seconds;
 				SCR_DateTimeHelper.GetHourMinuteSecondFromSeconds(entry.m_iTotalTime_ms/1000, hours, minutes, seconds);
 				string timeFormatted = string.Format("%1:%2", minutes.ToString(2), seconds.ToString(2));
+				lineWidgets.m_TimeText.SetText(timeFormatted);
 			}
 			
 			m_bRefreshTable = false;

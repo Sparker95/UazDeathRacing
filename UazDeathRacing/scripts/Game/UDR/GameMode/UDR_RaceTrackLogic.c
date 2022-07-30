@@ -40,7 +40,7 @@ class UDR_RaceTrackLogic : GenericEntity
 	protected ref map<IEntity, ref UDR_RaceTrackLogicRacerData> m_RacerData = new map<IEntity, ref UDR_RaceTrackLogicRacerData>;
 	
 	// Script invokers
-	ref ScriptInvoker m_OnFinishLineActivated = new ScriptInvoker(); // (IEntity racer, bool lastLap, float timeSinceRaceStart_ms)
+	ref ScriptInvoker m_OnFinishLineActivated = new ScriptInvoker(); // (IEntity racer, bool lastLap)
 	
 	protected float m_fRaceStartTime_ms;
 	protected bool m_bInitSuccess = false;
@@ -52,7 +52,7 @@ class UDR_RaceTrackLogic : GenericEntity
 	// Registers a racer
 	// racerEnt - entity which will be activating triggers (the vehicle entity)
 	// racerData - the data object of this racer, can be passed in case of switching of vehicles, when the new vehicle inherits progress of the old one.
-	void RegisterRacer(notnull IEntity racerEnt, UDR_RaceTrackLogicRacerData racerData = null)
+	void RegisterRacer(notnull IEntity racerEnt, int lapCount = 0, int nextWaypoint = 1)
 	{
 		_print(string.Format("RegisterRacer: %1", racerEnt));
 		
@@ -64,23 +64,14 @@ class UDR_RaceTrackLogic : GenericEntity
 			return;
 		}
 		
-		if (racerData != null)
-		{
-			m_RacerData.Insert(racerEnt, racerData);
-		}
-		else
-		{
-			int firstWaypointId = 1;
-			
-			UDR_RaceTrackLogicRacerData newRacerData = new UDR_RaceTrackLogicRacerData();
-			newRacerData.m_iNextWaypoint = firstWaypointId;
-			int prevWpId = firstWaypointId - 1;
-			if (prevWpId < 0)
-				prevWpId = m_aWaypoints.Count() - 1;
-			newRacerData.m_iPrevWaypoint = prevWpId;
-			m_RacerData.Insert(racerEnt, newRacerData);
-		}
-		
+		UDR_RaceTrackLogicRacerData newRacerData = new UDR_RaceTrackLogicRacerData();
+		newRacerData.m_iNextWaypoint = nextWaypoint;
+		int prevWpId = nextWaypoint - 1;
+		if (prevWpId < 0)
+			prevWpId = m_aWaypoints.Count() - 1;
+		newRacerData.m_iPrevWaypoint = prevWpId;
+		newRacerData.m_iLapCount = lapCount;
+		m_RacerData.Insert(racerEnt, newRacerData);
 	}
 	
 	//----------------------------------------------------------------------------------------------
@@ -100,24 +91,7 @@ class UDR_RaceTrackLogic : GenericEntity
 	}
 	
 	//----------------------------------------------------------------------------------------------
-	// Combines both register and unregister: unregisters old racer, registers new racer,
-	// And makes the new racer inherit Racer Data of the old one.
-	void SwitchRacer(IEntity oldRacerEnt, IEntity newRacerEnt)
-	{
-		UDR_RaceTrackLogicRacerData oldRacerData = m_RacerData.Get(oldRacerEnt);
-		
-		if (!oldRacerData)
-		{
-			_print("SwitchRacer: could not find the old racer entity!");
-			return;
-		}
-		
-		UnregisterRacer(oldRacerEnt);
-		RegisterRacer(newRacerEnt, oldRacerData);
-	}
-	
-	//----------------------------------------------------------------------------------------------
-	bool GetRacerData(IEntity racerEnt, out float outTotalProgress, out int outLapCount, out int outNextWaypoint)
+	bool GetRacerData(IEntity racerEnt, out float outTotalProgress, out int outLapCount, out int outNextWaypoint, out int outPrevWaypoint)
 	{
 		UDR_RaceTrackLogicRacerData racerData = m_RacerData.Get(racerEnt);
 		
@@ -127,6 +101,7 @@ class UDR_RaceTrackLogic : GenericEntity
 		outTotalProgress = racerData.m_fTotalProgress;
 		outLapCount = racerData.m_iLapCount;
 		outNextWaypoint = racerData.m_iNextWaypoint;
+		outPrevWaypoint = racerData.m_iPrevWaypoint;
 		return true;
 	}
 	
@@ -140,6 +115,21 @@ class UDR_RaceTrackLogic : GenericEntity
 	void StartRace()
 	{
 		m_fRaceStartTime_ms = GetGame().GetWorld().GetWorldTime();
+	}
+	
+	//----------------------------------------------------------------------------------------------
+	float GetTimeSinceRaceStartMs()
+	{
+		float timeSinceRaceStart_ms = GetGame().GetWorld().GetWorldTime() - m_fRaceStartTime_ms;
+		return timeSinceRaceStart_ms;
+	}
+	
+	//----------------------------------------------------------------------------------------------
+	UDR_Waypoint GetWaypoint(int id)
+	{
+		if (id < 0 || id >= m_aWaypoints.Count())
+			return null;
+		return m_aWaypoints[id];
 	}
 	
 	//----------------------------------------------------------------------------------------------
@@ -306,9 +296,8 @@ class UDR_RaceTrackLogic : GenericEntity
 		{
 			racerData.m_iLapCount++;
 			
-			float timeSinceRaceStart_ms = GetGame().GetWorld().GetWorldTime() - m_fRaceStartTime_ms;
 			bool lastLap = racerData.m_iLapCount == m_iLapCount;
-			m_OnFinishLineActivated.Invoke(veh, lastLap, timeSinceRaceStart_ms);
+			m_OnFinishLineActivated.Invoke(veh, lastLap);
 		}
 	}
 	
@@ -336,7 +325,7 @@ class UDR_RaceTrackLogic : GenericEntity
 	
 	void UDR_RaceTrackLogic(IEntitySource src, IEntity parent)
 	{
-		SetEventMask(EntityEvent.INIT);
+		SetEventMask(EntityEvent.INIT | EntityEvent.DIAG);
 		SetFlags(EntityFlags.ACTIVE, true);
 	}
 	

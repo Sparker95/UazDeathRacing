@@ -55,5 +55,13 @@ class UDR_Waypoint : ScriptedGameTriggerEntity
 	{
 		if (m_Next)
 			m_Next.Draw(this);
+		
+		// Visualize direction
+		vector transform[4];
+		GetTransform(transform);
+		
+		vector arrow0 = GetOrigin();
+		vector arrow1 = arrow0 + 3.0*transform[2];				
+		Shape.CreateArrow(arrow0, arrow1, 1, Color.RED, ShapeFlags.ONCE | ShapeFlags.NOZBUFFER);
 	}
 }

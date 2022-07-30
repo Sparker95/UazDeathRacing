@@ -101,7 +101,7 @@ class UDR_HudVehicle : UDR_HudBase
 		widgets.m_HealthText.SetText(healthPercent.ToString());
 		
 		// Race track
-		UDR_PlayerNetworkEntity myNetworkEntity = gm.GetLocalPlayerNetworkSyncEntity();
+		UDR_PlayerNetworkEntity myNetworkEntity = gm.GetLocalPlayerNetworkEntity();
 		if (myNetworkEntity)
 			UpdateRacePositionWidgets(myNetworkEntity, widgets.m_PositionText, widgets.m_LapCountText);
 		

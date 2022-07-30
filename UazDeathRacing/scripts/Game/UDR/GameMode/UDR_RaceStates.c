@@ -116,7 +116,7 @@ sealed class UDR_RaceStateOnePlayer : UDR_RaceStateBase
 
 sealed class UDR_RaceStatePreparing : UDR_RaceStateBase
 {	
-	protected const float TIMER_THRESHOLD = 3.0;
+	protected const float TIMER_THRESHOLD = 8.0;
 	protected float m_fTimer;
 	
 	//-----------------------------------------------------------------------------
@@ -265,19 +265,7 @@ sealed class UDR_RaceStateRacing : UDR_RaceStateBase
 	//-----------------------------------------------------------------------------
 	override void OnStateEnter()
 	{
-		
-	}
-	
-	
-	//-----------------------------------------------------------------------------
-	override void OnStateLeave()
-	{
-		// Assign all current racers to the next race
-		array<UDR_PlayerNetworkComponent> currentRacers = m_GameMode.GetCurrentRacers();
-		foreach (UDR_PlayerNetworkComponent playerComp : currentRacers)
-		{
-			m_GameMode.AssignToNextRace(playerComp);
-		}
+		m_GameMode.ClearRaceResults();
 	}
 	
 	//-----------------------------------------------------------------------------
@@ -295,22 +283,54 @@ sealed class UDR_RaceStateRacing : UDR_RaceStateBase
 	}
 	
 	//-----------------------------------------------------------------------------
+	override void OnPlayerFinishedRace(UDR_PlayerNetworkComponent playerComp)
+	{
+		// Last lap has been finished
+		m_GameMode._print(string.Format("Player has finished the race: %1", playerComp.GetPlayerName()));
+		
+		// Add entry to race result table
+		int posInRace = m_GameMode.AddToRaceResults(playerComp);
+		
+		// Despawn the vehicle and assign to spectators
+		m_GameMode.DespawnVehicle(playerComp);
+		m_GameMode.AssignToSpectators(playerComp);
+		m_GameMode.UnassignFromCurrentRace(playerComp);
+		
+		// Broadcast message
+		string notificationText;
+		if (posInRace <= 2)
+		{
+			array<string> posText = {"first", "second", "third"};
+			notificationText = string.Format("%1 has finished %2!", playerComp.GetPlayerName(), posText[posInRace]);
+		}
+		else
+		{
+			notificationText = string.Format("%1 has finished the race!", playerComp.GetPlayerName());
+		}
+		
+		m_GameMode.BroadcastNotification(notificationText, 4000);
+	}
+	
+	//-----------------------------------------------------------------------------
 	override bool OnUpdate(float timeSlice, out ERaceState outNewState)
 	{
 		array<UDR_PlayerNetworkComponent> currentRacers = m_GameMode.GetCurrentRacers();
+		array<UDR_PlayerNetworkComponent> nextRacers = m_GameMode.GetNextRacers();
 		
 		int nCurrentRacers = currentRacers.Count();
+		int nNextRacers = nextRacers.Count();
 		
 		if (nCurrentRacers == 0)
-		{			
+		{
 			outNewState = ERaceState.RESULTS; // Everyone has finished or left
 			return true;
 		}
-		/*else if (nCurrentRacers == 1)
+		else if (nCurrentRacers == 1 && nNextRacers == 1)
 		{
+			// If noone is waiting for next race and we are racing alone
 			outNewState = ERaceState.ONE_PLAYER;
 			return true;
-		}*/
+		}
 		else
 		{
 			return false; // The race continues
@@ -334,20 +354,27 @@ sealed class UDR_RaceStateResults : UDR_RaceStateBase
 	override void OnStateEnter()
 	{
 		m_fTimerSeconds = 6.0;
-		
-		// Force everyone to spectate, in case the race didn't finish yet
-		//m_GameMode.DespawnAllVehicles();
-		//array<UDR_PlayerNetworkComponent> currentRacers = m_GameMode.GetCurrentRacers();
-		//foreach (UDR_PlayerNetworkComponent playerComp : currentRacers)
-		//{
-		//	m_GameMode.AssignToSpectators(playerComp);
-		//}
+		m_GameMode.BroadcastRaceResultsTable();	
 	}
 	
 	
 	//-----------------------------------------------------------------------------
 	override void OnStateLeave()
 	{
+	}
+	
+	//-----------------------------------------------------------------------------
+	override void OnPlayerConnected(UDR_PlayerNetworkComponent playerComp)
+	{
+		// Assign the player to next race and enable spectator mode
+		m_GameMode.AssignToSpectators(playerComp);
+		m_GameMode.AssignToNextRace(playerComp);
+	}
+	
+	//-----------------------------------------------------------------------------
+	override void OnPlayerRequestJoinRace(UDR_PlayerNetworkComponent playerComp)
+	{
+		OnPlayerConnected(playerComp);
 	}
 	
 	//-----------------------------------------------------------------------------

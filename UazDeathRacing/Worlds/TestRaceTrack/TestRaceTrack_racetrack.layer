@@ -1,62 +1,54 @@
 UDR_RaceTrackLogic RaceTrackLogic {
  coords 32.106 13.087 468.513
  m_FinishLineWaypoint UDR_EntityLinkWaypoint "{59F55BCB1745E5F7}" {
-  m_sEntityName "RaceTrack_FinishLine"
+  m_sEntityName "WpFinish"
  }
  m_VehiclePositioning UDR_EntityLinkVehiclePositioning "{59F56997989401A6}" {
   m_sEntityName "VehiclePositioning"
  }
- m_iLapCount 2
 }
-$grp UDR_Waypoint {
- RaceTrack_FinishLine {
-  coords 35.072 2.001 478.913
-  TriggerShapeType "Oriented Bounding Box"
-  BoxMins -0.5 0 -10
-  BoxMaxs 0.5 5 10
-  DrawShape 1
-  ShapeColor 1 0 0 0.196
-  TriggerActivationType "All changes"
-  ClassFilter "Vehicle"
-  m_Next UDR_EntityLinkWaypoint "{59F347004DEC0021}" {
-   m_sEntityName "Waypoint1"
-  }
- }
- Waypoint1 {
-  coords 73.182 2.001 464.053
-  TriggerShapeType Sphere
-  SphereRadius 5
-  DrawShape 1
-  ShapeColor 1 0 0 0.196
-  TriggerActivationType "All changes"
-  ClassFilter "Vehicle"
+$grp UDR_Waypoint : "{92A0F1C3F4161A7D}Prefabs/Triggers/WaypointInvisible.et" {
+ Wp1 {
+  coords 67.995 2.001 480.877
+  angleY 147.518
   m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
-   m_sEntityName "Waypoint2"
+   m_sEntityName "Wp2"
   }
  }
- Waypoint2 {
-  coords 47.526 2.001 445.488
-  TriggerShapeType Sphere
-  SphereRadius 5
-  DrawShape 1
-  ShapeColor 1 0 0 0.196
-  TriggerActivationType "All changes"
-  ClassFilter "Vehicle"
-  m_Next UDR_EntityLinkWaypoint "{59F347007E0749C5}" {
-   m_sEntityName "Waypoint3"
+ Wp2 {
+  coords 72.261 2.001 461.039
+  angleY -168.455
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "Wp3"
   }
  }
- Waypoint3 {
-  coords 16.905 2.001 462.137
-  TriggerShapeType Sphere
-  SphereRadius 5
-  DrawShape 1
-  ShapeColor 1 0 0 0.196
-  TriggerActivationType "All changes"
-  ClassFilter "Vehicle"
-  m_Next UDR_EntityLinkWaypoint "{59F3470048E188DD}" {
-   m_sEntityName "RaceTrack_FinishLine"
+ Wp3 {
+  coords 48.978 2.126 445.13
+  angleY -89.138
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "Wp4"
   }
+ }
+ Wp4 {
+  coords 22.851 2.001 450.844
+  angleY -43.72
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "Wp5"
+  }
+ }
+ Wp5 {
+  coords 11.575 2.001 474.863
+  angleY 47.201
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "WpFinish"
+  }
+ }
+}
+UDR_Waypoint WpFinish : "{9DB4B14E0E7FB10B}Prefabs/Triggers/WaypointFinishLine.et" {
+ coords 32.996 2.001 479.302
+ angleY 90
+ m_Next UDR_EntityLinkWaypoint "{59F347004DEC0021}" {
+  m_sEntityName "Wp1"
  }
 }
 UDR_VehiclePositioning VehiclePositioning : "{F33FD9275A6393DB}Prefabs/VehiclePositioning/VehiclePositioning.et" {

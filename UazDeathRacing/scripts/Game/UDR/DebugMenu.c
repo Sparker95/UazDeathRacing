@@ -84,6 +84,12 @@ class UDR_DebugMenu
 			udrWeaponMgrComp.Owner_RequestAddWeapon(selectedWeaponId);
 		}
 		
+		if (DbgUI.Button("Destroy Vehicle"))
+		{
+			SCR_VehicleDamageManagerComponent dmgMgr = SCR_VehicleDamageManagerComponent.Cast(vehicleEnt.FindComponent(SCR_VehicleDamageManagerComponent));
+			dmgMgr.Kill();
+		}
+		
 		DbgUI.End();
 	}
 	

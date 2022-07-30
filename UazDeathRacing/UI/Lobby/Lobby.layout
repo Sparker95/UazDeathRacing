@@ -282,6 +282,7 @@ FrameWidgetClass {
            Slot LayoutSlot "{59ECC4C9D23BE703}" {
             SizeMode Fill
            }
+           "Is Visible" 0
            Color 1 0.027 0.027 1
            Text "Warning Text"
           }

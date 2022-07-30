@@ -1,14 +1,102 @@
 $grp GenericEntity : "{25C8B889A777399D}Prefabs/Props/Infrastructure/ConeTraffic/ConeTraffic_01_red.et" {
  {
-  coords 73.2 2.001 463.515
+  coords 60.474 2.001 488.743
   scale 2
  }
  {
-  coords 47.28 2.001 445.254
+  coords 68.503 2.001 488.503
   scale 2
  }
  {
-  coords 16.844 2.001 462.22
+  coords 74.817 2.001 483.191
+  scale 2
+ }
+ {
+  coords 76.845 2.001 475.681
+  scale 2
+ }
+ {
+  coords 79.376 2.001 465.696
+  scale 2
+ }
+ {
+  coords 79.646 2.001 459.716
+  scale 2
+ }
+ {
+  coords 75.118 2.001 454.438
+  scale 2
+ }
+ {
+  coords 66.376 2.001 448.292
+  scale 2
+ }
+ {
+  coords 59.224 1.989 444.016
+  scale 2
+ }
+ {
+  coords 50.275 1.976 439.594
+  scale 2
+ }
+ {
+  coords 40.776 2.001 439.266
+  scale 2
+ }
+ {
+  coords 33.94 2.001 441.372
+  scale 2
+ }
+ {
+  coords 25.499 2.001 442.274
+  scale 2
+ }
+ {
+  coords 17.954 2.001 444.705
+  scale 2
+ }
+ {
+  coords 13.353 2.001 450.94
+  scale 2
+ }
+ {
+  coords 9.868 2.001 457.967
+  scale 2
+ }
+ {
+  coords 6.997 2.001 464.884
+  scale 2
+ }
+ {
+  coords 4.753 2.001 473.163
+  scale 2
+ }
+ {
+  coords 7.381 2.001 480.333
+  scale 2
+ }
+ {
+  coords 13.085 2.001 484.272
+  scale 2
+ }
+ {
+  coords 19.823 2.001 486.927
+  scale 2
+ }
+ {
+  coords 27.101 2.001 488.447
+  scale 2
+ }
+ {
+  coords 33.974 2.001 489.61
+  scale 2
+ }
+ {
+  coords 41.558 2.001 490.672
+  scale 2
+ }
+ {
+  coords 49.834 2.001 490.331
   scale 2
  }
 }
