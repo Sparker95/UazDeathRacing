@@ -200,6 +200,7 @@ sealed class UDR_RaceStateCountdown : UDR_RaceStateBase
 	//-----------------------------------------------------------------------------
 	override void OnStateLeave()
 	{
+		m_GameMode.ResetRaceTimer();
 	}
 	
 	//-----------------------------------------------------------------------------

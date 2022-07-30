@@ -27,6 +27,9 @@ class UDR_PlayerNetworkEntity : GenericEntity
 	bool m_bRacingNow;			// Participating in the race now
 	
 	[RplProp()]
+	bool m_bFinishedRace;		// In the current race and has finished it
+	
+	[RplProp()]
 	RplId m_AssigedVehicleId;	// Rpl ID of the assigned vehicle
 	
 	//------------------------------------------------------------------------------------------------

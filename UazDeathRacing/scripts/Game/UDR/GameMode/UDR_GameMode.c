@@ -26,6 +26,10 @@ class UDR_GameMode: SCR_BaseGameMode
 	// States of the race
 	[RplProp()]
 	protected ERaceState m_eRaceState = -1;
+	
+	[RplProp()]
+	protected int m_iLapCount;
+	
 	protected UDR_RaceStateBase m_RaceState;
 	protected ref UDR_RaceStateNoPlayers		m_StateNoPlayers;
 	protected ref UDR_RaceStateOnePlayer		m_StateOnePlayer;
@@ -640,6 +644,13 @@ class UDR_GameMode: SCR_BaseGameMode
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
+	// Total amount of laps in the current race track
+	int GetTotalLapCount()
+	{
+		return m_iLapCount;
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
 	// NOTIFICATIONS
 	
 	static void _____NOTIFICATIONS();
@@ -748,6 +759,8 @@ class UDR_GameMode: SCR_BaseGameMode
 			m_StateRacing			= new UDR_RaceStateRacing(this);
 			m_StateResults			= new UDR_RaceStateResults(this);
 			SwitchToRaceState(ERaceState.NO_PLAYERS);
+			
+			SwitchToRaceTrack(m_RaceTrackLogic.value);
 		}
 	}
 	
@@ -813,6 +826,13 @@ class UDR_GameMode: SCR_BaseGameMode
 	// RACE STATE
 	
 	static void _____RACE_STATE_AND_LOGIC();
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	protected void SwitchToRaceTrack(notnull UDR_RaceTrackLogic raceTrackLogic)
+	{
+		m_iLapCount = raceTrackLogic.GetLapCount();
+		Replication.BumpMe();
+	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
 	protected void SwitchToRaceState(ERaceState newRaceState)
@@ -929,6 +949,12 @@ class UDR_GameMode: SCR_BaseGameMode
 	void ClearRaceResults()
 	{
 		m_RaceResultsTable.Clear();
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	void ResetRaceTimer()
+	{
+		m_RaceTrackLogic.value.ResetRaceTimer();
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------

@@ -106,13 +106,20 @@ class UDR_RaceTrackLogic : GenericEntity
 	}
 	
 	//----------------------------------------------------------------------------------------------
+	// Returns total lap count in this race
+	int GetLapCount()
+	{
+		return m_iLapCount;
+	}
+	
+	//----------------------------------------------------------------------------------------------
 	UDR_VehiclePositioning GetVehiclePositioning()
 	{
 		return m_VehiclePositioning.value;
 	}
 	
 	//----------------------------------------------------------------------------------------------
-	void StartRace()
+	void ResetRaceTimer()
 	{
 		m_fRaceStartTime_ms = GetGame().GetWorld().GetWorldTime();
 	}
