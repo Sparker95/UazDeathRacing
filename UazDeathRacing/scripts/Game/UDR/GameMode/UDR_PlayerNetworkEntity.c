@@ -12,16 +12,16 @@ class UDR_PlayerNetworkEntity : GenericEntity
 	int m_iPlayerId;
 	
 	[RplProp()]
-	int m_iLapCount;		// Our lap count
+	int m_iLapCount;			// Our lap count
 	
 	[RplProp()]
-	int m_iPositionInRace;	// Our position among other racers
+	int m_iPositionInRace;		// Our position among other racers
 	
 	[RplProp()]
 	bool m_bSpectating;			// Spectating
 	
 	[RplProp()]
-	bool m_bAssignedForRace;	// Will participate in the next race
+	bool m_bAssignedForNextRace;// Will participate in the next race
 	
 	[RplProp()]
 	bool m_bRacingNow;			// Participating in the race now
@@ -70,8 +70,9 @@ class UDR_PlayerNetworkEntity : GenericEntity
 		reader.ReadInt(m_iPositionInRace);
 		
 		reader.ReadBool(m_bSpectating);
-		reader.ReadBool(m_bAssignedForRace);
+		reader.ReadBool(m_bAssignedForNextRace);
 		reader.ReadBool(m_bRacingNow);
+		reader.ReadBool(m_bFinishedRace);
 		
 		reader.ReadRplId(m_AssigedVehicleId);
 		
@@ -93,8 +94,9 @@ class UDR_PlayerNetworkEntity : GenericEntity
 		writer.WriteInt(m_iPositionInRace);
 		
 		writer.WriteBool(m_bSpectating);
-		writer.WriteBool(m_bAssignedForRace);
+		writer.WriteBool(m_bAssignedForNextRace);
 		writer.WriteBool(m_bRacingNow);
+		writer.WriteBool(m_bFinishedRace);
 		
 		writer.WriteRplId(m_AssigedVehicleId);
 		

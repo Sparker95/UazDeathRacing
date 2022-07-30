@@ -38,11 +38,6 @@ class UDR_GameMode: SCR_BaseGameMode
 	protected ref UDR_RaceStateRacing			m_StateRacing;
 	protected ref UDR_RaceStateResults			m_StateResults;
 	
-	// IDs of players which are assigned to the race
-	protected ref array<UDR_PlayerNetworkComponent> m_aCurrentRacers = {};	// Players who are currently racing
-	protected ref array<UDR_PlayerNetworkComponent> m_aNextRacers = {};		// Players who want to race at the next race
-	protected ref array<UDR_PlayerNetworkComponent> m_aSpectators = {};		// Players currently spectating
-	
 	// Map which maintains UDR_PlayerNetworkEntity per each player
 	protected ref map<int, UDR_PlayerNetworkEntity> m_mPlayerNetworkSyncEntities = new map<int, UDR_PlayerNetworkEntity>();
 	
@@ -157,70 +152,26 @@ class UDR_GameMode: SCR_BaseGameMode
 	static void _____PLAYER_GROUP_ASSIGNMENT();
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
-	void AssignToCurrentRace(notnull UDR_PlayerNetworkComponent playerComp)
+	void AssignToCurrentRace(notnull UDR_PlayerNetworkComponent playerComp, bool value)
 	{
-		_print(string.Format("AssignToCurrentRace: %1", playerComp.GetPlayerName()));
-		
-		if (!m_aCurrentRacers.Contains(playerComp))
-			m_aCurrentRacers.Insert(playerComp);
-		
-		playerComp.m_NetworkEntity.m_bRacingNow = true;
+		_print(string.Format("AssignToCurrentRace: %1 %2", playerComp.GetPlayerName(), value));
+		playerComp.m_NetworkEntity.m_bRacingNow = value;
 		playerComp.m_NetworkEntity.BumpReplication();
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
-	void UnassignFromCurrentRace(notnull UDR_PlayerNetworkComponent playerComp)
+	void AssignToNextRace(notnull UDR_PlayerNetworkComponent playerComp, bool value)
 	{
-		_print(string.Format("UnassignFromCurrentRace: %1", playerComp.GetPlayerName()));
-		
-		m_aCurrentRacers.RemoveItem(playerComp);
-		
-		playerComp.m_NetworkEntity.m_bRacingNow = false;
+		_print(string.Format("AssignToNextRace: %1 %2", playerComp.GetPlayerName(), value));
+		playerComp.m_NetworkEntity.m_bAssignedForNextRace = value;
 		playerComp.m_NetworkEntity.BumpReplication();
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
-	void AssignToNextRace(notnull UDR_PlayerNetworkComponent playerComp)
+	void AssignToSpectators(notnull UDR_PlayerNetworkComponent playerComp, bool value)
 	{
-		_print(string.Format("AssignToNextRace: %1", playerComp.GetPlayerName()));
-		
-		if (!m_aNextRacers.Contains(playerComp))
-			m_aNextRacers.Insert(playerComp);
-		
-		playerComp.m_NetworkEntity.m_bAssignedForRace = true;
-		playerComp.m_NetworkEntity.BumpReplication();
-	}
-	
-	//-------------------------------------------------------------------------------------------------------------------------------
-	void UnassignFromNextRace(notnull UDR_PlayerNetworkComponent playerComp)
-	{
-		_print(string.Format("UnassignFromNextRace: %1", playerComp.GetPlayerName()));
-		
-		m_aNextRacers.RemoveItem(playerComp);
-		
-		playerComp.m_NetworkEntity.m_bAssignedForRace = false;
-		playerComp.m_NetworkEntity.BumpReplication();
-	}
-	
-	//-------------------------------------------------------------------------------------------------------------------------------
-	void AssignToSpectators(notnull UDR_PlayerNetworkComponent playerComp)
-	{
-		_print(string.Format("AssignToSpectators: %1", playerComp.GetPlayerName()));
-		
-		if (!m_aSpectators.Contains(playerComp))
-			m_aSpectators.Insert(playerComp);
-		
-		playerComp.m_NetworkEntity.m_bSpectating = true;
-		playerComp.m_NetworkEntity.BumpReplication();
-	}
-	
-	//-------------------------------------------------------------------------------------------------------------------------------
-	void UnassignFromSpectators(notnull UDR_PlayerNetworkComponent playerComp)
-	{
-		_print(string.Format("UnassignFromSpectators: %1", playerComp.GetPlayerName()));
-		
-		m_aSpectators.RemoveItem(playerComp);
-		playerComp.m_NetworkEntity.m_bSpectating = false;
+		_print(string.Format("AssignToSpectators: %1 %2", playerComp.GetPlayerName(), value));
+		playerComp.m_NetworkEntity.m_bSpectating = value;
 		playerComp.m_NetworkEntity.BumpReplication();
 	}
 	
@@ -229,8 +180,8 @@ class UDR_GameMode: SCR_BaseGameMode
 	{
 		_print("UnassignAllFromCurrentRace");
 		
-		foreach (UDR_PlayerNetworkComponent playerComp : GetAllPlayers())
-			UnassignFromCurrentRace(playerComp);
+		foreach (UDR_PlayerNetworkComponent playerComp : UDR_PlayerNetworkComponent.GetAll())
+			AssignToCurrentRace(playerComp, false);
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
@@ -238,8 +189,8 @@ class UDR_GameMode: SCR_BaseGameMode
 	{
 		_print("UnassignAllFromNextRace");
 		
-		foreach (UDR_PlayerNetworkComponent playerComp : GetAllPlayers())
-			UnassignFromCurrentRace(playerComp);
+		foreach (UDR_PlayerNetworkComponent playerComp : UDR_PlayerNetworkComponent.GetAll())
+			AssignToNextRace(playerComp, false);
 	}
 	
 	
@@ -266,7 +217,7 @@ class UDR_GameMode: SCR_BaseGameMode
 		vector transform[4];
 		UDR_Waypoint wp = m_RaceTrackLogic.value.GetWaypoint(playerComp.m_iPrevWaypoint);
 		wp.GetTransform(transform);
-		SpawnVehicle(playerComp, transform, playerComp.m_iLapCount, playerComp.m_iNextWaypoint);
+		SpawnVehicle(playerComp, transform, playerComp.m_NetworkEntity.m_iLapCount, playerComp.m_iNextWaypoint);
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
@@ -356,7 +307,7 @@ class UDR_GameMode: SCR_BaseGameMode
 	//-------------------------------------------------------------------------------------------------------------------------------
 	void DespawnAllVehicles()
 	{
-		foreach (UDR_PlayerNetworkComponent playerComp : GetAllPlayers())
+		foreach (UDR_PlayerNetworkComponent playerComp : UDR_PlayerNetworkComponent.GetAll())
 		{
 			DespawnVehicle(playerComp);
 		}
@@ -423,11 +374,7 @@ class UDR_GameMode: SCR_BaseGameMode
 		if (!playerComp)
 			return;
 		
-		UDR_PlayerNetworkEntity playerEnt = playerComp.m_NetworkEntity;
-		if (!playerEnt)
-			return;
-		
-		if (!playerEnt.m_bSpectating)
+		if (!playerComp.m_NetworkEntity.m_bSpectating)
 		{
 			SpawnVehicleAtLastWaypoint(playerComp);
 		}
@@ -484,9 +431,12 @@ class UDR_GameMode: SCR_BaseGameMode
 		// Get current race progress
 		// And save it to player component. We must restore it upon respawn.
 		float totalProgress;
-		if (!m_RaceTrackLogic.value.GetRacerData(vehEntity, totalProgress, playerComp.m_iLapCount, playerComp.m_iNextWaypoint, playerComp.m_iPrevWaypoint))
+		if (!m_RaceTrackLogic.value.GetRacerData(vehEntity, totalProgress, playerComp.m_NetworkEntity.m_iLapCount,
+				playerComp.m_iNextWaypoint, playerComp.m_iPrevWaypoint))
+		{
 			return;
-		
+		}
+			
 		m_RaceTrackLogic.value.UnregisterRacer(vehEntity);
 		
 		GetGame().GetCallqueue().CallLater(Temp_RespawnPlayer, RESPAWN_DELAY_MS, false, playerId);
@@ -572,47 +522,38 @@ class UDR_GameMode: SCR_BaseGameMode
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
-	// Returns all players, regardless of their state
-	array<UDR_PlayerNetworkComponent> GetAllPlayers()
-	{
-		PlayerManager pm = GetGame().GetPlayerManager();
-		array<int> playerIds = {};
-		pm.GetPlayers(playerIds);
-		
-		array<UDR_PlayerNetworkComponent> a = {};
-		foreach (int id : playerIds)
-		{
-			auto playerComp = UDR_PlayerNetworkComponent.GetForPlayerId(id);			
-			a.Insert(playerComp);
-		}
-		
-		return a;
-	}
-	
-	//-------------------------------------------------------------------------------------------------------------------------------
 	array<UDR_PlayerNetworkComponent> GetCurrentRacers()
 	{
-		RemoveNullsFromArray(m_aCurrentRacers);
 		array<UDR_PlayerNetworkComponent> a = {};
-		a.Copy(m_aCurrentRacers);
+		foreach (UDR_PlayerNetworkComponent playerComp : UDR_PlayerNetworkComponent.GetAll())
+		{
+			if (playerComp.m_NetworkEntity && playerComp.m_NetworkEntity.m_bRacingNow)
+				a.Insert(playerComp);
+		}
 		return a;
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
 	array<UDR_PlayerNetworkComponent> GetNextRacers()
 	{
-		RemoveNullsFromArray(m_aNextRacers);
 		array<UDR_PlayerNetworkComponent> a = {};
-		a.Copy(m_aNextRacers);
+		foreach (UDR_PlayerNetworkComponent playerComp : UDR_PlayerNetworkComponent.GetAll())
+		{
+			if (playerComp.m_NetworkEntity && playerComp.m_NetworkEntity.m_bAssignedForNextRace)
+				a.Insert(playerComp);
+		}
 		return a;
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
 	array<UDR_PlayerNetworkComponent> GetSpectators()
 	{
-		RemoveNullsFromArray(m_aSpectators);
 		array<UDR_PlayerNetworkComponent> a = {};
-		a.Copy(m_aSpectators);
+		foreach (UDR_PlayerNetworkComponent playerComp : UDR_PlayerNetworkComponent.GetAll())
+		{
+			if (playerComp.m_NetworkEntity && playerComp.m_NetworkEntity.m_bSpectating)
+				a.Insert(playerComp);
+		}
 		return a;
 	}
 	
@@ -662,11 +603,11 @@ class UDR_GameMode: SCR_BaseGameMode
 		{
 			case ERaceState.ONE_PLAYER:
 			{
-				UDR_PlayerNetworkEntity myNetworkEntity = GetLocalPlayerNetworkEntity();
-				if (!myNetworkEntity)
+				UDR_PlayerNetworkComponent playerComp = UDR_PlayerNetworkComponent.GetLocal();
+				if (!playerComp.m_NetworkEntity)
 					return string.Empty;
 				
-				if (!myNetworkEntity.m_bSpectating)
+				if (!playerComp.m_NetworkEntity.m_bSpectating)
 					return "You are the only player. Wait until more players join...";
 				else
 					return string.Empty;
@@ -803,7 +744,7 @@ class UDR_GameMode: SCR_BaseGameMode
 			if (DbgUI.Button("State: Results"))
 			{
 				// For testing, add every player to the results table
-				foreach (UDR_PlayerNetworkComponent playerComp : GetAllPlayers())
+				foreach (UDR_PlayerNetworkComponent playerComp : UDR_PlayerNetworkComponent.GetAll())
 				{
 					m_RaceResultsTable.Add(playerComp.GetPlayerId(), playerComp.GetPlayerName(), Math.RandomFloat(0, 1000*60*3));
 				}
@@ -865,10 +806,6 @@ class UDR_GameMode: SCR_BaseGameMode
 	//-------------------------------------------------------------------------------------------------------------------------------
 	void UpdateRaceState(float timeSlice)
 	{
-		RemoveNullsFromArray(m_aCurrentRacers);
-		RemoveNullsFromArray(m_aNextRacers);
-		RemoveNullsFromArray(m_aSpectators);
-		
 		if (m_RaceState)
 		{
 			ERaceState newRaceState = -1;
@@ -898,8 +835,6 @@ class UDR_GameMode: SCR_BaseGameMode
 			if (!playerComp)
 				continue;
 			
-			UDR_PlayerNetworkEntity networkEnt = playerComp.m_NetworkEntity;
-			
 			IEntity assignedVehicle = playerComp.m_AssignedVehicle;
 			if (!assignedVehicle)
 				continue;
@@ -912,12 +847,12 @@ class UDR_GameMode: SCR_BaseGameMode
 			if (!m_RaceTrackLogic.value.GetRacerData(assignedVehicle, totalProgress, lapCount, nextWaypoint, prevWaypoint))
 				continue;
 			
-			networkEnt.m_iLapCount = lapCount;
-			
 			playerComp.m_iNextWaypoint = nextWaypoint;
 			playerComp.m_iPrevWaypoint = prevWaypoint;
-			playerComp.m_iLapCount = lapCount;
 			playerComp.m_fTotalProgress = totalProgress;
+			
+			playerComp.m_NetworkEntity.m_iLapCount = lapCount;
+			playerComp.m_NetworkEntity.BumpReplication();
 			
 			playerComponentsSorted.Insert(playerComp);
 		}
@@ -925,12 +860,14 @@ class UDR_GameMode: SCR_BaseGameMode
 		// Sort player components by total track progress, to find who is first, second, etc
 		SCR_Sorting<UDR_PlayerNetworkComponent, UDR_PlayerNetworkComponent_CompareTotalProgress>.HeapSort(playerComponentsSorted, true);
 		
+		int nRacersFinishedRace = 0;	// Also count how many players have finished the race
+		foreach (UDR_PlayerNetworkComponent playerComp : GetCurrentRacers())
+			nRacersFinishedRace += playerComp.m_NetworkEntity.m_bFinishedRace;
+		
 		foreach (int i, UDR_PlayerNetworkComponent playerComp : playerComponentsSorted)
 		{
-			UDR_PlayerNetworkEntity networkSync = playerComp.m_NetworkEntity;
-			
-			networkSync.m_iPositionInRace = i;
-			networkSync.BumpReplication();
+			playerComp.m_NetworkEntity.m_iPositionInRace = i + nRacersFinishedRace;
+			playerComp.m_NetworkEntity.BumpReplication();
 		}
 	}
 	
@@ -972,14 +909,14 @@ class UDR_GameMode: SCR_BaseGameMode
 			return;
 		
 		// Player is spectator already
-		if (m_aSpectators.Contains(playerComp))
+		if (playerComp.m_NetworkEntity.m_bSpectating)
 			return;
 		
-		AssignToSpectators(playerComp);
+		AssignToSpectators(playerComp, true);
 		DespawnVehicle(playerComp);
 		
-		UnassignFromNextRace(playerComp);
-		UnassignFromCurrentRace(playerComp);
+		AssignToNextRace(playerComp, false);
+		AssignToCurrentRace(playerComp, false);
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
@@ -991,7 +928,7 @@ class UDR_GameMode: SCR_BaseGameMode
 		if (!playerComp)
 			return;
 		
-		if (m_aCurrentRacers.Contains(playerComp) || m_aNextRacers.Contains(playerComp))
+		if (playerComp.m_NetworkEntity.m_bRacingNow || playerComp.m_NetworkEntity.m_bAssignedForNextRace)
 			return;
 
 		m_RaceState.OnPlayerRequestJoinRace(playerComp);
@@ -1026,7 +963,7 @@ class UDR_GameMode: SCR_BaseGameMode
 	// Sends a UI sound event to all users
 	void BroadcastUiSoundEvent(string eventName)
 	{
-		foreach (UDR_PlayerNetworkComponent playerComp : GetAllPlayers())
+		foreach (UDR_PlayerNetworkComponent playerComp : UDR_PlayerNetworkComponent.GetAll())
 		{
 			playerComp.Authority_SendUiSoundEvent(eventName);
 		}
@@ -1036,7 +973,7 @@ class UDR_GameMode: SCR_BaseGameMode
 	// Sends a notification to all players
 	void BroadcastNotification(string text, float lifeTime_ms)
 	{
-		foreach (UDR_PlayerNetworkComponent playerComp : GetAllPlayers())
+		foreach (UDR_PlayerNetworkComponent playerComp : UDR_PlayerNetworkComponent.GetAll())
 		{
 			playerComp.Authority_SendNotification(text, lifeTime_ms);
 		}

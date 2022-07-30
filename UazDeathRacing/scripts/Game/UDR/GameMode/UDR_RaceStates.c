@@ -7,7 +7,7 @@ sealed class UDR_RaceStateNoPlayers : UDR_RaceStateBase
 	override void OnPlayerConnected(UDR_PlayerNetworkComponent playerComp)
 	{
 		// Assign first player to next race
-		m_GameMode.AssignToNextRace(playerComp);
+		m_GameMode.AssignToNextRace(playerComp, true);
 	}
 	
 	//-----------------------------------------------------------------------------
@@ -18,8 +18,8 @@ sealed class UDR_RaceStateNoPlayers : UDR_RaceStateBase
 	//-----------------------------------------------------------------------------
 	override void OnPlayerRequestJoinRace(UDR_PlayerNetworkComponent playerComp)
 	{
-		m_GameMode.AssignToNextRace(playerComp);
-		m_GameMode.UnassignFromSpectators(playerComp);
+		m_GameMode.AssignToNextRace(playerComp, true);
+		m_GameMode.AssignToSpectators(playerComp, false);
 	}
 	
 	//-----------------------------------------------------------------------------
@@ -79,14 +79,14 @@ sealed class UDR_RaceStateOnePlayer : UDR_RaceStateBase
 	override void OnPlayerConnected(UDR_PlayerNetworkComponent playerComp)
 	{
 		// Assign the player to next race
-		m_GameMode.AssignToNextRace(playerComp);
+		m_GameMode.AssignToNextRace(playerComp, true);
 	}
 	
 	//-----------------------------------------------------------------------------
 	override void OnPlayerRequestJoinRace(UDR_PlayerNetworkComponent playerComp)
 	{
-		m_GameMode.AssignToNextRace(playerComp);
-		m_GameMode.UnassignFromSpectators(playerComp);
+		m_GameMode.AssignToNextRace(playerComp, true);
+		m_GameMode.AssignToSpectators(playerComp, false);
 	}
 	
 	//-----------------------------------------------------------------------------
@@ -131,7 +131,7 @@ sealed class UDR_RaceStatePreparing : UDR_RaceStateBase
 		foreach (UDR_PlayerNetworkComponent player : players)
 		{
 			m_GameMode.SpawnVehicleAtSpawnPoint(player);
-			m_GameMode.UnassignFromSpectators(player);
+			m_GameMode.AssignToSpectators(player, false);
 		}
 	}
 	
@@ -139,15 +139,15 @@ sealed class UDR_RaceStatePreparing : UDR_RaceStateBase
 	override void OnPlayerConnected(UDR_PlayerNetworkComponent playerComp)
 	{
 		// Assign the player to next race and spawn his vehicle
-		m_GameMode.AssignToNextRace(playerComp);
+		m_GameMode.AssignToNextRace(playerComp, true);
 		m_GameMode.SpawnVehicleAtSpawnPoint(playerComp);
 	}
 	
 	//-----------------------------------------------------------------------------
 	override void OnPlayerRequestJoinRace(UDR_PlayerNetworkComponent playerComp)
 	{
-		m_GameMode.AssignToNextRace(playerComp);
-		m_GameMode.UnassignFromSpectators(playerComp);
+		m_GameMode.AssignToNextRace(playerComp, true);
+		m_GameMode.AssignToSpectators(playerComp, false);
 		m_GameMode.SpawnVehicleAtSpawnPoint(playerComp);	// During this stage we can spawn in vehicles for new players
 	}
 	
@@ -193,7 +193,10 @@ sealed class UDR_RaceStateCountdown : UDR_RaceStateBase
 		array<UDR_PlayerNetworkComponent> nextRacePlayers = m_GameMode.GetNextRacers();
 		foreach (UDR_PlayerNetworkComponent playerComp : nextRacePlayers)
 		{
-			m_GameMode.AssignToCurrentRace(playerComp);
+			m_GameMode.AssignToCurrentRace(playerComp, true);
+			
+			playerComp.m_NetworkEntity.m_bFinishedRace = false;
+			playerComp.m_NetworkEntity.BumpReplication();
 		}
 	}
 	
@@ -207,8 +210,8 @@ sealed class UDR_RaceStateCountdown : UDR_RaceStateBase
 	override void OnPlayerConnected(UDR_PlayerNetworkComponent playerComp)
 	{
 		// Assign the player to next race and enable spectator mode
-		m_GameMode.AssignToSpectators(playerComp);
-		m_GameMode.AssignToNextRace(playerComp);
+		m_GameMode.AssignToSpectators(playerComp, true);
+		m_GameMode.AssignToNextRace(playerComp, true);
 	}
 	
 	//-----------------------------------------------------------------------------
@@ -273,8 +276,8 @@ sealed class UDR_RaceStateRacing : UDR_RaceStateBase
 	override void OnPlayerConnected(UDR_PlayerNetworkComponent playerComp)
 	{
 		// Assign the player to next race and enable spectator mode
-		m_GameMode.AssignToSpectators(playerComp);
-		m_GameMode.AssignToNextRace(playerComp);
+		m_GameMode.AssignToSpectators(playerComp, true);
+		m_GameMode.AssignToNextRace(playerComp, true);
 	}
 	
 	//-----------------------------------------------------------------------------
@@ -294,8 +297,10 @@ sealed class UDR_RaceStateRacing : UDR_RaceStateBase
 		
 		// Despawn the vehicle and assign to spectators
 		m_GameMode.DespawnVehicle(playerComp);
-		m_GameMode.AssignToSpectators(playerComp);
-		m_GameMode.UnassignFromCurrentRace(playerComp);
+		m_GameMode.AssignToSpectators(playerComp, true);
+		
+		playerComp.m_NetworkEntity.m_bFinishedRace = true;
+		playerComp.m_NetworkEntity.BumpReplication();
 		
 		// Broadcast message
 		string notificationText;
@@ -315,18 +320,23 @@ sealed class UDR_RaceStateRacing : UDR_RaceStateBase
 	//-----------------------------------------------------------------------------
 	override bool OnUpdate(float timeSlice, out ERaceState outNewState)
 	{
-		array<UDR_PlayerNetworkComponent> currentRacers = m_GameMode.GetCurrentRacers();
-		array<UDR_PlayerNetworkComponent> nextRacers = m_GameMode.GetNextRacers();
-		
-		int nCurrentRacers = currentRacers.Count();
-		int nNextRacers = nextRacers.Count();
-		
-		if (nCurrentRacers == 0)
+		int nCurrentRacers = 0;
+		int nFinishedRace = 0;
+		foreach (UDR_PlayerNetworkComponent playerComp : UDR_PlayerNetworkComponent.GetAll())
+		{
+			if (!playerComp.m_NetworkEntity)
+				continue;
+			
+			nFinishedRace += playerComp.m_NetworkEntity.m_bFinishedRace;
+			nCurrentRacers += playerComp.m_NetworkEntity.m_bRacingNow;
+		}
+				
+		if (nCurrentRacers == nFinishedRace)
 		{
 			outNewState = ERaceState.RESULTS; // Everyone has finished or left
 			return true;
 		}
-		else if (nCurrentRacers == 1 && nNextRacers == 1)
+		else if (nCurrentRacers == 1 && nFinishedRace == 0)
 		{
 			// If noone is waiting for next race and we are racing alone
 			outNewState = ERaceState.ONE_PLAYER;
@@ -354,7 +364,7 @@ sealed class UDR_RaceStateResults : UDR_RaceStateBase
 	//-----------------------------------------------------------------------------
 	override void OnStateEnter()
 	{
-		m_fTimerSeconds = 6.0;
+		m_fTimerSeconds = 9.0;
 		m_GameMode.BroadcastRaceResultsTable();	
 	}
 	
@@ -368,8 +378,8 @@ sealed class UDR_RaceStateResults : UDR_RaceStateBase
 	override void OnPlayerConnected(UDR_PlayerNetworkComponent playerComp)
 	{
 		// Assign the player to next race and enable spectator mode
-		m_GameMode.AssignToSpectators(playerComp);
-		m_GameMode.AssignToNextRace(playerComp);
+		m_GameMode.AssignToSpectators(playerComp, true);
+		m_GameMode.AssignToNextRace(playerComp, true);
 	}
 	
 	//-----------------------------------------------------------------------------

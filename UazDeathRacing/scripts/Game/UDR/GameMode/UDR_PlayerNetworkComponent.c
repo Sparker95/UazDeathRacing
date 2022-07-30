@@ -15,7 +15,6 @@ class UDR_PlayerNetworkComponent : ScriptComponent
 	float m_fTotalProgress;	// Our total distance travelled, including previous laps
 	int m_iNextWaypoint;
 	int m_iPrevWaypoint;
-	int m_iLapCount;
 
   	// Used to avoid double death when runned over after vehicle was destroyed
 	bool m_bHasDied = false;
@@ -24,8 +23,9 @@ class UDR_PlayerNetworkComponent : ScriptComponent
 	protected bool m_bMoveInVehicleRequest = false;
 	protected RplId m_MoveInVehicleRplId;
 	
+	// Array of notifications
 	protected ref array<ref UDR_Notification> m_aNotifications = {};
-	
+		
 	
 	//-----------------------------------------------------------------------
 	void BumpReplication()
@@ -197,6 +197,26 @@ class UDR_PlayerNetworkComponent : ScriptComponent
 	{
 		PlayerController pc = GetGame().GetPlayerController();
 		return UDR_PlayerNetworkComponent.Cast(pc.FindComponent(UDR_PlayerNetworkComponent));
+	}
+	
+	// Returns component for all players, regardless of their state
+	static array<UDR_PlayerNetworkComponent> GetAll()
+	{
+		PlayerManager pm = GetGame().GetPlayerManager();
+		array<UDR_PlayerNetworkComponent> arrayOut = {};
+		array<int> playerIds = {};
+		pm.GetPlayers(playerIds);
+		foreach (int id : playerIds)
+		{
+			PlayerController pc = pm.GetPlayerController(id);
+			if (!pc)
+				continue;
+			UDR_PlayerNetworkComponent playerComp = UDR_PlayerNetworkComponent.Cast(pc.FindComponent(UDR_PlayerNetworkComponent));
+			if (!playerComp)
+				continue;
+			arrayOut.Insert(playerComp);
+		}
+		return arrayOut;
 	}
 	
 	override void EOnFrame(IEntity owner, float timeSlice)
