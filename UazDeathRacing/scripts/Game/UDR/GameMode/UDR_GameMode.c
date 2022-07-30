@@ -50,7 +50,13 @@ class UDR_GameMode: SCR_BaseGameMode
 	{
 		SetEventMask(EntityEvent.INIT | EntityEvent.FRAME | EntityEvent.DIAG);
 	}
-		
+	
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	// PLAYER CONNECTION HANDLING
+	
+	static void _____PLAYER_CONNECTION_HANDLING();
+	
 	//-------------------------------------------------------------------------------------------------------------------------------
 	override void OnPlayerRegistered(int playerId)
 	{
@@ -140,9 +146,105 @@ class UDR_GameMode: SCR_BaseGameMode
 	}
 	
 	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	// PLAYER ASSIGNMENT TO GROUPS
+	
+	static void _____PLAYER_GROUP_ASSIGNMENT();
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
-	// Vehicle spawning
+	void AssignToCurrentRace(notnull UDR_PlayerNetworkComponent playerComp)
+	{
+		_print(string.Format("AssignToCurrentRace: %1", playerComp.GetPlayerName()));
+		
+		if (!m_aCurrentRacers.Contains(playerComp))
+			m_aCurrentRacers.Insert(playerComp);
+		
+		playerComp.m_NetworkEntity.m_bRacingNow = true;
+		playerComp.m_NetworkEntity.BumpReplication();
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	void UnassignFromCurrentRace(notnull UDR_PlayerNetworkComponent playerComp)
+	{
+		_print(string.Format("UnassignFromCurrentRace: %1", playerComp.GetPlayerName()));
+		
+		m_aCurrentRacers.RemoveItem(playerComp);
+		
+		playerComp.m_NetworkEntity.m_bRacingNow = false;
+		playerComp.m_NetworkEntity.BumpReplication();
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	void AssignToNextRace(notnull UDR_PlayerNetworkComponent playerComp)
+	{
+		_print(string.Format("AssignToNextRace: %1", playerComp.GetPlayerName()));
+		
+		if (!m_aNextRacers.Contains(playerComp))
+			m_aNextRacers.Insert(playerComp);
+		
+		playerComp.m_NetworkEntity.m_bAssignedForRace = true;
+		playerComp.m_NetworkEntity.BumpReplication();
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	void UnassignFromNextRace(notnull UDR_PlayerNetworkComponent playerComp)
+	{
+		_print(string.Format("UnassignFromNextRace: %1", playerComp.GetPlayerName()));
+		
+		m_aNextRacers.RemoveItem(playerComp);
+		
+		playerComp.m_NetworkEntity.m_bAssignedForRace = false;
+		playerComp.m_NetworkEntity.BumpReplication();
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	void AssignToSpectators(notnull UDR_PlayerNetworkComponent playerComp)
+	{
+		_print(string.Format("AssignToSpectators: %1", playerComp.GetPlayerName()));
+		
+		if (!m_aSpectators.Contains(playerComp))
+			m_aSpectators.Insert(playerComp);
+		
+		playerComp.m_NetworkEntity.m_bSpectating = true;
+		playerComp.m_NetworkEntity.BumpReplication();
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	void UnassignFromSpectators(notnull UDR_PlayerNetworkComponent playerComp)
+	{
+		_print(string.Format("UnassignFromSpectators: %1", playerComp.GetPlayerName()));
+		
+		m_aSpectators.RemoveItem(playerComp);
+		playerComp.m_NetworkEntity.m_bSpectating = false;
+		playerComp.m_NetworkEntity.BumpReplication();
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	void UnassignAllFromCurrentRace()
+	{
+		_print("UnassignAllFromCurrentRace");
+		
+		foreach (UDR_PlayerNetworkComponent playerComp : GetAllPlayers())
+			UnassignFromCurrentRace(playerComp);
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	void UnassignAllFromNextRace()
+	{
+		_print("UnassignAllFromNextRace");
+		
+		foreach (UDR_PlayerNetworkComponent playerComp : GetAllPlayers())
+			UnassignFromCurrentRace(playerComp);
+	}
+	
+	
+	
+	
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	// VEHICLE SPAWNING
+	
+	static void _____VEHICLE_SPAWNING();
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
 	void SpawnVehicleAtSpawnPoint(notnull UDR_PlayerNetworkComponent playerComp)
@@ -198,10 +300,10 @@ class UDR_GameMode: SCR_BaseGameMode
 		
 		// Register to destroyed event
 		EventHandlerManagerComponent ev = EventHandlerManagerComponent.Cast(newVehicleEntity.FindComponent(EventHandlerManagerComponent));
-        ev.RegisterScriptHandler("OnDestroyed", newVehicleEntity, OnVehicleDestroyed);
+        ev.RegisterScriptHandler("OnDestroyed", newVehicleEntity, Callback_OnVehicleDestroyed);
 
 		// register to server death event
-		this.GetOnPlayerKilled().Insert(OnPlayerDeath);
+		this.GetOnPlayerKilled().Insert(Callback_OnPlayerDeath);
 		
 		// Initialize vehicleComp
 		Vehicle vehicle = Vehicle.Cast(newVehicleEntity);
@@ -225,6 +327,32 @@ class UDR_GameMode: SCR_BaseGameMode
 		RplComponent rpl = RplComponent.Cast(newVehicleEntity.FindComponent(RplComponent));
 		playerComp.m_NetworkEntity.m_AssigedVehicleId = rpl.Id();
 		playerComp.m_NetworkEntity.BumpReplication();
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	void DespawnVehicle(notnull UDR_PlayerNetworkComponent playerComp)
+	{
+		_print(string.Format("DespawnVehicle: %1, %2", playerComp.GetPlayerId(), playerComp.GetPlayerName()));
+		
+		SCR_PlayerController pc = SCR_PlayerController.Cast(playerComp.GetOwner());
+		if (pc.GetControlledEntity())
+		{
+			pc.SetPossessedEntity(null);
+			SCR_Global.DeleteEntityAndChildren(pc.GetControlledEntity());
+		}
+		if (playerComp.m_AssignedVehicle)
+		{
+			SCR_Global.DeleteEntityAndChildren(playerComp.m_AssignedVehicle);
+		}
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	void DespawnAllVehicles()
+	{
+		foreach (UDR_PlayerNetworkComponent playerComp : GetAllPlayers())
+		{
+			DespawnVehicle(playerComp);
+		}
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
@@ -260,34 +388,12 @@ class UDR_GameMode: SCR_BaseGameMode
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
-	void DespawnVehicle(notnull UDR_PlayerNetworkComponent playerComp)
-	{
-		_print(string.Format("DespawnVehicle: %1, %2", playerComp.GetPlayerId(), playerComp.GetPlayerName()));
-		
-		SCR_PlayerController pc = SCR_PlayerController.Cast(playerComp.GetOwner());
-		if (pc.GetControlledEntity())
-		{
-			pc.SetPossessedEntity(null);
-			SCR_Global.DeleteEntityAndChildren(pc.GetControlledEntity());
-		}
-		if (playerComp.m_AssignedVehicle)
-		{
-			SCR_Global.DeleteEntityAndChildren(playerComp.m_AssignedVehicle);
-		}
-	}
+	// EVENT HANDLERS
+	
+	static void _____EVENT_HANDLERS();
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
-	void DespawnAllVehicles()
-	{
-		foreach (UDR_PlayerNetworkComponent playerComp : GetAllPlayers())
-		{
-			DespawnVehicle(playerComp);
-		}
-	}
-	
-	
-	//-------------------------------------------------------------------------------------------------------------------------------
-	void OnVehicleDestroyed(IEntity vehEntity)
+	void Callback_OnVehicleDestroyed(IEntity vehEntity)
 	{
 		m_RaceTrackLogic.value.UnregisterRacer(vehEntity);
 		
@@ -301,7 +407,7 @@ class UDR_GameMode: SCR_BaseGameMode
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
-	void OnPlayerDeath(int playerID, IEntity controlledEntity)
+	void Callback_OnPlayerDeath(int playerID, IEntity controlledEntity)
 	{
 		PlayerController playerController = GetGame().GetPlayerManager().GetPlayerController(playerID);
 		UDR_PlayerNetworkComponent playerNetworkComp = UDR_PlayerNetworkComponent.Cast(playerController.FindComponent(UDR_PlayerNetworkComponent));
@@ -310,6 +416,52 @@ class UDR_GameMode: SCR_BaseGameMode
 		}
 	}
 	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	// Called from race track logic when a racer (vehicle) crosses finish line
+	void Callback_OnFinishLineActivated(IEntity racer, bool lastLap, float timeSinceRaceStart_ms)
+	{
+		UDR_VehicleNetworkComponent vehicleComp = UDR_VehicleNetworkComponent.Cast(racer.FindComponent(UDR_VehicleNetworkComponent));
+		if (!vehicleComp)
+			return;
+		
+		UDR_PlayerNetworkComponent playerComp = UDR_PlayerNetworkComponent.GetForPlayerId(vehicleComp.GetPlayerId());
+		if (!playerComp)
+			return;
+		
+		_print(string.Format("Player has crossed finished line: %1", playerComp.GetPlayerName()));
+		
+		// Play sound on each lap
+		playerComp.Authority_SendUiSoundEvent(UDR_UISounds.RACE_FINISH_LINE);
+		
+		if (lastLap)
+		{
+			// Last lap has been finished
+			_print(string.Format("Player has finished the race: %1", playerComp.GetPlayerName()));
+			
+			// Add entry to race result table
+			int posInRace = m_RaceResultsTable.GetCount();
+			m_RaceResultsTable.Add(playerComp.GetPlayerId(), playerComp.GetPlayerName(), timeSinceRaceStart_ms);
+			
+			// Despawn the vehicle and assign to spectators
+			DespawnVehicle(playerComp);
+			AssignToSpectators(playerComp);
+			UnassignFromCurrentRace(playerComp);
+			
+			// Broadcast message
+			string notificationText;
+			if (posInRace <= 2)
+			{
+				array<string> posText = {"first", "second", "third"};
+				notificationText = string.Format("%1 has finished %2!", playerComp.GetPlayerName(), posText[posInRace]);
+			}
+			else
+			{
+				notificationText = string.Format("%1 has finished the race!", playerComp.GetPlayerName());
+			}
+			
+			BroadcastNotification(notificationText, 4000);
+		}
+	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
 	void ForceRespawnPlayer(int playerID)
@@ -341,6 +493,11 @@ class UDR_GameMode: SCR_BaseGameMode
 	
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
+	// GETTERS
+	
+	static void _____GETTERS();
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
 	// Returns Player ID of player assigned to this vehicle
 	int GetVehiclePlayerId(Vehicle veh)
 	{
@@ -365,6 +522,133 @@ class UDR_GameMode: SCR_BaseGameMode
 			return null;
 		return GetPlayerNetworkSyncEntity(pc.GetPlayerId());
 	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	// Returns all player nerwork entities
+	array<UDR_PlayerNetworkEntity> GetAllPlayerNetworkEntities()
+	{		
+		array<UDR_PlayerNetworkEntity> a = {};
+		
+		foreach (int id, UDR_PlayerNetworkEntity ent : m_mPlayerNetworkSyncEntities)
+		{		
+			a.Insert(ent);
+		}
+		
+		return a;
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	// Returns all players, regardless of their state
+	array<UDR_PlayerNetworkComponent> GetAllPlayers()
+	{
+		PlayerManager pm = GetGame().GetPlayerManager();
+		array<int> playerIds = {};
+		pm.GetPlayers(playerIds);
+		
+		array<UDR_PlayerNetworkComponent> a = {};
+		foreach (int id : playerIds)
+		{
+			auto playerComp = UDR_PlayerNetworkComponent.GetForPlayerId(id);			
+			a.Insert(playerComp);
+		}
+		
+		return a;
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	array<UDR_PlayerNetworkComponent> GetCurrentRacers()
+	{
+		RemoveNullsFromArray(m_aCurrentRacers);
+		array<UDR_PlayerNetworkComponent> a = {};
+		a.Copy(m_aCurrentRacers);
+		return a;
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	array<UDR_PlayerNetworkComponent> GetNextRacers()
+	{
+		RemoveNullsFromArray(m_aNextRacers);
+		array<UDR_PlayerNetworkComponent> a = {};
+		a.Copy(m_aNextRacers);
+		return a;
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	array<UDR_PlayerNetworkComponent> GetSpectators()
+	{
+		RemoveNullsFromArray(m_aSpectators);
+		array<UDR_PlayerNetworkComponent> a = {};
+		a.Copy(m_aSpectators);
+		return a;
+	}
+	
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	// Returns race state
+	ERaceState GetRaceState()
+	{
+		return m_eRaceState;
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	UDR_RaceResultsTable GetRaceResults()
+	{
+		return m_RaceResultsTable;
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	// Fallback position for the camera when there is nothing to spectate
+	IEntity GetFallbackSpectatorTarget()
+	{
+		return m_RaceTrackLogic.value;
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	// NOTIFICATIONS
+	
+	static void _____NOTIFICATIONS();
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	string GetNotificationText()
+	{	
+		switch (m_eRaceState)
+		{
+			case ERaceState.ONE_PLAYER:
+			{
+				return "You are the only player. Drive around until more players join...";
+			}
+			
+			case ERaceState.PREPARING:
+			{
+				return "Prepare for race! Wait for a few seconds...";
+			}
+			
+			case ERaceState.RACING:
+			case ERaceState.COUNTDOWN:
+			case ERaceState.RESULTS:
+			{
+				return string.Empty;
+			}
+		}
+		
+		return string.Empty;
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	// Sends a UI sound event to all users
+	void BroadcastNotification(string text, float lifeTime_ms)
+	{
+		foreach (UDR_PlayerNetworkComponent playerComp : GetAllPlayers())
+		{
+			playerComp.Authority_SendNotification(text, lifeTime_ms);
+		}
+	}
+	
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	// ENTITY EVENTS
+	
+	static void _____ENTITY_EVENTS();
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
 	float m_fUpdateRaceTrackLogicTimer = RACE_TRACK_LOGIC_UPDATE_INTERVAL;
@@ -484,6 +768,56 @@ class UDR_GameMode: SCR_BaseGameMode
 			m_RaceTrackLogic.Draw(this);
 	}
 	
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	// RACE STATE
+	
+	static void _____RACE_STATE_AND_LOGIC();
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	protected void SwitchToRaceState(ERaceState newRaceState)
+	{
+		if (m_eRaceState == newRaceState)
+			return;
+		
+		if (m_RaceState)
+		{
+			_print(string.Format("Leaving race state: %1", m_RaceState.Type()));
+			m_RaceState.OnStateLeave();
+		}
+		
+		switch (newRaceState)
+		{
+			case ERaceState.NO_PLAYERS:			m_RaceState = m_StateNoPlayers; break;
+			case ERaceState.ONE_PLAYER:			m_RaceState = m_StateOnePlayer; break;
+			case ERaceState.PREPARING:			m_RaceState = m_StatePreparing; break;
+			case ERaceState.COUNTDOWN:			m_RaceState = m_StateCountdown; break;
+			case ERaceState.RACING:				m_RaceState = m_StateRacing; break;
+			case ERaceState.RESULTS:			m_RaceState = m_StateResults; break;
+		}
+		
+		_print(string.Format("Entering race state: %1", m_RaceState.Type()));
+		m_eRaceState = newRaceState;
+		m_RaceState.OnStateEnter();
+		Replication.BumpMe();
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	void UpdateRaceState(float timeSlice)
+	{
+		RemoveNullsFromArray(m_aCurrentRacers);
+		RemoveNullsFromArray(m_aNextRacers);
+		RemoveNullsFromArray(m_aSpectators);
+		
+		if (m_RaceState)
+		{
+			ERaceState newRaceState = -1;
+			bool switchToNewState = m_RaceState.OnUpdate(timeSlice, newRaceState);
+			if (switchToNewState && newRaceState != -1)
+				SwitchToRaceState(newRaceState);
+		}
+	}
+	
 	//-------------------------------------------------------------------------------------------------------------------------------
 	void UpdateRaceTrackLogic(float timeSlice)
 	{
@@ -538,252 +872,6 @@ class UDR_GameMode: SCR_BaseGameMode
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
-	void UpdateRaceState(float timeSlice)
-	{
-		RemoveNullsFromArray(m_aCurrentRacers);
-		RemoveNullsFromArray(m_aNextRacers);
-		RemoveNullsFromArray(m_aSpectators);
-		
-		if (m_RaceState)
-		{
-			ERaceState newRaceState = -1;
-			bool switchToNewState = m_RaceState.OnUpdate(timeSlice, newRaceState);
-			if (switchToNewState && newRaceState != -1)
-				SwitchToRaceState(newRaceState);
-		}
-	}
-	protected static void RemoveNullsFromArray(array<UDR_PlayerNetworkComponent> a)
-	{
-		for (int i = a.Count() - 1; i >= 0; i--)
-		{
-			if (!a[i])
-				a.Remove(i);
-		}
-	}
-	
-	
-	
-	
-	
-	//-------------------------------------------------------------------------------------------------------------------------------
-	// Assignment to player groups
-	
-	//-------------------------------------------------------------------------------------------------------------------------------
-	void AssignToCurrentRace(notnull UDR_PlayerNetworkComponent playerComp)
-	{
-		_print(string.Format("AssignToCurrentRace: %1", playerComp.GetPlayerName()));
-		
-		if (!m_aCurrentRacers.Contains(playerComp))
-			m_aCurrentRacers.Insert(playerComp);
-		
-		playerComp.m_NetworkEntity.m_bRacingNow = true;
-		playerComp.m_NetworkEntity.BumpReplication();
-	}
-	
-	//-------------------------------------------------------------------------------------------------------------------------------
-	void UnassignFromCurrentRace(notnull UDR_PlayerNetworkComponent playerComp)
-	{
-		_print(string.Format("UnassignFromCurrentRace: %1", playerComp.GetPlayerName()));
-		
-		m_aCurrentRacers.RemoveItem(playerComp);
-		
-		playerComp.m_NetworkEntity.m_bRacingNow = false;
-		playerComp.m_NetworkEntity.BumpReplication();
-	}
-	
-	//-------------------------------------------------------------------------------------------------------------------------------
-	void AssignToNextRace(notnull UDR_PlayerNetworkComponent playerComp)
-	{
-		_print(string.Format("AssignToNextRace: %1", playerComp.GetPlayerName()));
-		
-		if (!m_aNextRacers.Contains(playerComp))
-			m_aNextRacers.Insert(playerComp);
-		
-		playerComp.m_NetworkEntity.m_bAssignedForRace = true;
-		playerComp.m_NetworkEntity.BumpReplication();
-	}
-	
-	//-------------------------------------------------------------------------------------------------------------------------------
-	void UnassignFromNextRace(notnull UDR_PlayerNetworkComponent playerComp)
-	{
-		_print(string.Format("UnassignFromNextRace: %1", playerComp.GetPlayerName()));
-		
-		m_aNextRacers.RemoveItem(playerComp);
-		
-		playerComp.m_NetworkEntity.m_bAssignedForRace = false;
-		playerComp.m_NetworkEntity.BumpReplication();
-	}
-	
-	//-------------------------------------------------------------------------------------------------------------------------------
-	void AssignToSpectators(notnull UDR_PlayerNetworkComponent playerComp)
-	{
-		_print(string.Format("AssignToSpectators: %1", playerComp.GetPlayerName()));
-		
-		if (!m_aSpectators.Contains(playerComp))
-			m_aSpectators.Insert(playerComp);
-		
-		playerComp.m_NetworkEntity.m_bSpectating = true;
-		playerComp.m_NetworkEntity.BumpReplication();
-	}
-	
-	//-------------------------------------------------------------------------------------------------------------------------------
-	void UnassignFromSpectators(notnull UDR_PlayerNetworkComponent playerComp)
-	{
-		_print(string.Format("UnassignFromSpectators: %1", playerComp.GetPlayerName()));
-		
-		m_aSpectators.RemoveItem(playerComp);
-		playerComp.m_NetworkEntity.m_bSpectating = false;
-		playerComp.m_NetworkEntity.BumpReplication();
-	}
-	
-	//-------------------------------------------------------------------------------------------------------------------------------
-	void UnassignAllFromCurrentRace()
-	{
-		_print("UnassignAllFromCurrentRace");
-		
-		foreach (UDR_PlayerNetworkComponent playerComp : GetAllPlayers())
-			UnassignFromCurrentRace(playerComp);
-	}
-	
-	//-------------------------------------------------------------------------------------------------------------------------------
-	void UnassignAllFromNextRace()
-	{
-		_print("UnassignAllFromNextRace");
-		
-		foreach (UDR_PlayerNetworkComponent playerComp : GetAllPlayers())
-			UnassignFromCurrentRace(playerComp);
-	}
-	
-	//-------------------------------------------------------------------------------------------------------------------------------
-	// Getters for arrays
-	
-	array<UDR_PlayerNetworkComponent> GetCurrentRacers()
-	{
-		RemoveNullsFromArray(m_aCurrentRacers);
-		array<UDR_PlayerNetworkComponent> a = {};
-		a.Copy(m_aCurrentRacers);
-		return a;
-	}
-	
-	array<UDR_PlayerNetworkComponent> GetNextRacers()
-	{
-		RemoveNullsFromArray(m_aNextRacers);
-		array<UDR_PlayerNetworkComponent> a = {};
-		a.Copy(m_aNextRacers);
-		return a;
-	}
-	
-	array<UDR_PlayerNetworkComponent> GetSpectators()
-	{
-		RemoveNullsFromArray(m_aSpectators);
-		array<UDR_PlayerNetworkComponent> a = {};
-		a.Copy(m_aSpectators);
-		return a;
-	}
-	
-	// Returns all players, regardless of their state
-	array<UDR_PlayerNetworkComponent> GetAllPlayers()
-	{
-		PlayerManager pm = GetGame().GetPlayerManager();
-		array<int> playerIds = {};
-		pm.GetPlayers(playerIds);
-		
-		array<UDR_PlayerNetworkComponent> a = {};
-		foreach (int id : playerIds)
-		{
-			auto playerComp = UDR_PlayerNetworkComponent.GetForPlayerId(id);			
-			a.Insert(playerComp);
-		}
-		
-		return a;
-	}
-	
-	// Returns race state
-	ERaceState GetRaceState()
-	{
-		return m_eRaceState;
-	}
-	
-	// Returns all player nerwork entities
-	array<UDR_PlayerNetworkEntity> GetAllPlayerNetworkEntities()
-	{		
-		array<UDR_PlayerNetworkEntity> a = {};
-		
-		foreach (int id, UDR_PlayerNetworkEntity ent : m_mPlayerNetworkSyncEntities)
-		{		
-			a.Insert(ent);
-		}
-		
-		return a;
-	}
-	
-	UDR_RaceResultsTable GetRaceResults()
-	{
-		return m_RaceResultsTable;
-	}
-	
-	//-------------------------------------------------------------------------------------------------------------------------------
-	string GetNotificationText()
-	{	
-		switch (m_eRaceState)
-		{
-			case ERaceState.ONE_PLAYER:
-			{
-				return "You are the only player. Drive around until more players join...";
-			}
-			
-			case ERaceState.PREPARING:
-			{
-				return "Prepare for race! Wait for a few seconds...";
-			}
-			
-			case ERaceState.RACING:
-			case ERaceState.COUNTDOWN:
-			case ERaceState.RESULTS:
-			{
-				return string.Empty;
-			}
-		}
-		
-		return string.Empty;
-	}
-	
-	//-------------------------------------------------------------------------------------------------------------------------------
-	protected void SwitchToRaceState(ERaceState newRaceState)
-	{
-		if (m_eRaceState == newRaceState)
-			return;
-		
-		if (m_RaceState)
-		{
-			_print(string.Format("Leaving race state: %1", m_RaceState.Type()));
-			m_RaceState.OnStateLeave();
-		}
-		
-		switch (newRaceState)
-		{
-			case ERaceState.NO_PLAYERS:			m_RaceState = m_StateNoPlayers; break;
-			case ERaceState.ONE_PLAYER:			m_RaceState = m_StateOnePlayer; break;
-			case ERaceState.PREPARING:			m_RaceState = m_StatePreparing; break;
-			case ERaceState.COUNTDOWN:			m_RaceState = m_StateCountdown; break;
-			case ERaceState.RACING:				m_RaceState = m_StateRacing; break;
-			case ERaceState.RESULTS:			m_RaceState = m_StateResults; break;
-		}
-		
-		_print(string.Format("Entering race state: %1", m_RaceState.Type()));
-		m_eRaceState = newRaceState;
-		m_RaceState.OnStateEnter();
-		Replication.BumpMe();
-	}
-	
-	//-------------------------------------------------------------------------------------------------------------------------------
-	// Fallback position for the camera when there is nothing to spectate
-	IEntity GetFallbackSpectatorTarget()
-	{
-		return m_RaceTrackLogic.value;
-	}
-	
-	//-------------------------------------------------------------------------------------------------------------------------------
 	// Sends a UI sound event to all users
 	void BroadcastUiSoundEvent(string eventName)
 	{
@@ -794,18 +882,13 @@ class UDR_GameMode: SCR_BaseGameMode
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
-	// Sends a UI sound event to all users
-	void BroadcastNotification(string text, float lifeTime_ms)
-	{
-		foreach (UDR_PlayerNetworkComponent playerComp : GetAllPlayers())
-		{
-			playerComp.Authority_SendNotification(text, lifeTime_ms);
-		}
-	}
+	// NETWORKING WITH CLIENT
+	
+	static void _____NETWORKING_WITH_CLIENT();
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
 	// Triggered by "Join Spectators" button
-	void AskJoinSpectators(int playerId)
+	void Ask_JoinSpectators(int playerId)
 	{
 		UDR_PlayerNetworkComponent playerComp = UDR_PlayerNetworkComponent.GetForPlayerId(playerId);
 		
@@ -825,7 +908,7 @@ class UDR_GameMode: SCR_BaseGameMode
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
 	// Triggered by "Join Race" button
-	void AskJoinRace(int playerId)
+	void Ask_JoinRace(int playerId)
 	{
 		UDR_PlayerNetworkComponent playerComp = UDR_PlayerNetworkComponent.GetForPlayerId(playerId);
 		
@@ -840,56 +923,9 @@ class UDR_GameMode: SCR_BaseGameMode
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
 	// Triggered by respawn action/button
-	void AskRespawn(int playerId)
+	void Ask_Respawn(int playerId)
 	{
 		// todo
-	}
-	
-	//-------------------------------------------------------------------------------------------------------------------------------
-	// Called from race track logic when a racer (vehicle) crosses finish line
-	void Callback_OnFinishLineActivated(IEntity racer, bool lastLap, float timeSinceRaceStart_ms)
-	{
-		UDR_VehicleNetworkComponent vehicleComp = UDR_VehicleNetworkComponent.Cast(racer.FindComponent(UDR_VehicleNetworkComponent));
-		if (!vehicleComp)
-			return;
-		
-		UDR_PlayerNetworkComponent playerComp = UDR_PlayerNetworkComponent.GetForPlayerId(vehicleComp.GetPlayerId());
-		if (!playerComp)
-			return;
-		
-		_print(string.Format("Player has crossed finished line: %1", playerComp.GetPlayerName()));
-		
-		// Play sound on each lap
-		playerComp.Authority_SendUiSoundEvent(UDR_UISounds.RACE_FINISH_LINE);
-		
-		if (lastLap)
-		{
-			// Last lap has been finished
-			_print(string.Format("Player has finished the race: %1", playerComp.GetPlayerName()));
-			
-			// Add entry to race result table
-			int posInRace = m_RaceResultsTable.GetCount();
-			m_RaceResultsTable.Add(playerComp.GetPlayerId(), playerComp.GetPlayerName(), timeSinceRaceStart_ms);
-			
-			// Despawn the vehicle and assign to spectators
-			DespawnVehicle(playerComp);
-			AssignToSpectators(playerComp);
-			UnassignFromCurrentRace(playerComp);
-			
-			// Broadcast message
-			string notificationText;
-			if (posInRace <= 2)
-			{
-				array<string> posText = {"first", "second", "third"};
-				notificationText = string.Format("%1 has finished %2!", playerComp.GetPlayerName(), posText[posInRace]);
-			}
-			else
-			{
-				notificationText = string.Format("%1 has finished the race!", playerComp.GetPlayerName());
-			}
-			
-			BroadcastNotification(notificationText, 4000);
-		}
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
@@ -908,6 +944,22 @@ class UDR_GameMode: SCR_BaseGameMode
 		UDR_RaceResultsTable resultTable = new UDR_RaceResultsTable();
 		resultTable.ExpandFromRAW(raceResultsJson);
 		m_RaceResultsTable = resultTable; // Erase previous results
+	}
+	
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	// OTHER
+	
+	static void _____OTHER();
+	
+	
+	protected static void RemoveNullsFromArray(array<UDR_PlayerNetworkComponent> a)
+	{
+		for (int i = a.Count() - 1; i >= 0; i--)
+		{
+			if (!a[i])
+				a.Remove(i);
+		}
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------

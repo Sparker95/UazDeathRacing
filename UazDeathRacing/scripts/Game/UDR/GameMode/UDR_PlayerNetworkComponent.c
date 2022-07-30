@@ -138,7 +138,7 @@ class UDR_PlayerNetworkComponent : ScriptComponent
 	void RpcAsk_JoinSpectators()
 	{
 		UDR_GameMode gm = GetGame().GetUdrGameMode();
-		gm.AskJoinSpectators(m_iPlayerId);
+		gm.Ask_JoinSpectators(m_iPlayerId);
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
@@ -153,7 +153,7 @@ class UDR_PlayerNetworkComponent : ScriptComponent
 	void RpcAsk_JoinRace()
 	{
 		UDR_GameMode gm = GetGame().GetUdrGameMode();
-		gm.AskJoinRace(m_iPlayerId);
+		gm.Ask_JoinRace(m_iPlayerId);
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
@@ -168,7 +168,7 @@ class UDR_PlayerNetworkComponent : ScriptComponent
 	void RpcAsk_Respawn()
 	{
 		PrintFormat("Player %1 request respawn", GetPlayerName());
-		GetGame().GetUdrGameMode().AskRespawn(m_iPlayerId);
+		GetGame().GetUdrGameMode().Ask_Respawn(m_iPlayerId);
 	}
 	
 	//-----------------------------------------------------------------------
