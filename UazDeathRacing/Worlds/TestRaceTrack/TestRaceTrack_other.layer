@@ -1,3 +1,64 @@
+$grp SCR_DestructibleBuildingEntity : "{12981279D4DB92D3}Prefabs/Structures/Infrastructure/Bridges/ConcreteBridge_01_Narrow_Base.et" {
+ {
+  coords 111.686 23.846 484.35
+  angleX 23.042
+ }
+ {
+  coords 122.133 23.846 485.053
+  angleX 25.723
+  angleY 31.27
+ }
+ {
+  coords 131.574 23.846 479.867
+  angleX 25.864
+  angleY 62.026
+ }
+ {
+  coords 137.159 23.846 471.075
+  angleX 19.127
+  angleY 92.327
+ }
+ {
+  coords 131.625 23.846 451.466
+  angleX 14.498
+  angleY 150.39
+ }
+ {
+  coords 137.437 23.846 460.608
+  angleX 15.877
+  angleY 123.598
+ }
+ {
+  coords 122.179 23.846 445.42
+  angleX 15.323
+  angleY -178.586
+ }
+ {
+  coords 102.406 23.846 449.925
+  angleX 15.983
+  angleY -119.756
+ }
+ {
+  coords 111.717 23.846 444.975
+  angleX 14.74
+  angleY -147.316
+ }
+ {
+  coords 96.453 23.846 458.852
+  angleX 17.335
+  angleY -87.917
+ }
+ {
+  coords 96.001 23.846 469.62
+  angleX 19.372
+  angleY -57.161
+ }
+ {
+  coords 101.599 23.846 479.43
+  angleX 21.773
+  angleY -23.603
+ }
+}
 $grp GenericEntity : "{25C8B889A777399D}Prefabs/Props/Infrastructure/ConeTraffic/ConeTraffic_01_red.et" {
  {
   coords 60.474 2.001 488.743
@@ -98,5 +159,15 @@ $grp GenericEntity : "{25C8B889A777399D}Prefabs/Props/Infrastructure/ConeTraffic
  {
   coords 49.834 2.001 490.331
   scale 2
+ }
+}
+$grp GenericEntity : "{532E2709E33FA192}Prefabs/Structures/BuildingParts/Bridges/BridgeRailingConcrete_01_pole.et" {
+ {
+  coords 117.12 -0.348 484.487
+  scale 15.2
+ }
+ {
+  coords 115.42 0.939 446.252
+  scale 15.2
  }
 }

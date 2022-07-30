@@ -39,5 +39,7 @@ GenericEntity {
    }
    ReceiveLight 0
   }
+  Hierarchy "{59FD58313B43357B}" {
+  }
  }
 }

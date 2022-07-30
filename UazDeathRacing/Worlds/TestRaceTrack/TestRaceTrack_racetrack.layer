@@ -1,4 +1,4 @@
-UDR_RaceTrackLogic RaceTrackLogic {
+UDR_RaceTrackLogic Track1 {
  coords 32.106 13.087 468.513
  m_FinishLineWaypoint UDR_EntityLinkWaypoint "{59F55BCB1745E5F7}" {
   m_sEntityName "WpFinish"
@@ -6,6 +6,7 @@ UDR_RaceTrackLogic RaceTrackLogic {
  m_VehiclePositioning UDR_EntityLinkVehiclePositioning "{59F56997989401A6}" {
   m_sEntityName "VehiclePositioning"
  }
+ m_sRaceTrackName "Track 1 - Inside The Cones"
 }
 $grp UDR_Waypoint : "{92A0F1C3F4161A7D}Prefabs/Triggers/WaypointInvisible.et" {
  Wp1 {
@@ -52,7 +53,7 @@ UDR_Waypoint WpFinish : "{9DB4B14E0E7FB10B}Prefabs/Triggers/WaypointFinishLine.e
  }
 }
 UDR_VehiclePositioning VehiclePositioning : "{F33FD9275A6393DB}Prefabs/VehiclePositioning/VehiclePositioning.et" {
- coords 47.109 2.001 479.192
+ coords 47.463 2.001 478.029
  angleY 90.12
  m_iNumRows 2
  m_iNumColumns 4

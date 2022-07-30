@@ -1,0 +1,63 @@
+UDR_RaceTrackLogic Track2 {
+ coords 115.601 34.011 467.673
+ m_FinishLineWaypoint UDR_EntityLinkWaypoint "{59FD5C1C7CCD60CC}" {
+  m_sEntityName "t2_finish"
+ }
+ m_VehiclePositioning UDR_EntityLinkVehiclePositioning "{59FD5C1FB0FB1F27}" {
+  m_sEntityName "t2_positions"
+ }
+ m_sRaceTrackName "Track 2 - Circle"
+}
+$grp UDR_Waypoint : "{92A0F1C3F4161A7D}Prefabs/Triggers/WaypointInvisible.et" {
+ t2_3 {
+  coords 134.819 23.861 474.336
+  angleY -29.898
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "t2_finish"
+  }
+ }
+ t2_2 {
+  coords 120.536 23.861 445.498
+  angleY 80.384
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "t2_3"
+  }
+ }
+ t2_1 {
+  coords 96.452 23.861 460.1
+  angleY 178.105
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "t2_2"
+  }
+ }
+}
+UDR_Waypoint t2_finish : "{9DB4B14E0E7FB10B}Prefabs/Triggers/WaypointFinishLine.et" {
+ coords 107.467 24.117 482.688
+ angleX 1.024
+ angleY -111.038
+ angleZ -21.75
+ BoxMins -6 0 -0.5
+ BoxMaxs 6 5 0.5
+ m_Next UDR_EntityLinkWaypoint "{59F347004DEC0021}" {
+  m_sEntityName "t2_1"
+ }
+ {
+  DecalEntity {
+   ID "59FD322FE3049CFF"
+   coords 0.203 0 -0.645
+   angleX -89.98
+   angleY 180
+   angleZ 177.625
+   TerrainOnly 0
+  }
+ }
+}
+UDR_VehiclePositioning t2_positions : "{F33FD9275A6393DB}Prefabs/VehiclePositioning/VehiclePositioning.et" {
+ coords 115.576 24.05 484.79
+ angleX -0.029
+ angleY -90.069
+ angleZ -23.042
+ m_iNumRows 2
+ m_fStepRows 5
+ m_fStepColumns 4
+}

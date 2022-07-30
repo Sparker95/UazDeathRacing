@@ -19,3 +19,6 @@ Layer other {
 Layer racetrack {
  Index 5
 }
+Layer racetrack2 {
+ Index 4
+}
