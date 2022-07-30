@@ -8,9 +8,11 @@ GenericEntity : "{A3E183EB5A2F3A38}Prefabs/Weapons/Rifles/SVD/Rifle_SVD_base.et"
    components {
     MuzzleComponent "{CA6BE4D6B867541F}" {
      FireModes {
+      BaseFireMode "{506B20D1476BA99E}" {
+      }
       BaseFireMode "{B80A64F4A8EF8333}" {
        MaxBurst -1
-       RoundsPerMinute 360
+       RoundsPerMinute 240
       }
      }
      MagazineTemplate "{EA28C1F1FBAEE0C8}Prefabs/Weapons/Blaster/BlasterMagazine.et"

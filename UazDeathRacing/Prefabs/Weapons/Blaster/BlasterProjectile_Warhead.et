@@ -9,7 +9,7 @@ GenericEntity : "{9B5FF7EECAD376FA}Prefabs/Weapons/Warheads/Warhead_Base.et" {
   BaseTriggerComponent "{55129E81CBAA1390}" {
    PROJECTILE_EFFECTS {
     BaseDamageEffect "{59DF70038D5B073E}" {
-     DamageValue 150
+     DamageValue 170
     }
    }
   }
