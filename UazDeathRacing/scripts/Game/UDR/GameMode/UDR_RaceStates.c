@@ -90,6 +90,12 @@ sealed class UDR_RaceStateOnePlayer : UDR_RaceStateBase
 	}
 	
 	//-----------------------------------------------------------------------------
+	override void OnPlayerRequestRespawn(UDR_PlayerNetworkComponent playerComp)
+	{
+		m_GameMode.SpawnVehicleAtLastWaypoint(playerComp);
+	}
+	
+	//-----------------------------------------------------------------------------
 	override bool OnUpdate(float timeSlice, out ERaceState outNewState)
 	{
 		array<UDR_PlayerNetworkComponent> players = m_GameMode.GetNextRacers();
@@ -284,6 +290,15 @@ sealed class UDR_RaceStateRacing : UDR_RaceStateBase
 	override void OnPlayerRequestJoinRace(UDR_PlayerNetworkComponent playerComp)
 	{
 		OnPlayerConnected(playerComp); // Same logic as when player connects
+	}
+	
+	//-----------------------------------------------------------------------------
+	override void OnPlayerRequestRespawn(UDR_PlayerNetworkComponent playerComp)
+	{
+		if (!playerComp.m_NetworkEntity.m_bRacingNow)
+			return;
+		
+		m_GameMode.SpawnVehicleAtLastWaypoint(playerComp);
 	}
 	
 	//-----------------------------------------------------------------------------

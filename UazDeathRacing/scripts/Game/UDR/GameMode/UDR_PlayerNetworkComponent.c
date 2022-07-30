@@ -38,7 +38,7 @@ class UDR_PlayerNetworkComponent : ScriptComponent
 	{
 		//owner.SetFlags(EntityFlags.ACTIVE, true);
 		SetEventMask(owner, EntityEvent.FRAME);
-		GetGame().GetInputManager().AddActionListener("UDR_Respawn", EActionTrigger.UP, OnRespawnAction);
+		GetGame().GetInputManager().AddActionListener("UDR_Respawn", EActionTrigger.DOWN, OnRespawnAction);
 	}
 	
 	//-----------------------------------------------------------------------
@@ -169,15 +169,21 @@ class UDR_PlayerNetworkComponent : ScriptComponent
 	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
 	void RpcAsk_Respawn()
 	{
-		PrintFormat("Player %1 request respawn", GetPlayerName());
 		GetGame().GetUdrGameMode().Ask_Respawn(m_iPlayerId);
 	}
 	
 	//-----------------------------------------------------------------------
 	// Called by the keyboard button action
+	protected float m_fRespawnActionCooldownEnd_ms = 0;
 	protected void OnRespawnAction()
 	{
+		float time_ms = GetGame().GetWorld().GetWorldTime();
+		if (time_ms < m_fRespawnActionCooldownEnd_ms)
+			return;
+		
 		Rpc(RpcAsk_Respawn);
+		
+		m_fRespawnActionCooldownEnd_ms = time_ms + 1000;
 	}
 	
 	//-----------------------------------------------------------------------

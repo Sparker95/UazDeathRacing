@@ -28,6 +28,9 @@ class UDR_BoostVehicleTrigger: ScriptedGameTriggerEntity
 	{
 		PrintString("RemoveBoost");
 		
+		if (!vWheelSimu)
+			return;
+		
 		vWheelSimu.EngineSetPeakTorqueState(80);
         vWheelSimu.EngineSetPeakPowerState(180);
 		foreach (SCR_ParticleEmitter emitter : emittersList)

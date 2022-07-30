@@ -938,7 +938,12 @@ class UDR_GameMode: SCR_BaseGameMode
 	// Triggered by respawn action/button
 	void Ask_Respawn(int playerId)
 	{
-		// todo
+		UDR_PlayerNetworkComponent playerComp = UDR_PlayerNetworkComponent.GetForPlayerId(playerId);
+		if (!playerComp)
+			return;
+		
+		_print(string.Format("Player requested respawn: %1 %2", playerComp.GetPlayerId(), playerComp.GetPlayerName()));
+		m_RaceState.OnPlayerRequestRespawn(playerComp);
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
