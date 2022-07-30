@@ -35,7 +35,12 @@ class UDR_LobbyUi : ScriptedWidgetComponent
 	// Called each frame
 	protected void Update()
 	{
-		
+		UDR_RaceTrackLogic raceTrack = GetGame().GetUdrGameMode().GetCurrentRaceTrack();
+		if (raceTrack)
+		{
+			widgets.m_RaceTrackNameText.SetText(string.Format("Race Track: %1", raceTrack.GetRaceTrackName()));
+			widgets.m_RaceTrackPropertiesText.SetText(string.Format("Laps: %1", raceTrack.GetLapCount()));
+		}
 	}
 	
 	void CreatePlayerList()
