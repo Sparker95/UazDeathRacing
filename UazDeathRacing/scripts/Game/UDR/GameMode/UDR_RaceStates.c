@@ -339,11 +339,14 @@ sealed class UDR_RaceStateRacing : UDR_RaceStateBase
 		int nFinishedRace = 0;
 		foreach (UDR_PlayerNetworkComponent playerComp : UDR_PlayerNetworkComponent.GetAll())
 		{
-			if (!playerComp.m_NetworkEntity)
+			UDR_PlayerNetworkEntity networkEnt = playerComp.m_NetworkEntity;
+			if (!networkEnt)
 				continue;
 			
-			nFinishedRace += playerComp.m_NetworkEntity.m_bFinishedRace;
-			nCurrentRacers += playerComp.m_NetworkEntity.m_bRacingNow;
+			bool racingNow = networkEnt.m_bRacingNow;
+			nCurrentRacers += racingNow;
+			if (racingNow)
+				nFinishedRace += networkEnt.m_bFinishedRace;
 		}
 				
 		if (nCurrentRacers == nFinishedRace)
@@ -387,6 +390,7 @@ sealed class UDR_RaceStateResults : UDR_RaceStateBase
 	//-----------------------------------------------------------------------------
 	override void OnStateLeave()
 	{
+		m_GameMode.SwitchToNextRaceTrack();
 	}
 	
 	//-----------------------------------------------------------------------------

@@ -30,6 +30,9 @@ class UDR_RaceTrackLogic : GenericEntity
 	[Attribute("1", UIWidgets.EditBox)]
 	protected int m_iLapCount;
 	
+	[Attribute("", UIWidgets.EditBox)]
+	protected string m_sRaceTrackName;
+	
 	// Waypoints
 	protected ref array<UDR_Waypoint> m_aWaypoints = {};	// Entities
 	protected ref array<vector> m_aWaypointPositions = {};	// Positiuon
@@ -110,6 +113,12 @@ class UDR_RaceTrackLogic : GenericEntity
 	int GetLapCount()
 	{
 		return m_iLapCount;
+	}
+	
+	//----------------------------------------------------------------------------------------------
+	string GetRaceTrackName()
+	{
+		return m_sRaceTrackName;
 	}
 	
 	//----------------------------------------------------------------------------------------------

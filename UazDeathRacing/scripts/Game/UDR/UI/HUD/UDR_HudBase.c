@@ -43,7 +43,9 @@ class UDR_HudBase : SCR_InfoDisplay
 			}
 			
 			positionWidget.SetText(string.Format("%1 / %2", networkEntity.m_iPositionInRace+1, allRacerCount));
-			lapCountWidget.SetText(string.Format("%1 / %2", networkEntity.m_iLapCount + 1, gm.GetTotalLapCount()));
+			
+			UDR_RaceTrackLogic currentRaceTrack = gm.GetCurrentRaceTrack();
+			lapCountWidget.SetText(string.Format("%1 / %2", networkEntity.m_iLapCount + 1, currentRaceTrack.GetLapCount()));
 		}
 	}
 }

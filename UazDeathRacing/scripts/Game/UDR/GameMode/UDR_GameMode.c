@@ -18,17 +18,16 @@ class UDR_GameMode: SCR_BaseGameMode
 	protected const float RACE_TRACK_LOGIC_UPDATE_INTERVAL = 0.25;
 	protected const int RESPAWN_DELAY_MS = 2500;
 	
-	
-	// Other entities for the game mode
 	[Attribute()]
-	protected ref UDR_EntityLinkRaceTrackLogic m_RaceTrackLogic;
+	protected ref array<ref UDR_EntityLinkRaceTrackLogic> m_aRaceTracks;
 	
 	// States of the race
 	[RplProp()]
 	protected ERaceState m_eRaceState = -1;
 	
 	[RplProp()]
-	protected int m_iLapCount;
+	protected int m_iCurrentRaceTrackId;
+	protected UDR_RaceTrackLogic m_CurrentRaceTrack;
 	
 	protected UDR_RaceStateBase m_RaceState;
 	protected ref UDR_RaceStateNoPlayers		m_StateNoPlayers;
@@ -215,7 +214,7 @@ class UDR_GameMode: SCR_BaseGameMode
 	void SpawnVehicleAtLastWaypoint(notnull UDR_PlayerNetworkComponent playerComp)
 	{
 		vector transform[4];
-		UDR_Waypoint wp = m_RaceTrackLogic.value.GetWaypoint(playerComp.m_iPrevWaypoint);
+		UDR_Waypoint wp = m_CurrentRaceTrack.GetWaypoint(playerComp.m_iPrevWaypoint);
 		wp.GetTransform(transform);
 		SpawnVehicle(playerComp, transform, playerComp.m_NetworkEntity.m_iLapCount, playerComp.m_iNextWaypoint);
 	}
@@ -284,7 +283,7 @@ class UDR_GameMode: SCR_BaseGameMode
 		playerComp.m_NetworkEntity.BumpReplication();
 		
 		// Register the vehicle to race track logic
-		m_RaceTrackLogic.value.RegisterRacer(newVehicleEntity, lapCount, nextWaypoint);
+		m_CurrentRaceTrack.RegisterRacer(newVehicleEntity, lapCount, nextWaypoint);
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
@@ -389,7 +388,7 @@ class UDR_GameMode: SCR_BaseGameMode
 	void Callback_OnVehicleDestroyed(IEntity vehEntity)
 	{
 		/*
-		m_RaceTrackLogic.value.UnregisterRacer(vehEntity);
+		m_CurrentRaceTrack.UnregisterRacer(vehEntity);
 		
 		int playerID = UDR_VehicleNetworkComponent.Cast(vehEntity.FindComponent(UDR_VehicleNetworkComponent)).GetPlayerId();
 		if (!playerID) {
@@ -431,13 +430,13 @@ class UDR_GameMode: SCR_BaseGameMode
 		// Get current race progress
 		// And save it to player component. We must restore it upon respawn.
 		float totalProgress;
-		if (!m_RaceTrackLogic.value.GetRacerData(vehEntity, totalProgress, playerComp.m_NetworkEntity.m_iLapCount,
+		if (!m_CurrentRaceTrack.GetRacerData(vehEntity, totalProgress, playerComp.m_NetworkEntity.m_iLapCount,
 				playerComp.m_iNextWaypoint, playerComp.m_iPrevWaypoint))
 		{
 			return;
 		}
 			
-		m_RaceTrackLogic.value.UnregisterRacer(vehEntity);
+		m_CurrentRaceTrack.UnregisterRacer(vehEntity);
 		
 		GetGame().GetCallqueue().CallLater(Temp_RespawnPlayer, RESPAWN_DELAY_MS, false, playerId);
 	}
@@ -575,20 +574,20 @@ class UDR_GameMode: SCR_BaseGameMode
 	// Fallback position for the camera when there is nothing to spectate
 	IEntity GetFallbackSpectatorTarget()
 	{
-		return m_RaceTrackLogic.value;
+		return m_CurrentRaceTrack;
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
 	UDR_VehiclePositioning GetVehiclePositioning()
 	{
-		return m_RaceTrackLogic.value.GetVehiclePositioning();
+		return m_CurrentRaceTrack.GetVehiclePositioning();
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
-	// Total amount of laps in the current race track
-	int GetTotalLapCount()
+	UDR_RaceTrackLogic GetCurrentRaceTrack()
 	{
-		return m_iLapCount;
+		// We don't return the race track object directly because on clients only ID is replicated
+		return m_aRaceTracks[m_iCurrentRaceTrackId].value;
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
@@ -682,10 +681,13 @@ class UDR_GameMode: SCR_BaseGameMode
 		if (!GetGame().InPlayMode())
 			return;
 		
-		if (!m_RaceTrackLogic.Init())
-			Print("Could not find UDR_RaceTrackLogic!", LogLevel.ERROR);
-		
-		m_RaceTrackLogic.value.m_OnFinishLineActivated.Insert(Callback_OnFinishLineActivated);
+		foreach (UDR_EntityLinkRaceTrackLogic raceTrackLink : m_aRaceTracks)
+		{
+			if (raceTrackLink.Init() == null)
+				continue;
+			
+			raceTrackLink.value.m_OnFinishLineActivated.Insert(Callback_OnFinishLineActivated);
+		}
 		
 		if (m_RplComponent.IsMaster())
 		{
@@ -701,7 +703,7 @@ class UDR_GameMode: SCR_BaseGameMode
 			m_StateResults			= new UDR_RaceStateResults(this);
 			SwitchToRaceState(ERaceState.NO_PLAYERS);
 			
-			SwitchToRaceTrack(m_RaceTrackLogic.value);
+			SwitchToRaceTrack(0);
 		}
 	}
 	
@@ -711,6 +713,9 @@ class UDR_GameMode: SCR_BaseGameMode
 		if (DiagMenu.GetBool(SCR_DebugMenuID.UDR_SHOW_GAME_MODE_PANEL))
 		{
 			DbgUI.Begin("Game Mode");
+			
+			if (m_CurrentRaceTrack)
+				DbgUI.Text(string.Format("Race Track: %1, %2", m_iCurrentRaceTrackId, m_CurrentRaceTrack.GetRaceTrackName()));
 			
 			DbgUI.Text(string.Format("Race State: %1 %2", typename.EnumToString(ERaceState, m_eRaceState), m_RaceState.Type()));
 			
@@ -758,8 +763,11 @@ class UDR_GameMode: SCR_BaseGameMode
 	//-------------------------------------------------------------------------------------------------------------------------------
 	override void _WB_AfterWorldUpdate(float timeSlice)
 	{
-		if (m_RaceTrackLogic)
-			m_RaceTrackLogic.Draw(this);
+		foreach (auto raceTrackLink : m_aRaceTracks)
+		{
+			if (raceTrackLink)
+				raceTrackLink.Draw(this);
+		}
 	}
 	
 	
@@ -769,10 +777,21 @@ class UDR_GameMode: SCR_BaseGameMode
 	static void _____RACE_STATE_AND_LOGIC();
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
-	protected void SwitchToRaceTrack(notnull UDR_RaceTrackLogic raceTrackLogic)
+	protected void SwitchToRaceTrack(int trackId)
 	{
-		m_iLapCount = raceTrackLogic.GetLapCount();
+		if (trackId < 0 || trackId >= m_aRaceTracks.Count())
+			return;
+		
+		m_CurrentRaceTrack = m_aRaceTracks[trackId].value;
+		m_iCurrentRaceTrackId = trackId;
 		Replication.BumpMe();
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	void SwitchToNextRaceTrack()
+	{
+		int newId = (m_iCurrentRaceTrackId + 1) % m_aRaceTracks.Count();
+		SwitchToRaceTrack(newId);
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
@@ -818,7 +837,7 @@ class UDR_GameMode: SCR_BaseGameMode
 	//-------------------------------------------------------------------------------------------------------------------------------
 	void UpdateRaceTrackLogic(float timeSlice)
 	{
-		m_RaceTrackLogic.value.UpdateAllRacers();
+		m_CurrentRaceTrack.UpdateAllRacers();
 			
 		// Update player component of each player
 		PlayerManager playerMgr = GetGame().GetPlayerManager();
@@ -844,7 +863,7 @@ class UDR_GameMode: SCR_BaseGameMode
 			int lapCount;
 			int nextWaypoint;
 			int prevWaypoint;
-			if (!m_RaceTrackLogic.value.GetRacerData(assignedVehicle, totalProgress, lapCount, nextWaypoint, prevWaypoint))
+			if (!m_CurrentRaceTrack.GetRacerData(assignedVehicle, totalProgress, lapCount, nextWaypoint, prevWaypoint))
 				continue;
 			
 			playerComp.m_iNextWaypoint = nextWaypoint;
@@ -876,7 +895,7 @@ class UDR_GameMode: SCR_BaseGameMode
 	{
 		int id = m_RaceResultsTable.GetCount();
 		
-		float timeSinceRaceStart_ms = m_RaceTrackLogic.value.GetTimeSinceRaceStartMs();
+		float timeSinceRaceStart_ms = m_CurrentRaceTrack.GetTimeSinceRaceStartMs();
 		m_RaceResultsTable.Add(playerComp.GetPlayerId(), playerComp.GetPlayerName(), timeSinceRaceStart_ms);
 		
 		return id;
@@ -891,7 +910,7 @@ class UDR_GameMode: SCR_BaseGameMode
 	//-------------------------------------------------------------------------------------------------------------------------------
 	void ResetRaceTimer()
 	{
-		m_RaceTrackLogic.value.ResetRaceTimer();
+		m_CurrentRaceTrack.ResetRaceTimer();
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
