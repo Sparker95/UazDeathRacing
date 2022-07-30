@@ -18,6 +18,26 @@ $grp UDR_Pickup : "{7D5C596D78F729C8}Prefabs/Pickups/PickupAmmo.et" {
   coords 4985.465 155.272 7397.128
  }
 }
+$grp UDR_BoostVehicleTrigger : "{C3865A319561D60F}Prefabs/Triggers/UDR_BoostTriggerVehicle.et" {
+ {
+  coords 4948.065 156.574 7414.736
+  angleX -0.277
+  angleY -71.622
+  angleZ 6.484
+ }
+ {
+  coords 4908.292 162.982 7345.246
+  angleX 4.585
+  angleY -157.006
+  angleZ 2.911
+ }
+ {
+  coords 4867.798 162.108 7363.536
+  angleX 0.009
+  angleY 90.273
+  angleZ -1.79
+ }
+}
 $grp UDR_Pickup : "{DF1C96AAD094BA04}Prefabs/Pickups/PickupHealth.et" {
  {
   coords 4922.764 164.893 7359.211

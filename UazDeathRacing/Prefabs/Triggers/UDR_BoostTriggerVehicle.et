@@ -2,8 +2,8 @@ UDR_BoostVehicleTrigger {
  ID "59CD64AB00935620"
  coords 52.015 2.001 470.025
  TriggerShapeType "Oriented Bounding Box"
- BoxMins 0 0 0
- BoxMaxs 1 5 20
+ BoxMins -10 0 0
+ BoxMaxs 10 5 1
  DrawShape 1
  ShapeColor 1 0 0 0.196
  TriggerActivationType "All changes"
@@ -14,30 +14,34 @@ UDR_BoostVehicleTrigger {
   $grp DecalEntity {
    {
     ID "59E0215C5D9C88B3"
-    coords 1.462 -0.152 9.024
-    angleX 90
-    angleY -90
+    angleX -90
     scale 3
     Flags 524291
+    FarPlane 3
     Stretch 2
+    ClutterOccluder 1
     Mat "{FA057F4E1A537B9E}Prefabs/Triggers/boost.emat"
    }
    {
     ID "59E0215C7ECAF601"
-    coords 1.569 116.944 10.746
-    angleX 1.751
+    coords 6 0 0
+    angleX -90
+    scale 3
     Flags 524291
+    FarPlane 3
     Stretch 2
+    ClutterOccluder 1
     Mat "{FA057F4E1A537B9E}Prefabs/Triggers/boost.emat"
    }
    {
     ID "59E0215D53E650BC"
-    coords 1.443 0 2.979
-    angleX 90
-    angleY -90
+    coords -6 0 0
+    angleX -90
     scale 3
     Flags 524291
+    FarPlane 3
     Stretch 2
+    ClutterOccluder 1
     Mat "{FA057F4E1A537B9E}Prefabs/Triggers/boost.emat"
    }
   }

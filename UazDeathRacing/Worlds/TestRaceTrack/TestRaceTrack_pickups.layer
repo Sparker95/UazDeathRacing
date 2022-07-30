@@ -1,4 +1,4 @@
-$grp UDR_Pickup : "{7D5C596D78F729C8}Prefabs/Pickup/PickupAmmo.et" {
+$grp UDR_Pickup : "{7D5C596D78F729C8}Prefabs/Pickups/PickupAmmo.et" {
  {
   coords 50.685 2.023 441.958
   {
@@ -15,7 +15,16 @@ $grp UDR_Pickup : "{7D5C596D78F729C8}Prefabs/Pickup/PickupAmmo.et" {
   coords 80.002 2.001 445.936
  }
 }
-$grp UDR_Pickup : "{DF1C96AAD094BA04}Prefabs/Pickup/PickupHealth.et" {
+$grp UDR_BoostVehicleTrigger : "{C3865A319561D60F}Prefabs/Triggers/UDR_BoostTriggerVehicle.et" {
+ {
+  coords 53.469 2.001 478.224
+  angleY 89.623
+ }
+ {
+  coords 11.134 2.001 407.956
+ }
+}
+$grp UDR_Pickup : "{DF1C96AAD094BA04}Prefabs/Pickups/PickupHealth.et" {
  {
   coords 44.032 2.061 443.966
  }

@@ -13,12 +13,9 @@ Layer pickups {
 Layer weapons {
  Index 3
 }
-Layer tests {
- Index 4
+Layer other {
+ Index 6
 }
 Layer racetrack {
  Index 5
-}
-Layer other {
- Index 6
 }
