@@ -13,7 +13,8 @@ UDR_VehiclePositioning t1_Positions {
  angleX -3.681
  angleY 87.691
  angleZ -2.532
- m_iNumColumns 4
+ m_iNumRows 3
+ m_iNumColumns 5
  m_fStepRows 6
  m_fStepColumns 5
 }
