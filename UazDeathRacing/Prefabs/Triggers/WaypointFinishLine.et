@@ -11,4 +11,15 @@ UDR_Waypoint {
  ClassFilter "Vehicle"
  m_Next UDR_EntityLinkWaypoint "{59F347004DEC0021}" {
  }
+ {
+  DecalEntity FinishLineDecal {
+   ID "59FD322FE3049CFF"
+   angleX -90
+   scale 0.9
+   FarPlane 9.653
+   Stretch 34.354
+   ClutterOccluder 1
+   Mat "{A3DE976E05A631EA}Prefabs/Triggers/FinishLine.emat"
+  }
+ }
 }
