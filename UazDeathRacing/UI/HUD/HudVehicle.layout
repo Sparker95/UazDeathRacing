@@ -115,5 +115,29 @@ FrameWidgetClass {
    Slot FrameWidgetSlot "{59EEAA91041B7852}" {
    }
   }
+  TextWidgetClass "{59FD14EA9F5FB0EA}" {
+   Name "TextControls"
+   Slot FrameWidgetSlot "{59FD14EA9F5FB0C7}" {
+    Anchor 0.95 0.95 0.95 0.95
+    PositionX -6.317
+    OffsetLeft -6.317
+    PositionY 36.908
+    OffsetTop 36.908
+    SizeX 283.5
+    OffsetRight -277.183
+    SizeY 30
+    OffsetBottom -66.908
+    Alignment 1 1
+   }
+   Color 1 0.323 0.323 1
+   Text "Hold [H] to respawn"
+   "Font Size" 32
+   "Min Font Size" 23
+   FontProperties FontProperties "{59FD14EAC1C102DB}" {
+    Font "{CD2634D279AB011A}UI/Fonts/Roboto/Roboto_Bold.fnt"
+    OutlineSize 2
+    OutlineColor 0 0 0 0.424
+   }
+  }
  }
 }
