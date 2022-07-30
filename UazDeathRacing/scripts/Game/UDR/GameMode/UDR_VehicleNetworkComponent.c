@@ -5,15 +5,15 @@ class UDR_VehicleNetworkComponentClass : ScriptComponentClass
 
 class UDR_VehicleNetworkComponent : ScriptComponent
 {
-	protected int playerControllerID;
+	protected int m_PlayerId;
 	
 	void Init(int playerId)
 	{
-		playerControllerID = playerId;
+		m_PlayerId = playerId;
 	}
 	
 	int GetPlayerId()
 	{
-		return playerControllerID;
+		return m_PlayerId;
 	}
 }

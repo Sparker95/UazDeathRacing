@@ -1,11 +1,12 @@
 UDR_RaceTrackLogic RaceTrackLogic {
- coords 41.823 13.087 460.796
+ coords 32.106 13.087 468.513
  m_FinishLineWaypoint UDR_EntityLinkWaypoint "{59F55BCB1745E5F7}" {
   m_sEntityName "RaceTrack_FinishLine"
  }
  m_VehiclePositioning UDR_EntityLinkVehiclePositioning "{59F56997989401A6}" {
   m_sEntityName "VehiclePositioning"
  }
+ m_iLapCount 2
 }
 $grp UDR_Waypoint {
  RaceTrack_FinishLine {

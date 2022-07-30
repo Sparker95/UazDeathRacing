@@ -11,6 +11,11 @@ SCR_PlayerController : "{225E51284CC95CFA}Prefabs/Characters/Core/DefaultPlayerC
      m_LayoutPath "{ECE19D6F64222867}UI/HUD/HudSpectator.layout"
      m_eLayer HIGH
     }
+    UDR_HudRaceResults "{59FB585ECB4074CA}" {
+     m_LayoutPath "{AFBE0900AFBFCDFD}UI/HUD/HudRaceResults/HudRaceResults.layout"
+     m_eLayer HIGH
+     m_iOverrideZOrder 100
+    }
    }
   }
   UDR_PlayerNetworkComponent "{59DB692A9733FFE1}" {

@@ -9,7 +9,7 @@ enum ERaceState
 	PREPARING,			// Vehicles are being spawned and controls are locked
 	COUNTDOWN,			// No new vehicles are being spawned
 	RACING,				// Race goes on
-	FINISH_SCREEN		// Showing the screen with race results
+	RESULTS				// Showing the screen with race results
 }
 
 class UDR_GameMode: SCR_BaseGameMode
@@ -31,8 +31,7 @@ class UDR_GameMode: SCR_BaseGameMode
 	protected ref UDR_RaceStatePreparing		m_StatePreparing;
 	protected ref UDR_RaceStateCountdown		m_StateCountdown;
 	protected ref UDR_RaceStateRacing			m_StateRacing;
-	protected ref UDR_RaceStateFinishScreen		m_StateFinishScreen;
-	
+	protected ref UDR_RaceStateResults			m_StateResults;
 	
 	// IDs of players which are assigned to the race
 	protected ref array<UDR_PlayerNetworkComponent> m_aCurrentRacers = {};	// Players who are currently racing
@@ -42,37 +41,14 @@ class UDR_GameMode: SCR_BaseGameMode
 	// Map which maintains UDR_PlayerNetworkEntity per each player
 	protected ref map<int, UDR_PlayerNetworkEntity> m_mPlayerNetworkSyncEntities = new map<int, UDR_PlayerNetworkEntity>();
 	
+	// Table with race results
+	// On clients it's updated via RPC
+	protected ref UDR_RaceResultsTable m_RaceResultsTable = new UDR_RaceResultsTable();
+	
 	//-------------------------------------------------------------------------------------------------------------------------------
 	void UDR_GameMode(IEntitySource src, IEntity parent)
 	{
 		SetEventMask(EntityEvent.INIT | EntityEvent.FRAME | EntityEvent.DIAG);
-	}
-	
-	//-------------------------------------------------------------------------------------------------------------------------------
-	override void EOnInit(IEntity owner)
-	{
-		super.EOnInit(owner);
-		
-		if (!GetGame().InPlayMode())
-			return;
-		
-		if (!m_RaceTrackLogic.Init())
-			Print("Could not find UDR_RaceTrackLogic!", LogLevel.ERROR);
-		
-		if (m_RplComponent.IsMaster())
-		{
-			//--------------------------------------------------------
-			// Everything below is only for server
-			
-			// Initialize the race states
-			m_StateNoPlayers 		= new UDR_RaceStateNoPlayers(this);
-			m_StateOnePlayer		= new UDR_RaceStateOnePlayer(this);
-			m_StatePreparing		= new UDR_RaceStatePreparing(this);
-			m_StateCountdown		= new UDR_RaceStateCountdown(this);
-			m_StateRacing			= new UDR_RaceStateRacing(this);
-			m_StateFinishScreen		= new UDR_RaceStateFinishScreen(this);
-			SwitchToRaceState(ERaceState.NO_PLAYERS);
-		}
 	}
 		
 	//-------------------------------------------------------------------------------------------------------------------------------
@@ -186,6 +162,8 @@ class UDR_GameMode: SCR_BaseGameMode
 	//-------------------------------------------------------------------------------------------------------------------------------
 	void SpawnVehicle(notnull UDR_PlayerNetworkComponent playerComp, vector transform[4])
 	{
+		_print(string.Format("SpawnVehicle: %1, %2", playerComp.GetPlayerId(), playerComp.GetPlayerName()));
+		
 		SCR_PlayerController pc = SCR_PlayerController.Cast(playerComp.GetOwner());
 	
 		// If there is a previous vehicle or character controlled by this player, delete them
@@ -284,6 +262,8 @@ class UDR_GameMode: SCR_BaseGameMode
 	//-------------------------------------------------------------------------------------------------------------------------------
 	void DespawnVehicle(notnull UDR_PlayerNetworkComponent playerComp)
 	{
+		_print(string.Format("DespawnVehicle: %1, %2", playerComp.GetPlayerId(), playerComp.GetPlayerName()));
+		
 		SCR_PlayerController pc = SCR_PlayerController.Cast(playerComp.GetOwner());
 		if (pc.GetControlledEntity())
 		{
@@ -320,6 +300,7 @@ class UDR_GameMode: SCR_BaseGameMode
 		GetGame().GetCallqueue().CallLater(ForceRespawnPlayer, 5000, false, playerID);
 	}
 	
+	//-------------------------------------------------------------------------------------------------------------------------------
 	void OnPlayerDeath(int playerID, IEntity controlledEntity)
 	{
 		PlayerController playerController = GetGame().GetPlayerManager().GetPlayerController(playerID);
@@ -377,6 +358,15 @@ class UDR_GameMode: SCR_BaseGameMode
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
+	UDR_PlayerNetworkEntity GetLocalPlayerNetworkSyncEntity()
+	{
+		PlayerController pc = GetGame().GetPlayerController();
+		if (!pc)
+			return null;
+		return GetPlayerNetworkSyncEntity(pc.GetPlayerId());
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
 	float m_fUpdateRaceTrackLogicTimer = RACE_TRACK_LOGIC_UPDATE_INTERVAL;
 	override void EOnFrame(IEntity owner, float timeSlice)
 	{
@@ -414,6 +404,35 @@ class UDR_GameMode: SCR_BaseGameMode
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
+	override void EOnInit(IEntity owner)
+	{
+		super.EOnInit(owner);
+		
+		if (!GetGame().InPlayMode())
+			return;
+		
+		if (!m_RaceTrackLogic.Init())
+			Print("Could not find UDR_RaceTrackLogic!", LogLevel.ERROR);
+		
+		m_RaceTrackLogic.value.m_OnFinishLineActivated.Insert(Callback_OnFinishLineActivated);
+		
+		if (m_RplComponent.IsMaster())
+		{
+			//--------------------------------------------------------
+			// Everything below is only for server
+			
+			// Initialize the race states
+			m_StateNoPlayers 		= new UDR_RaceStateNoPlayers(this);
+			m_StateOnePlayer		= new UDR_RaceStateOnePlayer(this);
+			m_StatePreparing		= new UDR_RaceStatePreparing(this);
+			m_StateCountdown		= new UDR_RaceStateCountdown(this);
+			m_StateRacing			= new UDR_RaceStateRacing(this);
+			m_StateResults			= new UDR_RaceStateResults(this);
+			SwitchToRaceState(ERaceState.NO_PLAYERS);
+		}
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
 	override void EOnDiag(IEntity owner, float timeSlice)
 	{
 		if (DiagMenu.GetBool(SCR_DebugMenuID.UDR_SHOW_GAME_MODE_PANEL))
@@ -442,6 +461,17 @@ class UDR_GameMode: SCR_BaseGameMode
 				spawnPosStr = spawnPosStr + string.Format("%1 ", GetVehiclePositioning().GetPlayerAssignedToPosition(i));
 			}
 			DbgUI.Text(spawnPosStr);
+			
+			if (DbgUI.Button("State: Results"))
+			{
+				// For testing, add every player to the results table
+				foreach (UDR_PlayerNetworkComponent playerComp : GetAllPlayers())
+				{
+					m_RaceResultsTable.Add(playerComp.GetPlayerId(), playerComp.GetPlayerName(), Math.RandomFloat(0, 1000*60*3));
+				}
+				BroadcastRaceResultTable();
+				SwitchToRaceState(ERaceState.RESULTS);
+			}
 			
 			DbgUI.End();
 		}
@@ -668,6 +698,12 @@ class UDR_GameMode: SCR_BaseGameMode
 		return a;
 	}
 	
+	// Returns race state
+	ERaceState GetRaceState()
+	{
+		return m_eRaceState;
+	}
+	
 	// Returns all player nerwork entities
 	array<UDR_PlayerNetworkEntity> GetAllPlayerNetworkEntities()
 	{		
@@ -681,7 +717,10 @@ class UDR_GameMode: SCR_BaseGameMode
 		return a;
 	}
 	
-	
+	UDR_RaceResultsTable GetRaceResults()
+	{
+		return m_RaceResultsTable;
+	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
 	string GetNotificationText()
@@ -700,7 +739,7 @@ class UDR_GameMode: SCR_BaseGameMode
 			
 			case ERaceState.RACING:
 			case ERaceState.COUNTDOWN:
-			case ERaceState.FINISH_SCREEN:
+			case ERaceState.RESULTS:
 			{
 				return string.Empty;
 			}
@@ -728,19 +767,13 @@ class UDR_GameMode: SCR_BaseGameMode
 			case ERaceState.PREPARING:			m_RaceState = m_StatePreparing; break;
 			case ERaceState.COUNTDOWN:			m_RaceState = m_StateCountdown; break;
 			case ERaceState.RACING:				m_RaceState = m_StateRacing; break;
-			case ERaceState.FINISH_SCREEN:		m_RaceState = m_StateFinishScreen; break;
+			case ERaceState.RESULTS:			m_RaceState = m_StateResults; break;
 		}
 		
 		_print(string.Format("Entering race state: %1", m_RaceState.Type()));
 		m_eRaceState = newRaceState;
 		m_RaceState.OnStateEnter();
 		Replication.BumpMe();
-	}
-	
-	//-------------------------------------------------------------------------------------------------------------------------------
-	void _print(string str, LogLevel logLevel = LogLevel.NORMAL)
-	{
-		Print(string.Format("UDR_GameMode: %1", str));
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
@@ -803,5 +836,83 @@ class UDR_GameMode: SCR_BaseGameMode
 			return;
 
 		m_RaceState.OnPlayerRequestJoinRace(playerComp);
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	// Triggered by respawn action/button
+	void AskRespawn(int playerId)
+	{
+		// todo
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	// Called from race track logic when a racer (vehicle) crosses finish line
+	void Callback_OnFinishLineActivated(IEntity racer, bool lastLap, float timeSinceRaceStart_ms)
+	{
+		UDR_VehicleNetworkComponent vehicleComp = UDR_VehicleNetworkComponent.Cast(racer.FindComponent(UDR_VehicleNetworkComponent));
+		if (!vehicleComp)
+			return;
+		
+		UDR_PlayerNetworkComponent playerComp = UDR_PlayerNetworkComponent.GetForPlayerId(vehicleComp.GetPlayerId());
+		if (!playerComp)
+			return;
+		
+		_print(string.Format("Player has crossed finished line: %1", playerComp.GetPlayerName()));
+		
+		// Play sound on each lap
+		playerComp.Authority_SendUiSoundEvent(UDR_UISounds.RACE_FINISH_LINE);
+		
+		if (lastLap)
+		{
+			// Last lap has been finished
+			_print(string.Format("Player has finished the race: %1", playerComp.GetPlayerName()));
+			
+			// Add entry to race result table
+			int posInRace = m_RaceResultsTable.GetCount();
+			m_RaceResultsTable.Add(playerComp.GetPlayerId(), playerComp.GetPlayerName(), timeSinceRaceStart_ms);
+			
+			// Despawn the vehicle and assign to spectators
+			DespawnVehicle(playerComp);
+			AssignToSpectators(playerComp);
+			UnassignFromCurrentRace(playerComp);
+			
+			// Broadcast message
+			string notificationText;
+			if (posInRace <= 2)
+			{
+				array<string> posText = {"first", "second", "third"};
+				notificationText = string.Format("%1 has finished %2!", playerComp.GetPlayerName(), posText[posInRace]);
+			}
+			else
+			{
+				notificationText = string.Format("%1 has finished the race!", playerComp.GetPlayerName());
+			}
+			
+			BroadcastNotification(notificationText, 4000);
+		}
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	void BroadcastRaceResultTable()
+	{
+		m_RaceResultsTable.InstantPack();
+		string raceResultsJson = m_RaceResultsTable.AsString();
+		//RpcDo_ShowResultTable(raceResultsJson); // No need to call it for ourselves, we have it already
+		Rpc(RpcDo_UpdateRaceResultsTable, raceResultsJson);
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
+	protected void RpcDo_UpdateRaceResultsTable(string raceResultsJson)
+	{
+		UDR_RaceResultsTable resultTable = new UDR_RaceResultsTable();
+		resultTable.ExpandFromRAW(raceResultsJson);
+		m_RaceResultsTable = resultTable; // Erase previous results
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	void _print(string str, LogLevel logLevel = LogLevel.NORMAL)
+	{
+		Print(string.Format("UDR_GameMode: %1", str));
 	}
 }

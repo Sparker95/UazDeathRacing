@@ -1,4 +1,4 @@
-class UDR_HudSpectator : SCR_InfoDisplay
+class UDR_HudSpectator : UDR_HudBase
 {
 	protected ref UDR_HudSpectatorWidgets widgets = new UDR_HudSpectatorWidgets();
 	
@@ -39,8 +39,10 @@ class UDR_HudSpectator : SCR_InfoDisplay
 			int targetPlayerId = target.m_iPlayerId;
 			string playerName = GetGame().GetPlayerManager().GetPlayerName(targetPlayerId);
 			widgets.m_PlayerNameText.SetText(playerName);
-			widgets.m_PositionText.SetText(target.m_iPositionInRace.ToString());
-			widgets.m_LapCountText.SetText(target.m_iLapCount.ToString());
+			
+			UpdateRacePositionWidgets(target, widgets.m_PositionText, widgets.m_LapCountText);
 		}
+		
+		UpdateNotificationWidget(widgets.m_NotificationText);
 	}
 }

@@ -12,6 +12,8 @@ class UDR_HudSpectatorWidgets
 
 	TextWidget m_PlayerNameText;
 
+	TextWidget m_NotificationText;
+
 	bool Init(Widget root)
 	{
 		m_LapCountText = TextWidget.Cast(root.FindWidget("RaceProgressPanel.Panel.VerticalLayout0.HudLineLap.TextRight"));
@@ -19,6 +21,8 @@ class UDR_HudSpectatorWidgets
 		m_PositionText = TextWidget.Cast(root.FindWidget("RaceProgressPanel.Panel.VerticalLayout0.HudLinePos.TextRight"));
 
 		m_PlayerNameText = TextWidget.Cast(root.FindWidget("VerticalLayout0.HorizontalLayout0.PlayerName"));
+
+		m_NotificationText = TextWidget.Cast(root.FindWidget("m_NotificationText"));
 
 		return true;
 	}

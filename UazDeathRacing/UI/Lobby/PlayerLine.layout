@@ -1,4 +1,4 @@
-OverlayWidgetClass {
+SizeLayoutWidgetClass {
  Name "PlayerLine"
  Slot LayoutSlot "{59ECC4D0B8729F42}" {
  }
@@ -11,10 +11,12 @@ OverlayWidgetClass {
   UDR_PlayerLineComponent "{59ECF95023C4E83E}" {
   }
  }
+ AllowHeightOverride 1
+ HeightOverride 27
  {
   HorizontalLayoutWidgetClass "{59ECC4D0BC7A896D}" {
    Name "HorizontalLayout0"
-   Slot OverlayWidgetSlot "{59ECC4D0BC7A8977}" {
+   Slot AlignableSlot {
     HorizontalAlign 3
     VerticalAlign 3
    }

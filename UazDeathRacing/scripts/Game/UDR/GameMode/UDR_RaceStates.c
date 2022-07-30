@@ -73,7 +73,6 @@ sealed class UDR_RaceStateOnePlayer : UDR_RaceStateBase
 	//-----------------------------------------------------------------------------
 	override void OnStateLeave()
 	{
-		m_GameMode.DespawnAllVehicles();
 	}
 	
 	//-----------------------------------------------------------------------------
@@ -125,10 +124,14 @@ sealed class UDR_RaceStatePreparing : UDR_RaceStateBase
 	{
 		m_fTimer = TIMER_THRESHOLD;
 		
+		// Despawn any previous vehicles if they still existed
+		m_GameMode.DespawnAllVehicles();
+		
 		array<UDR_PlayerNetworkComponent> players = m_GameMode.GetNextRacers();
 		foreach (UDR_PlayerNetworkComponent player : players)
 		{
 			m_GameMode.SpawnVehicleAtSpawnPoint(player);
+			m_GameMode.UnassignFromSpectators(player);
 		}
 	}
 	
@@ -300,14 +303,14 @@ sealed class UDR_RaceStateRacing : UDR_RaceStateBase
 		
 		if (nCurrentRacers == 0)
 		{			
-			outNewState = ERaceState.NO_PLAYERS;
+			outNewState = ERaceState.RESULTS; // Everyone has finished or left
 			return true;
 		}
-		else if (nCurrentRacers == 1)
+		/*else if (nCurrentRacers == 1)
 		{
 			outNewState = ERaceState.ONE_PLAYER;
 			return true;
-		}
+		}*/
 		else
 		{
 			return false; // The race continues
@@ -323,16 +326,41 @@ sealed class UDR_RaceStateRacing : UDR_RaceStateBase
 //----------------------------------------------------------------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-sealed class UDR_RaceStateFinishScreen : UDR_RaceStateBase
-{	
+sealed class UDR_RaceStateResults : UDR_RaceStateBase
+{
+	protected float m_fTimerSeconds;
+	
 	//-----------------------------------------------------------------------------
 	override void OnStateEnter()
 	{
+		m_fTimerSeconds = 6.0;
+		
+		// Force everyone to spectate, in case the race didn't finish yet
+		//m_GameMode.DespawnAllVehicles();
+		//array<UDR_PlayerNetworkComponent> currentRacers = m_GameMode.GetCurrentRacers();
+		//foreach (UDR_PlayerNetworkComponent playerComp : currentRacers)
+		//{
+		//	m_GameMode.AssignToSpectators(playerComp);
+		//}
 	}
 	
 	
 	//-----------------------------------------------------------------------------
 	override void OnStateLeave()
 	{
+	}
+	
+	//-----------------------------------------------------------------------------
+	override bool OnUpdate(float timeSlice, out ERaceState outNewState)
+	{
+		m_fTimerSeconds -= timeSlice;
+		
+		if (m_fTimerSeconds <= 0)
+		{
+			outNewState = ERaceState.PREPARING;
+			return true;
+		}
+		
+		return false;
 	}
 }

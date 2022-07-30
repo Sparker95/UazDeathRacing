@@ -4,8 +4,6 @@ class UDR_LobbyUi : ScriptedWidgetComponent
 	
 	protected SCR_BaseGameMode m_GameMode;
 	
-	protected const string PLAYER_LINE_LAYOUT = "{CAA1C1C8D8023792}UI/Lobby/PlayerLine.layout";
-	
 	override void HandlerAttached(Widget w)
 	{
 		widgets.Init(w);
@@ -54,7 +52,7 @@ class UDR_LobbyUi : ScriptedWidgetComponent
 	
 	void CreatePlayerLine(int playerId)
 	{
-		Widget w = GetGame().GetWorkspace().CreateWidgets(PLAYER_LINE_LAYOUT, widgets.m_PlayerList);
+		Widget w = GetGame().GetWorkspace().CreateWidgets(UDR_PlayerLineWidgets.s_sLayout, widgets.m_PlayerList);
 		UDR_PlayerLineComponent comp = UDR_PlayerLineComponent.Cast(w.FindHandler(UDR_PlayerLineComponent));
 		comp.Init(playerId);
 	}

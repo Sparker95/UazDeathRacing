@@ -1,0 +1,114 @@
+FrameWidgetClass {
+ Name "rootFrame"
+ components {
+  SCR_WidgetExportRuleRoot "{59FB3D8E7E29DB61}" {
+   DestinationPath "{0650B47502DFD6F4}scripts/Game/UDR/UI/HUD"
+   ScriptAddon "$UazDeathRacing:"
+   ScriptClassNamePrefix "UDR_"
+  }
+ }
+ {
+  SizeLayoutWidgetClass "{59FB3D83C338A40A}" {
+   Name "PanelSize"
+   Slot FrameWidgetSlot "{59FB3D83C8C3F42D}" {
+    Anchor 0.5 0.4 0.5 0.4
+    PositionX 0
+    OffsetLeft 0
+    PositionY 0
+    OffsetTop 0
+    SizeX 500
+    OffsetRight -500
+    SizeY 30
+    OffsetBottom -30
+    Alignment 0.5 0
+    SizeToContent 1
+   }
+   AllowWidthOverride 1
+   WidthOverride 400
+   {
+    OverlayWidgetClass "{59FB3D83DF6EF979}" {
+     Name "Overlay0"
+     Slot OverlayWidgetSlot "{59FB3D83DF6EF9A9}" {
+      HorizontalAlign 3
+      VerticalAlign 3
+     }
+     {
+      ImageWidgetClass "{59FB3D8371E5E509}" : "{997E262EDAF1549F}UI/layouts/Menus/Dialogs/DialogBackground.layout" {
+       Name "Background"
+       Slot OverlayWidgetSlot "{59FB3D8371E5E56D}" {
+        HorizontalAlign 3
+        VerticalAlign 3
+       }
+      }
+      VerticalLayoutWidgetClass "{59FB3D850CB06594}" {
+       Name "VerticalLayout0"
+       Slot OverlayWidgetSlot "{59FB3D850CB065EA}" {
+        HorizontalAlign 3
+        VerticalAlign 3
+        Padding 10 10 10 10
+       }
+       {
+        TextWidgetClass "{59FB3D830D0B0A98}" : "{B3656334DE3D701F}UI/layouts/WidgetLibrary/TextWidgets/Text_Heading3.layout" {
+         Name "Label"
+         Slot LayoutSlot "{59FB3D830D0B0AF3}" {
+         }
+         Clipping False
+         Text "Race Results"
+         "Horizontal Alignment" Center
+        }
+        HorizontalLayoutWidgetClass "{59FB3D8515D95170}" {
+         Name "TopBar"
+         Slot LayoutSlot "{59FB3D8514CFDD69}" {
+         }
+         {
+          TextWidgetClass "{59FB3D8568171DD6}" : "{6FD63D0CFCF2F4DF}UI/layouts/WidgetLibrary/TextWidgets/Text_Heading5.layout" {
+           Name "Pos"
+           Slot LayoutSlot "{59FB3D8568171E28}" {
+            Padding 10 0 0 0
+            SizeMode Fill
+            FillWeight 2
+           }
+           Text "Pos"
+           "Horizontal Alignment" Center
+          }
+          TextWidgetClass "{59FB3D82FFDCC633}" : "{6FD63D0CFCF2F4DF}UI/layouts/WidgetLibrary/TextWidgets/Text_Heading5.layout" {
+           Name "Driver"
+           Slot LayoutSlot "{59FB3D8568171E28}" {
+            Padding 10 0 0 0
+            SizeMode Fill
+            FillWeight 10
+           }
+           Text "Driver"
+          }
+          TextWidgetClass "{59FB3D82C6EEB665}" : "{6FD63D0CFCF2F4DF}UI/layouts/WidgetLibrary/TextWidgets/Text_Heading5.layout" {
+           Name "Time"
+           Slot LayoutSlot "{59FB3D8568171E28}" {
+            Padding 10 0 0 0
+            SizeMode Fill
+            FillWeight 5
+           }
+           Text "Time"
+           "Horizontal Alignment" Center
+          }
+         }
+        }
+        ImageWidgetClass "{59FB3D809E2D21EF}" {
+         Name "Separator"
+         Slot LayoutSlot "{59ECC4CC64D0A553}" {
+         }
+         Color 0.012 0.012 0.012 1
+         Size 32 2
+        }
+        VerticalLayoutWidgetClass "{59FB3D80E918515C}" {
+         Name "m_PlayerList"
+         Slot LayoutSlot "{59FB3D80E91851BE}" {
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

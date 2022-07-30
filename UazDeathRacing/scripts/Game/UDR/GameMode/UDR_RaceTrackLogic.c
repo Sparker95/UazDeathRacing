@@ -21,20 +21,28 @@ class UDR_RaceTrackLogicClass : GenericEntityClass
 
 class UDR_RaceTrackLogic : GenericEntity
 {	
+	[Attribute("", UIWidgets.Auto, "Finish line waypoint which must be circularly linked with the rest of waypoints.")]
+	protected ref UDR_EntityLinkWaypoint m_FinishLineWaypoint;
+	
+	[Attribute("", UIWidgets.Auto, "UDR_VehiclePositioning of this race track")]
+	protected ref UDR_EntityLinkVehiclePositioning m_VehiclePositioning;
+	
+	[Attribute("1", UIWidgets.EditBox)]
+	protected int m_iLapCount;
+	
 	// Waypoints
 	protected ref array<UDR_Waypoint> m_aWaypoints = {};	// Entities
 	protected ref array<vector> m_aWaypointPositions = {};	// Positiuon
 	protected ref array<float> m_aWaypointDistances = {};	// Distance from that WP to next WP
 	protected float m_fLapLength;
 	
-	[Attribute("", UIWidgets.Auto, "Finish line waypoint which must be circularly linked with the rest of waypoints.")]
-	protected ref UDR_EntityLinkWaypoint m_FinishLineWaypoint;
-	
-	[Attribute()]
-	protected ref UDR_EntityLinkVehiclePositioning m_VehiclePositioning;
-	
+	// Map of data of all registered racers
 	protected ref map<IEntity, ref UDR_RaceTrackLogicRacerData> m_RacerData = new map<IEntity, ref UDR_RaceTrackLogicRacerData>;
 	
+	// Script invokers
+	ref ScriptInvoker m_OnFinishLineActivated = new ScriptInvoker(); // (IEntity racer, bool lastLap, float timeSinceRaceStart_ms)
+	
+	protected float m_fRaceStartTime_ms;
 	protected bool m_bInitSuccess = false;
 	
 	//----------------------------------------------------------------------------------------------
@@ -126,6 +134,12 @@ class UDR_RaceTrackLogic : GenericEntity
 	UDR_VehiclePositioning GetVehiclePositioning()
 	{
 		return m_VehiclePositioning.value;
+	}
+	
+	//----------------------------------------------------------------------------------------------
+	void StartRace()
+	{
+		m_fRaceStartTime_ms = GetGame().GetWorld().GetWorldTime();
 	}
 	
 	//----------------------------------------------------------------------------------------------
@@ -221,12 +235,6 @@ class UDR_RaceTrackLogic : GenericEntity
 	}
 	
 	//----------------------------------------------------------------------------------------------
-	//override void EOnFixedFrame(IEntity owner, float timeSlice)
-	//{
-	//	
-	//}
-	
-	//----------------------------------------------------------------------------------------------
 	void UpdateAllRacers()
 	{
 		foreach (IEntity racerEnt, UDR_RaceTrackLogicRacerData racerData : m_RacerData)
@@ -290,14 +298,18 @@ class UDR_RaceTrackLogic : GenericEntity
 		
 		int nextWpId = (wpId + 1) % m_aWaypoints.Count();
 		
+		racerData.m_iNextWaypoint = nextWpId;
+		racerData.m_iPrevWaypoint = wpId;
+		
 		// If racer crossed the finish line, increase lap count
 		if (wpId == 0)
 		{
 			racerData.m_iLapCount++;
+			
+			float timeSinceRaceStart_ms = GetGame().GetWorld().GetWorldTime() - m_fRaceStartTime_ms;
+			bool lastLap = racerData.m_iLapCount == m_iLapCount;
+			m_OnFinishLineActivated.Invoke(veh, lastLap, timeSinceRaceStart_ms);
 		}
-		
-		racerData.m_iNextWaypoint = nextWpId;
-		racerData.m_iPrevWaypoint = wpId;
 	}
 	
 	//----------------------------------------------------------------------------------------------
@@ -328,6 +340,7 @@ class UDR_RaceTrackLogic : GenericEntity
 		SetFlags(EntityFlags.ACTIVE, true);
 	}
 	
+	//----------------------------------------------------------------------------------------------
 	override void _WB_AfterWorldUpdate(float timeSlice)
 	{
 		if (m_FinishLineWaypoint)
