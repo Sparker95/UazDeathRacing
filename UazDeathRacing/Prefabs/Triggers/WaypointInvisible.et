@@ -1,0 +1,12 @@
+UDR_Waypoint {
+ ID "59FCBB71A5489F96"
+ coords 73.182 2.001 464.053
+ TriggerShapeType Sphere
+ SphereRadius 5
+ DrawShape 1
+ ShapeColor 1 0 0 0.196
+ TriggerActivationType "All changes"
+ ClassFilter "Vehicle"
+ m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+ }
+}

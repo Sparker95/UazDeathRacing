@@ -1,0 +1,14 @@
+UDR_Waypoint {
+ ID "59FCBB7783A08234"
+ coords 35.072 2.001 478.913
+ angleY 90
+ TriggerShapeType "Oriented Bounding Box"
+ BoxMins -10 0 -0.5
+ BoxMaxs 10 5 0.5
+ DrawShape 1
+ ShapeColor 1 0 0 0.196
+ TriggerActivationType "All changes"
+ ClassFilter "Vehicle"
+ m_Next UDR_EntityLinkWaypoint "{59F347004DEC0021}" {
+ }
+}
