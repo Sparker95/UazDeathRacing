@@ -1187,7 +1187,7 @@ Vehicle : "{1F9BB80C3EC3C891}Prefabs/Vehicles/Core/Wheeled_Car_Base.et" {
     Offset 0 1.4012 1.3205
     Angles 0 0 0
    }
-   WeaponTemplate "{58ED978DD73772BE}Prefabs/Weapons/Blaster/Blaster.et"
+   WeaponTemplate "{493189F23B815B13}Prefabs/Weapons/Blaster/Blaster_LowAmmo.et"
   }
   ActionsManagerComponent "{C97BE5489221AE18}" {
    ActionContexts {

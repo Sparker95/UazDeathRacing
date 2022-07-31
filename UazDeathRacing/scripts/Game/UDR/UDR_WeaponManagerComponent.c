@@ -85,7 +85,8 @@ class UDR_WeaponManagerComponent : ScriptComponent
 					if (muzzleComp.IsChamberingPossible() && muzzleComp.IsBarrelChambered(0))
 						ammoCount++;
 					
-					return ammoCount == magazineComp.GetMaxAmmoCount();
+					//return ammoCount == magazineComp.GetMaxAmmoCount();
+					return ammoCount == 10; // Todo solve it for other guns when we have them
 				}
 			}
 		}
