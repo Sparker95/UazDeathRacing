@@ -1,3 +1,12 @@
+GenericEntity {
+ components {
+  MeshObject "{59FE928A408788F9}" {
+   Object "{E214B6724DA6188A}Prefabs/Pickups/Assets/PickupHealth.xob"
+  }
+ }
+ coords 4433.236 53.468 10731.69
+ angleY -95.03
+}
 $grp SCR_ParticleEmitter {
  {
   coords 4432.997 30.647 10735.53
@@ -223,6 +232,9 @@ $grp GenericEntity : "{8EDE6222B9F5A416}Prefabs/Structures/Walls/Pipe/PipeWallCo
   coords 4486.415 7.623 11011.046
   angleY 150.464
  }
+}
+GenericEntity : "{90299A76FC1AE10F}Prefabs/Props/Wrecks/T62_wreck_turret.et" {
+ coords 4425.063 13.187 10753.686
 }
 $grp StaticModelEntity : "{9ED02B6FED143A5A}Prefabs/Structures/Walls/Pipe/PipeWall_8M.et" {
  {

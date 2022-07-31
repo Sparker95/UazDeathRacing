@@ -1,5 +1,5 @@
 UDR_RaceTrackLogic Track2 {
- coords 4389.75 42.448 10753.557
+ coords 4389.75 58.705 10753.557
  m_FinishLineWaypoint UDR_EntityLinkWaypoint "{59FE929A18F6CA1D}" {
   m_sEntityName "t2_finish"
  }
