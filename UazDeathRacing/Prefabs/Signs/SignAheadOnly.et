@@ -1,0 +1,24 @@
+GenericEntity {
+ ID "59FE929E085B676D"
+ components {
+  MeshObject "{59FE929ECBB4C9BD}" {
+   Object "{6ECC57F0A3616CFF}Assets/Structures/Signs/Warnings/Sign_Circle_A.xob"
+   Materials {
+    MaterialAssignClass "{59FE929E335B9B92}" {
+     SourceMaterial "Sign_Restrictive_NoEntryBothDir"
+     AssignedMaterial "{B3B3A98CC2D925D5}Assets/Structures/Signs/Warnings/Data/Sign_Mandatory_AheadOnly_A.emat"
+    }
+    MaterialAssignClass "{59FE929E335B9BEC}" {
+     SourceMaterial "Sign_Restrictive_NoEntryBothDir_MLOD"
+     AssignedMaterial "{B44CF99286E52243}Assets/Structures/Signs/Warnings/Data/Sign_Mandatory_AheadOnly_A_MLOD.emat"
+    }
+   }
+  }
+  RigidBody "{59FE929F6B0A9B18}" {
+   ModelGeometry 1
+   Static 1
+  }
+ }
+ coords 4453.612 11.566 10772.669
+ scale 5
+}

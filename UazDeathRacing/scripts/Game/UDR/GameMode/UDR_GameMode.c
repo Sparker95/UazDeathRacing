@@ -574,7 +574,7 @@ class UDR_GameMode: SCR_BaseGameMode
 	// Fallback position for the camera when there is nothing to spectate
 	IEntity GetFallbackSpectatorTarget()
 	{
-		return m_CurrentRaceTrack;
+		return m_aRaceTracks[m_iCurrentRaceTrackId].value;
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------

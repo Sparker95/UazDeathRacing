@@ -1,0 +1,90 @@
+$grp UDR_Pickup : "{7D5C596D78F729C8}Prefabs/Pickups/PickupAmmo.et" {
+ {
+  coords 4922.741 164.893 7370.449
+ }
+ {
+  coords 4864.917 158.514 7422.749
+ }
+ {
+  coords 4913.57 162.583 7349.825
+ }
+ {
+  coords 4896.364 163.661 7330.131
+ }
+ {
+  coords 4857.8 165.029 7282.255
+ }
+ {
+  coords 4985.465 155.272 7397.128
+ }
+ {
+  coords 4389.605 12.871 10685.078
+ }
+}
+$grp UDR_BoostVehicleTrigger : "{C3865A319561D60F}Prefabs/Triggers/UDR_BoostTriggerVehicle.et" {
+ {
+  coords 4948.065 156.574 7414.736
+  angleX -0.277
+  angleY -71.622
+  angleZ 6.484
+ }
+ {
+  coords 4908.292 162.982 7345.246
+  angleX 4.585
+  angleY -157.006
+  angleZ 2.911
+ }
+ {
+  coords 4867.798 162.108 7363.536
+  angleX 0.009
+  angleY 90.273
+  angleZ -1.79
+ }
+ {
+  coords 4591.952 18.231 10666.073
+  angleY -14.511
+ }
+ {
+  coords 4572.157 17.801 10759.426
+  angleY -13.034
+ }
+ {
+  coords 4419.302 6.98 10943.458
+  angleY 167.169
+  {
+   DecalEntity {
+    ID "59E0215D53E650BC"
+    TerrainOnly 0
+   }
+  }
+ }
+ {
+  coords 4390.003 9.756 10708.94
+  angleY -98.813
+ }
+ {
+  coords 4260.824 12.358 10605.432
+  angleY 106.607
+ }
+ {
+  coords 4438.933 16.812 10625.158
+  angleY 83.82
+ }
+}
+$grp UDR_Pickup : "{DF1C96AAD094BA04}Prefabs/Pickups/PickupHealth.et" {
+ {
+  coords 4922.764 164.893 7359.211
+ }
+ {
+  coords 4912.811 160.775 7380.706
+ }
+ {
+  coords 4844.818 164.651 7299.251
+ }
+ {
+  coords 4828.168 164.418 7314.35
+ }
+ {
+  coords 4928.807 156.528 7421.462
+ }
+}

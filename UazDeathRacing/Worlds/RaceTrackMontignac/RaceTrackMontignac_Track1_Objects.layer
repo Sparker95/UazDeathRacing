@@ -1,0 +1,720 @@
+$grp GenericEntity : "{3E229A70EF3DF4F9}Prefabs/Structures/Walls/Pipe/PipeWallCombo_16m.et" {
+ {
+  coords 4868.156 165.235 7292.909
+  angleY -56.198
+ }
+ {
+  coords 4901.196 164.084 7317.738
+  angleY -57.163
+ }
+ {
+  coords 4916.889 162.339 7345.516
+  angleY 116.202
+ }
+ {
+  coords 4861.838 158.987 7427.353
+  angleY 127.198
+  {
+   GenericEntity {
+    ID "59DD52DD22D4D6A0"
+    coords 0 0 0
+   }
+  }
+ }
+ {
+  coords 4983.569 155.073 7409.715
+  angleY -151.836
+  {
+   GenericEntity {
+    ID "59DD52DD22D4D6A0"
+    coords 0.001 0 -0.007
+    {
+     StaticModelEntity {
+      ID "59DD52DDCBBCAE98"
+      coords 0 0 0.2
+     }
+     StaticModelEntity {
+      ID "59DD52DDCBBCAE99"
+      coords 8 0 -0.2
+     }
+    }
+   }
+   GenericEntity {
+    ID "59DD52DD3922E8B9"
+    coords 8 0 0
+    {
+     StaticModelEntity {
+      ID "59DD52DDCBBCAE98"
+      coords 0 0 0.2
+     }
+     StaticModelEntity {
+      ID "59DD52DDCBBCAE99"
+      coords 8 0 -0.2
+     }
+    }
+   }
+  }
+ }
+ {
+  coords 4999.583 156.828 7377.571
+  angleY -100.792
+  {
+   GenericEntity {
+    ID "59DD52DD22D4D6A0"
+    coords 0 0 -0.002
+    {
+     StaticModelEntity {
+      ID "59DD52DDCBBCAE98"
+      coords 0 0 0.201
+     }
+     StaticModelEntity {
+      ID "59DD52DDCBBCAE99"
+      coords 8 0 -0.199
+     }
+    }
+   }
+   GenericEntity {
+    ID "59DD52DD3922E8B9"
+    coords 8 0 -0.001
+    {
+     StaticModelEntity {
+      ID "59DD52DDCBBCAE98"
+      coords 0 0 0.201
+     }
+     StaticModelEntity {
+      ID "59DD52DDCBBCAE99"
+      coords 8 0 -0.199
+     }
+    }
+   }
+  }
+ }
+ {
+  coords 4993.383 158.033 7363.084
+  angleY -67.133
+  {
+   GenericEntity {
+    ID "59DD52DD22D4D6A0"
+    coords 0.001 0 0
+    {
+     StaticModelEntity {
+      ID "59DD52DDCBBCAE98"
+      coords 0 0 0.199
+     }
+     StaticModelEntity {
+      ID "59DD52DDCBBCAE99"
+      coords 8 0 -0.201
+     }
+    }
+   }
+   GenericEntity {
+    ID "59DD52DD3922E8B9"
+    coords 8 0 0
+    {
+     StaticModelEntity {
+      ID "59DD52DDCBBCAE98"
+      coords 0 0 0.199
+     }
+     StaticModelEntity {
+      ID "59DD52DDCBBCAE99"
+      coords 8 0 -0.201
+     }
+    }
+   }
+  }
+ }
+ {
+  coords 4982.33 158.445 7351.634
+  angleY -46.01
+  {
+   GenericEntity {
+    ID "59DD52DD22D4D6A0"
+    coords 0.002 0 -0.001
+   }
+  }
+ }
+ {
+  coords 4905.527 160.425 7391.131
+  angleY 27.892
+ }
+ {
+  coords 4888.991 162.329 7354.722
+  angleX -1.644
+  angleY -2.233
+  angleZ -9.3
+  {
+   GenericEntity {
+    ID "59DD52DD22D4D6A0"
+    {
+     StaticModelEntity {
+      ID "59DD52DDCBBCAE98"
+      placement none
+     }
+     StaticModelEntity {
+      ID "59DD52DDCBBCAE99"
+      placement none
+     }
+    }
+   }
+   GenericEntity {
+    ID "59DD52DD3922E8B9"
+    {
+     StaticModelEntity {
+      ID "59DD52DDCBBCAE98"
+      placement none
+     }
+     StaticModelEntity {
+      ID "59DD52DDCBBCAE99"
+      placement none
+     }
+    }
+   }
+  }
+ }
+ {
+  coords 4888.135 161.808 7372.177
+  angleX -1.613
+  angleY -2.045
+  angleZ -10.076
+  {
+   GenericEntity {
+    ID "59DD52DD22D4D6A0"
+    {
+     StaticModelEntity {
+      ID "59DD52DDCBBCAE98"
+      placement none
+     }
+     StaticModelEntity {
+      ID "59DD52DDCBBCAE99"
+      placement none
+     }
+    }
+   }
+   GenericEntity {
+    ID "59DD52DD3922E8B9"
+    {
+     StaticModelEntity {
+      ID "59DD52DDCBBCAE98"
+      placement none
+     }
+     StaticModelEntity {
+      ID "59DD52DDCBBCAE99"
+      placement none
+     }
+    }
+   }
+  }
+ }
+ {
+  coords 4860.267 162.85 7354
+  angleY -179.204
+ }
+ {
+  coords 4822.193 163.697 7325.012
+  angleY 86.024
+ }
+ {
+  coords 4834.348 162.388 7370.577
+  angleY 135.341
+ }
+ {
+  coords 4856.245 162.075 7370.885
+  angleY 178.334
+ }
+ {
+  coords 4838.745 164.736 7316.896
+  angleY 61.585
+ }
+ {
+  coords 4894.553 163.877 7332.793
+  angleY -64.469
+ }
+ {
+  coords 4837.406 164.759 7287.812
+  angleY 35.462
+ }
+ {
+  coords 4996.698 156.71 7393.043
+  angleY -126.542
+ }
+ {
+  coords 4877.573 158.02 7430.177
+  angleY 169.856
+ }
+ {
+  coords 4849.655 161.227 7389.955
+  angleY 41.834
+ }
+}
+$grp GenericEntity : "{4BF499166FC510B2}Prefabs/Structures/Walls/Pipe/PipeWallCombo_4m.et" {
+ {
+  coords 4868.312 160.475 7395.164
+  angleY -95.87
+ }
+ {
+  coords 4823.074 162.681 7359.393
+  angleY 133.389
+ }
+ {
+  coords 4864.482 165.177 7291.768
+  angleY -18.656
+ }
+ {
+  coords 4923.628 160.294 7379.149
+  angleY 176.209
+ }
+}
+$grp GenericEntity : "{8EDE6222B9F5A416}Prefabs/Structures/Walls/Pipe/PipeWallCombo_32m.et" {
+ {
+  coords 4877.021 165.165 7306.125
+  angleY -56.73
+  {
+   GenericEntity {
+    ID "59DD52DD68F76589"
+    coords 0.001 0 0
+    {
+     StaticModelEntity {
+      ID "59DD52DDCBBCAE98"
+      coords 0 -0.002 0.2
+     }
+     StaticModelEntity {
+      ID "59DD52DDCBBCAE99"
+      coords 8 -0.31 -0.2
+      angleY -180
+     }
+    }
+   }
+   GenericEntity {
+    ID "59DD52DD6E72DA44"
+    coords 8 -0.314 0
+    {
+     StaticModelEntity {
+      ID "59DD52DDCBBCAE98"
+      coords 0.001 -0.004 0.199
+     }
+     StaticModelEntity {
+      ID "59DD52DDCBBCAE99"
+      coords 8.001 -0.277 -0.201
+      angleY -180
+     }
+    }
+   }
+   GenericEntity {
+    ID "59DD52DD726FC1B0"
+    coords 24 -0.916 0
+    {
+     StaticModelEntity {
+      ID "59DD52DDCBBCAE98"
+      coords 0 -0.01 0.2
+     }
+     StaticModelEntity {
+      ID "59DD52DDCBBCAE99"
+      coords 8 -0.372 -0.2
+      angleY -180
+     }
+    }
+   }
+   GenericEntity {
+    ID "59DD52DD739E5357"
+    coords 16 -0.598 0.001
+    {
+     StaticModelEntity {
+      ID "59DD52DDCBBCAE98"
+      coords 0.001 -0.008 0.2
+     }
+     StaticModelEntity {
+      ID "59DD52DDCBBCAE99"
+      coords 8.001 -0.308 -0.2
+      angleY -180
+     }
+    }
+   }
+  }
+ }
+ {
+  coords 4884.065 164.763 7290.967
+  angleY -57.423
+ }
+ {
+  coords 4852.283 160.749 7414.876
+  angleY 93.88
+  {
+   GenericEntity {
+    ID "59DD52DD68F76589"
+    coords -0.002 0 0.001
+   }
+  }
+ }
+ {
+  coords 4909.314 156.773 7433.024
+  angleY 174.845
+  {
+   GenericEntity {
+    ID "59DD52DD68F76589"
+    coords -0.002 0 -0.001
+    {
+     StaticModelEntity {
+      ID "59DD52DDCBBCAE98"
+      coords 0 0 0.2
+     }
+     StaticModelEntity {
+      ID "59DD52DDCBBCAE99"
+      coords 8 0 -0.2
+     }
+    }
+   }
+   GenericEntity {
+    ID "59DD52DD6E72DA44"
+    coords 8 0 0
+    {
+     StaticModelEntity {
+      ID "59DD52DDCBBCAE98"
+      coords 0 0 0.2
+     }
+     StaticModelEntity {
+      ID "59DD52DDCBBCAE99"
+      coords 8 0 -0.2
+     }
+    }
+   }
+   GenericEntity {
+    ID "59DD52DD726FC1B0"
+    coords 24 0 0
+    {
+     StaticModelEntity {
+      ID "59DD52DDCBBCAE98"
+      coords 0 0 0.2
+     }
+     StaticModelEntity {
+      ID "59DD52DDCBBCAE99"
+      coords 8 0 -0.199
+     }
+    }
+   }
+   GenericEntity {
+    ID "59DD52DD739E5357"
+    coords 16 0 0
+    {
+     StaticModelEntity {
+      ID "59DD52DDCBBCAE98"
+      coords 0 0 0.201
+     }
+     StaticModelEntity {
+      ID "59DD52DDCBBCAE99"
+      coords 8 0 -0.199
+     }
+    }
+   }
+  }
+ }
+ {
+  coords 4940.89 155.586 7428.273
+  angleY -171.436
+  {
+   GenericEntity {
+    ID "59DD52DD68F76589"
+    coords -0.002 0 -0.004
+    {
+     StaticModelEntity {
+      ID "59DD52DDCBBCAE98"
+      coords -0.001 0.018 0.201
+     }
+     StaticModelEntity {
+      ID "59DD52DDCBBCAE99"
+      coords 8 0.244 -0.199
+      angleY -180
+     }
+    }
+   }
+   GenericEntity {
+    ID "59DD52DD6E72DA44"
+    coords 7.999 0.259 -0.001
+    {
+     StaticModelEntity {
+      ID "59DD52DDCBBCAE98"
+      coords 0 0.013 0.199
+     }
+     StaticModelEntity {
+      ID "59DD52DDCBBCAE99"
+      coords 8 0.184 -0.201
+      angleY -180
+     }
+    }
+   }
+   GenericEntity {
+    ID "59DD52DD726FC1B0"
+    coords 23.999 0.686 -0.002
+    {
+     StaticModelEntity {
+      ID "59DD52DDCBBCAE98"
+      coords 0 0.014 0.201
+     }
+     StaticModelEntity {
+      ID "59DD52DDCBBCAE99"
+      coords 7.999 0.08 -0.2
+      angleY -180
+     }
+    }
+   }
+   GenericEntity {
+    ID "59DD52DD739E5357"
+    coords 15.998 0.461 -0.002
+    {
+     StaticModelEntity {
+      ID "59DD52DDCBBCAE98"
+      coords -0.001 0.016 0.2
+     }
+     StaticModelEntity {
+      ID "59DD52DDCBBCAE99"
+      coords 8 0.211 -0.2
+      angleY -180
+     }
+    }
+   }
+  }
+ }
+ {
+  coords 4903.957 158.713 7413.967
+  angleY 9.486
+  {
+   GenericEntity {
+    ID "59DD52DD68F76589"
+    coords 0.002 0 0.002
+   }
+  }
+ }
+ {
+  coords 4970.603 155.15 7416.766
+  angleY -158.853
+  {
+   GenericEntity {
+    ID "59DD52DD68F76589"
+    coords 0 0 -0.001
+   }
+  }
+ }
+ {
+  coords 4904.18 158.716 7413.926
+  angleY 178.163
+ }
+ {
+  coords 4919.628 162.793 7345.473
+  angleY -90.074
+  {
+   GenericEntity {
+    ID "59DD52DD68F76589"
+    coords 0 0 -0.001
+   }
+  }
+ }
+ {
+  coords 4888.113 161.862 7372.19
+  angleY 177.679
+ }
+ {
+  coords 4888.991 162.816 7354.771
+  angleY 178.622
+  {
+   GenericEntity {
+    ID "59DD52DD68F76589"
+    coords 0 0 -0.001
+    {
+     StaticModelEntity {
+      ID "59DD52DDCBBCAE98"
+      coords 0 -1.05 0.2
+     }
+     StaticModelEntity {
+      ID "59DD52DDCBBCAE99"
+      coords 8 -1.002 -0.2
+      angleY -180
+     }
+    }
+   }
+   GenericEntity {
+    ID "59DD52DD6E72DA44"
+    coords 8 -0.996 -0.001
+    {
+     StaticModelEntity {
+      ID "59DD52DDCBBCAE98"
+      coords -0.001 0.007 0.2
+     }
+     StaticModelEntity {
+      ID "59DD52DDCBBCAE99"
+      coords 8 0.087 -0.2
+      angleY -180
+     }
+    }
+   }
+   GenericEntity {
+    ID "59DD52DD726FC1B0"
+    coords 24 -0.873 -0.001
+    {
+     StaticModelEntity {
+      ID "59DD52DDCBBCAE98"
+      coords -0.001 0.012 0.2
+     }
+     StaticModelEntity {
+      ID "59DD52DDCBBCAE99"
+      coords 7.999 0.01 -0.2
+      angleY -180
+     }
+    }
+   }
+   GenericEntity {
+    ID "59DD52DD739E5357"
+    coords 16 -0.9 -0.001
+    {
+     StaticModelEntity {
+      ID "59DD52DDCBBCAE98"
+      coords 0 0.01 0.2
+     }
+     StaticModelEntity {
+      ID "59DD52DDCBBCAE99"
+      coords 8 0.015 -0.2
+      angleY -180
+     }
+    }
+   }
+  }
+ }
+ {
+  coords 4820.573 163.539 7356.896
+  angleY 87.082
+ }
+ {
+  coords 4838.992 162.95 7348.718
+  angleY 90.299
+ }
+ {
+  coords 4822.822 163.637 7316.141
+  angleY 62.597
+ }
+ {
+  coords 4874.281 161.007 7390.346
+  angleY -1.495
+ }
+ {
+  coords 4935.292 157.434 7408.802
+  angleY 18.129
+ }
+ {
+  coords 4962.573 160.318 7381.708
+  angleY 176.055
+ }
+ {
+  coords 4919.475 161.191 7351.19
+ }
+ {
+  coords 4951.346 160.453 7351.158
+  angleY -1.713
+ }
+}
+$grp StaticModelEntity : "{9ED02B6FED143A5A}Prefabs/Structures/Walls/Pipe/PipeWall_8M.et" {
+ {
+  coords 4861.427 0.01 7379.418
+  angleY 31.099
+ }
+ {
+  coords 4868.069 -0.012 7375.489
+  angleY 29.295
+ }
+}
+$grp GenericEntity : "{AA6FBCA54B8DBBD4}Prefabs/Structures/Walls/Pipe/PipeWallCombo_8m.et" {
+ {
+  coords 4874.429 161.012 7390.197
+  angleY -139.886
+ }
+ {
+  coords 4844.443 162.684 7354.315
+  angleY 133.42
+ }
+ {
+  coords 4840.373 161.936 7370.413
+  angleY 178.356
+ }
+ {
+  coords 4846.3 164.617 7302.893
+  angleY 59.986
+ }
+ {
+  coords 4850.136 165.135 7296.04
+  angleY 33.965
+ }
+ {
+  coords 4856.59 165.061 7291.603
+  angleY -1.634
+ }
+ {
+  coords 4901.423 162.786 7347.014
+  angleY -81.031
+ }
+ {
+  coords 4850.356 164.996 7278.529
+  angleY 1.228
+ }
+ {
+  coords 4858.208 165.079 7278.357
+ }
+ {
+  coords 4865.117 165.188 7278.129
+  angleY -14.147
+ }
+ {
+  coords 4872.776 165.437 7279.995
+  angleY -38.119
+ }
+ {
+  coords 4878.916 165.479 7284.762
+  angleY -50.758
+ }
+ {
+  coords 4916.864 163.065 7345.455
+  angleY -69.55
+ }
+ {
+  coords 4919.565 160.564 7375.838
+  angleY -90.411
+ }
+ {
+  coords 4867.656 159.629 7406.977
+  angleY 88.17
+ }
+ {
+  coords 4872.665 158.81 7412.953
+  angleY 130.13
+ }
+ {
+  coords 4965.368 156.315 7398.906
+  angleY 52.573
+ }
+ {
+  coords 4970.222 156.757 7392.721
+  angleY 97.598
+ }
+ {
+  coords 4962.094 157.909 7381.669
+  angleY -24.231
+ }
+ {
+  coords 4930.749 160.09 7379.509
+  angleY 177.283
+ }
+ {
+  coords 4987.197 154.298 7405.906
+  angleY -135.413
+ }
+}
+$grp SCR_DestructibleBuildingEntity : "{CF86E4F10D9173E9}Prefabs/Structures/Infrastructure/Bridges/ConcreteBridge_01_Narrow_Long_Base.et" {
+ {
+  coords 4879.001 160.343 7358.833
+  angleX -0.891
+  angleY -2.455
+  angleZ -10
+ }
+ {
+  coords 4878.684 160.128 7367.457
+  angleX -0.891
+  angleY -2.455
+  angleZ -10
+ }
+}

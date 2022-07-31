@@ -1,0 +1,26 @@
+GenericEntity {
+ ID "59FE9290843DE72D"
+ components {
+  MeshObject "{59FE929F4D94AB1D}" {
+   Object "{3AF3E4AA0496A73C}Assets/Structures/Signs/Warnings/Sign_Triangle_A.xob"
+   Materials {
+    MaterialAssignClass "{59FE929081D0770C}" {
+     SourceMaterial "Sign_Danger_CurveRight_A"
+     AssignedMaterial "{6FE7A5588F16D83A}Assets/Structures/Signs/Warnings/Data/Sign_Warning_CurveLeft_A.emat"
+    }
+    MaterialAssignClass "{59FE929081D07767}" {
+     SourceMaterial "Sign_Danger_CurveRight_A_MLOD"
+     AssignedMaterial "{CF0E67E5A0E18C85}Assets/Structures/Signs/Warnings/Data/Sign_Warning_CurveLeft_A_MLOD.emat"
+    }
+   }
+  }
+  RigidBody "{59FE9290A651C395}" {
+   ResponseIndex "HugeDestructible"
+   ModelGeometry 1
+   Static 1
+  }
+ }
+ coords 4406.172 10.439 10709.3
+ angleY -143.787
+ scale 5
+}

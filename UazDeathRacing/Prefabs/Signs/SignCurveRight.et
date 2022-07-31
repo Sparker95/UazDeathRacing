@@ -1,0 +1,16 @@
+GenericEntity {
+ ID "59FE9290B4EA81B9"
+ components {
+  MeshObject "{59FE929F4D94AB1D}" {
+   Object "{3AF3E4AA0496A73C}Assets/Structures/Signs/Warnings/Sign_Triangle_A.xob"
+  }
+  RigidBody "{59FE9290A651C395}" {
+   ResponseIndex "HugeDestructible"
+   ModelGeometry 1
+   Static 1
+  }
+ }
+ coords 4406.172 10.439 10709.3
+ angleY -143.787
+ scale 5
+}

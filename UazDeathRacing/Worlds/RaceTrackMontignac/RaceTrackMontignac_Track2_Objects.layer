@@ -1,0 +1,239 @@
+$grp SCR_ParticleEmitter {
+ {
+  coords 4432.997 30.647 10735.53
+  angleX -3.505
+  angleY 0.059
+  angleZ -0.96
+  m_EffectPath "{3FEEFBF34A5A515C}Particles/Vehicle/Vehicle_fire_engine_BTR70_01.ptc"
+ }
+ {
+  coords 4445.682 16.974 10743.657
+  angleX -3.505
+  angleY 0.059
+  angleZ -0.96
+  m_EffectPath "{3FEEFBF34A5A515C}Particles/Vehicle/Vehicle_fire_engine_BTR70_01.ptc"
+ }
+ {
+  coords 4438.183 17.512 10742.452
+  angleX -3.505
+  angleY 0.059
+  angleZ -0.96
+  m_EffectPath "{3FEEFBF34A5A515C}Particles/Vehicle/Vehicle_fire_engine_BTR70_01.ptc"
+ }
+}
+SCR_DestructibleBuildingEntity : "{12981279D4DB92D3}Prefabs/Structures/Infrastructure/Bridges/ConcreteBridge_01_Narrow_Base.et" {
+ coords 4450.465 11.217 10773.439
+ angleX 1.509
+ angleY 118.433
+ angleZ -19.377
+ scale 0.6
+ {
+  $grp GenericEntity {
+   SignAheadOnly {
+    components {
+     MeshObject "{59FE929ECBB4C9BD}" {
+      Object "{6ECC57F0A3616CFF}Assets/Structures/Signs/Warnings/Sign_Circle_A.xob"
+      Materials {
+       MaterialAssignClass "{59FE929E335B9B92}" {
+        SourceMaterial "Sign_Restrictive_NoEntryBothDir"
+        AssignedMaterial "{B3B3A98CC2D925D5}Assets/Structures/Signs/Warnings/Data/Sign_Mandatory_AheadOnly_A.emat"
+       }
+       MaterialAssignClass "{59FE929E335B9BEC}" {
+        SourceMaterial "Sign_Restrictive_NoEntryBothDir_MLOD"
+        AssignedMaterial "{B44CF99286E52243}Assets/Structures/Signs/Warnings/Data/Sign_Mandatory_AheadOnly_A_MLOD.emat"
+       }
+      }
+     }
+    }
+    coords 2.65 -0.118 2.634
+    angleX 89.227
+    angleY -179.492
+    angleZ -89.609
+    scale 3
+   }
+   SignAheadOnly2 {
+    components {
+     MeshObject "{59FE929ECBB4C9BD}" {
+      Object "{6ECC57F0A3616CFF}Assets/Structures/Signs/Warnings/Sign_Circle_A.xob"
+      Materials {
+       MaterialAssignClass "{59FE929E335B9B92}" {
+        SourceMaterial "Sign_Restrictive_NoEntryBothDir"
+        AssignedMaterial "{B3B3A98CC2D925D5}Assets/Structures/Signs/Warnings/Data/Sign_Mandatory_AheadOnly_A.emat"
+       }
+       MaterialAssignClass "{59FE929E335B9BEC}" {
+        SourceMaterial "Sign_Restrictive_NoEntryBothDir_MLOD"
+        AssignedMaterial "{B44CF99286E52243}Assets/Structures/Signs/Warnings/Data/Sign_Mandatory_AheadOnly_A_MLOD.emat"
+       }
+      }
+     }
+    }
+    coords 2.486 -0.076 -2.8
+    angleX 89.016
+    angleY 28.334
+    angleZ 117.63
+    scale 3
+   }
+  }
+ }
+}
+$grp GenericEntity : "{156126277C35FBCA}Prefabs/Structures/Signs/Warnings/SignBendRight_01.et" {
+ {
+  coords 4433.374 14.194 10661.349
+  angleY -6.655
+  scale 5
+ }
+ {
+  coords 4400.406 13.935 10659.922
+  angleY 64.2
+  scale 5
+ }
+}
+$grp GenericEntity : "{1E78A516FE185C50}Prefabs/Signs/SignCurveLeft.et" {
+ {
+  coords 4295.816 6.585 10703.04
+  angleY 129.471
+ }
+ {
+  coords 4304.695 7.331 10706.089
+  angleY 143.241
+ }
+ {
+  coords 4247.931 14.264 10599.707
+  angleY 41.484
+ }
+ {
+  coords 4600.132 19.684 10651.04
+  angleY -67.058
+ }
+ {
+  coords 4594.749 19.384 10642.436
+  angleY -47.332
+ }
+ {
+  coords 4490.703 9.382 11014.695
+  angleY 159.303
+ }
+ {
+  coords 4503.406 9.843 11011.946
+  angleY -147.524
+ }
+ {
+  coords 4497.402 9.626 11014.676
+  angleY -174.509
+ }
+ {
+  coords 4405.205 11.831 10716.071
+  angleY 175.474
+ }
+ {
+  coords 4409.621 12.308 10711.043
+  angleY -105.136
+ }
+}
+$grp GenericEntity : "{25B265F3E7CBDFC8}Prefabs/Props/Wrecks/BMP1_wreck.et" {
+ {
+  coords 4445.377 11.212 10776.242
+  angleY 17.642
+ }
+ {
+  coords 4418.187 11.364 10711.385
+  angleY -1.718
+ }
+}
+$grp GenericEntity : "{25C8B889A777399D}Prefabs/Props/Infrastructure/ConeTraffic/ConeTraffic_01_red.et" {
+ {
+  coords 4561.542 17.698 10768.221
+  scale 5
+ }
+ {
+  coords 4577.581 17.813 10772.296
+  scale 5
+ }
+}
+$grp GenericEntity : "{3E229A70EF3DF4F9}Prefabs/Structures/Walls/Pipe/PipeWallCombo_16m.et" {
+ {
+  coords 4481.472 16.16 10637.73
+  angleY -20.239
+ }
+ {
+  coords 4482.282 16.747 10618.838
+  angleY -22.149
+ }
+ {
+  coords 4434.4 12.503 10722.663
+  angleY 80.104
+ }
+}
+GenericEntity : "{4777B477160BA814}Prefabs/Signs/SignCurveRight.et" {
+ coords 4460.361 13.517 10773.956
+ angleY -17.212
+}
+$grp GenericEntity : "{4EC62858248F74D4}Prefabs/Signs/SignAheadOnly.et" {
+ {
+  coords 4324.719 18.043 10614.268
+  angleY -97.617
+ }
+ {
+  coords 4578.523 25.571 10672.593
+  angleY 169.779
+ }
+ {
+  coords 4585.837 21.884 10746.807
+  angleY 168.093
+ }
+}
+GenericEntity : "{7783AE4B44D3CF29}Prefabs/Props/Wrecks/M923A1_wreck.et" {
+ coords 4452.209 12.653 10750.606
+ angleY 22.066
+}
+GenericEntity : "{84CBCE9163176B3E}Prefabs/Props/Wrecks/S105_wreck.et" {
+ coords 4439.496 18.323 10739.895
+ angleX -36.342
+ angleY -156.785
+ angleZ 43.492
+}
+$grp GenericEntity : "{8D3CBF3A91BE18C9}Prefabs/Props/Civilian/BenchStreet/StreetBench_01/BenchStreet_01_Base.et" {
+ {
+  coords 4424.515 11.779 10679.642
+  angleX -1.019
+  angleY 81.388
+  angleZ -0.751
+ }
+ {
+  coords 4424.155 11.776 10684.302
+  angleX -1.019
+  angleY 81.388
+  angleZ -0.751
+ }
+ {
+  coords 4413.167 11.906 10683.074
+  angleY -92.265
+ }
+ {
+  coords 4413.916 11.906 10679.009
+  angleY -92.265
+ }
+}
+$grp GenericEntity : "{8EDE6222B9F5A416}Prefabs/Structures/Walls/Pipe/PipeWallCombo_32m.et" {
+ {
+  coords 4568.065 18.938 10720.229
+  angleY -104.047
+ }
+ {
+  coords 4486.415 7.623 11011.046
+  angleY 150.464
+ }
+}
+$grp StaticModelEntity : "{9ED02B6FED143A5A}Prefabs/Structures/Walls/Pipe/PipeWall_8M.et" {
+ {
+  coords 4474.608 0.001 10911.944
+  angleY -106.994
+ }
+ {
+  coords 4472.446 0.001 10926.779
+  angleY -109.098
+ }
+}
+GenericEntity : "{AE300E34EA8FF40C}Prefabs/Props/Wrecks/Ural4320_wreck_static.et" {
+ coords 4453.83 12.578 10757.795
+}

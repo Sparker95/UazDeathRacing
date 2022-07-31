@@ -1,0 +1,141 @@
+UDR_RaceTrackLogic Track2 {
+ coords 4389.75 42.448 10753.557
+ m_FinishLineWaypoint UDR_EntityLinkWaypoint "{59FE929A18F6CA1D}" {
+  m_sEntityName "t2_finish"
+ }
+ m_VehiclePositioning UDR_EntityLinkVehiclePositioning "{59FE929A1CD422A9}" {
+  m_sEntityName "t2_positions"
+ }
+ m_iLapCount 3
+ m_sRaceTrackName "Assault of St. Phillipe Church"
+}
+$grp UDR_Waypoint : "{92A0F1C3F4161A7D}Prefabs/Triggers/WaypointInvisible.et" {
+ t2_1 {
+  coords 4554.637 16.821 10852.413
+  angleX -0.035
+  angleY -12.632
+  angleZ -0.006
+  SphereRadius 15
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "t2_2"
+  }
+ }
+ t2_2 {
+  coords 4496.976 13.283 11002.194
+  angleY -98.254
+  SphereRadius 15
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "t2_3"
+  }
+ }
+ t2_3 {
+  coords 4415.338 6.354 10965.598
+  angleY 178.078
+  SphereRadius 15
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "t2_4"
+  }
+ }
+ t2_4 {
+  coords 4443.885 9.154 10847.114
+  angleY 168.133
+  SphereRadius 10.3
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "t2_5"
+  }
+ }
+ t2_5 {
+  coords 4426.097 12.765 10740.229
+  angleY -174.37
+  SphereRadius 10.3
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "t2_6"
+  }
+ }
+ t2_6 {
+  coords 4429.1 12.301 10668.617
+  angleY -128.754
+  SphereRadius 12.1
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "t2_7"
+  }
+ }
+ t2_8 {
+  coords 4300.383 4.886 10695.725
+  angleX -1.251
+  angleY -126.331
+  angleZ -0.191
+  SphereRadius 15.6
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "t2_9"
+  }
+ }
+ t2_9 {
+  coords 4253.708 12.122 10608.23
+  angleX 0.637
+  angleY 104.77
+  angleZ 1.094
+  SphereRadius 15.6
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "t2_10"
+  }
+ }
+ t2_10 {
+  coords 4353.134 14.188 10612.502
+  angleX 0.985
+  angleY 83.885
+  angleZ 0.795
+  SphereRadius 15.6
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "t2_11"
+  }
+ }
+ t2_11 {
+  coords 4462.622 17.159 10627.436
+  angleX 0.985
+  angleY 83.885
+  angleZ 0.795
+  SphereRadius 15.6
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "t2_12"
+  }
+ }
+ t2_12 {
+  coords 4592.93 18.111 10653.276
+  angleX 0.824
+  angleY -4.417
+  angleZ -0.961
+  SphereRadius 15.6
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "t2_finish"
+  }
+ }
+ t2_7 {
+  coords 4349.955 8.037 10701.891
+  angleY -96.754
+  SphereRadius 12.1
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "t2_8"
+  }
+ }
+}
+UDR_Waypoint t2_finish : "{9DB4B14E0E7FB10B}Prefabs/Triggers/WaypointFinishLine.et" {
+ coords 4570.333 17.697 10768.292
+ angleY -12
+ m_Next UDR_EntityLinkWaypoint "{59F347004DEC0021}" {
+  m_sEntityName "t2_1"
+ }
+ {
+  DecalEntity {
+   ID "59FD322FE3049CFF"
+   coords 0 -0.17 0
+   TerrainOnly 0
+  }
+ }
+}
+UDR_VehiclePositioning t2_positions : "{F33FD9275A6393DB}Prefabs/VehiclePositioning/VehiclePositioning.et" {
+ coords 4565.813 17.604 10794.176
+ angleY -10.731
+ m_iNumColumns 3
+ m_fStepColumns 3.5
+}

@@ -4,21 +4,27 @@ SubScene {
 Layer default {
  Index 0
 }
-Layer race_track_Montignac {
+Layer Track1_Objects {
  Index 1
 }
-Layer track_1 {
+Layer Track1 {
  Index 2
 }
-Layer pickups {
+Layer Track1_Pickups {
  Index 3
 }
 Layer gamemode {
  Index 4
 }
-Layer decor {
+Layer Track1_Decorations {
  Index 5
 }
-Layer triggers {
+Layer Track2 {
+ Index 6
+}
+Layer Track2_Objects {
  Index 7
+}
+Layer Track2_Pickups {
+ Index 8
 }
