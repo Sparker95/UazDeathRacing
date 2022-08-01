@@ -28,3 +28,12 @@ Layer Track2_Objects {
 Layer Track2_Pickups {
  Index 8
 }
+Layer Track3_Objects {
+ Index 9
+}
+Layer Track3 {
+ Index 10
+}
+Layer Track3_Pickups {
+ Index 11
+}

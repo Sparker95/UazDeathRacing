@@ -1,0 +1,115 @@
+UDR_RaceTrackLogic Track3 {
+ coords 10128.619 135.241 3562.409
+ m_FinishLineWaypoint UDR_EntityLinkWaypoint "{5A032B14A55A1A34}" {
+  m_sEntityName "t3_finish"
+ }
+ m_VehiclePositioning UDR_EntityLinkVehiclePositioning "{5A032B14AA2E1C1F}" {
+  m_sEntityName "t3_positions"
+ }
+ m_iLapCount 2
+ m_sRaceTrackName "Black Lake Hyper Loop"
+}
+$grp UDR_Waypoint : "{92A0F1C3F4161A7D}Prefabs/Triggers/WaypointInvisible.et" {
+ t3_1 {
+  coords 9783.782 288.121 3269.673
+  angleY 160.119
+  SphereRadius 18.2
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "t3_2"
+  }
+ }
+ t3_2 {
+  coords 9819.642 288.121 3171.108
+  angleY 160.119
+  SphereRadius 18.2
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "t3_3"
+  }
+ }
+ t3_3 {
+  coords 9873.819 280.852 3026.912
+  angleY 171.608
+  SphereRadius 18.2
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "t3_4"
+  }
+ }
+ t3_4 {
+  coords 10007.261 282.001 2949.479
+  angleY 39.449
+  SphereRadius 8.3
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "t3_5"
+  }
+ }
+ t3_5 {
+  coords 10198.917 46.724 3156.304
+  angleX -11.715
+  angleY 13.371
+  angleZ -0.04
+  SphereRadius 18.2
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "t3_6"
+  }
+ }
+ t3_7 {
+  coords 10073.105 130.499 3622.702
+  angleX 6.847
+  angleY -79.42
+  angleZ -18.174
+  SphereRadius 18.2
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "t3_8"
+  }
+ }
+ t3_9 {
+  coords 9626.135 289.055 3681.745
+  angleX -1.753
+  angleY 159.883
+  angleZ 0.642
+  SphereRadius 24.2
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "t3_finish"
+  }
+ }
+ t3_6 {
+  coords 10217.689 79.664 3448.896
+  angleX 6.564
+  angleY -57.978
+  angleZ -22.765
+  SphereRadius 18.9
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "t3_7"
+  }
+ }
+ t3_8 {
+  coords 9861.99 206.02 3741.698
+  angleX 5.94
+  angleY -97.384
+  angleZ -23.757
+  SphereRadius 18.2
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "t3_9"
+  }
+ }
+}
+UDR_Waypoint t3_finish : "{9DB4B14E0E7FB10B}Prefabs/Triggers/WaypointFinishLine.et" {
+ coords 9684.874 288.001 3524.708
+ angleY 159.722
+ BoxMins -20 0 -0.5
+ BoxMaxs 20 5 0.5
+ m_Next UDR_EntityLinkWaypoint "{59F347004DEC0021}" {
+  m_sEntityName "t3_1"
+ }
+ {
+  DecalEntity {
+   ID "59FD322FE3049CFF"
+   TerrainOnly 0
+  }
+ }
+}
+UDR_VehiclePositioning t3_positions : "{F33FD9275A6393DB}Prefabs/VehiclePositioning/VehiclePositioning.et" {
+ coords 9701.286 288.081 3481.767
+ angleY 159.934
+ m_iNumColumns 4
+}

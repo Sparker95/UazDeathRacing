@@ -1,0 +1,264 @@
+$grp UDR_BoostVehicleTrigger : "{C3865A319561D60F}Prefabs/Triggers/UDR_BoostTriggerVehicle.et" {
+ {
+  coords 10245.821 43.247 3287.305
+  angleX 8.258
+  angleY 5.23
+  angleZ -13.903
+  m_iBoostDuration_ms 10000
+  {
+   DecalEntity {
+    ID "59E0215C5D9C88B3"
+    TerrainOnly 0
+   }
+   DecalEntity {
+    ID "59E0215C7ECAF601"
+    TerrainOnly 0
+   }
+   DecalEntity {
+    ID "59E0215D53E650BC"
+    TerrainOnly 0
+   }
+  }
+ }
+ {
+  coords 10193.038 84.764 3468.913
+  angleX 15.141
+  angleY -32.195
+  angleZ -17.544
+  m_iBoostDuration_ms 10000
+  {
+   DecalEntity {
+    ID "59E0215C5D9C88B3"
+    TerrainOnly 0
+   }
+   DecalEntity {
+    ID "59E0215C7ECAF601"
+    TerrainOnly 0
+   }
+   DecalEntity {
+    ID "59E0215D53E650BC"
+    TerrainOnly 0
+   }
+  }
+ }
+ {
+  coords 9984.307 156.932 3672.613
+  angleX 20.025
+  angleY -57.316
+  angleZ -14.321
+  m_iBoostDuration_ms 10000
+  {
+   DecalEntity {
+    ID "59E0215C5D9C88B3"
+    TerrainOnly 0
+   }
+   DecalEntity {
+    ID "59E0215C7ECAF601"
+    TerrainOnly 0
+   }
+   DecalEntity {
+    ID "59E0215D53E650BC"
+    TerrainOnly 0
+   }
+  }
+ }
+ {
+  coords 9816.75 218.346 3743.723
+  angleX 22.626
+  angleY -78.937
+  angleZ -11.701
+  m_iBoostDuration_ms 10000
+  {
+   DecalEntity {
+    ID "59E0215C5D9C88B3"
+    TerrainOnly 0
+   }
+   DecalEntity {
+    ID "59E0215C7ECAF601"
+    TerrainOnly 0
+   }
+   DecalEntity {
+    ID "59E0215D53E650BC"
+    TerrainOnly 0
+   }
+  }
+ }
+ {
+  coords 10117.852 113.138 3566.244
+  angleX 11.295
+  angleY -43.763
+  angleZ -11.116
+  m_iBoostDuration_ms 10000
+  {
+   DecalEntity {
+    ID "59E0215C5D9C88B3"
+    TerrainOnly 0
+   }
+   DecalEntity {
+    ID "59E0215C7ECAF601"
+    TerrainOnly 0
+   }
+   DecalEntity {
+    ID "59E0215D53E650BC"
+    TerrainOnly 0
+   }
+  }
+ }
+ {
+  coords 10235.575 60.696 3385.904
+  angleX 12.774
+  angleY -13.43
+  angleZ -14.245
+  m_iBoostDuration_ms 10000
+  {
+   DecalEntity {
+    ID "59E0215C5D9C88B3"
+    TerrainOnly 0
+   }
+   DecalEntity {
+    ID "59E0215C7ECAF601"
+    TerrainOnly 0
+   }
+   DecalEntity {
+    ID "59E0215D53E650BC"
+    TerrainOnly 0
+   }
+  }
+ }
+ {
+  coords 10054.991 132.23 3624.745
+  angleX 14.557
+  angleY -51.8
+  angleZ -12.935
+  m_iBoostDuration_ms 10000
+  {
+   DecalEntity {
+    ID "59E0215C5D9C88B3"
+    TerrainOnly 0
+   }
+   DecalEntity {
+    ID "59E0215C7ECAF601"
+    TerrainOnly 0
+   }
+   DecalEntity {
+    ID "59E0215D53E650BC"
+    TerrainOnly 0
+   }
+  }
+ }
+ {
+  coords 9630.841 288.712 3671.227
+  angleX -1.766
+  angleY 161.074
+  angleZ 0.605
+  BoxMins -15 0 0
+  BoxMaxs 15 5 1
+  m_iBoostDuration_ms 10000
+  {
+   DecalEntity {
+    ID "59E0215C5D9C88B3"
+    TerrainOnly 0
+   }
+   DecalEntity {
+    ID "59E0215C7ECAF601"
+    TerrainOnly 0
+   }
+   DecalEntity {
+    ID "59E0215D53E650BC"
+    TerrainOnly 0
+   }
+  }
+ }
+ {
+  coords 9702.872 288.573 3474.674
+  angleX -1.766
+  angleY 161.074
+  angleZ 0.605
+  BoxMins -15 0 0
+  BoxMaxs 15 5 1
+  m_iBoostDuration_ms 10000
+  {
+   DecalEntity {
+    ID "59E0215C5D9C88B3"
+    TerrainOnly 0
+   }
+   DecalEntity {
+    ID "59E0215C7ECAF601"
+    TerrainOnly 0
+   }
+   DecalEntity {
+    ID "59E0215D53E650BC"
+    TerrainOnly 0
+   }
+  }
+ }
+ {
+  coords 9669.134 288.036 3566.846
+  angleX -1.766
+  angleY 161.074
+  angleZ 0.605
+  BoxMins -15 0 0
+  BoxMaxs 15 5 1
+  m_iBoostDuration_ms 10000
+  {
+   DecalEntity {
+    ID "59E0215C5D9C88B3"
+    TerrainOnly 0
+   }
+   DecalEntity {
+    ID "59E0215C7ECAF601"
+    TerrainOnly 0
+   }
+   DecalEntity {
+    ID "59E0215D53E650BC"
+    TerrainOnly 0
+   }
+  }
+ }
+ {
+  coords 9742.383 288.031 3368.44
+  angleX -1.766
+  angleY 161.074
+  angleZ 0.605
+  BoxMins -15 0 0
+  BoxMaxs 15 5 1
+  m_iBoostDuration_ms 10000
+  {
+   DecalEntity {
+    ID "59E0215C5D9C88B3"
+    TerrainOnly 0
+   }
+   DecalEntity {
+    ID "59E0215C7ECAF601"
+    TerrainOnly 0
+   }
+   DecalEntity {
+    ID "59E0215D53E650BC"
+    TerrainOnly 0
+   }
+  }
+ }
+ {
+  coords 10207.648 45.95 3161.102
+  angleX 1.824
+  angleY 12.272
+  angleZ 0.397
+  BoxMins -8 0 0
+  BoxMaxs 8 5 1
+  m_iBoostDuration_ms 10000
+  {
+   DecalEntity {
+    ID "59E0215C5D9C88B3"
+    TerrainOnly 0
+   }
+   DecalEntity {
+    ID "59E0215C7ECAF601"
+    TerrainOnly 0
+   }
+   DecalEntity {
+    ID "59E0215D53E650BC"
+    TerrainOnly 0
+   }
+  }
+ }
+}
