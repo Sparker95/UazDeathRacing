@@ -6,6 +6,9 @@ class UDR_BoostVehicleTrigger: ScriptedGameTriggerEntity
 {
 	static const string BOOST_PARTICLE_NAME = "{575C2DEE390847F1}Prefabs/Triggers/boostParticle.ptc";
 
+	[Attribute("2000", UIWidgets.EditBox)]
+	protected int m_iBoostDuration_ms;
+	
 	override void OnActivate(IEntity ent)
 	{
 		PrintString("activateBoost");
@@ -21,10 +24,13 @@ class UDR_BoostVehicleTrigger: ScriptedGameTriggerEntity
 		emittersList = findEmitters(ent);
 		foreach (SCR_ParticleEmitter emitter : emittersList)
 			emitter.Play();
-		GetGame().GetCallqueue().CallLater(RemoveBoost, 2000, false, vWheelSimu, emittersList);
+		GetGame().GetCallqueue().Remove(RemoveBoost); // Remove previous delayed calls to remove boost so that they don't conflict
+		GetGame().GetCallqueue().CallLater(RemoveBoost, m_iBoostDuration_ms, false, vWheelSimu, emittersList);
     }
 	
-	void RemoveBoost(VehicleWheeledSimulation vWheelSimu, array<SCR_ParticleEmitter> emittersList)
+	// This must be static, otherwise when we remove boost from callqueue, we remove only boost
+	// caused by this trigger, and not all another boost trigger
+	static void RemoveBoost(VehicleWheeledSimulation vWheelSimu, array<SCR_ParticleEmitter> emittersList)
 	{
 		PrintString("RemoveBoost");
 		
