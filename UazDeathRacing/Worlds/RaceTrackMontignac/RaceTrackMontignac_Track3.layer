@@ -6,7 +6,7 @@ UDR_RaceTrackLogic Track3 {
  m_VehiclePositioning UDR_EntityLinkVehiclePositioning "{5A032B14AA2E1C1F}" {
   m_sEntityName "t3_positions"
  }
- m_iLapCount 2
+ m_iLapCount 3
  m_sRaceTrackName "Black Lake Hyper Loop"
 }
 $grp UDR_Waypoint : "{92A0F1C3F4161A7D}Prefabs/Triggers/WaypointInvisible.et" {

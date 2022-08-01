@@ -1,3 +1,40 @@
+$grp UDR_Pickup : "{7D5C596D78F729C8}Prefabs/Pickups/PickupAmmo.et" {
+ {
+  coords 9761.563 294.475 3316.358
+ }
+ {
+  coords 9767.055 294.61 3318.191
+ }
+ {
+  coords 9756.065 294.608 3313.992
+ }
+ {
+  coords 10060.539 214.36 3015.145
+ }
+ {
+  coords 10203.132 41.908 3179.094
+ }
+ {
+  coords 10246.33 54.165 3351.331
+ }
+ {
+  coords 10136.774 106.542 3542.058
+ }
+ {
+  coords 9843.977 208.051 3738.079
+ }
+ {
+  coords 9648.113 288.061 3637.893
+ }
+ {
+  coords 9659.276 288.031 3578.707
+ }
+}
+GenericEntity : "{8EDE6222B9F5A416}Prefabs/Structures/Walls/Pipe/PipeWallCombo_32m.et" {
+ coords 9881.705 281.153 2982.574
+ angleY 53.368
+ angleZ -4.792
+}
 $grp UDR_BoostVehicleTrigger : "{C3865A319561D60F}Prefabs/Triggers/UDR_BoostTriggerVehicle.et" {
  {
   coords 10245.821 43.247 3287.305
@@ -260,5 +297,28 @@ $grp UDR_BoostVehicleTrigger : "{C3865A319561D60F}Prefabs/Triggers/UDR_BoostTrig
     TerrainOnly 0
    }
   }
+ }
+}
+$grp UDR_Pickup : "{DF1C96AAD094BA04}Prefabs/Pickups/PickupHealth.et" {
+ {
+  coords 9812.356 288.121 3191.609
+ }
+ {
+  coords 9803.448 288.121 3188.962
+ }
+ {
+  coords 9944.045 283.086 2929.712
+ }
+ {
+  coords 10100.834 143.062 3054.651
+ }
+ {
+  coords 10203.543 81.017 3456.429
+ }
+ {
+  coords 10000.469 151.373 3665.666
+ }
+ {
+  coords 9767.115 296.149 3301.319
  }
 }
