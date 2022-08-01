@@ -6,7 +6,7 @@ UDR_RaceTrackLogic Track2 {
  m_VehiclePositioning UDR_EntityLinkVehiclePositioning "{59FE929A1CD422A9}" {
   m_sEntityName "t2_positions"
  }
- m_iLapCount 3
+ m_iLapCount 2
  m_sRaceTrackName "Assault of St. Phillipe Church"
 }
 $grp UDR_Waypoint : "{92A0F1C3F4161A7D}Prefabs/Triggers/WaypointInvisible.et" {
