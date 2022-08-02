@@ -25,6 +25,10 @@ GenericEntity {
   UDR_GameMode UDR_GameMode1 : "{CD9589A17294B557}Prefabs/GameMode/UDR_GameMode.et" {
    ID "59D5289C95B8DF5E"
    components {
+    SCR_NotificationSenderComponent "{5A0536D0F814164B}" {
+     m_iKillFeedType FULL
+     m_iReceiveKillFeedType ALL
+    }
    }
   }
   ScriptedChatEntity : "{F69BC912AC8236F9}Prefabs/MP/ScriptedChatEntity.et" {
