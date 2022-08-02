@@ -6,7 +6,7 @@ UDR_RaceTrackLogic Track1 {
  m_VehiclePositioning UDR_EntityLinkVehiclePositioning "{59FD238C048973D7}" {
   m_sEntityName "t1_Positions"
  }
- m_iLapCount 3
+ m_iLapCount 4
  m_sRaceTrackName "The Montignac Ramp"
 }
 UDR_VehiclePositioning t1_Positions {
