@@ -92,7 +92,7 @@ sealed class UDR_RaceStateOnePlayer : UDR_RaceStateBase
 	//-----------------------------------------------------------------------------
 	override void OnPlayerRequestRespawn(UDR_PlayerNetworkComponent playerComp)
 	{
-		m_GameMode.SpawnVehicleAtLastWaypoint(playerComp);
+		m_GameMode.DestroyPlayerAndVehicle(playerComp);
 	}
 	
 	//-----------------------------------------------------------------------------
@@ -298,7 +298,7 @@ sealed class UDR_RaceStateRacing : UDR_RaceStateBase
 		if (!playerComp.m_NetworkEntity.m_bRacingNow)
 			return;
 		
-		m_GameMode.SpawnVehicleAtLastWaypoint(playerComp);
+		m_GameMode.DestroyPlayerAndVehicle(playerComp);
 	}
 	
 	//-----------------------------------------------------------------------------

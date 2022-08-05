@@ -15,9 +15,6 @@ class UDR_PlayerNetworkComponent : ScriptComponent
 	float m_fTotalProgress;	// Our total distance travelled, including previous laps
 	int m_iNextWaypoint;
 	int m_iPrevWaypoint;
-
-  	// Used to avoid double death when runned over after vehicle was destroyed
-	bool m_bHasDied = false;
   
 	// For moving into vehicle
 	protected bool m_bMoveInVehicleRequest = false;
@@ -127,6 +124,8 @@ class UDR_PlayerNetworkComponent : ScriptComponent
 		
 		PlayerController pc = PlayerController.Cast(GetOwner());
 		IEntity controlledEntity = pc.GetControlledEntity();
+		if (!controlledEntity)
+			return;
 		
 		SCR_CompartmentAccessComponent compartmentAccessComponent = SCR_CompartmentAccessComponent.Cast(controlledEntity.FindComponent(SCR_CompartmentAccessComponent));
 		compartmentAccessComponent.MoveInVehicle(vehicle, ECompartmentType.Pilot);

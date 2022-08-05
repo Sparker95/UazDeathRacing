@@ -16,7 +16,7 @@ class UDR_GameMode: SCR_BaseGameMode
 {
 	// Constants
 	protected const float RACE_TRACK_LOGIC_UPDATE_INTERVAL = 0.25;
-	protected const int RESPAWN_DELAY_MS = 2500;
+	protected const int REVENGE_DURATION_MS = 5000;
 	
 	[Attribute()]
 	protected ref array<ref UDR_EntityLinkRaceTrackLogic> m_aRaceTracks;
@@ -197,9 +197,9 @@ class UDR_GameMode: SCR_BaseGameMode
 	
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
-	// VEHICLE SPAWNING
+	// RESPAWNING
 	
-	static void _____VEHICLE_SPAWNING();
+	static void _____RESPAWNING();
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
 	void SpawnVehicleAtSpawnPoint(notnull UDR_PlayerNetworkComponent playerComp)
@@ -257,9 +257,6 @@ class UDR_GameMode: SCR_BaseGameMode
 		EventHandlerManagerComponent ev = EventHandlerManagerComponent.Cast(newVehicleEntity.FindComponent(EventHandlerManagerComponent));
         ev.RegisterScriptHandler("OnDestroyed", newVehicleEntity, Callback_OnVehicleDestroyed);
 
-		// register to server death event
-		this.GetOnPlayerKilled().Insert(Callback_OnPlayerDeath);
-		
 		// Initialize vehicleComp
 		Vehicle vehicle = Vehicle.Cast(newVehicleEntity);
 		UDR_VehicleNetworkComponent vehNetComp = UDR_VehicleNetworkComponent.Cast(vehicle.FindComponent(UDR_VehicleNetworkComponent));
@@ -313,6 +310,26 @@ class UDR_GameMode: SCR_BaseGameMode
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
+	// Kills player and his vehicle if it's not destroyed yet
+	void DestroyPlayerAndVehicle(notnull UDR_PlayerNetworkComponent playerComp)
+	{
+		PlayerController pc = PlayerController.Cast(playerComp.GetOwner());
+		if (!pc)
+			return;
+		IEntity controlledEntity = pc.GetControlledEntity();
+		SCR_CharacterControllerComponent characterController = SCR_CharacterControllerComponent.Cast(controlledEntity.FindComponent(SCR_CharacterControllerComponent));
+		if (characterController)
+			characterController.ForceDeath();
+		
+		if (playerComp.m_AssignedVehicle)
+		{
+			SCR_VehicleDamageManagerComponent vehicleDamageMgr = SCR_VehicleDamageManagerComponent.Cast(
+				playerComp.m_AssignedVehicle.FindComponent(SCR_VehicleDamageManagerComponent));
+			vehicleDamageMgr.Kill();
+		}
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
 	int FindAndAssignSpawnPosition(notnull UDR_PlayerNetworkComponent playerComp)
 	{
 		int playerId = playerComp.GetPlayerId();
@@ -339,40 +356,36 @@ class UDR_GameMode: SCR_BaseGameMode
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
-	void ForceRespawnPlayer(int playerID)
+	void EndRevenge(int playerId)
 	{
-		PlayerController playerController = GetGame().GetPlayerManager().GetPlayerController(playerID);
-		if (!playerController) {
-			PrintFormat("no PlayerController found for playerID: %1", playerID);
-			return;
-		}
-		
-		IEntity playerEntity = playerController.GetControlledEntity();
-		if (!playerEntity) {
-			PrintFormat("no IEntity found for playerID: %1", playerID);
-			return;
-		}
-		
-		UDR_PlayerNetworkComponent playerNetworkComp = UDR_PlayerNetworkComponent.Cast(playerController.FindComponent(UDR_PlayerNetworkComponent));
-		if (playerNetworkComp.m_bHasDied) {
-			playerNetworkComp.m_bHasDied = false;
-			return;
-		}
-
-		SCR_CharacterControllerComponent characterController = SCR_CharacterControllerComponent.Cast(playerEntity.FindComponent(SCR_CharacterControllerComponent));
-		if (characterController) {
-			characterController.ForceDeath();
-			PrintFormat("ForceDeath playerID: %1", playerID);
-		}
-	}
-	
-	//-------------------------------------------------------------------------------------------------------------------------------
-	void Temp_RespawnPlayer(int playerId)
-	{
+		// Check if player has a working vehicle already - meaning he has already respawned
 		UDR_PlayerNetworkComponent playerComp = UDR_PlayerNetworkComponent.GetForPlayerId(playerId);
 		if (!playerComp)
 			return;
 		
+		bool assignedVehicleAlive = false;
+		IEntity assignedVehicle = playerComp.m_AssignedVehicle;
+		if (assignedVehicle)
+		{
+			SCR_DamageManagerComponent vehicleDamageMgr = SCR_DamageManagerComponent.Cast(assignedVehicle.FindComponent(SCR_DamageManagerComponent));
+			if (vehicleDamageMgr)
+			{
+				assignedVehicleAlive = vehicleDamageMgr.GetState() != EDamageState.DESTROYED;
+			}
+		}
+		
+		// Bail if we have a vehicle already
+		if (assignedVehicleAlive)
+			return;
+		
+		// If vehicle is not alive, kill player
+		// The player character death events will handle the rest
+		DestroyPlayerAndVehicle(playerComp);
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	void RespawnPlayer(notnull UDR_PlayerNetworkComponent playerComp)
+	{
 		if (!playerComp.m_NetworkEntity.m_bSpectating)
 		{
 			SpawnVehicleAtLastWaypoint(playerComp);
@@ -409,7 +422,8 @@ class UDR_GameMode: SCR_BaseGameMode
 		if (!playerComp)
 			return;
 		
-		// Temporary until we implement Revenge - kill all occupants
+		// Enable back damage for all occupants
+		/*
 		BaseCompartmentManagerComponent compartmentMgr = BaseCompartmentManagerComponent.Cast(vehEntity.FindComponent(BaseCompartmentManagerComponent));
 		array<BaseCompartmentSlot> compartments = {};
 		compartmentMgr.GetCompartments(compartments);
@@ -419,13 +433,16 @@ class UDR_GameMode: SCR_BaseGameMode
 			if (!occupant)
 				continue;
 			
+			/*
 			SCR_CharacterControllerComponent characterController = SCR_CharacterControllerComponent.Cast(
 				occupant.FindComponent(SCR_CharacterControllerComponent));
 			if (!characterController)
 				continue;
 			
 			characterController.ForceDeath();
+			
 		}
+		*/
 		
 		// Get current race progress
 		// And save it to player component. We must restore it upon respawn.
@@ -438,17 +455,19 @@ class UDR_GameMode: SCR_BaseGameMode
 			
 		m_CurrentRaceTrack.UnregisterRacer(vehEntity);
 		
-		GetGame().GetCallqueue().CallLater(Temp_RespawnPlayer, RESPAWN_DELAY_MS, false, playerId);
-	}
-	
-	//-------------------------------------------------------------------------------------------------------------------------------
-	void Callback_OnPlayerDeath(int playerID, IEntity controlledEntity)
-	{
-		PlayerController playerController = GetGame().GetPlayerManager().GetPlayerController(playerID);
-		UDR_PlayerNetworkComponent playerNetworkComp = UDR_PlayerNetworkComponent.Cast(playerController.FindComponent(UDR_PlayerNetworkComponent));
-		if (playerNetworkComp) {
-			playerNetworkComp.m_bHasDied = true;
+		// Enable back damage handling for character
+		PlayerController pc = PlayerController.Cast(playerComp.GetOwner());
+		IEntity controlledEntity = pc.GetControlledEntity();
+		if(controlledEntity)
+		{
+			SCR_DamageManagerComponent damageMgr = SCR_DamageManagerComponent.Cast(controlledEntity.FindComponent(SCR_DamageManagerComponent));
+			if (damageMgr)
+			{
+				damageMgr.EnableDamageHandling(true);
+			}
 		}
+		
+		GetGame().GetCallqueue().CallLater(EndRevenge, REVENGE_DURATION_MS, false, playerId);
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
@@ -474,6 +493,21 @@ class UDR_GameMode: SCR_BaseGameMode
 		}
 	}
 	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	override void OnPlayerKilled(int playerId, IEntity player, IEntity killer)
+	{
+		super.OnPlayerKilled(playerId, player, killer);
+		
+		GetGame().GetCallqueue().CallLater(Callback_OnPlayerKilledDelayed, 0, false, playerId);
+	}
+	protected void Callback_OnPlayerKilledDelayed(int playerId)
+	{
+		UDR_PlayerNetworkComponent playerComp = UDR_PlayerNetworkComponent.GetForPlayerId(playerId);
+		if (!playerComp)
+			return;
+		
+		RespawnPlayer(playerComp);
+	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
 	// GETTERS
