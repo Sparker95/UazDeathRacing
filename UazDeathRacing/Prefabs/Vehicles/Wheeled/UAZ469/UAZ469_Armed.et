@@ -1039,8 +1039,8 @@ Vehicle : "{1F9BB80C3EC3C891}Prefabs/Vehicles/Core/Wheeled_Car_Base.et" {
   }
   UDR_WeaponManagerComponent "{59CD1419338A6B23}" {
    m_vDeployablePosition 0 0.5 -2.2
-   m_iDeployableMaxAmmoCount 3
-   m_iDeployableInitialAmmoCount 1
+   m_iDeployableMaxAmmo 3
+   m_iDeployableStartAmmo 1
   }
   VehicleWheeledSimulation "{731B26FCA2F19855}" {
    Simulation Wheeled "{4D8B26DEA5F25978}" {

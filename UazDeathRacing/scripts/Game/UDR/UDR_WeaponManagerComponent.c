@@ -18,12 +18,12 @@ class UDR_WeaponManagerComponent : ScriptComponent
 	protected vector m_vDeployablePosition;
 	
 	[Attribute()]
-	protected int m_iDeployableMaxAmmoCount;
+	protected int m_iDeployableMaxAmmo;
 	
 	[Attribute()]
-	protected int m_iDeployableInitialAmmoCount;
+	protected int m_iDeployableStartAmmo;
 	
-	protected int m_iDeployableAmmoCount;
+	protected int m_iDeployableAmmo;
 	
 	//----------------------------------------------------------------------------------------------------------------------------------------
 	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
@@ -116,7 +116,7 @@ class UDR_WeaponManagerComponent : ScriptComponent
 	//----------------------------------------------------------------------------------------------------------------------------------------
 	bool IsDeployableAmmoFull()
 	{
-		return m_iDeployableAmmoCount == m_iDeployableMaxAmmoCount;
+		return m_iDeployableAmmo == m_iDeployableMaxAmmo;
 	}
 	
 	//----------------------------------------------------------------------------------------------------------------------------------------
@@ -126,7 +126,7 @@ class UDR_WeaponManagerComponent : ScriptComponent
 	void Owner_RequestFireDeployable()
 	{
 		// Check if we have enough ammo
-		if (m_iDeployableAmmoCount <= 0)
+		if (m_iDeployableAmmo <= 0)
 			return;
 		
 		IEntity owner = GetOwner();
@@ -167,9 +167,9 @@ class UDR_WeaponManagerComponent : ScriptComponent
 		vector vAside = vUp * vDir;
 		vAside.Normalize();
 		
-		m_iDeployableAmmoCount--;
+		m_iDeployableAmmo--;
 		
-		Rpc(RpcAsk_SyncDeployableAmmo, m_iDeployableAmmoCount);
+		Rpc(RpcAsk_SyncDeployableAmmo, m_iDeployableAmmo);
 		Rpc(RpcAsk_FireDeployable, vAside, vUp, vDir, pos);
 	}
 	
@@ -193,13 +193,13 @@ class UDR_WeaponManagerComponent : ScriptComponent
 	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
 	protected void RpcAsk_SyncDeployableAmmo(int ammoCount)
 	{
-		m_iDeployableAmmoCount = ammoCount;
+		m_iDeployableAmmo = ammoCount;
 	}
 	[RplRpc(RplChannel.Reliable, RplRcver.Owner)]
 	protected void RpcDo_SetDeployableAmmo(int ammoCount)
 	{	
-		m_iDeployableAmmoCount = ammoCount;
-		Rpc(RpcAsk_SyncDeployableAmmo, m_iDeployableAmmoCount);
+		m_iDeployableAmmo = ammoCount;
+		Rpc(RpcAsk_SyncDeployableAmmo, m_iDeployableAmmo);
 	}
 	
 	//----------------------------------------------------------------------------------------------------------------------------------------
@@ -211,8 +211,8 @@ class UDR_WeaponManagerComponent : ScriptComponent
 	
 	
 	//----------------------------------------------------------------------------------------------------------------------------------------
-	int GetDeployableAmmo() { return m_iDeployableAmmoCount; }
-	int GetDeployableMaxAmmo() { return m_iDeployableMaxAmmoCount; }
+	int GetDeployableAmmo() { return m_iDeployableAmmo; }
+	int GetDeployableMaxAmmo() { return m_iDeployableMaxAmmo; }
 	
 	
 	//----------------------------------------------------------------------------------------------------------------------------------------
@@ -233,10 +233,6 @@ class UDR_WeaponManagerComponent : ScriptComponent
 	//----------------------------------------------------------------------------------------------------------------------------------------
 	override void EOnInit(IEntity owner)
 	{
-		RplComponent rpl = RplComponent.Cast(owner.FindComponent(RplComponent));
-		if (!rpl.IsProxy())
-		{
-			Authority_SetDeployableAmmo(m_iDeployableInitialAmmoCount);
-		}
+		m_iDeployableAmmo = m_iDeployableStartAmmo;
 	}
 }
