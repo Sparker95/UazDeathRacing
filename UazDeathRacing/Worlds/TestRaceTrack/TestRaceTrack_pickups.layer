@@ -28,6 +28,16 @@ $grp UDR_BoostVehicleTrigger : "{C3865A319561D60F}Prefabs/Triggers/UDR_BoostTrig
 $grp UDR_Pickup : "{CD6C53BE2DEE6DCA}Prefabs/Pickups/PickupDeployable.et" {
  {
   coords 41.645 2.037 453.309
+  {
+   GenericEntity {
+    ID "59D2A41752346FD0"
+    components {
+     UDR_PickupItemAnimationComponent "{59D2BDA02D5829F0}" {
+      m_fOscillationAnimAmplitude 0.05
+     }
+    }
+   }
+  }
  }
  {
   coords 60.168 2.001 473.227

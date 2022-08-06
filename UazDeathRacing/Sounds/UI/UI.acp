@@ -41,7 +41,7 @@ AudioClass {
   SoundClass {
    id 13321
    name "RACE_START"
-   tl 216.214 587.905
+   tl 213.992 589.016
    conns {
     ConnectionsClass connections {
      id 0
@@ -93,8 +93,8 @@ AudioClass {
      }
     }
    }
-   volume 7.943
-   volume_dB 18
+   volume 1.413
+   volume_dB 3
    outState 7179
    outStatePort 2055
    noInAudible 0
