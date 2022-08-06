@@ -71,6 +71,17 @@ $grp UDR_BoostVehicleTrigger : "{C3865A319561D60F}Prefabs/Triggers/UDR_BoostTrig
   angleY 83.82
  }
 }
+$grp UDR_Pickup : "{CD6C53BE2DEE6DCA}Prefabs/Pickups/PickupDeployable.et" {
+ {
+  coords 4922.792 164.893 7364.307
+ }
+ {
+  coords 4900.29 160.957 7382.088
+ }
+ {
+  coords 4959.064 156.677 7407.914
+ }
+}
 $grp UDR_Pickup : "{DF1C96AAD094BA04}Prefabs/Pickups/PickupHealth.et" {
  {
   coords 4922.764 164.893 7359.211
