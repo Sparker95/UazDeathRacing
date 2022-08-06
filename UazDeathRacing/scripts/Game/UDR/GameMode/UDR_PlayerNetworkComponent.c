@@ -206,7 +206,10 @@ class UDR_PlayerNetworkComponent : ScriptComponent
 		UDR_WeaponManagerComponent weaponMgr = UDR_WeaponManagerComponent.Cast(vehicleEntity.FindComponent(UDR_WeaponManagerComponent));
 		if (!weaponMgr)
 			return;
-		weaponMgr.Owner_RequestFireDeployable();
+		
+		bool fired = weaponMgr.Owner_RequestFireDeployable();
+		if (fired)
+			SCR_UISoundEntity.SoundEvent(UDR_UISounds.FIRE_DEPLOYABLE);
 	}
 	
 	//-----------------------------------------------------------------------

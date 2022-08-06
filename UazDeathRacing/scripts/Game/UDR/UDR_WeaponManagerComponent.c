@@ -123,11 +123,11 @@ class UDR_WeaponManagerComponent : ScriptComponent
 	// Deployables
 	
 	//----------------------------------------------------------------------------------------------------------------------------------------
-	void Owner_RequestFireDeployable()
+	bool Owner_RequestFireDeployable()
 	{
 		// Check if we have enough ammo
 		if (m_iDeployableAmmo <= 0)
-			return;
+			return false;
 		
 		IEntity owner = GetOwner();
 		vector myTransform[4]; // aside, up, dir, pos
@@ -142,10 +142,10 @@ class UDR_WeaponManagerComponent : ScriptComponent
 		tp.Exclude = owner; // Exclude our car
 		float traceProgress = GetGame().GetWorld().TraceMove(tp, null);
 		if (traceProgress >= 1.0)
-			return; // Invalid trace, didn't hit anything
+			return false; // Invalid trace, didn't hit anything
 		
 		if (tp.TraceEnt && Vehicle.Cast(tp.TraceEnt))
-			return; // We've hit a car, can't deploy here
+			return false; // We've hit a car, can't deploy here
 		
 		// Find the position where to place the deployable
 		// It must be placed according to the surface normal
@@ -171,6 +171,8 @@ class UDR_WeaponManagerComponent : ScriptComponent
 		
 		Rpc(RpcAsk_SyncDeployableAmmo, m_iDeployableAmmo);
 		Rpc(RpcAsk_FireDeployable, vAside, vUp, vDir, pos);
+		
+		return true;
 	}
 	
 	//----------------------------------------------------------------------------------------------------------------------------------------
@@ -186,7 +188,7 @@ class UDR_WeaponManagerComponent : ScriptComponent
 		IEntity deployableEntity = GetGame().SpawnEntityPrefab(res, params: p);
 		
 		// Later delete it
-		GetGame().GetCallqueue().CallLater(SCR_EntityHelper.DeleteEntityAndChildren, 20000, false, deployableEntity);
+		GetGame().GetCallqueue().CallLater(SCR_EntityHelper.DeleteEntityAndChildren, 10000, false, deployableEntity);
 	}
 	
 	//----------------------------------------------------------------------------------------------------------------------------------------

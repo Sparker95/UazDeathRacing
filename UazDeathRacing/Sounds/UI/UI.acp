@@ -78,12 +78,33 @@ AudioClass {
    outStatePort 2055
    noInAudible 0
   }
+  SoundClass {
+   id 17417
+   name "FIRE_DEPLOYABLE"
+   tl 210.045 960.243
+   conns {
+    ConnectionsClass connections {
+     id 0
+     links {
+      ConnectionClass connection {
+       id 16388
+       port 65
+      }
+     }
+    }
+   }
+   volume 7.943
+   volume_dB 18
+   outState 7179
+   outStatePort 2055
+   noInAudible 0
+  }
  }
  mixers {
   MixerClass {
    id 7179
    name "OutputState 7"
-   tl 600.976 158.833
+   tl 969.309 537.166
    res "{7C8E39DAEEA0CE80}Sounds/UI/UIMix.afm"
    iops {
     IOPConnectionClass iopConnection {
@@ -106,6 +127,10 @@ AudioClass {
         }
         ConnectionClass connection {
          id 14345
+         port 65
+        }
+        ConnectionClass connection {
+         id 17417
          port 65
         }
        }
@@ -157,6 +182,16 @@ AudioClass {
    Samples {
     AudioBankSampleClass "Sample(1)" {
      Filename "{6341321A3599CE49}Sounds/UI/RaceFinishLine.wav"
+    }
+   }
+  }
+  BankLocalClass {
+   id 16388
+   name "Bank 9"
+   tl 18.136 961.576
+   Samples {
+    AudioBankSampleClass "Sample(1)" {
+     Filename "{F33B4F3194DB7E39}Sounds/Destruction/Multiphase/Samples/RockSmall/Destruction_Multiphase_RockSmall_Impact_09.wav"
     }
    }
   }

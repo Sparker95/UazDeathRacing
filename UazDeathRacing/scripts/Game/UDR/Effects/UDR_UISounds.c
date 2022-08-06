@@ -6,4 +6,5 @@ class UDR_UISounds
 	static const string RACE_START			= "RACE_START";
 	static const string RACE_COUNTDOWN		= "RACE_COUNTDOWN";
 	static const string RACE_FINISH_LINE	= "RACE_FINISH_LINE";
+	static const string FIRE_DEPLOYABLE		= "FIRE_DEPLOYABLE";
 }

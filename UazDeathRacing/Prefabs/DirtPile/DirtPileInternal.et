@@ -8,6 +8,8 @@ GenericEntity {
    }
    ClutterOccluder 1
   }
+  Hierarchy "{5A0D69F97682DBDE}" {
+  }
   RigidBody "{5A0D08D0C5F568C2}" {
    ResponseIndex "HugeDestructible"
    ModelGeometry 1
