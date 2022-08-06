@@ -14,6 +14,8 @@ class UDR_WeaponManagerComponentClass : ScriptComponentClass
 
 class UDR_WeaponManagerComponent : ScriptComponent
 {	
+	protected static const int DEPLOYABLE_LIFETIME_MS = 20000;
+	
 	[Attribute()]
 	protected vector m_vDeployablePosition;
 	
@@ -188,7 +190,7 @@ class UDR_WeaponManagerComponent : ScriptComponent
 		IEntity deployableEntity = GetGame().SpawnEntityPrefab(res, params: p);
 		
 		// Later delete it
-		GetGame().GetCallqueue().CallLater(SCR_EntityHelper.DeleteEntityAndChildren, 10000, false, deployableEntity);
+		GetGame().GetCallqueue().CallLater(SCR_EntityHelper.DeleteEntityAndChildren, DEPLOYABLE_LIFETIME_MS, false, deployableEntity);
 	}
 	
 	//----------------------------------------------------------------------------------------------------------------------------------------
