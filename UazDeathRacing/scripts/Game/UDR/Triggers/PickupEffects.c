@@ -13,6 +13,7 @@ class UDR_PickupEffectAmmo : UDR_PickupEffectBase
 			return false;
 		
 		weaponMgr.RpcAsk_AddWeapon(UDR_Weapons.BLASTER);
+		weaponMgr.Authority_SetDeployableAmmo(3);
 		
 		SendUiEventToVehicle(ent, UDR_UISounds.PICKUP_ITEM);
 		

@@ -1,0 +1,16 @@
+GenericEntity {
+ ID "5A0D4385979601B4"
+ components {
+  Hierarchy "{5A0D438583B5CE2D}" {
+  }
+  RplComponent "{5A0D438581D9A80F}" {
+  }
+ }
+ {
+  GenericEntity : "{2D8669E6D1E24B4E}Prefabs/DirtPile/DirtPileInternal.et" {
+   ID "5A0D4385979601B2"
+   coords 0 0 0
+   scale 0.25
+  }
+ }
+}

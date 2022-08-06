@@ -13,10 +13,6 @@ GenericEntity {
    ModelGeometry 1
    Static 1
   }
-  RplComponent "{5A0D08D0C5F56974}" {
-  }
  }
  coords 255.89 2.001 365.285
- scale 0.25
- Flags 1027
 }

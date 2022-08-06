@@ -17,8 +17,13 @@ class UDR_WeaponManagerComponent : ScriptComponent
 	[Attribute()]
 	protected vector m_vDeployablePosition;
 	
-	[RplProp()]
-	protected int m_iDeployableCount;
+	[Attribute()]
+	protected int m_iDeployableMaxAmmoCount;
+	
+	[Attribute()]
+	protected int m_iDeployableInitialAmmoCount;
+	
+	protected int m_iDeployableAmmoCount;
 	
 	//----------------------------------------------------------------------------------------------------------------------------------------
 	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
@@ -76,12 +81,17 @@ class UDR_WeaponManagerComponent : ScriptComponent
 	}
 	
 	//----------------------------------------------------------------------------------------------------------------------------------------
-	// Returns true when this vehicle is full on ammo
+	// Returns true when this vehicle is full on ammo for both deployable and main weapon
 	bool IsFullAmmo()
 	{
 		IEntity vehicleEnt = GetOwner();
 		BaseWeaponManagerComponent weaponMgrComp = BaseWeaponManagerComponent.Cast(vehicleEnt.FindComponent(BaseWeaponManagerComponent));
 		BaseWeaponComponent weaponComp = weaponMgrComp.GetCurrentWeapon();
+		
+		bool mainWeaponFull = false;
+		bool deployablesFull = false;
+		
+		// Check main weapon ammo
 		if (weaponComp)
 		{
 			BaseMuzzleComponent muzzleComp = weaponComp.GetCurrentMuzzle();
@@ -95,12 +105,15 @@ class UDR_WeaponManagerComponent : ScriptComponent
 						ammoCount++;
 					
 					//return ammoCount == magazineComp.GetMaxAmmoCount();
-					return ammoCount == 10; // Todo solve it for other guns when we have them
+					mainWeaponFull = ammoCount == 10; // Todo solve it for other guns when we have them
 				}
 			}
 		}
 		
-		return false;
+		// Check deployable ammo
+		deployablesFull = m_iDeployableAmmoCount == m_iDeployableMaxAmmoCount;
+		
+		return deployablesFull && mainWeaponFull;
 	}
 	
 	//----------------------------------------------------------------------------------------------------------------------------------------
@@ -109,6 +122,10 @@ class UDR_WeaponManagerComponent : ScriptComponent
 	//----------------------------------------------------------------------------------------------------------------------------------------
 	void Owner_RequestFireDeployable()
 	{
+		// Check if we have enough ammo
+		if (m_iDeployableAmmoCount <= 0)
+			return;
+		
 		IEntity owner = GetOwner();
 		vector myTransform[4]; // aside, up, dir, pos
 		owner.GetTransform(myTransform);
@@ -147,6 +164,9 @@ class UDR_WeaponManagerComponent : ScriptComponent
 		vector vAside = vUp * vDir;
 		vAside.Normalize();
 		
+		m_iDeployableAmmoCount--;
+		
+		Rpc(RpcAsk_SyncDeployableAmmo, m_iDeployableAmmoCount);
 		Rpc(RpcAsk_FireDeployable, vAside, vUp, vDir, pos);
 	}
 	
@@ -159,13 +179,37 @@ class UDR_WeaponManagerComponent : ScriptComponent
 		p.Transform[1] = vUp;
 		p.Transform[2] = vDir;
 		p.Transform[3] = pos;
-		Resource res = Resource.Load("{2D8669E6D1E24B4E}Prefabs/DirtPile/DeployableDirtPile.et");
+		Resource res = Resource.Load("{104B44D37AC166E7}Prefabs/DirtPile/DirtPileDeployable.et");
 		IEntity deployableEntity = GetGame().SpawnEntityPrefab(res, params: p);
 		
 		// Later delete it
 		GetGame().GetCallqueue().CallLater(SCR_EntityHelper.DeleteEntityAndChildren, 20000, false, deployableEntity);
 	}
 	
+	//----------------------------------------------------------------------------------------------------------------------------------------
+	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
+	protected void RpcAsk_SyncDeployableAmmo(int ammoCount)
+	{
+		m_iDeployableAmmoCount = ammoCount;
+	}
+	[RplRpc(RplChannel.Reliable, RplRcver.Owner)]
+	protected void RpcDo_SetDeployableAmmo(int ammoCount)
+	{	
+		m_iDeployableAmmoCount = ammoCount;
+		Rpc(RpcAsk_SyncDeployableAmmo, m_iDeployableAmmoCount);
+	}
+	
+	//----------------------------------------------------------------------------------------------------------------------------------------
+	void Authority_SetDeployableAmmo(int ammoCount)
+	{
+		Rpc(RpcDo_SetDeployableAmmo, ammoCount);
+	}
+	
+	
+	
+	//----------------------------------------------------------------------------------------------------------------------------------------
+	int GetDeployableAmmo() { return m_iDeployableAmmoCount; }
+	int GetDeployableMaxAmmo() { return m_iDeployableMaxAmmoCount; }
 	
 	
 	//----------------------------------------------------------------------------------------------------------------------------------------
@@ -176,4 +220,20 @@ class UDR_WeaponManagerComponent : ScriptComponent
 		Shape.CreateSphere(Color.RED, ShapeFlags.ONCE, deployablePosWorld, 0.05);
 	}
 	
+	
+	//----------------------------------------------------------------------------------------------------------------------------------------
+	override void OnPostInit(IEntity owner)
+	{
+		SetEventMask(owner, EntityEvent.INIT);
+	}
+	
+	//----------------------------------------------------------------------------------------------------------------------------------------
+	override void EOnInit(IEntity owner)
+	{
+		RplComponent rpl = RplComponent.Cast(owner.FindComponent(RplComponent));
+		if (!rpl.IsProxy())
+		{
+			Authority_SetDeployableAmmo(m_iDeployableInitialAmmoCount);
+		}
+	}
 }
