@@ -20,16 +20,11 @@ EffectDef {
    Prefab "{29FBEC1991810EEF}system/wbdata/ParticleEditor/defaultPrefab.et"
    StretchMultiplier 1
    SizeMultiplier 1.5
-   RotMultiplier 0
    Velocity 0
    VelocityRND 0
-   GravityMultiply 0
    RandomFrame 1
    RotationSpeed {
     0 1 0.03 0.464 0.165 0.259
-   }
-   Size {
-    0.006 1 0.5 0.488 1 0
    }
   }
   EmitterDef Emitter_03 {

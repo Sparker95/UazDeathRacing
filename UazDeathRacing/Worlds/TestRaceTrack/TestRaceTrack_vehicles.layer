@@ -15,45 +15,6 @@ $grp Vehicle : "{1A20D130A03F9CF1}Prefabs/Vehicles/Wheeled/UAZ469/UAZ469_Armed.e
   }
   coords 35.565 2.001 433.928
  }
- UAZ469_Armed3 {
-  components {
-   SCR_VehicleDamageManagerComponent "{141326E9FD94FE40}" {
-    m_fVehicleDestroyDamage 857.143
-   }
-  }
-  coords 35.565 2.001 433.928
- }
- UAZ469_Armed4 {
-  components {
-   SCR_VehicleDamageManagerComponent "{141326E9FD94FE40}" {
-    m_fVehicleDestroyDamage 857.143
-   }
-   VehicleWheeledSimulation "{731B26FCA2F19855}" {
-    Simulation Wheeled "{4D8B26DEA5F25978}" {
-     Gearbox Gearbox Gearbox {
-      Reverse 0.1
-     }
-    }
-   }
-  }
-  coords 35.565 2.001 433.928
- }
- UAZ469_Armed5 {
-  components {
-   SCR_VehicleDamageManagerComponent "{141326E9FD94FE40}" {
-    m_fVehicleDestroyDamage 857.143
-   }
-  }
-  coords 35.565 2.001 433.928
- }
- UAZ469_Armed6 {
-  components {
-   SCR_VehicleDamageManagerComponent "{141326E9FD94FE40}" {
-    m_fVehicleDestroyDamage 857.143
-   }
-  }
-  coords 35.565 2.001 433.928
- }
 }
 $grp Vehicle : "{21C45FA677BCDBDA}Prefabs/Vehicles/Wheeled/M998/M998_Armed.et" {
  M998_Armed1 {
