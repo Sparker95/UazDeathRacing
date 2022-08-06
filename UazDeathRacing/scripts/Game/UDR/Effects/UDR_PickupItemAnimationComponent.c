@@ -58,6 +58,10 @@ class UDR_PickupItemAnimationComponent : ScriptComponent
 	//------------------------------------------------------------------------------------------------
 	override void OnPostInit(IEntity owner)
 	{
+		// Bail if we have no display, we don't care about those animations
+		if (System.IsConsoleApp())
+			return;
+		
 		SetEventMask(owner, EntityEvent.INIT | EntityEvent.FRAME);
 		owner.SetFlags(EntityFlags.ACTIVE, true);
 		
