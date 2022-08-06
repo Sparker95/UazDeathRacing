@@ -10,6 +10,8 @@ class UDR_HudVehicleWidgets
 
 	TextWidget m_AmmoText;
 
+	TextWidget m_MinesText;
+
 	TextWidget m_LapCountText;
 
 	TextWidget m_PositionText;
@@ -21,6 +23,8 @@ class UDR_HudVehicleWidgets
 		m_HealthText = TextWidget.Cast(root.FindWidget("Panel.VerticalLayout0.HudLineHealth.TextRight"));
 
 		m_AmmoText = TextWidget.Cast(root.FindWidget("Panel.VerticalLayout0.HudLineAmmo.TextRight"));
+
+		m_MinesText = TextWidget.Cast(root.FindWidget("Panel.VerticalLayout0.HudLineMines.TextRight"));
 
 		m_LapCountText = TextWidget.Cast(root.FindWidget("RaceProgressPanel.Panel.VerticalLayout0.HudLineLap.TextRight"));
 

@@ -9,10 +9,32 @@ class UDR_PickupEffectAmmo : UDR_PickupEffectBase
 			return false;
 		
 		// Don't pick it up if the vehicle is full on ammo already
-		if (weaponMgr.IsFullAmmo())
+		if (weaponMgr.IsMainAmmoFull())
 			return false;
 		
 		weaponMgr.RpcAsk_AddWeapon(UDR_Weapons.BLASTER);
+		
+		SendUiEventToVehicle(ent, UDR_UISounds.PICKUP_ITEM);
+		
+		return true;
+	}
+}
+
+[BaseContainerProps()]
+class UDR_PickupEffectDeployableAmmo : UDR_PickupEffectBase
+{
+	override bool Authority_ApplyEffect(IEntity ent)
+	{
+		UDR_WeaponManagerComponent weaponMgr = UDR_WeaponManagerComponent.Cast(ent.FindComponent(UDR_WeaponManagerComponent));
+		
+		if (!weaponMgr)
+			return false;
+		
+		// Don't pick it up if the vehicle is full on ammo already
+		if (weaponMgr.IsDeployableAmmoFull())
+			return false;
+		
+		weaponMgr.Authority_SetDeployableAmmo(weaponMgr.GetDeployableMaxAmmo());
 		
 		SendUiEventToVehicle(ent, UDR_UISounds.PICKUP_ITEM);
 		

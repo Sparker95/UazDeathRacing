@@ -299,6 +299,9 @@ $grp UDR_BoostVehicleTrigger : "{C3865A319561D60F}Prefabs/Triggers/UDR_BoostTrig
   }
  }
 }
+UDR_Pickup : "{CD6C53BE2DEE6DCA}Prefabs/Pickups/PickupDeployable.et" {
+ coords 9764.1 296.149 3300.252
+}
 $grp UDR_Pickup : "{DF1C96AAD094BA04}Prefabs/Pickups/PickupHealth.et" {
  {
   coords 9812.356 288.121 3191.609
@@ -319,6 +322,6 @@ $grp UDR_Pickup : "{DF1C96AAD094BA04}Prefabs/Pickups/PickupHealth.et" {
   coords 10000.469 151.373 3665.666
  }
  {
-  coords 9767.115 296.149 3301.319
+  coords 9770.012 296.149 3302.442
  }
 }

@@ -33,6 +33,17 @@ $grp UDR_Pickup : "{7D5C596D78F729C8}Prefabs/Pickups/PickupAmmo.et" {
   coords 4595.024 18.106 10649.048
  }
 }
+$grp UDR_Pickup : "{CD6C53BE2DEE6DCA}Prefabs/Pickups/PickupDeployable.et" {
+ {
+  coords 4400.854 15.631 10619.651
+ }
+ {
+  coords 4459.603 7.396 10989.023
+ }
+ {
+  coords 4250.472 5.526 10653.426
+ }
+}
 $grp UDR_Pickup : "{DF1C96AAD094BA04}Prefabs/Pickups/PickupHealth.et" {
  {
   coords 4498.648 8.041 10997.8

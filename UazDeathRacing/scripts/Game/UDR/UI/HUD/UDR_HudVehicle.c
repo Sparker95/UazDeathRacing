@@ -105,6 +105,10 @@ class UDR_HudVehicle : UDR_HudBase
 		if (myNetworkEntity)
 			UpdateRacePositionWidgets(myNetworkEntity, widgets.m_PositionText, widgets.m_LapCountText);
 		
+		// Deployable ammo count
+		int deployableAmmoCount = udrWeaponMgrComp.GetDeployableAmmo();
+		widgets.m_MinesText.SetText(deployableAmmoCount.ToString());
+		
 		// Show notifications
 		UpdateNotificationWidget(widgets.m_NotificationText);
 		

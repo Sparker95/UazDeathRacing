@@ -35,7 +35,9 @@ class UDR_PlayerNetworkComponent : ScriptComponent
 	{
 		//owner.SetFlags(EntityFlags.ACTIVE, true);
 		SetEventMask(owner, EntityEvent.FRAME);
-		GetGame().GetInputManager().AddActionListener("UDR_Respawn", EActionTrigger.DOWN, OnRespawnAction);
+		auto im = GetGame().GetInputManager();
+		im.AddActionListener("UDR_Respawn", EActionTrigger.DOWN, OnRespawnAction);
+		im.AddActionListener("UDR_FireDeployable", EActionTrigger.DOWN, OnFireDeployableAction);
 	}
 	
 	//-----------------------------------------------------------------------
@@ -183,6 +185,31 @@ class UDR_PlayerNetworkComponent : ScriptComponent
 		Rpc(RpcAsk_Respawn);
 		
 		m_fRespawnActionCooldownEnd_ms = time_ms + 1000;
+	}
+	
+	//-----------------------------------------------------------------------
+	protected void OnFireDeployableAction()
+	{
+		PlayerController pc = PlayerController.Cast(GetOwner());
+		IEntity controlledEntity = pc.GetControlledEntity();
+		if (!controlledEntity)
+			return;
+		SCR_CompartmentAccessComponent compartmentAccess = SCR_CompartmentAccessComponent.Cast(controlledEntity.FindComponent(SCR_CompartmentAccessComponent));
+		if (!compartmentAccess)
+			return;
+		BaseCompartmentSlot compartmentSlot = compartmentAccess.GetCompartment();
+		if (!compartmentSlot)
+			return;
+		IEntity vehicleEntity = compartmentSlot.GetVehicle();
+		if (!vehicleEntity)
+			return;
+		UDR_WeaponManagerComponent weaponMgr = UDR_WeaponManagerComponent.Cast(vehicleEntity.FindComponent(UDR_WeaponManagerComponent));
+		if (!weaponMgr)
+			return;
+		
+		bool fired = weaponMgr.Owner_RequestFireDeployable();
+		if (fired)
+			SCR_UISoundEntity.SoundEvent(UDR_UISounds.FIRE_DEPLOYABLE);
 	}
 	
 	//-----------------------------------------------------------------------

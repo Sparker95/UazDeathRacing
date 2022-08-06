@@ -59,6 +59,21 @@ $grp SCR_DestructibleBuildingEntity : "{12981279D4DB92D3}Prefabs/Structures/Infr
   angleY -23.603
  }
 }
+$grp GenericEntity : "{19A3C48FC2665A3F}Prefabs/Props/Construction/GravelPile_01/GravelPile_01_large.et" {
+ {
+  coords 263.269 0.367 359.89
+ }
+ {
+  coords 238.117 2.001 366.838
+ }
+ {
+  coords 253.055 0.184 366.08
+ }
+ {
+  coords 277.596 2.001 367.225
+  scale 0.5
+ }
+}
 $grp GenericEntity : "{25C8B889A777399D}Prefabs/Props/Infrastructure/ConeTraffic/ConeTraffic_01_red.et" {
  {
   coords 60.474 2.001 488.743
@@ -160,6 +175,10 @@ $grp GenericEntity : "{25C8B889A777399D}Prefabs/Props/Infrastructure/ConeTraffic
   coords 49.834 2.001 490.331
   scale 2
  }
+}
+GenericEntity : "{2D8669E6D1E24B4E}Prefabs/DirtPile/DeployableDirtPile.et" {
+ coords 257.145 2.001 361.924
+ scale 0.3
 }
 $grp GenericEntity : "{532E2709E33FA192}Prefabs/Structures/BuildingParts/Bridges/BridgeRailingConcrete_01_pole.et" {
  {

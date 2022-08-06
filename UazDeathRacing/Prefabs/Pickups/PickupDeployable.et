@@ -1,0 +1,19 @@
+UDR_Pickup : "{762143360F3032EB}Prefabs/Pickups/PickupBase.et" {
+ ID "59D2A41745B895CC"
+ components {
+ }
+ m_PickupEffect UDR_PickupEffectDeployableAmmo "{5A0D51A636D090C6}" {
+ }
+ {
+  GenericEntity {
+   ID "59D2A41752346FD0"
+   components {
+    MeshObject "{5A0D51A70448D209}" {
+     Object "{8D4E2E836BBABBDD}Assets/Props/Civilian/Bucket_01/Bucket_01.xob"
+    }
+   }
+   coords 0 0.7 0
+   scale 1.4
+  }
+ }
+}

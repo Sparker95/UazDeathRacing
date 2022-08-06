@@ -16,10 +16,10 @@ FrameWidgetClass {
     OffsetLeft 0
     PositionY 0
     OffsetTop 0
-    SizeX 300
-    OffsetRight -300
-    SizeY 100
-    OffsetBottom -100
+    SizeX 240
+    OffsetRight -240
+    SizeY 130
+    OffsetBottom -130
     Alignment 1 1
    }
    {
@@ -35,6 +35,12 @@ FrameWidgetClass {
        Slot LayoutSlot "{59CCF35D7D973317}" {
        }
        {
+        SizeLayoutWidgetClass "{59CCF35EA3208881}" {
+         Prefab "{59CCF35EA3208881}"
+         WidthOverride 150
+         {
+         }
+        }
         TextWidgetClass "{59CCF35E66713599}" {
          Prefab "{59CCF35E66713599}"
          components {
@@ -52,6 +58,7 @@ FrameWidgetClass {
        {
         SizeLayoutWidgetClass "{59CCF35EA3208881}" {
          Prefab "{59CCF35EA3208881}"
+         WidthOverride 150
          {
           TextWidgetClass "{59CCF35E63C2AC08}" {
            Prefab "{59CCF35E63C2AC08}"
@@ -70,23 +77,28 @@ FrameWidgetClass {
        }
       }
       HorizontalLayoutWidgetClass "{59CCF35F9BF50430}" : "{73693F4D3D37CE31}UI/Prefabs/HudLine.layout" {
-       Name "HudLineBoosters"
+       Name "HudLineMines"
        Slot LayoutSlot "{59CCF35D7D973317}" {
        }
-       "Is Visible" 0
        {
         SizeLayoutWidgetClass "{59CCF35EA3208881}" {
          Prefab "{59CCF35EA3208881}"
+         WidthOverride 150
          {
           TextWidgetClass "{59CCF35E63C2AC08}" {
            Prefab "{59CCF35E63C2AC08}"
-           Text "Boosters:"
+           Text "Mines:"
           }
          }
         }
         TextWidgetClass "{59CCF35E66713599}" {
          Prefab "{59CCF35E66713599}"
-         Text "NYI"
+         components {
+          SCR_WidgetExportRule "{5A0D43842025A800}" {
+           WidgetVariableName "m_MinesText"
+          }
+         }
+         Text "9"
         }
        }
       }
@@ -119,18 +131,20 @@ FrameWidgetClass {
    Name "TextControls"
    Slot FrameWidgetSlot "{59FD14EA9F5FB0C7}" {
     Anchor 0.95 0.95 0.95 0.95
-    PositionX -16
-    OffsetLeft -16
-    PositionY 28
-    OffsetTop 28
+    PositionX -260
+    OffsetLeft -260
+    PositionY 0
+    OffsetTop 0
     SizeX 283.5
-    OffsetRight -267.5
-    SizeY 80
-    OffsetBottom -108
-    Alignment 1 0.5
+    OffsetRight -23.5
+    OffsetBottom -30
+    Alignment 1 1
+    SizeToContent 1
    }
+   Clipping False
    Color 1 0.323 0.323 1
-   Text "H (hold) - Respawn"\
+   Text "Left CTRL - Deploy mine"\
+   "H (hold) - Respawn"\
    "ESC - Lobby"
    "Font Size" 30
    "Min Font Size" 23
