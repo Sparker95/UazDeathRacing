@@ -1,0 +1,22 @@
+GenericEntity {
+ ID "5A0D08D0D4E85BDE"
+ components {
+  MeshObject "{5A0D08D0C5F56889}" {
+   Object "{1D309C35F90BE925}Assets/Props/Construction/GravelPile_01/GravelPile_01_large.xob"
+   LODFactors {
+    5 2 1.5 1 1 1
+   }
+   ClutterOccluder 1
+  }
+  RigidBody "{5A0D08D0C5F568C2}" {
+   ResponseIndex "HugeDestructible"
+   ModelGeometry 1
+   Static 1
+  }
+  RplComponent "{5A0D08D0C5F56974}" {
+  }
+ }
+ coords 255.89 2.001 365.285
+ scale 0.25
+ Flags 1027
+}
