@@ -82,14 +82,13 @@ class UDR_WeaponManagerComponent : ScriptComponent
 	
 	//----------------------------------------------------------------------------------------------------------------------------------------
 	// Returns true when this vehicle is full on ammo for both deployable and main weapon
-	bool IsFullAmmo()
+	bool IsMainAmmoFull()
 	{
 		IEntity vehicleEnt = GetOwner();
 		BaseWeaponManagerComponent weaponMgrComp = BaseWeaponManagerComponent.Cast(vehicleEnt.FindComponent(BaseWeaponManagerComponent));
 		BaseWeaponComponent weaponComp = weaponMgrComp.GetCurrentWeapon();
 		
 		bool mainWeaponFull = false;
-		bool deployablesFull = false;
 		
 		// Check main weapon ammo
 		if (weaponComp)
@@ -110,10 +109,14 @@ class UDR_WeaponManagerComponent : ScriptComponent
 			}
 		}
 		
-		// Check deployable ammo
-		deployablesFull = m_iDeployableAmmoCount == m_iDeployableMaxAmmoCount;
 		
-		return deployablesFull && mainWeaponFull;
+		return mainWeaponFull;
+	}
+	
+	//----------------------------------------------------------------------------------------------------------------------------------------
+	bool IsDeployableAmmoFull()
+	{
+		return m_iDeployableAmmoCount == m_iDeployableMaxAmmoCount;
 	}
 	
 	//----------------------------------------------------------------------------------------------------------------------------------------
