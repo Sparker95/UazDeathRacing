@@ -17,6 +17,8 @@ class UDR_ChatCommandHandlerComponent : ScriptComponent
 	{
 		// todo find a better way to solve initialization of this on clients
 		UDR_GameMode gm = GetGame().GetUdrGameMode();
+		if (!gm)
+			return;
 		
 		// Bail if we are initializing this for some other player
 		if (gm.m_LocalChatCommandHandler)
