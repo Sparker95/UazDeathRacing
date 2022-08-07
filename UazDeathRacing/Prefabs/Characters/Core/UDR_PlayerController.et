@@ -18,6 +18,8 @@ SCR_PlayerController : "{225E51284CC95CFA}Prefabs/Characters/Core/DefaultPlayerC
     }
    }
   }
+  UDR_ChatCommandHandlerComponent "{5A0ECCC1B33FF6AF}" {
+  }
   UDR_PlayerNetworkComponent "{59DB692A9733FFE1}" {
   }
   UDR_SpectatorComponent "{59F0CB1B5F1BC2C8}" {

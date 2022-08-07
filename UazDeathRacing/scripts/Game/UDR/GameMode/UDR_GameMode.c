@@ -44,6 +44,9 @@ class UDR_GameMode: SCR_BaseGameMode
 	// On clients it's updated via RPC
 	protected ref UDR_RaceResultsTable m_RaceResultsTable = new UDR_RaceResultsTable();
 	
+	// Local chat command handler component is registered here
+	UDR_ChatCommandHandlerComponent m_LocalChatCommandHandler;
+	
 	//-------------------------------------------------------------------------------------------------------------------------------
 	void UDR_GameMode(IEntitySource src, IEntity parent)
 	{
@@ -510,6 +513,23 @@ class UDR_GameMode: SCR_BaseGameMode
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
+	override void OnPlayerRoleChange(int playerId, EPlayerRole roleFlags)
+	{
+		super.OnPlayerRoleChange(playerId, roleFlags);
+		
+		// When we gain admin rights, show a message to us locally
+		if ((roleFlags & EPlayerRole.ADMINISTRATOR) || (roleFlags & EPlayerRole.SESSION_ADMINISTRATOR))
+		{
+			if (playerId == GetGame().GetPlayerController().GetPlayerId())
+			{
+				SCR_ChatPanelManager chatPanelMgr = SCR_ChatPanelManager.GetInstance();
+				string msg = "Type /help to view available commands";
+				chatPanelMgr.OnNewMessage(msg);
+			}
+		}
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
 	// GETTERS
 	
 	static void _____GETTERS();
@@ -622,6 +642,18 @@ class UDR_GameMode: SCR_BaseGameMode
 	{
 		// We don't return the race track object directly because on clients only ID is replicated
 		return m_aRaceTracks[m_iCurrentRaceTrackId].value;
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	array<UDR_RaceTrackLogic> GetAllRaceTracks()
+	{
+		array<UDR_RaceTrackLogic> a = {};
+		a.Resize(m_aRaceTracks.Count());
+		foreach (int i, UDR_EntityLinkRaceTrackLogic link : m_aRaceTracks)
+		{
+			a[i] = link.value;
+		}
+		return a;
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
@@ -997,6 +1029,33 @@ class UDR_GameMode: SCR_BaseGameMode
 		
 		_print(string.Format("Player requested respawn: %1 %2", playerComp.GetPlayerId(), playerComp.GetPlayerName()));
 		m_RaceState.OnPlayerRequestRespawn(playerComp);
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	// Admin request to end the race
+	void Ask_AdminEndRace()
+	{
+		RplComponent rpl = RplComponent.Cast(FindComponent(RplComponent));
+		if (!rpl.IsMaster())
+			return;
+		
+		SwitchToRaceState(ERaceState.RESULTS);
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	void Ask_AdminSwitchRaceTrack(int trackId)
+	{
+		RplComponent rpl = RplComponent.Cast(FindComponent(RplComponent));
+		if (!rpl.IsMaster())
+			return;
+		
+		if (trackId < 0 || trackId >= m_aRaceTracks.Count())
+			return;
+		
+		if (m_eRaceState == ERaceState.PREPARING)
+			SwitchToRaceState(ERaceState.RESULTS);
+		SwitchToRaceTrack(trackId);
+		SwitchToRaceState(ERaceState.PREPARING);
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
