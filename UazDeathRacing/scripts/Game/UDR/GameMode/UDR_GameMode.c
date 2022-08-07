@@ -662,6 +662,7 @@ class UDR_GameMode: SCR_BaseGameMode
 	static void _____NOTIFICATIONS();
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
+	// Returns static notification text
 	string GetNotificationText()
 	{	
 		switch (m_eRaceState)
@@ -682,7 +683,13 @@ class UDR_GameMode: SCR_BaseGameMode
 			
 			case ERaceState.PREPARING:
 			{
-				return "Prepare for race! Wait for a few seconds...";
+				UDR_RaceTrackLogic currentTrack = GetCurrentRaceTrack();
+				string strTrackName;
+				if (currentTrack)
+				{
+					strTrackName = string.Format("Current race track:\n%1\n\n", currentTrack.GetRaceTrackName());
+				}
+				return strTrackName + "Prepare for race! Wait for a few seconds...";
 			}
 			
 			case ERaceState.RACING:
