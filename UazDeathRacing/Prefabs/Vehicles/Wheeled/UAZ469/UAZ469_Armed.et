@@ -1098,7 +1098,7 @@ Vehicle : "{1F9BB80C3EC3C891}Prefabs/Vehicles/Core/Wheeled_Car_Base.et" {
        MaxTravelDown 0.2
       }
       Wheel Wheel "{4D8B26DFFE211745}" {
-       Radius 0.5
+       Radius 0.4
        BrakeTorque 126000
       }
       Tyre Tyre "{4D8B26DFFD85E58F}" : "{E3FA972AED2374FE}Prefabs/Vehicles/Wheeled/UAZ469/VehicleSimulationTire_UAZ469.conf" {
