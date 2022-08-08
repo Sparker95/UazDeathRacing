@@ -14,6 +14,36 @@ class UDR_Waypoint : ScriptedGameTriggerEntity
 	[Attribute()]
 	ref UDR_EntityLinkWaypoint m_Next;
 	
+	[Attribute()]
+	protected string m_sUiSoundEventName;
+	
+	// Linked entities are related to this waypoint but are not within its hierarchy.
+	// This is used for managing visuals.
+	ref array<IEntity> m_aLinkedEntities = {};
+	
+	//-------------------------------------------------------------------------------------------
+	void SetVisible(bool visible)
+	{
+		if (visible)
+		{
+			SetFlags(EntityFlags.VISIBLE, true);
+			foreach (IEntity ent : m_aLinkedEntities)
+				ent.SetFlags(EntityFlags.VISIBLE, true);
+		}
+		else
+		{
+			ClearFlags(EntityFlags.VISIBLE, true);
+			foreach (IEntity ent : m_aLinkedEntities)
+				ent.ClearFlags(EntityFlags.VISIBLE, true);
+		}
+	}
+	
+	//-------------------------------------------------------------------------------------------
+	string GetUiSoundEventName()
+	{
+		return m_sUiSoundEventName;
+	}
+	
 	//-------------------------------------------------------------------------------------------
 	override void OnInit(IEntity owner)
 	{
@@ -63,5 +93,42 @@ class UDR_Waypoint : ScriptedGameTriggerEntity
 		vector arrow0 = GetOrigin();
 		vector arrow1 = arrow0 + 3.0*transform[2];				
 		Shape.CreateArrow(arrow0, arrow1, 1, Color.RED, ShapeFlags.ONCE | ShapeFlags.NOZBUFFER);
+	}
+	
+	void RegisterLinkedEntity(IEntity ent)
+	{
+		m_aLinkedEntities.Insert(ent);
+	}
+}
+
+
+// Component class which scales waypoint's subentities according to size of waypoint
+class UDR_WaypointAutoScaleComponentClass : ScriptComponentClass {}
+
+class UDR_WaypointAutoScaleComponent : ScriptComponent
+{
+	override void OnPostInit(IEntity owner)
+	{
+		SetEventMask(owner, EntityEvent.INIT);
+		
+		owner.SetScale(10);
+	}
+	
+	override void EOnInit(IEntity owner)
+	{
+		if (!GetGame().InPlayMode())
+			return;
+		
+		// Scale this object according to trigger size
+		UDR_Waypoint parentWp = UDR_Waypoint.Cast(owner.GetParent());
+		if (!parentWp)
+			return;
+		
+		// Scale can't be applied to child, so this object must be unparanted
+		parentWp.RemoveChild(GetOwner());
+		owner.SetOrigin(parentWp.GetOrigin());
+		owner.SetScale(2.0 * parentWp.GetSphereRadius());
+		
+		parentWp.RegisterLinkedEntity(owner);
 	}
 }

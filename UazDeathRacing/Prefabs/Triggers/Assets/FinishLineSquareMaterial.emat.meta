@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{81B9DC592E94F22E}Prefabs/Triggers/Assets/FinishLineMaterial.emat"
+ Configurations {
+  EMATResourceClass PC {
+  }
+  EMATResourceClass XBOX_ONE : PC {
+  }
+  EMATResourceClass XBOX_SERIES : PC {
+  }
+  EMATResourceClass PS4 : PC {
+  }
+  EMATResourceClass HEADLESS : PC {
+  }
+ }
+}

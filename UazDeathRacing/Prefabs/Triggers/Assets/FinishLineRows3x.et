@@ -1,0 +1,33 @@
+GenericEntity {
+ ID "5A11378A6E50A1FD"
+ components {
+  Hierarchy "{5A11460D4190422B}" {
+  }
+ }
+ {
+  $grp GenericEntity : "{B335AE63AD9FC70B}Prefabs/Triggers/Assets/FinishLineSquareRow.et" {
+   {
+    ID "5A11460F429929C8"
+    coords 0 4 0
+   }
+   {
+    ID "5A11460F7A64CAF8"
+    coords 0 0 0
+   }
+   {
+    ID "5A11460F7D08265B"
+    coords 2 2 0
+    {
+     GenericEntity {
+      ID "5A11378AD7BBF737"
+      components {
+       MeshObject "{5A1137891CC85737}" {
+        Enabled 0
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

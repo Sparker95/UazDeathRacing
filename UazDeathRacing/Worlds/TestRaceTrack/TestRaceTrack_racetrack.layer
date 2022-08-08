@@ -8,48 +8,34 @@ UDR_RaceTrackLogic Track1 {
  }
  m_sRaceTrackName "Track 1 - Inside The Cones"
 }
-$grp UDR_Waypoint : "{92A0F1C3F4161A7D}Prefabs/Triggers/WaypointInvisible.et" {
+UDR_Waypoint WpFinish : "{73691FA333C77DE0}Prefabs/Triggers/WaypointFinishLineVisible.et" {
+ coords 34.69 2.001 477.053
+ angleY 88.564
+ m_Next UDR_EntityLinkWaypoint "{5A11378BA1F434ED}" {
+  m_sEntityName "Wp1"
+ }
+}
+$grp UDR_Waypoint : "{ABD6A727D7E4D14A}Prefabs/Triggers/WaypointVisible.et" {
  Wp1 {
-  coords 67.995 2.001 480.877
-  angleY 147.518
+  coords 69.088 2.001 474.461
+  angleY 170.061
   m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
    m_sEntityName "Wp2"
   }
  }
  Wp2 {
-  coords 72.261 2.001 461.039
-  angleY -168.455
+  coords 43.49 1.982 448.399
+  angleY -88.467
   m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
    m_sEntityName "Wp3"
   }
  }
  Wp3 {
-  coords 48.978 2.126 445.13
-  angleY -89.138
-  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
-   m_sEntityName "Wp4"
-  }
- }
- Wp4 {
-  coords 22.851 2.001 450.844
-  angleY -43.72
-  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
-   m_sEntityName "Wp5"
-  }
- }
- Wp5 {
-  coords 11.575 2.001 474.863
-  angleY 47.201
+  coords 12.702 2.001 469.68
+  angleY 64.51
   m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
    m_sEntityName "WpFinish"
   }
- }
-}
-UDR_Waypoint WpFinish : "{9DB4B14E0E7FB10B}Prefabs/Triggers/WaypointFinishLine.et" {
- coords 32.996 2.001 479.302
- angleY 90
- m_Next UDR_EntityLinkWaypoint "{59F347004DEC0021}" {
-  m_sEntityName "Wp1"
  }
 }
 UDR_VehiclePositioning VehiclePositioning : "{F33FD9275A6393DB}Prefabs/VehiclePositioning/VehiclePositioning.et" {

@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{B903D0EEB8E7BA40}Prefabs/Pickups/Assets/WaypointCylinderMaterial.emat"
+ Configurations {
+  EMATResourceClass PC {
+  }
+  EMATResourceClass XBOX_ONE : PC {
+  }
+  EMATResourceClass XBOX_SERIES : PC {
+  }
+  EMATResourceClass PS4 : PC {
+  }
+  EMATResourceClass HEADLESS : PC {
+  }
+ }
+}

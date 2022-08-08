@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{B04B1DEDC0684B04}Prefabs/Pickups/Assets/WaypointArrowMaterial.emat"
+ Configurations {
+  EMATResourceClass PC {
+  }
+  EMATResourceClass XBOX_ONE : PC {
+  }
+  EMATResourceClass XBOX_SERIES : PC {
+  }
+  EMATResourceClass PS4 : PC {
+  }
+  EMATResourceClass HEADLESS : PC {
+  }
+ }
+}

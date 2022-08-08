@@ -1,11 +1,11 @@
 MetaFileClass {
- Name "{A3048B22A0B49B2E}Prefabs/Pickups/Assets/PickupCylinder.xob"
+ Name "{A3048B22A0B49B2E}Prefabs/Triggers/Assets/WaypointCylinder.xob"
  Configurations {
   FBXResourceClass PC {
    MaterialAssigns {
     MaterialAssignClass "{59D2A416D00C78F9}" {
      SourceMaterial "DefaultGeneratedMaterial"
-     AssignedMaterial "{E9A02EECF7D59F52}Prefabs/Pickups/Assets/PickupCylinderMaterial.emat"
+     AssignedMaterial "{E9A02EECF7D59F52}Prefabs/Pickups/Assets/PickupShellMaterial.emat"
     }
    }
    Common TXOCommonClass "{59D2A4114D7C27D0}" : "{0877E7C4BB2B2C9A}Configs/System/ResourceTypes/PC/MeshObjectCommon.conf" {

@@ -1,0 +1,15 @@
+MatPBRBasicGlass {
+ DiffuseIBL 0 0 0 0
+ SpecularIBL 0 0 0 0
+ Diffuse 0 0 0 0
+ Emissive 1 0 0 0
+ EmissiveAbsoluteLV 0
+ CastShadow 0
+ ReceiveShadow 0
+ OccludeRain 0
+ OccludeWetness 0
+ SurfaceProperties "{7898C33735EFBBB0}Common/Materials/Game/Core/default.gamemat"
+ Specular 0 0 0 0
+ OpacityMap "{3672DE2F614310EF}Prefabs/Pickups/Assets/PickupCylinderOpacity.edds"
+ FresnelPower 0.727
+}

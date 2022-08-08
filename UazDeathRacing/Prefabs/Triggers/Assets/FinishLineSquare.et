@@ -1,0 +1,11 @@
+GenericEntity {
+ ID "5A1137895C92F8F8"
+ components {
+  MeshObject "{5A1137891CC85737}" {
+   Object "{3E1CD6CB1ADB1959}Prefabs/Triggers/Assets/FinishLineSquare.xob"
+  }
+  Hierarchy "{5A11460D53AE3AD2}" {
+  }
+ }
+ coords 1.956 4.005 3.086
+}

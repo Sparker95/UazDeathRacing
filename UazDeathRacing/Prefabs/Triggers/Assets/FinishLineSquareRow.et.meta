@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{B335AE63AD9FC70B}Prefabs/Triggers/Assets/FinishLineSquareRow.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}

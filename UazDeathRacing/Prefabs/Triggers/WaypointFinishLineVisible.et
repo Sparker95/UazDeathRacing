@@ -1,5 +1,9 @@
 UDR_Waypoint {
- ID "59FCBB7783A08234"
+ ID "5A11378BA1F42C7F"
+ components {
+  Hierarchy "{5A11460CA3530ACD}" {
+  }
+ }
  coords 35.072 2.001 478.913
  angleY 90
  TriggerShapeType "Oriented Bounding Box"
@@ -9,18 +13,22 @@ UDR_Waypoint {
  ShapeColor 1 0 0 0.196
  TriggerActivationType "All changes"
  ClassFilter "Vehicle"
- m_Next UDR_EntityLinkWaypoint "{59F347004DEC0021}" {
+ m_Next UDR_EntityLinkWaypoint "{5A11378BA1F434ED}" {
  }
  m_sUiSoundEventName "RACE_FINISH_LINE"
  {
   DecalEntity FinishLineDecal {
-   ID "59FD322FE3049CFF"
+   ID "5A11378BA1F43497"
    angleX -90
    scale 0.9
    FarPlane 9.653
    Stretch 34.354
    ClutterOccluder 1
    Mat "{A3DE976E05A631EA}Prefabs/Triggers/FinishLine.emat"
+  }
+  GenericEntity : "{4F6097A2245559BE}Prefabs/Triggers/Assets/FinishLineRows3x.et" {
+   ID "5A11460E9778A24A"
+   coords 0 2 0
   }
  }
 }

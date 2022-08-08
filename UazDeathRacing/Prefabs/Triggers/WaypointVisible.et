@@ -1,0 +1,46 @@
+UDR_Waypoint : "{92A0F1C3F4161A7D}Prefabs/Triggers/WaypointInvisible.et" {
+ ID "59FCBB71A5489F96"
+ components {
+  Hierarchy "{5A0F3ECE9F20CE6B}" {
+  }
+ }
+ m_sUiSoundEventName "WAYPOINT"
+ {
+  $grp GenericEntity {
+   {
+    ID "5A0F3ECD665B42F0"
+    components {
+     MeshObject "{5A0F3ECD6FEC8FE1}" {
+      Object "{449BF87A70C323CF}Prefabs/Triggers/Assets/WaypointArrow.xob"
+      CastShadow 0
+      CastFarShadow 0
+      RainOccluder 0
+      WetnessOccluder 0
+      ReceiveLight 0
+     }
+     Hierarchy "{5A0F3ECEE6140FD8}" {
+     }
+    }
+    coords 0 5 0
+   }
+   {
+    ID "5A0F3ECDDD90091E"
+    components {
+     MeshObject "{5A0F3ECD204CF463}" {
+      Object "{A3048B22A0B49B2E}Prefabs/Triggers/Assets/WaypointCylinder.xob"
+      CastShadow 0
+      CastFarShadow 0
+      RainOccluder 0
+      WetnessOccluder 0
+      ReceiveLight 0
+     }
+     Hierarchy "{5A0F3ECEE28C20E3}" {
+     }
+     UDR_WaypointAutoScaleComponent "{5A0F3EC9466A5250}" {
+     }
+    }
+    scale 3
+   }
+  }
+ }
+}

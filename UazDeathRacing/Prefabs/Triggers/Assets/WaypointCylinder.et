@@ -1,0 +1,9 @@
+GenericEntity {
+ ID "5A0F49AE59718EDB"
+ components {
+  MeshObject "{5A0F49AE124C863B}" {
+   Object "{A3048B22A0B49B2E}Prefabs/Triggers/Assets/WaypointCylinder.xob"
+  }
+ }
+ coords 2.642 4.348 3.157
+}

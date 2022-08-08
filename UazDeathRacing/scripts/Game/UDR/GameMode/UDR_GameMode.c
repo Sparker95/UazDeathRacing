@@ -211,6 +211,7 @@ class UDR_GameMode: SCR_BaseGameMode
 		int spawnPointId = FindAndAssignSpawnPosition(playerComp);
 		GetVehiclePositioning().GetPositionTransform(spawnPointId, transform); // Get position from vehicle positioning entity
 		SpawnVehicle(playerComp, transform, 0, 1); // On first spawn we always have 0 lap count and our first waypoint is wp 1.
+		playerComp.Authority_HighlightWaypoint(m_iCurrentRaceTrackId, 1);
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
@@ -220,6 +221,7 @@ class UDR_GameMode: SCR_BaseGameMode
 		UDR_Waypoint wp = m_CurrentRaceTrack.GetWaypoint(playerComp.m_iPrevWaypoint);
 		wp.GetTransform(transform);
 		SpawnVehicle(playerComp, transform, playerComp.m_NetworkEntity.m_iLapCount, playerComp.m_iNextWaypoint);
+		playerComp.Authority_HighlightWaypoint(m_iCurrentRaceTrackId, playerComp.m_iNextWaypoint);
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
@@ -487,13 +489,32 @@ class UDR_GameMode: SCR_BaseGameMode
 		
 		_print(string.Format("Player has crossed finished line: %1", playerComp.GetPlayerName()));
 		
-		// Play sound on each lap
-		playerComp.Authority_SendUiSoundEvent(UDR_UISounds.RACE_FINISH_LINE);
-		
 		if (lastLap)
 		{
 			m_RaceState.OnPlayerFinishedRace(playerComp);
 		}
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
+	// Called from race track logic when a racer (vehicles) crosses any waypoint
+	void Callback_OnWaypointActivated(IEntity racer, int wpId, int nextWpId)
+	{
+		UDR_VehicleNetworkComponent vehicleComp = UDR_VehicleNetworkComponent.Cast(racer.FindComponent(UDR_VehicleNetworkComponent));
+		if (!vehicleComp)
+			return;
+		
+		UDR_PlayerNetworkComponent playerComp = UDR_PlayerNetworkComponent.GetForPlayerId(vehicleComp.GetPlayerId());
+		if (!playerComp)
+			return;
+		
+		// Highlight next waypoint for client
+		playerComp.Authority_HighlightWaypoint(m_iCurrentRaceTrackId, nextWpId);
+		
+		// Play UI sound event
+		UDR_Waypoint wp = GetCurrentRaceTrack().GetWaypoint(wpId);
+		string uiSoundEvent = wp.GetUiSoundEventName();
+		if (!uiSoundEvent.IsEmpty())
+			playerComp.Authority_SendUiSoundEvent(uiSoundEvent);
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
@@ -657,6 +678,14 @@ class UDR_GameMode: SCR_BaseGameMode
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
+	UDR_RaceTrackLogic GetRaceTrack(int id)
+	{
+		if (id < 0 || id >= m_aRaceTracks.Count())
+			return null;
+		return m_aRaceTracks[id].value;
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------------------------
 	// NOTIFICATIONS
 	
 	static void _____NOTIFICATIONS();
@@ -760,6 +789,7 @@ class UDR_GameMode: SCR_BaseGameMode
 				continue;
 			
 			raceTrackLink.value.m_OnFinishLineActivated.Insert(Callback_OnFinishLineActivated);
+			raceTrackLink.value.m_OnWaypointActivated.Insert(Callback_OnWaypointActivated);
 		}
 		
 		if (m_RplComponent.IsMaster())

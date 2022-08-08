@@ -1,0 +1,48 @@
+GenericEntity {
+ ID "5A11378AD7BBF72B"
+ components {
+  Hierarchy "{5A11460D4AF133FD}" {
+  }
+ }
+ coords 0 0 0
+ {
+  $grp GenericEntity : "{2F4626A4BCE5BBDE}Prefabs/Triggers/Assets/FinishLineSquare.et" {
+   {
+    ID "5A11378AD7B82553"
+    coords -4 0 0
+   }
+   {
+    ID "5A11378AD7B84D69"
+    coords -8 0 0
+   }
+   {
+    ID "5A11378AD7B84D7C"
+    coords -12 0 0
+   }
+   {
+    ID "5A11378AD7B85DAC"
+    coords -16 0 0
+   }
+   {
+    ID "5A11378AD7B85DAD"
+    coords 0 0 0
+   }
+   {
+    ID "5A11378AD7BBA798"
+    coords 4 0 0
+   }
+   {
+    ID "5A11378AD7BBA79B"
+    coords 8 0 0
+   }
+   {
+    ID "5A11378AD7BBF736"
+    coords 12 0 0
+   }
+   {
+    ID "5A11378AD7BBF737"
+    coords 16 0 0
+   }
+  }
+ }
+}

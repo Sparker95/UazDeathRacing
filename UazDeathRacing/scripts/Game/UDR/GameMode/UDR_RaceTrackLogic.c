@@ -43,7 +43,8 @@ class UDR_RaceTrackLogic : GenericEntity
 	protected ref map<IEntity, ref UDR_RaceTrackLogicRacerData> m_RacerData = new map<IEntity, ref UDR_RaceTrackLogicRacerData>;
 	
 	// Script invokers
-	ref ScriptInvoker m_OnFinishLineActivated = new ScriptInvoker(); // (IEntity racer, bool lastLap)
+	ref ScriptInvoker m_OnFinishLineActivated = new ScriptInvoker(); // (IEntity racer, bool lastLap)			- Gets called on each waypoint
+	ref ScriptInvoker m_OnWaypointActivated = new ScriptInvoker(); // (IEntity racer, int wpId, int nextWpId)	- Gets called only on finish line
 	
 	protected float m_fRaceStartTime_ms;
 	protected bool m_bInitSuccess = false;
@@ -152,26 +153,8 @@ class UDR_RaceTrackLogic : GenericEntity
 	override void EOnInit(IEntity owner)
 	{		
 		//-----------------------------------------------
-		// If we are in editor, just check if all waypoint names are correct and return
-		#ifdef WORKBENCH
-		
 		if (!GetGame().InPlayMode())
-		{
-			/*
-			// Disabled this shit because it looks like it can't find entities when reloading a world and thus spams this sometimes
-			WorldEditor worldEditor = Workbench.GetModule(WorldEditor); // Watch out, WorldEditor class doesn't exist not in Workbench
-			WorldEditorAPI api = worldEditor.GetApi();
-			
-			foreach (string wpName : m_aWaypointNames)
-			{
-				IEntitySource wpEntSrc = api.FindEntityByName(wpName);
-				if (!wpEntSrc)
-					_print(string.Format("Could not find waypoint: %1", wpName), LogLevel.ERROR);
-			}
-			*/
 			return;
-		}
-		#endif
 		
 		//-----------------------------------------------
 		// Not in editor, but in actual game
@@ -307,6 +290,8 @@ class UDR_RaceTrackLogic : GenericEntity
 		racerData.m_iNextWaypoint = nextWpId;
 		racerData.m_iPrevWaypoint = wpId;
 		
+		m_OnWaypointActivated.Invoke(veh, wpId, nextWpId);
+		
 		// If racer crossed the finish line, increase lap count
 		if (wpId == 0)
 		{
@@ -331,6 +316,19 @@ class UDR_RaceTrackLogic : GenericEntity
 		
 		racerData.m_fLapProgress = lapProgress;
 		racerData.m_fTotalProgress = racerData.m_iLapCount * m_fLapLength + lapProgress;
+	}
+	
+	//----------------------------------------------------------------------------------------------
+	// Sets visible only the waypoint with given id
+	void HighlightWaypoint(int id)
+	{
+		if (id < 0 || id >= m_aWaypoints.Count())
+			return;
+		
+		foreach(UDR_Waypoint wp : m_aWaypoints)
+			wp.SetVisible(false);
+		
+		m_aWaypoints[id].SetVisible(true);
 	}
 	
 	//----------------------------------------------------------------------------------------------

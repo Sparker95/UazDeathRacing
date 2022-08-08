@@ -213,6 +213,20 @@ class UDR_PlayerNetworkComponent : ScriptComponent
 	}
 	
 	//-----------------------------------------------------------------------
+	// Highlights current waypoint for client
+	void Authority_HighlightWaypoint(int raceTrackId, int waypointId)
+	{
+		Rpc(RpcDo_HighlightWaypoint, raceTrackId, waypointId);
+	}
+	[RplRpc(RplChannel.Reliable, RplRcver.Owner)]
+	void RpcDo_HighlightWaypoint(int raceTrackId, int waypointId)
+	{
+		UDR_GameMode gm = GetGame().GetUdrGameMode();
+		UDR_RaceTrackLogic raceTrack = gm.GetRaceTrack(raceTrackId);
+		raceTrack.HighlightWaypoint(waypointId);
+	}
+	
+	//-----------------------------------------------------------------------
 	// Misc functions
 	
 	static UDR_PlayerNetworkComponent GetForPlayerId(int playerId)

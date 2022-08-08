@@ -99,6 +99,27 @@ AudioClass {
    outStatePort 2055
    noInAudible 0
   }
+  SoundClass {
+   id 19465
+   name "WAYPOINT"
+   tl 208.682 1150.243
+   conns {
+    ConnectionsClass connections {
+     id 0
+     links {
+      ConnectionClass connection {
+       id 18436
+       port 65
+      }
+     }
+    }
+   }
+   volume 1.413
+   volume_dB 3
+   outState 7179
+   outStatePort 2055
+   noInAudible 0
+  }
  }
  mixers {
   MixerClass {
@@ -131,6 +152,10 @@ AudioClass {
         }
         ConnectionClass connection {
          id 17417
+         port 65
+        }
+        ConnectionClass connection {
+         id 19465
          port 65
         }
        }
@@ -192,6 +217,16 @@ AudioClass {
    Samples {
     AudioBankSampleClass "Sample(1)" {
      Filename "{F33B4F3194DB7E39}Sounds/Destruction/Multiphase/Samples/RockSmall/Destruction_Multiphase_RockSmall_Impact_09.wav"
+    }
+   }
+  }
+  BankLocalClass {
+   id 18436
+   name "Bank 9"
+   tl 14.955 1151.576
+   Samples {
+    AudioBankSampleClass "Sample(1)" {
+     Filename "{A9BEF93833F240CC}Sounds/UI/Waypoint.wav"
     }
    }
   }
