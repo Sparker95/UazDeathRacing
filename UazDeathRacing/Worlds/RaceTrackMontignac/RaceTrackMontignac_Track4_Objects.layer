@@ -1,0 +1,70 @@
+$grp GenericEntity : "{35E211705F8FED68}Prefabs/Props/Industrial/CargoContainers/CargoContainer_01/CargoContainer_01_40ft_blue.et" {
+ {
+  coords 10090.131 2.54 1476.207
+  angleY -73.619
+ }
+ {
+  coords 10079.057 2.54 1482.047
+  angleY 106.387
+ }
+ {
+  coords 10066.38 2.54 1483.128
+  angleY -73.619
+ }
+ {
+  coords 10102.615 2.54 1475.237
+  angleY 106.387
+ }
+}
+$grp SCR_DestructibleBuildingEntity : "{85B7377A90F6A75F}Prefabs/Structures/Infrastructure/Naval/Cranes/HarborCrane_01.et" {
+ {
+  coords 10015.66 19.582 1489.994
+  angleY 143.663
+  scale 0.4
+ }
+ {
+  coords 10020.264 22.013 1484.262
+  angleY 143.663
+  scale 0.2
+ }
+}
+$grp GenericEntity : "{9A3ADECE49EF8993}Prefabs/Props/Industrial/CargoContainers/CargoContainer_01/CargoContainer_01_40ft_green.et" {
+ {
+  coords 10086.188 2.54 1511.928
+  angleY 13.585
+ }
+ {
+  coords 10101.932 2.54 1472.811
+  angleY -73.954
+ }
+ {
+  coords 10078.373 2.54 1479.622
+  angleY -73.954
+ }
+ {
+  coords 10067.063 2.54 1485.555
+  angleY 106.048
+ }
+ {
+  coords 10090.813 2.54 1478.634
+  angleY 106.048
+ }
+}
+$grp SCR_DestructibleBuildingEntity : "{CF86E4F10D9173E9}Prefabs/Structures/Infrastructure/Bridges/ConcreteBridge_01_Narrow_Long_Base.et" {
+ {
+  coords 10127.409 3.429 1466.333
+  angleY 15.788
+  angleZ 6.568
+  scale 0.5
+ }
+ {
+  coords 10115.273 4.889 1469.768
+  angleY 15.788
+  angleZ 6.568
+  scale 0.5
+ }
+}
+GenericEntity : "{DB403F1A9E7B0B4F}Prefabs/Props/Industrial/CargoContainers/CargoContainer_01/CargoContainer_01_40ft_red.et" {
+ coords 10191.854 7.663 1514.262
+ angleY 63.533
+}

@@ -1,0 +1,84 @@
+UDR_RaceTrackLogic Track4 {
+ coords 9980.645 25.888 1475.571
+ m_FinishLineWaypoint UDR_EntityLinkWaypoint "{5A1153F3C5E27A72}" {
+  m_sEntityName "t4_finish"
+ }
+ m_VehiclePositioning UDR_EntityLinkVehiclePositioning "{5A1153F3CA45B240}" {
+  m_sEntityName "t4_positions"
+ }
+ m_sRaceTrackName "St. Pierre Port"
+}
+UDR_Waypoint t4_finish : "{73691FA333C77DE0}Prefabs/Triggers/WaypointFinishLineVisible.et" {
+ coords 10080.157 2.282 1490.218
+ angleY -74.235
+ BoxMins -15 0 -0.5
+ BoxMaxs 15 15 0.5
+ m_Next UDR_EntityLinkWaypoint "{5A11378BA1F434ED}" {
+  m_sEntityName "t4_1"
+ }
+}
+$grp UDR_Waypoint : "{ABD6A727D7E4D14A}Prefabs/Triggers/WaypointVisible.et" {
+ t4_1 {
+  coords 9978.288 2.532 1516.491
+  angleY -89.392
+  SphereRadius 8.1
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "t4_2"
+  }
+ }
+ t4_2 {
+  coords 9900.636 2.501 1507.379
+  angleY -18.855
+  SphereRadius 8.1
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "t4_3"
+  }
+ }
+ t4_3 {
+  coords 9814.409 8.449 1569.14
+  angleY 27.034
+  SphereRadius 8.1
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "t4_4"
+  }
+ }
+ t4_4 {
+  coords 9866.16 7.033 1611.239
+  angleY 104.163
+  SphereRadius 8.1
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "t4_5"
+  }
+ }
+ t4_5 {
+  coords 10051.253 2.54 1569.089
+  angleY 105.738
+  SphereRadius 8.1
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "t4_6"
+  }
+ }
+ t4_6 {
+  coords 10185.119 2.688 1538.42
+  angleY 155.913
+  SphereRadius 8.1
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "t4_7"
+  }
+ }
+ t4_7 {
+  coords 10161.043 2.532 1469.397
+  angleY -79.804
+  SphereRadius 11.3
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "t4_finish"
+  }
+ }
+}
+UDR_VehiclePositioning t4_positions : "{F33FD9275A6393DB}Prefabs/VehiclePositioning/VehiclePositioning.et" {
+ coords 10056.479 2.501 1497.137
+ angleY -74.362
+ m_iNumColumns 4
+ m_fStepRows 5.5
+ m_fStepColumns 4.6
+}

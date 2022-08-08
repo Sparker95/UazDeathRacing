@@ -1,0 +1,39 @@
+$grp UDR_Pickup : "{7D5C596D78F729C8}Prefabs/Pickups/PickupAmmo.et" {
+ {
+  coords 10092.421 5.113 1476.83
+ }
+ {
+  coords 10000.402 2.532 1514.458
+ }
+ {
+  coords 9913.032 4.963 1606.423
+ }
+ {
+  coords 10191.845 2.532 1513.138
+ }
+}
+$grp UDR_Pickup : "{CD6C53BE2DEE6DCA}Prefabs/Pickups/PickupDeployable.et" {
+ {
+  coords 10080.925 5.113 1480.202
+ }
+ {
+  coords 9947.247 2.532 1512.67
+ }
+ {
+  coords 10009.783 2.355 1582.875
+ }
+}
+$grp UDR_Pickup : "{DF1C96AAD094BA04}Prefabs/Pickups/PickupHealth.et" {
+ {
+  coords 10101.121 5.113 1474.427
+ }
+ {
+  coords 9887.903 2.731 1536.641
+ }
+ {
+  coords 9833.961 7.698 1591.433
+ }
+ {
+  coords 10102.147 2.542 1554.605
+ }
+}

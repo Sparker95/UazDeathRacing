@@ -37,3 +37,12 @@ Layer Track3 {
 Layer Track3_Pickups {
  Index 11
 }
+Layer Track4 {
+ Index 12
+}
+Layer Track4_Objects {
+ Index 13
+}
+Layer Track4_Pickups {
+ Index 14
+}
