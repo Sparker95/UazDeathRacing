@@ -6,6 +6,7 @@ UDR_RaceTrackLogic Track4 {
  m_VehiclePositioning UDR_EntityLinkVehiclePositioning "{5A1153F3CA45B240}" {
   m_sEntityName "t4_positions"
  }
+ m_iLapCount 4
  m_sRaceTrackName "St. Pierre Port"
 }
 UDR_Waypoint t4_finish : "{73691FA333C77DE0}Prefabs/Triggers/WaypointFinishLineVisible.et" {
