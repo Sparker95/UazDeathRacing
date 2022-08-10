@@ -343,16 +343,18 @@ Vehicle : "{1F9BB80C3EC3C891}Prefabs/Vehicles/Core/Wheeled_Car_Base.et" {
       }
      }
      ThrottleCurve {
-      4000 0.8 5000 0.5 6000 0
+      4000 1 5000 0.5 6000 0
      }
      ReverseCurve {
-      1400 0.8 1700 0.5 2100 0
+      1400 1 1700 0.8 6000 0
      }
-     ClutchUncoupleTime 0.35
-     ClutchCoupleTime 0.45
+     ThrottleReactionTime 0.5
+     ClutchUncoupleTime 0.1
+     ClutchCoupleTime 0.1
      ClutchUncoupleRpm 1000
-     ClutchCoupleRpm 2300
-     Latency 0.5
+     ClutchCoupleRpm 2100
+     SlopeSmoothing 0.3
+     Latency 0.2
      UpShiftRpm 2000
      DownShiftRpm 1800
     }
@@ -1550,7 +1552,7 @@ Vehicle : "{1F9BB80C3EC3C891}Prefabs/Vehicles/Core/Wheeled_Car_Base.et" {
      }
     }
     coords 0.485 0.414 -1.882
-    m_EffectPath "{575C2DEE390847F1}Prefabs/Triggers/boostParticle.ptc"
+    m_EffectPath "{575C2DEE390847F1}Prefabs/Triggers/Assets/boostParticle.ptc"
     m_PlayOnSpawn 0
    }
    {
@@ -1560,7 +1562,7 @@ Vehicle : "{1F9BB80C3EC3C891}Prefabs/Vehicles/Core/Wheeled_Car_Base.et" {
      }
     }
     coords -0.343 0.312 -1.846
-    m_EffectPath "{575C2DEE390847F1}Prefabs/Triggers/boostParticle.ptc"
+    m_EffectPath "{575C2DEE390847F1}Prefabs/Triggers/Assets/boostParticle.ptc"
     m_PlayOnSpawn 0
    }
   }
