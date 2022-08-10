@@ -11,6 +11,9 @@ class UDR_HudVehicle : UDR_HudBase
 		GetRootWidget().SetOpacity(0);
 	}
 	
+	protected const string TEXT_CONTROLS_PCMR		= "LMB - Shoot\nLeft Ctrl - Deploy mine\nHold H - Respawn\nEsc - Lobby";
+	protected const string TEXT_CONTROLS_GAMEPAD	= "Y - Shoot\nB - Deploy mine\nHold X - Respawn\nMenu - Lobby";
+	
 	override event void UpdateValues(IEntity owner, float timeSlice)
 	{
 		//-------------------------------------------------------------------------
@@ -111,6 +114,13 @@ class UDR_HudVehicle : UDR_HudBase
 		
 		// Show notifications
 		UpdateNotificationWidget(widgets.m_NotificationText);
+		
+		// Show controls text
+		EInputDeviceType lastInputDevice = GetGame().GetInputManager().GetLastUsedInputDevice();
+		if (lastInputDevice == EInputDeviceType.GAMEPAD)
+			widgets.m_TextControls.SetText(TEXT_CONTROLS_GAMEPAD);
+		else
+			widgets.m_TextControls.SetText(TEXT_CONTROLS_PCMR);
 		
 		Show(true);
 	}
