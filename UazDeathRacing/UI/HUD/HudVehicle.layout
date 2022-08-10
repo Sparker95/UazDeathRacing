@@ -114,9 +114,9 @@ FrameWidgetClass {
     OffsetLeft 0
     PositionY 0
     OffsetTop 0
-    SizeX 0
+    SizeX -1620
     OffsetRight 0
-    SizeY 0
+    SizeY -980
     OffsetBottom 0
    }
    {
