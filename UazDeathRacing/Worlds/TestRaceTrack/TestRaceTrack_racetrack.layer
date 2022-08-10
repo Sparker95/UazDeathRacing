@@ -1,5 +1,5 @@
 UDR_RaceTrackLogic Track1 {
- coords 32.106 13.087 468.513
+ coords 35.498 2.717 434.454
  m_FinishLineWaypoint UDR_EntityLinkWaypoint "{59F55BCB1745E5F7}" {
   m_sEntityName "WpFinish"
  }

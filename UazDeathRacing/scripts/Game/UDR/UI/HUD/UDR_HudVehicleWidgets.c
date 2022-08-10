@@ -18,6 +18,8 @@ class UDR_HudVehicleWidgets
 
 	TextWidget m_NotificationText;
 
+	TextWidget m_TextControls;
+
 	bool Init(Widget root)
 	{
 		m_HealthText = TextWidget.Cast(root.FindWidget("Panel.VerticalLayout0.HudLineHealth.TextRight"));
@@ -31,6 +33,8 @@ class UDR_HudVehicleWidgets
 		m_PositionText = TextWidget.Cast(root.FindWidget("RaceProgressPanel.Panel.VerticalLayout0.HudLinePos.TextRight"));
 
 		m_NotificationText = TextWidget.Cast(root.FindWidget("m_NotificationText"));
+
+		m_TextControls = TextWidget.Cast(root.FindWidget("m_TextControls"));
 
 		return true;
 	}

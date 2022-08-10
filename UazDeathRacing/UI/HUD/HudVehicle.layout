@@ -128,7 +128,7 @@ FrameWidgetClass {
    }
   }
   TextWidgetClass "{59FD14EA9F5FB0EA}" {
-   Name "TextControls"
+   Name "m_TextControls"
    Slot FrameWidgetSlot "{59FD14EA9F5FB0C7}" {
     Anchor 0.95 0.95 0.95 0.95
     PositionX -260

@@ -14,6 +14,63 @@ FrameWidgetClass {
     OffsetBottom 0
    }
    {
+    OverlayWidgetClass "{59ECF7262E7BF284}" {
+     Prefab "{59ECF7262E7BF284}"
+     {
+      OverlayWidgetClass "{59ECF7261A53DAFE}" {
+       Prefab "{59ECF7261A53DAFE}"
+       {
+        VerticalLayoutWidgetClass "{59ECF726656D7C68}" {
+         Prefab "{59ECF726656D7C68}"
+         {
+          VerticalLayoutWidgetClass "{59ECC4DBD04E6870}" {
+           Prefab "{59ECC4DBD04E6870}"
+           "Is Visible" 0
+           {
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+  OverlayWidgetClass "{54C4A02A556443D7}" {
+   Prefab "{54C4A02A556443D7}"
+   {
+    VerticalLayoutWidgetClass "{557478C13FE3A622}" {
+     Prefab "{557478C13FE3A622}"
+     {
+      ButtonWidgetClass "{5A1531E7B1307BFD}" : "{9ECCD201BCF07E96}UI/layouts/Menus/PauseMenu/PauseMenuButton.layout" {
+       Name "JoinRace"
+       Slot LayoutSlot "{557478C3F0230865}" {
+       }
+       "Z Order" 1
+       components {
+        SCR_ButtonTextComponent "{5548F0143AE99095}" {
+         m_sText "Join Race"
+        }
+       }
+       {
+       }
+      }
+      ButtonWidgetClass "{5A1531E7B714E945}" : "{9ECCD201BCF07E96}UI/layouts/Menus/PauseMenu/PauseMenuButton.layout" {
+       Name "JoinSpectators"
+       Slot LayoutSlot "{557478C3F0230865}" {
+       }
+       "Z Order" 2
+       components {
+        SCR_ButtonTextComponent "{5548F0143AE99095}" {
+         m_sText "Join Spectators"
+        }
+       }
+       {
+       }
+      }
+     }
+    }
    }
   }
  }
