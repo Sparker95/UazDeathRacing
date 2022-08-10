@@ -2,7 +2,6 @@ class UDR_HudVehicle : UDR_HudBase
 {
 	protected ref UDR_HudVehicleWidgets widgets = new UDR_HudVehicleWidgets();
 	
-	
 	override event void OnStartDraw(IEntity owner)
 	{
 		super.OnStartDraw(owner);
@@ -122,15 +121,15 @@ class UDR_HudVehicle : UDR_HudBase
 	void Callback_OnVehicleDamage(EDamageType type, float damage, HitZone pHitZone, IEntity instigator, inout vector hitTransform[3], float speed, int colliderID, int nodeID)
 	{
 		if (damage > 0) {
-			widgets.m_flashRedBlurBorderTop.SetOpacity(1);
-			widgets.m_flashRedBlurBorderBottom.SetOpacity(1);
-			widgets.m_flashRedBlurBorderLeft.SetOpacity(1);
-			widgets.m_flashRedBlurBorderRight.SetOpacity(1);
+			widgets.m_BloodVignette1.SetOpacity(1);
+			widgets.m_BloodVignette2.SetOpacity(1);
+			widgets.m_SuppressionVignette.SetOpacity(1);
+			widgets.m_BlackOut.SetOpacity(1);
 
-			WidgetAnimator.PlayAnimation(widgets.m_flashRedBlurBorderTop, WidgetAnimationType.Opacity, 0, 1);
-			WidgetAnimator.PlayAnimation(widgets.m_flashRedBlurBorderBottom, WidgetAnimationType.Opacity, 0, 1);
-			WidgetAnimator.PlayAnimation(widgets.m_flashRedBlurBorderLeft, WidgetAnimationType.Opacity, 0, 1);
-			WidgetAnimator.PlayAnimation(widgets.m_flashRedBlurBorderRight, WidgetAnimationType.Opacity, 0, 1);
+			WidgetAnimator.PlayAnimation(widgets.m_BloodVignette1, WidgetAnimationType.Opacity, 0, 1);
+			WidgetAnimator.PlayAnimation(widgets.m_BloodVignette2, WidgetAnimationType.Opacity, 0, 1);
+			WidgetAnimator.PlayAnimation(widgets.m_SuppressionVignette, WidgetAnimationType.Opacity, 0, 1);
+			WidgetAnimator.PlayAnimation(widgets.m_BlackOut, WidgetAnimationType.Opacity, 0, 1);
 		}
 	}
 }

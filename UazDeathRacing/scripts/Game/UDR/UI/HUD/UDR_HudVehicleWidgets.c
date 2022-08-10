@@ -20,13 +20,13 @@ class UDR_HudVehicleWidgets
 
 	TextWidget m_TextControls;
 
-	BlurWidget m_flashRedBlurBorderTop;
+	ImageWidget m_BloodVignette1;
 
-	BlurWidget m_flashRedBlurBorderLeft;
+	ImageWidget m_SuppressionVignette;
 
-	BlurWidget m_flashRedBlurBorderBottom;
+	ImageWidget m_BlackOut;
 
-	BlurWidget m_flashRedBlurBorderRight;
+	ImageWidget m_BloodVignette2;
 
 	bool Init(Widget root)
 	{
@@ -44,13 +44,13 @@ class UDR_HudVehicleWidgets
 
 		m_TextControls = TextWidget.Cast(root.FindWidget("m_TextControls"));
 
-		m_flashRedBlurBorderTop = BlurWidget.Cast(root.FindWidget("m_flashRedBlurBorderTop"));
+		m_BloodVignette1 = ImageWidget.Cast(root.FindWidget("m_BloodVignette1"));
 
-		m_flashRedBlurBorderLeft = BlurWidget.Cast(root.FindWidget("m_flashRedBlurBorderLeft"));
+		m_SuppressionVignette = ImageWidget.Cast(root.FindWidget("m_SuppressionVignette"));
 
-		m_flashRedBlurBorderBottom = BlurWidget.Cast(root.FindWidget("m_flashRedBlurBorderBottom"));
+		m_BlackOut = ImageWidget.Cast(root.FindWidget("m_BlackOut"));
 
-		m_flashRedBlurBorderRight = BlurWidget.Cast(root.FindWidget("m_flashRedBlurBorderRight"));
+		m_BloodVignette2 = ImageWidget.Cast(root.FindWidget("m_BloodVignette2"));
 
 		return true;
 	}
