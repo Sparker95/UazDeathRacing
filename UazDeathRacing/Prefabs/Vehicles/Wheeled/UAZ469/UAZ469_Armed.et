@@ -342,6 +342,12 @@ Vehicle : "{1F9BB80C3EC3C891}Prefabs/Vehicles/Core/Wheeled_Car_Base.et" {
        Offset 0 1.2548 1.1624
       }
      }
+     SteeringForwardSpeed {
+      0 24 2 40 60 30 90 19 120 14 180 8 360 4
+     }
+     SteeringCenterSpeed {
+      1 0 2 40
+     }
      ThrottleCurve {
       4000 1 5000 0.5 6000 0
      }
@@ -1048,12 +1054,12 @@ Vehicle : "{1F9BB80C3EC3C891}Prefabs/Vehicles/Core/Wheeled_Car_Base.et" {
    Simulation Wheeled "{4D8B26DEA5F25978}" {
     Engine Engine Engine {
      Inertia 0.3
-     MaxPower 80
-     MaxTorque 180
+     MaxPower 130
+     MaxTorque 220
      RpmMaxPower 4000
      RpmMaxTorque 2000
      Steepness 15
-     RpmIdle 800
+     RpmIdle 1200
      RpmRedline 5000
      RpmMax 6000
     }
