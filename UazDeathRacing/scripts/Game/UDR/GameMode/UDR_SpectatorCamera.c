@@ -103,7 +103,7 @@ class UDR_SpectatorCamera : CameraBase
 		vector cameraPos = targetPos + m_fFollowDistance * dir;
 		
 		vector transform[4];
-		transform[0] = -aside;
+		transform[0] = aside;
 		transform[1] = up;
 		transform[2] = -dir;
 		transform[3] = cameraPos;
