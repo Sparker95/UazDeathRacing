@@ -114,9 +114,9 @@ FrameWidgetClass {
     OffsetLeft 0
     PositionY 0
     OffsetTop 0
-    SizeX -1620
+    SizeX 0
     OffsetRight 0
-    SizeY -980
+    SizeY 0
     OffsetBottom 0
    }
    {
@@ -153,6 +153,71 @@ FrameWidgetClass {
     OutlineSize 2
     OutlineColor 0 0 0 0.424
    }
+  }
+  BlurWidgetClass "{5A10DBF423067F9B}" {
+   Name "m_flashRedBlurBorderTop"
+   Slot FrameWidgetSlot "{5A10DBF4309F728D}" {
+    OffsetLeft 0
+    OffsetTop 0
+    SizeX 1920
+    OffsetRight -1920
+    OffsetBottom -30
+   }
+   IsPixelPerfect 0
+   Opacity 0.755
+   Color 0.797 0.023 0.023 1
+   "Smooth Border" 0 0 0 11.3
+  }
+  BlurWidgetClass "{5A14F232181A15C8}" {
+   Name "m_flashRedBlurBorderLeft"
+   Slot FrameWidgetSlot "{5A0D472B75DFF3C3}" {
+    PositionX 0
+    OffsetLeft 0
+    PositionY 30
+    OffsetTop 30
+    SizeX 30
+    OffsetRight -30
+    SizeY 1020
+    OffsetBottom -1050
+   }
+   IsPixelPerfect 0
+   Opacity 0.755
+   Color 0.797 0.023 0.023 1
+   "Smooth Border" 0 0 0 11.3
+  }
+  BlurWidgetClass "{5A0D472B75DFF381}" {
+   Name "m_flashRedBlurBorderBottom"
+   Slot FrameWidgetSlot "{5A0D472B75DFF3C3}" {
+    PositionX 0
+    OffsetLeft 0
+    PositionY 1050
+    OffsetTop 1050
+    SizeX 1920
+    OffsetRight -1920
+    SizeY 30
+    OffsetBottom -1080
+   }
+   IsPixelPerfect 0
+   Opacity 0.755
+   Color 0.797 0.023 0.023 1
+   "Smooth Border" 0 0 0 11.3
+  }
+  BlurWidgetClass "{5A14F233A7EE3978}" {
+   Name "m_flashRedBlurBorderRight"
+   Slot FrameWidgetSlot "{5A0D472B75DFF3C3}" {
+    PositionX 1890
+    OffsetLeft 1890
+    PositionY 30
+    OffsetTop 30
+    SizeX 30
+    OffsetRight -1920
+    SizeY 1020
+    OffsetBottom -1050
+   }
+   IsPixelPerfect 0
+   Opacity 0.755
+   Color 0.797 0.023 0.023 1
+   "Smooth Border" 0 0 0 11.3
   }
  }
 }

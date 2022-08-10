@@ -26,23 +26,15 @@ class UDR_HudVehicle : UDR_HudBase
 			Show(false);
 			return;
 		}
-			
-		SCR_CompartmentAccessComponent compartmentAccessComp;
-		BaseCompartmentSlot compartmentSlot;
-		IEntity vehicleEnt;
-		BaseWeaponManagerComponent weaponMgrComp;
-		UDR_WeaponManagerComponent udrWeaponMgrComp;
-		DamageManagerComponent damageMgrComp;
-		
-		
-		compartmentAccessComp = SCR_CompartmentAccessComponent.Cast(playerEntity.FindComponent(SCR_CompartmentAccessComponent));
+
+		SCR_CompartmentAccessComponent compartmentAccessComp = SCR_CompartmentAccessComponent.Cast(playerEntity.FindComponent(SCR_CompartmentAccessComponent));
 		if (!compartmentAccessComp)
 		{
 			Show(false);
 			return;
 		}
 		
-		compartmentSlot = compartmentAccessComp.GetCompartment();
+		BaseCompartmentSlot compartmentSlot = compartmentAccessComp.GetCompartment();
 		
 		if (!compartmentSlot)
 		{
@@ -51,7 +43,7 @@ class UDR_HudVehicle : UDR_HudBase
 			return;
 		}
 		
-		vehicleEnt = compartmentSlot.GetOwner();
+		IEntity vehicleEnt = compartmentSlot.GetOwner();
 		
 		if (!vehicleEnt)
 		{
@@ -60,15 +52,17 @@ class UDR_HudVehicle : UDR_HudBase
 			return;
 		}
 		
-		weaponMgrComp = BaseWeaponManagerComponent.Cast(vehicleEnt.FindComponent(BaseWeaponManagerComponent));
-		udrWeaponMgrComp = UDR_WeaponManagerComponent.Cast(vehicleEnt.FindComponent(UDR_WeaponManagerComponent));
-		damageMgrComp = DamageManagerComponent.Cast(vehicleEnt.FindComponent(DamageManagerComponent));
+		BaseWeaponManagerComponent weaponMgrComp = BaseWeaponManagerComponent.Cast(vehicleEnt.FindComponent(BaseWeaponManagerComponent));
+		UDR_WeaponManagerComponent udrWeaponMgrComp = UDR_WeaponManagerComponent.Cast(vehicleEnt.FindComponent(UDR_WeaponManagerComponent));
+		SCR_VehicleDamageManagerComponent damageMgrComp = SCR_VehicleDamageManagerComponent.Cast(vehicleEnt.FindComponent(SCR_VehicleDamageManagerComponent));
 		
 		if (!weaponMgrComp || !damageMgrComp)
 		{
 			Show(false);
 			return;
 		}
+		
+		damageMgrComp.GetOnDamage().Insert(Callback_OnVehicleDamage);
 		
 		
 		//-------------------------------------------------------------------------
@@ -123,5 +117,20 @@ class UDR_HudVehicle : UDR_HudBase
 			widgets.m_TextControls.SetText(TEXT_CONTROLS_PCMR);
 		
 		Show(true);
+	}
+	
+	void Callback_OnVehicleDamage(EDamageType type, float damage, HitZone pHitZone, IEntity instigator, inout vector hitTransform[3], float speed, int colliderID, int nodeID)
+	{
+		if (damage > 0) {
+			widgets.m_flashRedBlurBorderTop.SetOpacity(1);
+			widgets.m_flashRedBlurBorderBottom.SetOpacity(1);
+			widgets.m_flashRedBlurBorderLeft.SetOpacity(1);
+			widgets.m_flashRedBlurBorderRight.SetOpacity(1);
+
+			WidgetAnimator.PlayAnimation(widgets.m_flashRedBlurBorderTop, WidgetAnimationType.Opacity, 0, 1);
+			WidgetAnimator.PlayAnimation(widgets.m_flashRedBlurBorderBottom, WidgetAnimationType.Opacity, 0, 1);
+			WidgetAnimator.PlayAnimation(widgets.m_flashRedBlurBorderLeft, WidgetAnimationType.Opacity, 0, 1);
+			WidgetAnimator.PlayAnimation(widgets.m_flashRedBlurBorderRight, WidgetAnimationType.Opacity, 0, 1);
+		}
 	}
 }

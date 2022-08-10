@@ -20,6 +20,14 @@ class UDR_HudVehicleWidgets
 
 	TextWidget m_TextControls;
 
+	BlurWidget m_flashRedBlurBorderTop;
+
+	BlurWidget m_flashRedBlurBorderLeft;
+
+	BlurWidget m_flashRedBlurBorderBottom;
+
+	BlurWidget m_flashRedBlurBorderRight;
+
 	bool Init(Widget root)
 	{
 		m_HealthText = TextWidget.Cast(root.FindWidget("Panel.VerticalLayout0.HudLineHealth.TextRight"));
@@ -35,6 +43,14 @@ class UDR_HudVehicleWidgets
 		m_NotificationText = TextWidget.Cast(root.FindWidget("m_NotificationText"));
 
 		m_TextControls = TextWidget.Cast(root.FindWidget("m_TextControls"));
+
+		m_flashRedBlurBorderTop = BlurWidget.Cast(root.FindWidget("m_flashRedBlurBorderTop"));
+
+		m_flashRedBlurBorderLeft = BlurWidget.Cast(root.FindWidget("m_flashRedBlurBorderLeft"));
+
+		m_flashRedBlurBorderBottom = BlurWidget.Cast(root.FindWidget("m_flashRedBlurBorderBottom"));
+
+		m_flashRedBlurBorderRight = BlurWidget.Cast(root.FindWidget("m_flashRedBlurBorderRight"));
 
 		return true;
 	}

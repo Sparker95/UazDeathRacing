@@ -266,14 +266,15 @@ class UDR_GameMode: SCR_BaseGameMode
 		Vehicle vehicle = Vehicle.Cast(newVehicleEntity);
 		UDR_VehicleNetworkComponent vehNetComp = UDR_VehicleNetworkComponent.Cast(vehicle.FindComponent(UDR_VehicleNetworkComponent));
 		vehNetComp.Init(playerComp.GetPlayerId());
-
+		
 		// Start engine
 		CarControllerComponent carController = CarControllerComponent.Cast(vehicle.FindComponent(CarControllerComponent));
 		carController.StartEngine();
 		
-		// Move player in pilot and start the car
+		// Move player in pilot
 		playerComp.MoveInVehicle(vehicle);
 		
+		// Make player invincible
 		SCR_DamageManagerComponent damageManager = SCR_DamageManagerComponent.Cast(controlledEntity.FindComponent(SCR_DamageManagerComponent));
 		if (damageManager)
 			damageManager.EnableDamageHandling(false);
