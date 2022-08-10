@@ -6,9 +6,6 @@ UDR_GameMode {
   }
   SCR_RespawnHandlerComponent "{59ED26651584C9D7}" {
   }
-  SCR_RespawnSystemComponent "{59ED2665C39C7C2E}" {
-   m_bEnableRespawn 0
-  }
   RplComponent "{59CE058AE0CFD2D5}" {
   }
  }
