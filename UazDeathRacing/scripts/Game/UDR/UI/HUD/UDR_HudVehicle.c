@@ -2,6 +2,8 @@ class UDR_HudVehicle : UDR_HudBase
 {
 	protected ref UDR_HudVehicleWidgets widgets = new UDR_HudVehicleWidgets();
 	
+	protected SCR_VehicleDamageManagerComponent m_CurrentVehicleDamageMgr;
+	
 	override event void OnStartDraw(IEntity owner)
 	{
 		super.OnStartDraw(owner);
@@ -51,9 +53,25 @@ class UDR_HudVehicle : UDR_HudBase
 			return;
 		}
 		
+		
+		
 		BaseWeaponManagerComponent weaponMgrComp = BaseWeaponManagerComponent.Cast(vehicleEnt.FindComponent(BaseWeaponManagerComponent));
 		UDR_WeaponManagerComponent udrWeaponMgrComp = UDR_WeaponManagerComponent.Cast(vehicleEnt.FindComponent(UDR_WeaponManagerComponent));
 		SCR_VehicleDamageManagerComponent damageMgrComp = SCR_VehicleDamageManagerComponent.Cast(vehicleEnt.FindComponent(SCR_VehicleDamageManagerComponent));
+		
+		// If damage manager has changed
+		if (damageMgrComp != m_CurrentVehicleDamageMgr)
+		{
+			// Subscribe to event of new damage mgr
+			if (damageMgrComp)
+				damageMgrComp.GetOnDamage().Insert(Callback_OnVehicleDamage);
+			
+			// Unsubscribe from event of previous damage mgr
+			if (m_CurrentVehicleDamageMgr)
+				m_CurrentVehicleDamageMgr.GetOnDamage().Remove(Callback_OnVehicleDamage);
+			
+			m_CurrentVehicleDamageMgr = damageMgrComp;
+		}
 		
 		if (!weaponMgrComp || !damageMgrComp)
 		{
