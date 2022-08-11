@@ -154,5 +154,96 @@ FrameWidgetClass {
     OutlineColor 0 0 0 0.424
    }
   }
+  ImageWidgetClass "{5A155EFF2DA43A5B}" {
+   Name "m_BloodVignette1"
+   Slot FrameWidgetSlot "{348226E682229785}" {
+    Anchor 0 0 1 1
+    PositionX 0
+    OffsetLeft 0
+    PositionY 0
+    OffsetTop 0
+    SizeX 0
+    OffsetRight 0
+    SizeY 0
+    OffsetBottom 0
+   }
+   Opacity 0
+   Color 0.558 0.558 0.558 1
+   "Inherit Color" 1
+   Texture "{8AFE0D27041B6338}UI/Textures/ScreenEffects/HitLayers/blood_1.edds"
+   Image ""
+   Size 2048 1024
+   Mask "{FAF20BF192821FDB}UI/Textures/ScreenEffects/Suppression/suppressionVignette_alphaMask100.edds"
+   "Transition width" 0.722
+   Range 0.971
+   "Shadow Color" 0 0 0 1
+  }
+  ImageWidgetClass "{5A155EF088087790}" {
+   Name "m_SuppressionVignette"
+   Slot FrameWidgetSlot "{348226E682229785}" {
+    Anchor 0 0 1 1
+    PositionX 0
+    OffsetLeft -300
+    PositionY 0
+    OffsetTop 0
+    SizeX 0
+    OffsetRight -300
+    SizeY 0
+    OffsetBottom 0
+   }
+   Opacity 0
+   Color 0 0 0 1
+   Image ""
+   Size 1920 1080
+   Mask "{4825491ACD202C43}UI/Textures/ScreenEffects/Suppression/suppressionVignette_alphaMask200.edds"
+   "Transition width" 1
+   Progress 0.352
+  }
+  ImageWidgetClass "{5A155EF09D270AE6}" {
+   Name "m_BlackOut"
+   Slot FrameWidgetSlot "{348226E682229785}" {
+    Anchor 0 0 1 1
+    PositionX 0
+    OffsetLeft 0
+    PositionY 0
+    OffsetTop 0
+    SizeX 0
+    OffsetRight 0
+    SizeY 0
+    OffsetBottom 0
+   }
+   Opacity 0
+   Color 0 0 0 1
+   Image ""
+   Size 1920 1080
+   Mask "{CA1F7652B536AA21}UI/Textures/ScreenEffects/Suppression/supressionVignette4.edds"
+   "Transition width" 0.408
+   Progress 0.284
+   "Shadow Color" 0 0 0 1
+  }
+  ImageWidgetClass "{5A155EF0998129F0}" {
+   Name "m_BloodVignette2"
+   Slot FrameWidgetSlot "{348226E682229785}" {
+    Anchor 0 0 1 1
+    PositionX 0
+    OffsetLeft 0
+    PositionY 0
+    OffsetTop 0
+    SizeX -1820
+    OffsetRight 0
+    SizeY -1050
+    OffsetBottom 0
+   }
+   Opacity 0
+   Color 0.571 0.571 0.571 1
+   "Inherit Color" 1
+   Texture "{D4162464BB96ED37}UI/Textures/ScreenEffects/HitLayers/blood_2.edds"
+   Image ""
+   Size 2048 1024
+   Mask "{FAF20BF192821FDB}UI/Textures/ScreenEffects/Suppression/suppressionVignette_alphaMask100.edds"
+   "Transition width" 1
+   Progress 0.628
+   "Shadow Color" 1 1 1 1
+  }
  }
 }

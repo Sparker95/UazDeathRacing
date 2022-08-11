@@ -20,6 +20,14 @@ class UDR_HudVehicleWidgets
 
 	TextWidget m_TextControls;
 
+	ImageWidget m_BloodVignette1;
+
+	ImageWidget m_SuppressionVignette;
+
+	ImageWidget m_BlackOut;
+
+	ImageWidget m_BloodVignette2;
+
 	bool Init(Widget root)
 	{
 		m_HealthText = TextWidget.Cast(root.FindWidget("Panel.VerticalLayout0.HudLineHealth.TextRight"));
@@ -35,6 +43,14 @@ class UDR_HudVehicleWidgets
 		m_NotificationText = TextWidget.Cast(root.FindWidget("m_NotificationText"));
 
 		m_TextControls = TextWidget.Cast(root.FindWidget("m_TextControls"));
+
+		m_BloodVignette1 = ImageWidget.Cast(root.FindWidget("m_BloodVignette1"));
+
+		m_SuppressionVignette = ImageWidget.Cast(root.FindWidget("m_SuppressionVignette"));
+
+		m_BlackOut = ImageWidget.Cast(root.FindWidget("m_BlackOut"));
+
+		m_BloodVignette2 = ImageWidget.Cast(root.FindWidget("m_BloodVignette2"));
 
 		return true;
 	}
