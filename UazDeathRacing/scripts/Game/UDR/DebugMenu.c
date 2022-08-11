@@ -38,7 +38,7 @@ class UDR_DebugMenu
 		BaseWeaponManagerComponent weaponMgrComp;
 		UDR_WeaponManagerComponent udrWeaponMgrComp;
 		array<Managed> weaponSlots = {};
-		
+		SCR_VehicleDamageManagerComponent dmgMgr;
 		
 		
 		playerController = GetGame().GetPlayerController();
@@ -65,6 +65,7 @@ class UDR_DebugMenu
 		turretControllerComp = TurretControllerComponent.Cast(vehicleEnt.FindComponent(TurretControllerComponent));
 		weaponMgrComp = BaseWeaponManagerComponent.Cast(vehicleEnt.FindComponent(BaseWeaponManagerComponent));
 		udrWeaponMgrComp = UDR_WeaponManagerComponent.Cast(vehicleEnt.FindComponent(UDR_WeaponManagerComponent));
+		dmgMgr = SCR_VehicleDamageManagerComponent.Cast(vehicleEnt.FindComponent(SCR_VehicleDamageManagerComponent));
 		
 		if (!turretControllerComp)
 			DbgUI.Text("No TurretControllerComponent found!");
@@ -84,10 +85,16 @@ class UDR_DebugMenu
 			udrWeaponMgrComp.Owner_RequestAddWeapon(selectedWeaponId);
 		}
 		
+		// Destroy vehicle
 		if (DbgUI.Button("Destroy Vehicle"))
-		{
-			SCR_VehicleDamageManagerComponent dmgMgr = SCR_VehicleDamageManagerComponent.Cast(vehicleEnt.FindComponent(SCR_VehicleDamageManagerComponent));
+		{	
 			dmgMgr.Kill();
+		}
+		
+		// Add damage
+		if (DbgUI.Button("Add Damage"))
+		{
+			dmgMgr.DamageRandomHitZones(50, EDamageType.KINETIC);
 		}
 		
 		DbgUI.End();
