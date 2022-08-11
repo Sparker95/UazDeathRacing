@@ -233,12 +233,15 @@ class UDR_GameMode: SCR_BaseGameMode
 	
 		// If there is a previous vehicle or character controlled by this player, delete them
 		DespawnVehicle(playerComp);
+		
+		// Get prev character and vehicle, delete them after switching to new character and vehicle
+		IEntity prevControlledEntity = pc.GetControlledEntity();
+		IEntity prevAssignedVehicle = playerComp.m_AssignedVehicle;
 			
 		// Spawn driver character
 		EntitySpawnParams p = new EntitySpawnParams();
 		p.Transform[3] = GetVehiclePositioning().GetOrigin();
-		Resource playerRes = Resource.Load("{A8BE87DC32CFF3C5}Prefabs/Characters/DriverCharacter.et");
-		IEntity controlledEntity = GetGame().SpawnEntityPrefab(playerRes, params: p);
+		IEntity controlledEntity = m_pRespawnSystemComponent.DoSpawn("{A8BE87DC32CFF3C5}Prefabs/Characters/DriverCharacter.et", GetVehiclePositioning().GetOrigin());
 		
 		pc.SetPossessedEntity(controlledEntity);
 		
@@ -287,6 +290,12 @@ class UDR_GameMode: SCR_BaseGameMode
 		
 		// Register the vehicle to race track logic
 		m_CurrentRaceTrack.RegisterRacer(newVehicleEntity, lapCount, nextWaypoint);
+		
+		// Delete the old character and vehicle if they existed
+		if (prevControlledEntity)
+			SCR_Global.DeleteEntityAndChildren(prevControlledEntity);
+		if (prevAssignedVehicle)
+			SCR_Global.DeleteEntityAndChildren(prevAssignedVehicle);
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
@@ -323,6 +332,8 @@ class UDR_GameMode: SCR_BaseGameMode
 		if (!pc)
 			return;
 		IEntity controlledEntity = pc.GetControlledEntity();
+		if (!controlledEntity)
+			return;
 		SCR_CharacterControllerComponent characterController = SCR_CharacterControllerComponent.Cast(controlledEntity.FindComponent(SCR_CharacterControllerComponent));
 		if (characterController)
 			characterController.ForceDeath();
