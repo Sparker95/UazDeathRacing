@@ -53,8 +53,6 @@ class UDR_HudVehicle : UDR_HudBase
 			return;
 		}
 		
-		
-		
 		BaseWeaponManagerComponent weaponMgrComp = BaseWeaponManagerComponent.Cast(vehicleEnt.FindComponent(BaseWeaponManagerComponent));
 		UDR_WeaponManagerComponent udrWeaponMgrComp = UDR_WeaponManagerComponent.Cast(vehicleEnt.FindComponent(UDR_WeaponManagerComponent));
 		SCR_VehicleDamageManagerComponent damageMgrComp = SCR_VehicleDamageManagerComponent.Cast(vehicleEnt.FindComponent(SCR_VehicleDamageManagerComponent));
@@ -78,9 +76,6 @@ class UDR_HudVehicle : UDR_HudBase
 			Show(false);
 			return;
 		}
-		
-		damageMgrComp.GetOnDamage().Insert(Callback_OnVehicleDamage);
-		
 		
 		//-------------------------------------------------------------------------
 		// Update values...
