@@ -744,7 +744,6 @@ class UDR_GameMode: SCR_BaseGameMode
 	{
 		super.EOnFrame(owner, timeSlice);
 		
-		
 		// Disable car inputs during countdown
 		if (m_eRaceState == ERaceState.COUNTDOWN || m_eRaceState == ERaceState.PREPARING)
 		{
@@ -779,6 +778,10 @@ class UDR_GameMode: SCR_BaseGameMode
 	override void EOnInit(IEntity owner)
 	{
 		super.EOnInit(owner);
+		
+		TimeAndWeatherManagerEntity wMng = GetGame().GetTimeAndWeatherManager();
+		if (wMng)
+			wMng.SetIsDayAutoAdvanced(false);
 		
 		if (!GetGame().InPlayMode())
 			return;
