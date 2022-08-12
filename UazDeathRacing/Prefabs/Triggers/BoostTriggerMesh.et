@@ -1,5 +1,5 @@
 UDR_BoostVehicleTrigger {
- ID "5A19179566D87BAB"
+ ID "5A191B65BD0B2CE0"
  coords 0 0 0
  TriggerShapeType "Oriented Bounding Box"
  BoxMins -10 0 0
@@ -11,54 +11,60 @@ UDR_BoostVehicleTrigger {
  UpdatePeriod 0.1
  ClassFilter "Vehicle"
  {
-  $grp GenericEntity {
+  GenericEntity {
+   ID "5A191B65BD0ACFDE"
+   coords 0 0 0
    {
-    ID "5A191B670CE2EE5B"
-    components {
-     MeshObject "{5A191B67E4E0EE14}" {
-      Object "{1FA59B6C4ED25DE6}system/wbdata/MaterialEditor/MaterialPlane.xob"
-      Materials {
-       MaterialAssignClass "{5A191B67F534A085}" {
-        SourceMaterial "DummyMaterial"
-        AssignedMaterial "{FA057F4E1A537B9E}Prefabs/Triggers/Assets/boost.emat"
+    $grp GenericEntity {
+     {
+      ID "5A191B65BD0A83E8"
+      components {
+       MeshObject "{5A191B67E4E0EE14}" {
+        Object "{1FA59B6C4ED25DE6}system/wbdata/MaterialEditor/MaterialPlane.xob"
+        Materials {
+         MaterialAssignClass "{5A191B67F534A085}" {
+          SourceMaterial "DummyMaterial"
+          AssignedMaterial "{FA057F4E1A537B9E}Prefabs/Triggers/Assets/boost.emat"
+         }
+        }
        }
       }
+      coords 6 0 0
+      scale 6
      }
-    }
-    coords 6 0 0
-    scale 6
-   }
-   {
-    ID "5A191B6767A1C7F6"
-    components {
-     MeshObject "{5A191B67E4E0EE14}" {
-      Object "{1FA59B6C4ED25DE6}system/wbdata/MaterialEditor/MaterialPlane.xob"
-      Materials {
-       MaterialAssignClass "{5A191B67F534A085}" {
-        SourceMaterial "DummyMaterial"
-        AssignedMaterial "{FA057F4E1A537B9E}Prefabs/Triggers/Assets/boost.emat"
+     {
+      ID "5A191B65BD0A83E9"
+      components {
+       MeshObject "{5A191B67E4E0EE14}" {
+        Object "{1FA59B6C4ED25DE6}system/wbdata/MaterialEditor/MaterialPlane.xob"
+        Materials {
+         MaterialAssignClass "{5A191B67F534A085}" {
+          SourceMaterial "DummyMaterial"
+          AssignedMaterial "{FA057F4E1A537B9E}Prefabs/Triggers/Assets/boost.emat"
+         }
+        }
        }
       }
+      coords 0 0 0
+      scale 6
      }
-    }
-    coords -6 0 0
-    scale 6
-   }
-   {
-    ID "5A191B67C3E33E8F"
-    components {
-     MeshObject "{5A191B67E4E0EE14}" {
-      Object "{1FA59B6C4ED25DE6}system/wbdata/MaterialEditor/MaterialPlane.xob"
-      Materials {
-       MaterialAssignClass "{5A191B67F534A085}" {
-        SourceMaterial "DummyMaterial"
-        AssignedMaterial "{FA057F4E1A537B9E}Prefabs/Triggers/Assets/boost.emat"
+     {
+      ID "5A191B65BD0ACFDD"
+      components {
+       MeshObject "{5A191B67E4E0EE14}" {
+        Object "{1FA59B6C4ED25DE6}system/wbdata/MaterialEditor/MaterialPlane.xob"
+        Materials {
+         MaterialAssignClass "{5A191B67F534A085}" {
+          SourceMaterial "DummyMaterial"
+          AssignedMaterial "{FA057F4E1A537B9E}Prefabs/Triggers/Assets/boost.emat"
+         }
+        }
        }
       }
+      coords -6 0 0
+      scale 6
      }
     }
-    coords 0 0 0
-    scale 6
    }
   }
  }
