@@ -11,7 +11,7 @@ GenericEntity {
    ID "5A0D4385979601B2"
    components {
    }
-   coords 0 0 0
+   coords 0 -0.14 0
    scale 0.25
   }
  }

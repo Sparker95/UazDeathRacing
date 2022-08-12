@@ -1,3 +1,38 @@
+$grp GenericEntity : "{104B44D37AC166E7}Prefabs/DirtPile/DirtPileDeployable.et" {
+ {
+  coords 114.295 2.001 472.921
+ }
+ {
+  coords 118.701 2.001 463.292
+ }
+ {
+  coords 103.214 2.001 462.919
+ }
+ {
+  coords 95.555 2.001 470.323
+ }
+ {
+  coords 92.226 2.001 481.473
+ }
+ {
+  coords 99.072 2.001 481.091
+ }
+ {
+  coords 99.979 2.001 472.507
+ }
+ {
+  coords 103.206 2.001 470.113
+ }
+ {
+  coords 107.85 2.001 470.965
+ }
+ {
+  coords 96.012 2.001 478.373
+ }
+ {
+  coords 90.352 2.001 477.047
+ }
+}
 $grp SCR_DestructibleBuildingEntity : "{12981279D4DB92D3}Prefabs/Structures/Infrastructure/Bridges/ConcreteBridge_01_Narrow_Base.et" {
  {
   coords 111.686 23.846 484.35
@@ -176,7 +211,7 @@ $grp GenericEntity : "{25C8B889A777399D}Prefabs/Props/Infrastructure/ConeTraffic
   scale 2
  }
 }
-GenericEntity : "{2D8669E6D1E24B4E}Prefabs/DirtPile/DeployableDirtPile.et" {
+GenericEntity : "{2D8669E6D1E24B4E}Prefabs/DirtPile/DirtPileInternal.et" {
  coords 257.145 2.001 361.924
  scale 0.3
 }
