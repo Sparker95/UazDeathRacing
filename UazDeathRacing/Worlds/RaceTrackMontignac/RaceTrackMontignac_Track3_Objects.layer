@@ -1,11 +1,11 @@
 $grp GenericEntity : "{1E78A516FE185C50}Prefabs/Signs/SignCurveLeft.et" {
  {
-  coords 9605.388 299.714 3682.499
+  coords 9570.502 352.205 3669.919
   angleY 70.17
   scale 10
  }
  {
-  coords 9608.918 299.902 3670.884
+  coords 9574.032 352.393 3658.304
   angleY 70.17
   scale 10
  }
@@ -519,20 +519,6 @@ $grp SCR_DestructibleBuildingEntity : "{CEF152812C79C4F2}Prefabs/Structures/Infr
   scale 2
  }
  {
-  coords 9617.574 297.597 3644.701
-  angleX 48.517
-  angleY -111.769
-  angleZ -2.652
-  scale 2
- }
- {
-  coords 9635.256 295.517 3595.988
-  angleX 48.517
-  angleY -111.769
-  angleZ -2.652
-  scale 2
- }
- {
   coords 9772.747 288.091 3285.97
   angleY 69.684
   scale 2
@@ -606,6 +592,83 @@ $grp SCR_DestructibleBuildingEntity : "{CEF152812C79C4F2}Prefabs/Structures/Infr
   angleX -18.309
   angleY -157.322
   angleZ -16.486
+ }
+ {
+  coords 9620.188 291.752 3645.938
+  angleX 20.003
+  angleY -110.704
+  angleZ -0.843
+  scale 2
+ }
+ {
+  coords 9604.183 301.681 3639.991
+  angleX 39.995
+  angleY -110.651
+  angleZ -0.871
+  scale 2
+ }
+ {
+  coords 9591.898 317.226 3635.417
+  angleX 59.99
+  angleY -110.098
+  angleZ -0.56
+  scale 2
+ }
+ {
+  coords 9585.376 336.122 3633.296
+  angleX 79.974
+  angleY -107.301
+  angleZ 1.992
+  scale 2
+ }
+ {
+  coords 9636.413 291.617 3598.18
+  angleX 20.003
+  angleY -110.704
+  angleZ -0.843
+  scale 2
+ }
+ {
+  coords 9620.405 301.547 3592.235
+  angleX 39.995
+  angleY -110.651
+  angleZ -0.871
+  scale 2
+ }
+ {
+  coords 9608.12 317.092 3587.66
+  angleX 59.99
+  angleY -110.098
+  angleZ -0.56
+  scale 2
+ }
+ {
+  coords 9601.601 335.987 3585.539
+  angleX 79.974
+  angleY -107.301
+  angleZ 1.992
+  scale 2
+ }
+ {
+  coords 9653.837 291.134 3549.828
+  angleX 20.003
+  angleY -110.704
+  angleZ -0.843
+  scale 2
+ }
+ {
+  coords 9637.827 301.063 3543.882
+  angleX 39.995
+  angleY -110.651
+  angleZ -0.871
+  scale 2
+ }
+ {
+  coords 9625.547 316.608 3539.308
+  angleX 59.99
+  angleY -110.098
+  angleZ -0.56
+  scale 2
  }
 }
 StaticModelEntity : "{F713FD9DE834D14C}Prefabs/Structures/Cultural/Statues/StatueStPeter_01.et" {

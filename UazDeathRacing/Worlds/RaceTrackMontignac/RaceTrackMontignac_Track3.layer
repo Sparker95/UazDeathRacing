@@ -9,7 +9,14 @@ UDR_RaceTrackLogic Track3 {
  m_iLapCount 3
  m_sRaceTrackName "Black Lake Hyper Loop"
 }
-$grp UDR_Waypoint : "{92A0F1C3F4161A7D}Prefabs/Triggers/WaypointInvisible.et" {
+UDR_Waypoint t3_finish : "{73691FA333C77DE0}Prefabs/Triggers/WaypointFinishLineVisible.et" {
+ coords 9693.909 288.001 3501.743
+ angleY 160.184
+ m_Next UDR_EntityLinkWaypoint "{5A11378BA1F434ED}" {
+  m_sEntityName "t3_1"
+ }
+}
+$grp UDR_Waypoint : "{92A0F1C3F4161A7D}Prefabs/Triggers/Waypoint.et" {
  t3_1 {
   coords 9783.782 288.121 3269.673
   angleY 160.119
@@ -93,23 +100,8 @@ $grp UDR_Waypoint : "{92A0F1C3F4161A7D}Prefabs/Triggers/WaypointInvisible.et" {
   }
  }
 }
-UDR_Waypoint t3_finish : "{9DB4B14E0E7FB10B}Prefabs/Triggers/WaypointFinishLine.et" {
- coords 9684.874 288.001 3524.708
- angleY 159.722
- BoxMins -20 0 -0.5
- BoxMaxs 20 5 0.5
- m_Next UDR_EntityLinkWaypoint "{59F347004DEC0021}" {
-  m_sEntityName "t3_1"
- }
- {
-  DecalEntity {
-   ID "59FD322FE3049CFF"
-   TerrainOnly 0
-  }
- }
-}
 UDR_VehiclePositioning t3_positions : "{F33FD9275A6393DB}Prefabs/VehiclePositioning/VehiclePositioning.et" {
- coords 9701.286 288.081 3481.767
+ coords 9701.984 288.081 3478.924
  angleY 159.934
  m_iNumColumns 4
 }
