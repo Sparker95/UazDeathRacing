@@ -1,10 +1,12 @@
 Particle {
  AlbedoMap "{7E984CB01A476DCB}Prefabs/Weapons/Blaster/TrailParticle.edds"
+ Diffuse 0.965 0.474 0.003 1
  Ambient 1 1 1 1
  Emissive 0.965 0.472 0.003 0
- EmissiveLV 5.133
+ EmissiveLV 4.187
  EmissiveAbsoluteLV 0
  ApplyAlbedoToEmissive 0
+ AlphaMul 0.2
  SphereSizeMultiplier 0.1
  CameraBlendNear 0.1
  CameraBlendFar 2
