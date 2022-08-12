@@ -4,7 +4,7 @@ EffectDef {
    ShapeSize 1 0 0
    ConeAngle 360 360 0
    MaxNum 300
-   BirthRate 60
+   BirthRate 30
    BirthRateRND 0
    Material "{C2DB77C6BEA354D2}Prefabs/Weapons/Blaster/BlasterTrailMaterial.emat"
    Prefab "{29FBEC1991810EEF}system/wbdata/ParticleEditor/defaultPrefab.et"
