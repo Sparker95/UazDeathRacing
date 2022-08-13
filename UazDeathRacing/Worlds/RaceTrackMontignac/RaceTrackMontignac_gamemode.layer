@@ -5,7 +5,7 @@ GenericEntity : "{94F1335400E2A788}Prefabs/GameMode/Systems.et" {
    ID "59D5289C95B8DF5E"
    m_aRaceTracks {
     UDR_EntityLinkRaceTrackLogic "{59FE92981C6F670E}" {
-     m_sEntityName "Track5"
+     m_sEntityName "Track6"
     }
     UDR_EntityLinkRaceTrackLogic "{59FE929A6CECDB8B}" {
      m_sEntityName "Track1"
@@ -18,6 +18,9 @@ GenericEntity : "{94F1335400E2A788}Prefabs/GameMode/Systems.et" {
     }
     UDR_EntityLinkRaceTrackLogic "{5A194AF9783C42E1}" {
      m_sEntityName "Track4"
+    }
+    UDR_EntityLinkRaceTrackLogic "{5A1B092C75C5B2DD}" {
+     m_sEntityName "Track5"
     }
    }
   }

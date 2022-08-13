@@ -1,0 +1,83 @@
+UDR_RaceTrackLogic Track6 {
+ coords 7246.661 41.461 9404.355
+ m_FinishLineWaypoint UDR_EntityLinkWaypoint "{5A1B092D651573DF}" {
+  m_sEntityName "t6_finish"
+ }
+ m_VehiclePositioning UDR_EntityLinkVehiclePositioning "{5A1B092C3E141EC8}" {
+  m_sEntityName "t6_positions"
+ }
+ m_iLapCount 3
+ m_sRaceTrackName "Over the Old Pier"
+}
+UDR_Waypoint t6_finish : "{73691FA333C77DE0}Prefabs/Triggers/WaypointFinishLineVisible.et" {
+ coords 7354.725 1.606 8940.218
+ angleY 90.631
+ BoxMins -20 0 -0.5
+ BoxMaxs 20 5 0.5
+ m_Next UDR_EntityLinkWaypoint "{5A11378BA1F434ED}" {
+  m_sEntityName "t6_1"
+ }
+}
+$grp UDR_Waypoint : "{ABD6A727D7E4D14A}Prefabs/Triggers/WaypointVisible.et" {
+ t6_1 {
+  coords 7561.242 1.32 8966.318
+  angleY 44.816
+  SphereRadius 20
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "t6_2"
+  }
+ }
+ t6_2 {
+  coords 7656.406 1.715 9130.298
+  angleY 1.51
+  SphereRadius 13
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "t6_3"
+  }
+ }
+ t6_3 {
+  coords 7538.952 1.297 9417.304
+  angleY -4.806
+  SphereRadius 13
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "t6_4"
+  }
+ }
+ t6_4 {
+  coords 7383.122 1.142 9525.771
+  angleY -146.252
+  SphereRadius 8
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "t6_5"
+  }
+ }
+ t6_5 {
+  coords 7305.292 3.679 9374.021
+  angleY -146.252
+  SphereRadius 8
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "t6_6"
+  }
+ }
+ t6_6 {
+  coords 7246.59 0 9235.812
+  angleY -146.252
+  SphereRadius 8
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "t6_7"
+  }
+ }
+ t6_7 {
+  coords 7187.813 1.618 8995.624
+  angleY 110.124
+  SphereRadius 15
+  m_Next UDR_EntityLinkWaypoint "{59F3470075027644}" {
+   m_sEntityName "t6_finish"
+  }
+ }
+}
+UDR_VehiclePositioning t6_positions : "{F33FD9275A6393DB}Prefabs/VehiclePositioning/VehiclePositioning.et" {
+ coords 7379.528 1.923 8943.127
+ angleY 90.966
+ m_iNumColumns 4
+}

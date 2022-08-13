@@ -55,3 +55,12 @@ Layer Track5_Objects {
 Layer Track5_Pickups {
  Index 17
 }
+Layer Track6 {
+ Index 18
+}
+Layer Track6_Objects {
+ Index 19
+}
+Layer Track6_Pickups {
+ Index 20
+}

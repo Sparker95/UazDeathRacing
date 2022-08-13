@@ -1,0 +1,79 @@
+UDR_BoostVehicleTrigger : "{462E24DF7CBE2A67}Prefabs/Triggers/BoostTriggerMesh.et" {
+ coords 7200.693 0.134 9127.063
+ angleX 3.007
+ angleY -157.454
+ angleZ -0.022
+ m_iBoostDuration_ms 3000
+ {
+  GenericEntity {
+   ID "5A191B65BD0ACFDE"
+   scale 0.3
+  }
+ }
+}
+$grp UDR_Pickup : "{7D5C596D78F729C8}Prefabs/Pickups/PickupAmmo.et" {
+ {
+  coords 7533.47 1.792 8946.095
+ }
+ {
+  coords 7595.565 1.834 9020.888
+ }
+ {
+  coords 7643.168 1.103 9233.87
+ }
+ {
+  coords 7463.479 1.812 9504.479
+ }
+ {
+  coords 7317.83 3.562 9399.641
+ }
+ {
+  coords 7283.27 3.946 9325.887
+ }
+ {
+  coords 7244.555 2.201 8985.669
+ }
+ {
+  coords 7337.077 1.133 8930.144
+ }
+}
+$grp UDR_Pickup : "{CD6C53BE2DEE6DCA}Prefabs/Pickups/PickupDeployable.et" {
+ {
+  coords 7489.83 0.782 8933.117
+ }
+ {
+  coords 7654.454 2.528 9093.632
+ }
+ {
+  coords 7534.503 1.49 9444.561
+ }
+ {
+  coords 7348.844 1.116 9467.413
+ }
+ {
+  coords 7231.185 -0.588 9202.164
+ }
+ {
+  coords 7207.087 1.139 8964.344
+ }
+}
+$grp UDR_Pickup : "{DF1C96AAD094BA04}Prefabs/Pickups/PickupHealth.et" {
+ {
+  coords 7436.379 1.579 8957.772
+ }
+ {
+  coords 7605.892 1.882 9348.759
+ }
+ {
+  coords 7507.337 0.94 9440.413
+ }
+ {
+  coords 7375.776 1.142 9502.56
+ }
+ {
+  coords 7241.103 -0.563 9222.083
+ }
+ {
+  coords 7163.73 1.547 9030.081
+ }
+}

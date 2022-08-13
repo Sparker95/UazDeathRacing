@@ -1,0 +1,283 @@
+$grp GenericEntity {
+ WoodenWall {
+  components {
+   MeshObject "{5A1B0928A67D3287}" {
+    Object "{CC33DA63C28BC4BF}Assets/Structures/Walls/Wooden/WoodenWall_02_4m_A.xob"
+   }
+   RigidBody "{5A1B0928BC65578E}" {
+    ModelGeometry 1
+    Static 1
+   }
+  }
+  coords 7321.729 2.414 9406.702
+  angleX 79.575
+  angleY 27.62
+  angleZ 90.051
+  scale 2.3
+ }
+ WoodenWall2 {
+  components {
+   MeshObject "{5A1B0928A67D3287}" {
+    Object "{CC33DA63C28BC4BF}Assets/Structures/Walls/Wooden/WoodenWall_02_4m_A.xob"
+   }
+   RigidBody "{5A1B0928BC65578E}" {
+    ModelGeometry 1
+    Static 1
+   }
+  }
+  coords 7317.766 2.44 9408.773
+  angleX 79.575
+  angleY 27.62
+  angleZ 90.051
+  scale 2.3
+ }
+ WoodenWall3 {
+  components {
+   MeshObject "{5A1B0928A67D3287}" {
+    Object "{CC33DA63C28BC4BF}Assets/Structures/Walls/Wooden/WoodenWall_02_4m_A.xob"
+   }
+   RigidBody "{5A1B0928BC65578E}" {
+    ResponseIndex "HugeDestructible"
+    ModelGeometry 1
+    Static 1
+   }
+  }
+  coords 7405.582 -0.143 9538.084
+  angleX 81.327
+  angleY 117.038
+  scale 4
+ }
+ WoodenWall4 {
+  components {
+   MeshObject "{5A1B0928A67D3287}" {
+    Object "{CC33DA63C28BC4BF}Assets/Structures/Walls/Wooden/WoodenWall_02_4m_A.xob"
+   }
+   RigidBody "{5A1B0928BC65578E}" {
+    ResponseIndex "HugeDestructible"
+    ModelGeometry 1
+    Static 1
+   }
+  }
+  coords 7387.27 -3.561 9547.339
+  angleX 2.907
+  angleY 117.038
+  scale 4
+ }
+}
+GenericEntity : "{1A1CE09F7BCA6650}Prefabs/Props/Wrecks/S105_wreck_static.et" {
+ coords 7228.644 -0.733 9192.894
+ angleY 33.773
+}
+SCR_DestructibleBuildingEntity : "{1FFA94F4319C780D}Prefabs/Structures/Infrastructure/Naval/Sheds/FishermanShed_01_V1.et" {
+ coords 7308.479 0.078 9328.725
+ angleY -34.24
+}
+GenericEntity : "{25B265F3E7CBDFC8}Prefabs/Props/Wrecks/BMP1_wreck.et" {
+ coords 7220.094 -0.715 9163.79
+}
+SCR_DestructibleBuildingEntity : "{2B165B5BF9FE270D}Prefabs/Structures/Infrastructure/Naval/Sheds/BoatShed_01.et" {
+ coords 7369.4 1.161 9474.995
+ angleY 117.388
+}
+$grp SCR_DestructibleBuildingEntity : "{2D0A93C80A6A5C5D}Prefabs/Structures/Infrastructure/Naval/Piers/PierWooden_02/PierWooden_02_bridge.et" {
+ {
+  coords 7199.28 1.29 9123.847
+  angleX -3.007
+  angleY 22.967
+ }
+ {
+  coords 7191.974 1.029 9106.604
+  angleX -3.007
+  angleY 22.967
+ }
+}
+$grp SCR_DestructibleBuildingEntity : "{3961F81016AAE7CD}Prefabs/Structures/Infrastructure/Naval/Sheds/PierShed_01.et" {
+ {
+  coords 7352.594 2.622 9496.71
+  angleY 118.682
+ }
+ {
+  coords 7355.441 2.28 9440.773
+  angleY -64.642
+ }
+}
+$grp SCR_DestructibleBuildingEntity : "{401E516FD6CA886B}Prefabs/Structures/Infrastructure/Naval/Piers/PierWooden_02/PierWooden_02_pier.et" {
+ {
+  coords 7349.05 -1.858 9459.357
+  angleX -0.359
+  angleY -60.819
+  Flags 1027
+ }
+ {
+  coords 7331.622 -1.858 9425.604
+  angleX 0.396
+  angleY -62.502
+  Flags 1027
+ }
+ {
+  coords 7366.603 -1.858 9493.389
+  angleY -63.646
+  Flags 1027
+ }
+ {
+  coords 7384.026 -1.858 9527.122
+  angleY -62.709
+  Flags 1027
+ }
+ {
+  coords 7304.775 0.678 9373.932
+  angleY -62.709
+  angleZ 3.75
+  Flags 1027
+ }
+ {
+  coords 7289.476 1.223 9340.701
+  angleX 0.069
+  angleY -67.859
+  angleZ -0.992
+  Flags 1027
+ }
+ {
+  coords 7274.998 0.924 9305.244
+  angleX -0.519
+  angleY -67.717
+  angleZ 0.025
+  Flags 1027
+ }
+ {
+  coords 7260.73 -0.895 9270.265
+  angleX -0.519
+  angleY -67.717
+  angleZ -5.325
+  Flags 1027
+ }
+ {
+  coords 7246.33 -4.445 9235.01
+  angleX -0.519
+  angleY -67.717
+  angleZ -5.325
+  Flags 1027
+ }
+ {
+  coords 7243.789 -3.587 9229.183
+  angleY -67.171
+  Flags 1027
+ }
+ {
+  coords 7228.913 -3.587 9193.981
+  angleY -67.171
+  Flags 1027
+ }
+ {
+  coords 7214.139 -3.587 9159.16
+  angleY -67.171
+  Flags 1027
+ }
+}
+$grp UDR_BoostVehicleTrigger : "{462E24DF7CBE2A67}Prefabs/Triggers/BoostTriggerMesh.et" {
+ {
+  coords 7196.956 0.624 9118.535
+  angleX 3.007
+  angleY -157.454
+  angleZ -0.022
+  m_iBoostDuration_ms 3000
+  {
+   GenericEntity {
+    ID "5A191B65BD0ACFDE"
+    scale 0.3
+   }
+  }
+ }
+ {
+  coords 7193.354 1.121 9109.783
+  angleX 3.007
+  angleY -157.454
+  angleZ -0.022
+  m_iBoostDuration_ms 3000
+  {
+   GenericEntity {
+    ID "5A191B65BD0ACFDE"
+    scale 0.3
+   }
+  }
+ }
+}
+$grp GenericEntity : "{4923E218F59644B9}Prefabs/Props/Wrecks/BoatWreck_01.et" {
+ {
+  coords 7304.825 0 9423.051
+  angleY 109.206
+ }
+ {
+  coords 7301.351 -0.199 9420.655
+  angleY 109.206
+ }
+}
+$grp SCR_DestructibleBuildingEntity : "{4ED653FEE1B9D8AB}Prefabs/Structures/Cultural/Castles/Castle_01_OuterWall_03.et" {
+ {
+  coords 7329.458 -1.013 9361.236
+  angleY 134.107
+ }
+ {
+  coords 7345.27 -2.54 9347.076
+  angleY -138.224
+ }
+ {
+  coords 7314.784 -0.705 9345.854
+  angleY 42.607
+ }
+}
+SCR_DestructibleBuildingEntity : "{4F3627AC1E51584D}Prefabs/Structures/Infrastructure/Naval/Lighthouse/LighthouseMedium_01.et" {
+ coords 7211.676 -12.825 9224.125
+ angleX -11.441
+ angleY 3.608
+ angleZ -17.635
+}
+StaticModelEntity : "{52ADECE22F634F08}Prefabs/Structures/Cultural/Statues/StatueAnchor_01.et" {
+ coords 7376.695 1.374 9451.349
+ angleX -39.325
+ angleY 29.176
+}
+$grp GenericEntity : "{6BE5C753730DBFED}Prefabs/Props/Wrecks/M923A1_wreck_static.et" {
+ {
+  coords 7235.101 -0.667 9218.86
+ }
+ {
+  coords 7316.925 -6.005 9400.362
+ }
+ {
+  coords 7317.896 -2.896 9400.89
+  angleX 45.261
+  angleY -63.82
+ }
+}
+SCR_DestructibleBuildingEntity : "{73AEA0148D58F723}Prefabs/Structures/Infrastructure/Naval/Sheds/FishermanShed_02_V1.et" {
+ coords 7370.881 1.673 9444.859
+ angleY 27.528
+}
+SCR_DestructibleBuildingEntity : "{DECF116069DCCC2B}Prefabs/Structures/Cultural/Castles/Castle_01_Tower.et" {
+ coords 7328.888 -15.541 9346.585
+ angleY -44.124
+}
+GenericEntity : "{E013D1650C3B6967}Prefabs/Structures/BuildingParts/Signs/SignWall/SignWall_01_65x45_ShippingCompany.et" {
+ coords 7353.595 2 9448.411
+ angleY 26.247
+ scale 5
+}
+$grp SCR_DestructibleBuildingEntity : "{FF39390F2D826521}Prefabs/Structures/Infrastructure/Naval/Piers/PierWooden_01_25m.et" {
+ {
+  coords 7352.949 0 9505.771
+  angleY -63.549
+ }
+ {
+  coords 7361.764 0 9445.625
+  angleY -63.549
+ }
+ {
+  coords 7371.364 0 9439.89
+  angleY 26.652
+ }
+ {
+  coords 7308.231 0 9419.147
+  angleY -63.549
+ }
+}
