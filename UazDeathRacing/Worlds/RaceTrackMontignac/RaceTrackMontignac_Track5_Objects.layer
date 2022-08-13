@@ -1,0 +1,38 @@
+$grp GenericEntity {
+ {
+  components {
+   MeshObject "{5A19697148F159BC}" {
+    Object "{B80903BACFCDCCB6}Assets/Vehicles/Wheeled/UAZ469/UAZ469_base.xob"
+   }
+  }
+  coords 6932.842 39.988 3484.759
+  angleY -149.018
+ }
+ {
+  components {
+   MeshObject "{5A19697148F159BC}" {
+    Object "{06C865EC0B9277E5}Assets/Vehicles/Wheeled/Ural4320/Ural_4320_base.xob"
+   }
+  }
+  coords 6931.911 39.741 3505.591
+  angleY -149.018
+ }
+ {
+  components {
+   MeshObject "{5A19697148F159BC}" {
+    Object "{DF7CF60669EFC7E5}Assets/Vehicles/Wheeled/M923A1/M923A1_BASE.xob"
+   }
+  }
+  coords 6932.053 39.853 3494.687
+  angleY -149.018
+ }
+}
+SCR_DestructibleBuildingEntity : "{401E516FD6CA886B}Prefabs/Structures/Infrastructure/Naval/Piers/PierWooden_02/PierWooden_02_pier.et" {
+ coords 7068.248 0.036 2830.941
+ angleX -0.844
+ angleY -29.865
+ angleZ -19.889
+}
+GenericEntity : "{A4D90CAA4F220CBE}Prefabs/Structures/Military/Flags/FlagPole_02_V2_FIA.et" {
+ coords 6929.575 39.661 3508.837
+}
