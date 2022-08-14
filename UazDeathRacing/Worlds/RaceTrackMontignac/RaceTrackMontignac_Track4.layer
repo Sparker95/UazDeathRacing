@@ -1,3 +1,6 @@
+GenericEntity t4_playerspawn {
+ coords 9995.106 2.463 1548.238
+}
 UDR_RaceTrackLogic Track4 {
  coords 9980.645 25.888 1475.571
  m_FinishLineWaypoint UDR_EntityLinkWaypoint "{5A1153F3C5E27A72}" {
@@ -5,6 +8,9 @@ UDR_RaceTrackLogic Track4 {
  }
  m_VehiclePositioning UDR_EntityLinkVehiclePositioning "{5A1153F3CA45B240}" {
   m_sEntityName "t4_positions"
+ }
+ m_PlayerSpawnPoint UDR_EntityLink "{5A1C92CE32DE3254}" {
+  m_sEntityName "t4_playerspawn"
  }
  m_iLapCount 4
  m_sRaceTrackName "St. Pierre Port"

@@ -1,3 +1,6 @@
+GenericEntity t6_playerspawn {
+ coords 7367.146 8.485 8856.405
+}
 UDR_RaceTrackLogic Track6 {
  coords 7246.661 41.461 9404.355
  m_FinishLineWaypoint UDR_EntityLinkWaypoint "{5A1B092D651573DF}" {
@@ -5,6 +8,9 @@ UDR_RaceTrackLogic Track6 {
  }
  m_VehiclePositioning UDR_EntityLinkVehiclePositioning "{5A1B092C3E141EC8}" {
   m_sEntityName "t6_positions"
+ }
+ m_PlayerSpawnPoint UDR_EntityLink "{5A1C92CE6017E0CC}" {
+  m_sEntityName "t6_playerspawn"
  }
  m_iLapCount 3
  m_sRaceTrackName "Over the Old Pier"

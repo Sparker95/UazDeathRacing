@@ -1,3 +1,6 @@
+GenericEntity t2_PlayerSpawn {
+ coords 4593.208 18.062 10773.485
+}
 UDR_RaceTrackLogic Track2 {
  coords 4389.75 58.705 10753.557
  m_FinishLineWaypoint UDR_EntityLinkWaypoint "{59FE929A18F6CA1D}" {
@@ -6,10 +9,13 @@ UDR_RaceTrackLogic Track2 {
  m_VehiclePositioning UDR_EntityLinkVehiclePositioning "{59FE929A1CD422A9}" {
   m_sEntityName "t2_positions"
  }
+ m_PlayerSpawnPoint UDR_EntityLink "{5A1C92CEFE212675}" {
+  m_sEntityName "t2_PlayerSpawn"
+ }
  m_iLapCount 2
  m_sRaceTrackName "Assault of St. Phillipe Church"
 }
-$grp UDR_Waypoint : "{92A0F1C3F4161A7D}Prefabs/Triggers/WaypointInvisible.et" {
+$grp UDR_Waypoint : "{92A0F1C3F4161A7D}Prefabs/Triggers/Waypoint.et" {
  t2_1 {
   coords 4554.637 16.821 10852.413
   angleX -0.035

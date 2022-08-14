@@ -1,3 +1,6 @@
+GenericEntity t1_PlayerSpawn {
+ coords 4927.898 159.639 7383.096
+}
 UDR_RaceTrackLogic Track1 {
  coords 4909.877 181.196 7365.972
  m_FinishLineWaypoint UDR_EntityLinkWaypoint "{59FD238CEBB95157}" {
@@ -5,6 +8,9 @@ UDR_RaceTrackLogic Track1 {
  }
  m_VehiclePositioning UDR_EntityLinkVehiclePositioning "{59FD238C048973D7}" {
   m_sEntityName "t1_Positions"
+ }
+ m_PlayerSpawnPoint UDR_EntityLink "{5A1C92CE9D096788}" {
+  m_sEntityName "t1_PlayerSpawn"
  }
  m_iLapCount 4
  m_sRaceTrackName "The Montignac Ramp"
@@ -19,7 +25,7 @@ UDR_VehiclePositioning t1_Positions {
  m_fStepRows 6
  m_fStepColumns 5
 }
-$grp UDR_Waypoint : "{92A0F1C3F4161A7D}Prefabs/Triggers/WaypointInvisible.et" {
+$grp UDR_Waypoint : "{92A0F1C3F4161A7D}Prefabs/Triggers/Waypoint.et" {
  t1_Wp1 {
   coords 4967.986 156.099 7407.464
   angleY -71.056

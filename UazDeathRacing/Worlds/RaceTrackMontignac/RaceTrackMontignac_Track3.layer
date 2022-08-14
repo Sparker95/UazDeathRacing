@@ -1,3 +1,6 @@
+GenericEntity t3_playerspawn {
+ coords 9628.747 280.919 3481.267
+}
 UDR_RaceTrackLogic Track3 {
  coords 10128.619 135.241 3562.409
  m_FinishLineWaypoint UDR_EntityLinkWaypoint "{5A032B14A55A1A34}" {
@@ -5,6 +8,9 @@ UDR_RaceTrackLogic Track3 {
  }
  m_VehiclePositioning UDR_EntityLinkVehiclePositioning "{5A032B14AA2E1C1F}" {
   m_sEntityName "t3_positions"
+ }
+ m_PlayerSpawnPoint UDR_EntityLink "{5A1C92CED80C98F5}" {
+  m_sEntityName "t3_playerspawn"
  }
  m_iLapCount 3
  m_sRaceTrackName "Black Lake Hyper Loop"

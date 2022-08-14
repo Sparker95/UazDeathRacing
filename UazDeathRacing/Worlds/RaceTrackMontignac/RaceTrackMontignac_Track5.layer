@@ -1,3 +1,6 @@
+GenericEntity t5_playerspawn {
+ coords 6941.403 44.351 3525.262
+}
 UDR_RaceTrackLogic Track5 {
  coords 6909.663 103.758 3343.299
  m_FinishLineWaypoint UDR_EntityLinkWaypoint "{5A194AF9623A5063}" {
@@ -5,6 +8,9 @@ UDR_RaceTrackLogic Track5 {
  }
  m_VehiclePositioning UDR_EntityLinkVehiclePositioning "{5A194AF9657D4FE3}" {
   m_sEntityName "t5_positions"
+ }
+ m_PlayerSpawnPoint UDR_EntityLink "{5A1C92CE0C318CF8}" {
+  m_sEntityName "t5_playerspawn"
  }
  m_iLapCount 2
  m_sRaceTrackName "Near Camurac"
