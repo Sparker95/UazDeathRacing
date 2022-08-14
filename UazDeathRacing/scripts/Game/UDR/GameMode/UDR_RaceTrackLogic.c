@@ -27,6 +27,9 @@ class UDR_RaceTrackLogic : GenericEntity
 	[Attribute("", UIWidgets.Auto, "UDR_VehiclePositioning of this race track")]
 	protected ref UDR_EntityLinkVehiclePositioning m_VehiclePositioning;
 	
+	[Attribute("", UIWidgets.Auto, "Entity which specifies player spawn position. Must be snapped to surface!")]
+	protected ref UDR_EntityLink m_PlayerSpawnPoint;
+	
 	[Attribute("1", UIWidgets.EditBox)]
 	protected int m_iLapCount;
 	
@@ -129,6 +132,12 @@ class UDR_RaceTrackLogic : GenericEntity
 	}
 	
 	//----------------------------------------------------------------------------------------------
+	vector GetPlayerSpawnPosition()
+	{
+		return m_PlayerSpawnPoint.value.GetOrigin();
+	}
+	
+	//----------------------------------------------------------------------------------------------
 	void ResetRaceTimer()
 	{
 		m_fRaceStartTime_ms = GetGame().GetWorld().GetWorldTime();
@@ -160,6 +169,7 @@ class UDR_RaceTrackLogic : GenericEntity
 		// Not in editor, but in actual game
 		m_FinishLineWaypoint.Init();
 		m_VehiclePositioning.Init();
+		m_PlayerSpawnPoint.Init();
 		m_aWaypoints = {};
 		m_aWaypointPositions = {};
 		m_aWaypointDistances = {};
@@ -350,5 +360,7 @@ class UDR_RaceTrackLogic : GenericEntity
 			m_FinishLineWaypoint.Draw(this);
 		if (m_VehiclePositioning)
 			m_VehiclePositioning.Draw(this);
+		if (m_PlayerSpawnPoint)
+			m_PlayerSpawnPoint.Draw(this);
 	}
 }

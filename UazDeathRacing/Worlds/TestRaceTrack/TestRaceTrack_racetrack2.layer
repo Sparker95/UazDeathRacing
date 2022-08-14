@@ -1,3 +1,6 @@
+GenericEntity PlayerSpawnPosition2 {
+ coords 109.806 2 490.628
+}
 UDR_RaceTrackLogic Track2 {
  coords 115.601 34.011 467.673
  m_FinishLineWaypoint UDR_EntityLinkWaypoint "{59FD5C1C7CCD60CC}" {
@@ -6,9 +9,12 @@ UDR_RaceTrackLogic Track2 {
  m_VehiclePositioning UDR_EntityLinkVehiclePositioning "{59FD5C1FB0FB1F27}" {
   m_sEntityName "t2_positions"
  }
+ m_PlayerSpawnPoint UDR_EntityLink "{5A1C92CDF34DC47A}" {
+  m_sEntityName "PlayerSpawnPosition2"
+ }
  m_sRaceTrackName "Track 2 - Circle"
 }
-$grp UDR_Waypoint : "{92A0F1C3F4161A7D}Prefabs/Triggers/WaypointInvisible.et" {
+$grp UDR_Waypoint : "{92A0F1C3F4161A7D}Prefabs/Triggers/Waypoint.et" {
  t2_3 {
   coords 134.819 23.861 474.336
   angleY -29.898

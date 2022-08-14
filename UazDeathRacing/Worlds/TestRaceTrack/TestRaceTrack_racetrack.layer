@@ -1,10 +1,16 @@
+GenericEntity PlayerSpawnPosition {
+ coords 46.433 2 504.639
+}
 UDR_RaceTrackLogic Track1 {
- coords 35.498 2.717 434.454
+ coords 40.63 20.172 459.672
  m_FinishLineWaypoint UDR_EntityLinkWaypoint "{59F55BCB1745E5F7}" {
   m_sEntityName "WpFinish"
  }
  m_VehiclePositioning UDR_EntityLinkVehiclePositioning "{59F56997989401A6}" {
   m_sEntityName "VehiclePositioning"
+ }
+ m_PlayerSpawnPoint UDR_EntityLink "{5A1C92CD8519E077}" {
+  m_sEntityName "PlayerSpawnPosition"
  }
  m_sRaceTrackName "Track 1 - Inside The Cones"
 }
@@ -39,7 +45,7 @@ $grp UDR_Waypoint : "{ABD6A727D7E4D14A}Prefabs/Triggers/WaypointVisible.et" {
  }
 }
 UDR_VehiclePositioning VehiclePositioning : "{F33FD9275A6393DB}Prefabs/VehiclePositioning/VehiclePositioning.et" {
- coords 47.463 2.001 478.029
+ coords 47.463 3.441 478.029
  angleY 90.12
  m_iNumRows 2
  m_iNumColumns 4

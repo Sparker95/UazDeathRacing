@@ -129,10 +129,27 @@ class UDR_PlayerNetworkComponent : ScriptComponent
 		if (!controlledEntity)
 			return;
 		
-		SCR_CompartmentAccessComponent compartmentAccessComponent = SCR_CompartmentAccessComponent.Cast(controlledEntity.FindComponent(SCR_CompartmentAccessComponent));
-		compartmentAccessComponent.MoveInVehicle(vehicle, ECompartmentType.Pilot);
+		CharacterControllerComponent characterController = CharacterControllerComponent.Cast(controlledEntity.FindComponent(CharacterControllerComponent));
+		if (!characterController)
+			return;
 		
-		m_bMoveInVehicleRequest = false;
+		// Important: wait until we are not falling any more, otherwise whole character controller gets broken permanently
+		if (characterController.IsFalling())
+			return;
+		
+		SCR_CompartmentAccessComponent compartmentAccessComponent = SCR_CompartmentAccessComponent.Cast(controlledEntity.FindComponent(SCR_CompartmentAccessComponent));
+		IEntity currentVehicle = compartmentAccessComponent.GetVehicle();
+		if (currentVehicle == vehicle)
+		{
+			// We are already in this vehicle
+			m_bMoveInVehicleRequest = false;
+			return;
+		}
+		else
+		{
+			//We are not in this vehicle, move in vehicle and check it again on next update
+			compartmentAccessComponent.MoveInVehicle(vehicle, ECompartmentType.Pilot);
+		}
 	}
 	
 	

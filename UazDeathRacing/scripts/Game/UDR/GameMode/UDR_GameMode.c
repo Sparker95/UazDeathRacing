@@ -239,9 +239,7 @@ class UDR_GameMode: SCR_BaseGameMode
 		IEntity prevAssignedVehicle = playerComp.m_AssignedVehicle;
 			
 		// Spawn driver character
-		EntitySpawnParams p = new EntitySpawnParams();
-		p.Transform[3] = GetVehiclePositioning().GetOrigin();
-		IEntity controlledEntity = m_pRespawnSystemComponent.DoSpawn("{A8BE87DC32CFF3C5}Prefabs/Characters/DriverCharacter.et", GetVehiclePositioning().GetOrigin());
+		IEntity controlledEntity = m_pRespawnSystemComponent.DoSpawn("{A8BE87DC32CFF3C5}Prefabs/Characters/DriverCharacter.et", m_CurrentRaceTrack.GetPlayerSpawnPosition());
 		
 		pc.SetPossessedEntity(controlledEntity);
 		
