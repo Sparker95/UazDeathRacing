@@ -8,13 +8,12 @@ GenericEntity : "{F9E1A46E3ABA116F}Prefabs/Weapons/Core/Magazine_Base.et" {
     Name "Blaster Magazine"
     Description "Blaster Magazine"
    }
-   MaxAmmo 10
+   MaxAmmo 12
    AmmoConfig "{D38AA322A96D5199}Prefabs/Weapons/Blaster/BlasterMagazine.conf"
    AmmoMapping {
    }
   }
   MeshObject "{CA6BE4D6A23F8EF0}" {
-   Object "{10D7B743E0A06735}Assets/Weapons/Magazines/SVD/Magazine_10rd_SVD.xob"
    CastShadow 0
    CastFarShadow 0
   }

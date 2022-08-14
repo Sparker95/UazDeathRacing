@@ -1,24 +1,12 @@
-GenericEntity : "{A3E183EB5A2F3A38}Prefabs/Weapons/Rifles/SVD/Rifle_SVD_base.et" {
+GenericEntity : "{58ED978DD73772BE}Prefabs/Weapons/Blaster/Blaster.et" {
  ID "525494E72B1E90FD"
  components {
-  MeshObject "{CFBAA4B701F95D69}" {
-   Object "{953BCAB28BF8B818}Assets/Weapons/Launchers/M72/m72_extended.xob"
-  }
   WeaponComponent "{CFBAA4B706BA66E8}" {
    components {
     MuzzleComponent "{CA6BE4D6B867541F}" {
-     FireModes {
-      BaseFireMode "{506B20D1476BA99E}" {
-      }
-      BaseFireMode "{B80A64F4A8EF8333}" {
-       MaxBurst -1
-       RoundsPerMinute 240
-      }
-     }
      MagazineTemplate "{375A83EA897AFBDC}Prefabs/Weapons/Blaster/BlasterMagazine_LowAmmo.et"
     }
    }
   }
  }
- scale 2
 }

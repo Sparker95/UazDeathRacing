@@ -1550,6 +1550,32 @@ Vehicle : "{1F9BB80C3EC3C891}Prefabs/Vehicles/Core/Wheeled_Car_Base.et" {
  }
  coords 0 0 0
  {
+  $grp GenericEntity {
+   Tube1 {
+    ID "5A1C92C38D2E746D"
+    components {
+     MeshObject "{5A1C92C3B81CCB6A}" {
+      Object "{0D10A529F2414F02}Assets/Weapons/Launchers/M72/M72_body.xob"
+     }
+     Hierarchy "{5A1C92C38F10B9AC}" {
+     }
+    }
+    coords -0.804 1.131 1.325
+    scale 2
+   }
+   Tube1 {
+    ID "5A1CAA45C102E6CE"
+    components {
+     MeshObject "{5A1C92C3B81CCB6A}" {
+      Object "{0D10A529F2414F02}Assets/Weapons/Launchers/M72/M72_body.xob"
+     }
+     Hierarchy "{5A1C92C38F10B9AC}" {
+     }
+    }
+    coords 0.804 1.131 1.325
+    scale 2
+   }
+  }
   $grp SCR_ParticleEmitter {
    {
     ID "59D0B4CF13A02508"

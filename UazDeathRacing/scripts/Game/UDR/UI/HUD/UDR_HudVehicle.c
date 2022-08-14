@@ -94,8 +94,15 @@ class UDR_HudVehicle : UDR_HudBase
 				if (magazineComp)
 				{
 					ammoCount = magazineComp.GetAmmoCount();
-					if (muzzleComp.IsChamberingPossible() && muzzleComp.IsBarrelChambered(0))
-						ammoCount++;
+					if (muzzleComp.IsChamberingPossible())
+					{
+						int nBarrels = muzzleComp.GetBarrelsCount();
+						for (int i = 0; i < nBarrels; i++)
+						{
+							if (muzzleComp.IsBarrelChambered(i))
+								ammoCount++;
+						}
+					}
 				}
 			}
 		}
