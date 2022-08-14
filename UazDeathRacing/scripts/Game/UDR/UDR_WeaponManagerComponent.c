@@ -111,7 +111,9 @@ class UDR_WeaponManagerComponent : ScriptComponent
 								ammoCount++;
 						}
 					}
-					return ammoCount == magazineComp.GetMaxAmmoCount();
+					//int maxAmmoCount = magazineComp.GetMaxAmmoCount();
+					int maxAmmoCount = 12; // Todo: fix it when we have more types of weapons
+					return ammoCount == maxAmmoCount;
 				}
 			}
 		}
