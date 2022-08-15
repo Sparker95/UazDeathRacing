@@ -437,28 +437,6 @@ class UDR_GameMode: SCR_BaseGameMode
 		if (!playerComp)
 			return;
 		
-		// Enable back damage for all occupants
-		/*
-		BaseCompartmentManagerComponent compartmentMgr = BaseCompartmentManagerComponent.Cast(vehEntity.FindComponent(BaseCompartmentManagerComponent));
-		array<BaseCompartmentSlot> compartments = {};
-		compartmentMgr.GetCompartments(compartments);
-		foreach (BaseCompartmentSlot slot : compartments)
-		{
-			IEntity occupant = slot.GetOccupant();
-			if (!occupant)
-				continue;
-			
-			/*
-			SCR_CharacterControllerComponent characterController = SCR_CharacterControllerComponent.Cast(
-				occupant.FindComponent(SCR_CharacterControllerComponent));
-			if (!characterController)
-				continue;
-			
-			characterController.ForceDeath();
-			
-		}
-		*/
-		
 		// Get current race progress
 		// And save it to player component. We must restore it upon respawn.
 		float totalProgress;
@@ -470,6 +448,7 @@ class UDR_GameMode: SCR_BaseGameMode
 			
 		m_CurrentRaceTrack.UnregisterRacer(vehEntity);
 		
+		/*
 		// Enable back damage handling for character
 		PlayerController pc = PlayerController.Cast(playerComp.GetOwner());
 		IEntity controlledEntity = pc.GetControlledEntity();
@@ -482,7 +461,27 @@ class UDR_GameMode: SCR_BaseGameMode
 			}
 		}
 		
+		
 		GetGame().GetCallqueue().CallLater(EndRevenge, REVENGE_DURATION_MS, false, playerId);
+		*/
+		
+		// Revenge is disabled, just kill player
+		BaseCompartmentManagerComponent compartmentMgr = BaseCompartmentManagerComponent.Cast(vehEntity.FindComponent(BaseCompartmentManagerComponent));
+		array<BaseCompartmentSlot> compartments = {};
+		compartmentMgr.GetCompartments(compartments);
+		foreach (BaseCompartmentSlot slot : compartments)
+		{
+			IEntity occupant = slot.GetOccupant();
+			if (!occupant)
+				continue;
+			
+			SCR_CharacterControllerComponent characterController = SCR_CharacterControllerComponent.Cast(
+				occupant.FindComponent(SCR_CharacterControllerComponent));
+			if (!characterController)
+				continue;
+			
+			characterController.ForceDeath();
+		}
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
