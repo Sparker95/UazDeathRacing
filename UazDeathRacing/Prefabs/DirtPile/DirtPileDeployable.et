@@ -10,8 +10,10 @@ GenericEntity {
   GenericEntity : "{2D8669E6D1E24B4E}Prefabs/DirtPile/DirtPileInternal.et" {
    ID "5A0D4385979601B2"
    components {
+    RigidBody "{5A0D08D0C5F568C2}" {
+    }
    }
-   coords 0 -0.14 0
+   coords 0 -0.12 0
    scale 0.25
   }
  }
