@@ -239,9 +239,11 @@ class UDR_GameMode: SCR_BaseGameMode
 		IEntity prevAssignedVehicle = playerComp.m_AssignedVehicle;
 			
 		// Spawn driver character
-		IEntity controlledEntity = m_pRespawnSystemComponent.DoSpawn("{A8BE87DC32CFF3C5}Prefabs/Characters/DriverCharacter.et", m_CurrentRaceTrack.GetPlayerSpawnPosition());
+		IEntity controlledEntity = m_pRespawnSystemComponent.CustomRespawn(playerComp.GetPlayerId(), "{A8BE87DC32CFF3C5}Prefabs/Characters/DriverCharacter.et",
+			m_CurrentRaceTrack.GetPlayerSpawnPosition(), Vector(1, 0, 0));
 		
-		pc.SetPossessedEntity(controlledEntity);
+		// Set possessed entity
+		//pc.SetPossessedEntity(controlledEntity);
 		
 		// Spawn vehicle
 		// List of UDR custom vehicles
@@ -272,24 +274,28 @@ class UDR_GameMode: SCR_BaseGameMode
 		CarControllerComponent carController = CarControllerComponent.Cast(vehicle.FindComponent(CarControllerComponent));
 		carController.StartEngine();
 		
-		// Move player in pilot
-		playerComp.MoveInVehicle(vehicle);
-		
 		// Make player invincible
 		SCR_DamageManagerComponent damageManager = SCR_DamageManagerComponent.Cast(controlledEntity.FindComponent(SCR_DamageManagerComponent));
 		if (damageManager)
 			damageManager.EnableDamageHandling(false);
-				
+		
 		// Assign vehicle to player
 		playerComp.m_AssignedVehicle = newVehicleEntity;
 		RplComponent rpl = RplComponent.Cast(newVehicleEntity.FindComponent(RplComponent));
 		playerComp.m_NetworkEntity.m_AssigedVehicleId = rpl.Id();
 		playerComp.m_NetworkEntity.BumpReplication();
 		
+		playerComp.MoveInVehicle(controlledEntity, vehicle);
+		
 		// Register the vehicle to race track logic
 		m_CurrentRaceTrack.RegisterRacer(newVehicleEntity, lapCount, nextWaypoint);
 		
-		// Delete the old character and vehicle if they existed
+		// Finalize respawning
+		//GetGame().GetCallqueue().CallLater(SpawnVehicleFinalize0, 1000, false, prevControlledEntity, prevAssignedVehicle);
+	}
+	
+	void SpawnVehicleFinalize0(SCR_PlayerController pc, UDR_PlayerNetworkComponent playerComp, IEntity prevControlledEntity, IEntity prevAssignedVehicle)
+	{
 		if (prevControlledEntity)
 			SCR_Global.DeleteEntityAndChildren(prevControlledEntity);
 		if (prevAssignedVehicle)

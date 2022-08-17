@@ -19,6 +19,7 @@ class UDR_PlayerNetworkComponent : ScriptComponent
 	// For moving into vehicle
 	protected bool m_bMoveInVehicleRequest = false;
 	protected RplId m_MoveInVehicleRplId;
+	protected RplId m_MoveInVehicleCharacterId;
 	
 	// Array of notifications
 	protected ref array<ref UDR_Notification> m_aNotifications = {};
@@ -98,35 +99,43 @@ class UDR_PlayerNetworkComponent : ScriptComponent
 	
 	//-----------------------------------------------------------------------
 	// Must be called by server
-	void MoveInVehicle(Vehicle vehicle)
+	void MoveInVehicle(IEntity character, Vehicle vehicle)
 	{
-		RplComponent rpl = RplComponent.Cast(vehicle.FindComponent(RplComponent));
-		Rpc(RpcDo_MoveInVehicle, rpl.Id());
+		RplComponent characterRpl = RplComponent.Cast(character.FindComponent(RplComponent));
+		RplComponent vehicleRpl = RplComponent.Cast(vehicle.FindComponent(RplComponent));
+		Rpc(RpcDo_MoveInVehicle, characterRpl.Id(), vehicleRpl.Id());
 	}
 	
 	//-----------------------------------------------------------------------
 	[RplRpc(RplChannel.Reliable, RplRcver.Owner)]
-	void RpcDo_MoveInVehicle(RplId vehId)
+	void RpcDo_MoveInVehicle(RplId characterId, RplId vehId)
 	{
 		m_bMoveInVehicleRequest = true;
 		m_MoveInVehicleRplId = vehId;
+		m_MoveInVehicleCharacterId = characterId;
 	}
 	
 	//-----------------------------------------------------------------------
 	void TryMoveInVehicle()
 	{
 		// We must wait until the vehicle entity is streamed to us, then move into it
-		RplComponent rpl = RplComponent.Cast(Replication.FindItem(m_MoveInVehicleRplId));
-		if (!rpl)
+		RplComponent rplVehicle = RplComponent.Cast(Replication.FindItem(m_MoveInVehicleRplId));
+		RplComponent rplCharacter = RplComponent.Cast(Replication.FindItem(m_MoveInVehicleCharacterId));
+		if (!rplCharacter || !rplVehicle)
 			return;
 		
-		Vehicle vehicle = Vehicle.Cast(rpl.GetEntity());
-		if (!vehicle)
+		Vehicle vehicle = Vehicle.Cast(rplVehicle.GetEntity());
+		IEntity character = rplCharacter.GetEntity(); 
+		if (!vehicle || !character)
 			return;
 		
 		PlayerController pc = PlayerController.Cast(GetOwner());
 		IEntity controlledEntity = pc.GetControlledEntity();
 		if (!controlledEntity)
+			return;
+		
+		// Bail if we are not controlling the proper character yet
+		if (controlledEntity != character)
 			return;
 		
 		CharacterControllerComponent characterController = CharacterControllerComponent.Cast(controlledEntity.FindComponent(CharacterControllerComponent));
@@ -139,17 +148,10 @@ class UDR_PlayerNetworkComponent : ScriptComponent
 		
 		SCR_CompartmentAccessComponent compartmentAccessComponent = SCR_CompartmentAccessComponent.Cast(controlledEntity.FindComponent(SCR_CompartmentAccessComponent));
 		IEntity currentVehicle = compartmentAccessComponent.GetVehicle();
-		if (currentVehicle == vehicle)
-		{
-			// We are already in this vehicle
-			m_bMoveInVehicleRequest = false;
-			return;
-		}
-		else
-		{
-			//We are not in this vehicle, move in vehicle and check it again on next update
-			compartmentAccessComponent.MoveInVehicle(vehicle, ECompartmentType.Pilot);
-		}
+		BaseCompartmentSlot compartmentSlot = compartmentAccessComponent.FindFreeCompartment(vehicle, ECompartmentType.Pilot);
+		compartmentAccessComponent.MoveInVehicle(vehicle, compartmentSlot);
+		
+		//compartmentAccessComponent.MoveInVehicle(vehicle, ECompartmentType.Pilot);
 	}
 	
 	
