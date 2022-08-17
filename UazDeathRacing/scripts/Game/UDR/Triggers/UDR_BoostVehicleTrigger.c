@@ -11,7 +11,7 @@ class UDR_BoostVehicleTrigger: ScriptedGameTriggerEntity
 	
 	override void OnActivate(IEntity ent)
 	{
-		PrintString("activateBoost");
+		//PrintString("activateBoost");
 
         Vehicle vehicle = Vehicle.Cast(ent);	
         VehicleBaseSimulation simulation = VehicleBaseSimulation.Cast(vehicle.FindComponent(VehicleBaseSimulation));
@@ -32,7 +32,7 @@ class UDR_BoostVehicleTrigger: ScriptedGameTriggerEntity
 	// caused by this trigger, and not all another boost trigger
 	static void RemoveBoost(VehicleWheeledSimulation vWheelSimu, array<SCR_ParticleEmitter> emittersList)
 	{
-		PrintString("RemoveBoost");
+		//PrintString("RemoveBoost");
 		
 		if (!vWheelSimu)
 			return;
