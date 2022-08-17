@@ -51,8 +51,12 @@ class UDR_SpectatorComponent : ScriptComponent
 		// We perform synchronization through our PlayerNetworkEntity
 		if (!m_MyNetworkEntity)
 		{
-			int myPlayerId = GetGame().GetPlayerController().GetPlayerId();
-			m_MyNetworkEntity = GetGame().GetUdrGameMode().GetPlayerNetworkSyncEntity(myPlayerId);
+			PlayerController pc = GetGame().GetPlayerController();
+			if (pc)
+			{
+				int myPlayerId = pc.GetPlayerId();
+				m_MyNetworkEntity = GetGame().GetUdrGameMode().GetPlayerNetworkSyncEntity(myPlayerId);
+			}
 		}
 		
 		// It might be not loaded yet
@@ -164,8 +168,10 @@ class UDR_SpectatorComponent : ScriptComponent
 	//------------------------------------------------------------------------------------------------
 	override void OnPostInit(IEntity owner)
 	{
+		if (System.IsConsoleApp())
+			return;
+		
 		SetEventMask(owner, EntityEvent.INIT | EntityEvent.FRAME);
-		//owner.SetFlags(EntityFlags.ACTIVE, true);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -215,16 +221,4 @@ class UDR_SpectatorComponent : ScriptComponent
 	{
 		SpectateOffset(-1);
 	}
-	
-	/*
-	//------------------------------------------------------------------------------------------------
-	void UDR_SpectatorComponent(IEntityComponentSource src, IEntity ent, IEntity parent)
-	{
-	}
-
-	//------------------------------------------------------------------------------------------------
-	void ~UDR_SpectatorComponent()
-	{
-	}
-	*/
 }

@@ -34,6 +34,9 @@ class UDR_PlayerNetworkComponent : ScriptComponent
 	//-----------------------------------------------------------------------
 	override void OnPostInit(IEntity owner)
 	{
+		if (System.IsConsoleApp())
+			return;
+		
 		//owner.SetFlags(EntityFlags.ACTIVE, true);
 		SetEventMask(owner, EntityEvent.FRAME);
 		auto im = GetGame().GetInputManager();
