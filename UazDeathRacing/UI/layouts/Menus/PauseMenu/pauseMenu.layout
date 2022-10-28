@@ -26,8 +26,6 @@ FrameWidgetClass {
           VerticalLayoutWidgetClass "{59ECC4DBD04E6870}" {
            Prefab "{59ECC4DBD04E6870}"
            "Is Visible" 0
-           {
-           }
           }
          }
         }
@@ -47,27 +45,25 @@ FrameWidgetClass {
        Name "JoinRace"
        Slot LayoutSlot "{557478C3F0230865}" {
        }
-       "Z Order" 1
        components {
         SCR_ButtonTextComponent "{5548F0143AE99095}" {
          m_sText "Join Race"
         }
-       }
-       {
        }
       }
       ButtonWidgetClass "{5A1531E7B714E945}" : "{9ECCD201BCF07E96}UI/layouts/Menus/PauseMenu/PauseMenuButton.layout" {
        Name "JoinSpectators"
        Slot LayoutSlot "{557478C3F0230865}" {
        }
-       "Z Order" 2
        components {
         SCR_ButtonTextComponent "{5548F0143AE99095}" {
          m_sText "Join Spectators"
         }
        }
-       {
-       }
+      }
+      ImageWidgetClass "{54C4A02BEFCFAC85}" {
+       Prefab "{54C4A02BEFCFAC85}"
+       "Z Order" -10
       }
      }
     }

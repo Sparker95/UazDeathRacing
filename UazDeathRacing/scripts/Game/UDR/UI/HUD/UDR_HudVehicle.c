@@ -146,10 +146,10 @@ class UDR_HudVehicle : UDR_HudBase
 			widgets.m_SuppressionVignette.SetOpacity(1);
 			widgets.m_BlackOut.SetOpacity(1);
 
-			WidgetAnimator.PlayAnimation(widgets.m_BloodVignette1, WidgetAnimationType.Opacity, 0, 1);
-			WidgetAnimator.PlayAnimation(widgets.m_BloodVignette2, WidgetAnimationType.Opacity, 0, 1);
-			WidgetAnimator.PlayAnimation(widgets.m_SuppressionVignette, WidgetAnimationType.Opacity, 0, 1);
-			WidgetAnimator.PlayAnimation(widgets.m_BlackOut, WidgetAnimationType.Opacity, 0, 1);
+			AnimateWidget.Opacity(widgets.m_BloodVignette1, 0, 1);
+			AnimateWidget.Opacity(widgets.m_BloodVignette2, 0, 1);
+			AnimateWidget.Opacity(widgets.m_SuppressionVignette, 0, 1);
+			AnimateWidget.Opacity(widgets.m_BlackOut, 0, 1);
 		}
 	}
 }

@@ -32,7 +32,7 @@ class UDR_SpectatorCamera : CameraBase
 		if (!s_Instance)
 			return;
 		
-		SCR_Global.DeleteEntityAndChildren(s_Instance);
+		SCR_EntityHelper.DeleteEntityAndChildren(s_Instance);
 	}
 	
 	void SwitchToThisCamera()

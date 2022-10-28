@@ -55,7 +55,7 @@ ButtonWidgetClass : "{4913D5BED796721F}UI/layouts/WidgetLibrary/Buttons/WLib_But
            Prefab "{557098267D2A9494}"
            Slot LayoutSlot "{557098267D2A94B6}" {
            }
-           Texture "{1F0A6C9C19E131C6}UI/Textures/Icons/icons_wrapperUI.imageset"
+           Texture "{2EFEA2AF1F38E7F0}UI/Textures/Icons/icons_wrapperUI-64.imageset"
            Image "exit"
            Size 64 64
           }

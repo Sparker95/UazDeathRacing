@@ -43,6 +43,10 @@ class UDR_SpectatorComponent : ScriptComponent
 		
 		im.AddActionListener("UDR_SpectatorNext", EActionTrigger.DOWN, OnActionNext);
 		im.AddActionListener("UDR_SpectatorPrevious", EActionTrigger.DOWN, OnActionPrevious);
+		
+		PlayerController localPc = GetGame().GetPlayerController();
+		
+		Print(string.Format("UDR_SpectatorComponent EOnInit for local PC: %1. Local PC: %2", localPc == owner, localPc));
 	}
 	
 	//------------------------------------------------------------------------------------------------

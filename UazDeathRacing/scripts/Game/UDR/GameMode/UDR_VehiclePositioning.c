@@ -198,7 +198,7 @@ class UDR_VehiclePositioning : GenericEntity
 		// Clear previews
 		foreach (IEntity preview : m_aPreviews)
 		{
-			SCR_Global.DeleteEntityAndChildren(preview);
+			SCR_EntityHelper.DeleteEntityAndChildren(preview);
 		}
 	}
 

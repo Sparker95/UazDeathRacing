@@ -98,9 +98,9 @@ class UDR_GameMode: SCR_BaseGameMode
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
-	override void OnPlayerDisconnected(int playerId)
+	override void OnPlayerDisconnected(int playerId, KickCauseCode cause)
 	{
-		super.OnPlayerDisconnected(playerId);
+		super.OnPlayerDisconnected(playerId, cause);
 		
 		if (!m_RplComponent.IsMaster())
 			return;
@@ -120,7 +120,7 @@ class UDR_GameMode: SCR_BaseGameMode
 		UDR_PlayerNetworkEntity networkSyncEnt;
 		if (m_mPlayerNetworkSyncEntities.Find(playerId, networkSyncEnt))
 		{
-			SCR_Global.DeleteEntityAndChildren(networkSyncEnt);
+			SCR_EntityHelper.DeleteEntityAndChildren(networkSyncEnt);
 		}
 	}
 	
@@ -297,9 +297,9 @@ class UDR_GameMode: SCR_BaseGameMode
 	void SpawnVehicleFinalize0(SCR_PlayerController pc, UDR_PlayerNetworkComponent playerComp, IEntity prevControlledEntity, IEntity prevAssignedVehicle)
 	{
 		if (prevControlledEntity)
-			SCR_Global.DeleteEntityAndChildren(prevControlledEntity);
+			SCR_EntityHelper.DeleteEntityAndChildren(prevControlledEntity);
 		if (prevAssignedVehicle)
-			SCR_Global.DeleteEntityAndChildren(prevAssignedVehicle);
+			SCR_EntityHelper.DeleteEntityAndChildren(prevAssignedVehicle);
 	}
 	
 	//-------------------------------------------------------------------------------------------------------------------------------
@@ -311,11 +311,11 @@ class UDR_GameMode: SCR_BaseGameMode
 		if (pc.GetControlledEntity())
 		{
 			pc.SetPossessedEntity(null);
-			SCR_Global.DeleteEntityAndChildren(pc.GetControlledEntity());
+			SCR_EntityHelper.DeleteEntityAndChildren(pc.GetControlledEntity());
 		}
 		if (playerComp.m_AssignedVehicle)
 		{
-			SCR_Global.DeleteEntityAndChildren(playerComp.m_AssignedVehicle);
+			SCR_EntityHelper.DeleteEntityAndChildren(playerComp.m_AssignedVehicle);
 		}
 	}
 	

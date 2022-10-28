@@ -73,7 +73,7 @@ class UDR_WeaponManagerComponent : ScriptComponent
 		IEntity prevWeaponEnt = weaponMgrComp.SetSlotWeapon(slot, weaponEnt);
 		
 		if (prevWeaponEnt && deletePrevWeapon)
-			SCR_Global.DeleteEntityAndChildren(prevWeaponEnt);
+			SCR_EntityHelper.DeleteEntityAndChildren(prevWeaponEnt);
 	}
 	
 	//----------------------------------------------------------------------------------------------------------------------------------------
